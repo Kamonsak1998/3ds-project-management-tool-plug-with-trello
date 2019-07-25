@@ -13,7 +13,7 @@
   color: black;
   text-align: center;
   margin: auto auto 0 auto;
-   background-color: #f8f9f9;
+  background-color: #f8f9f9;
 }
 </style>
 

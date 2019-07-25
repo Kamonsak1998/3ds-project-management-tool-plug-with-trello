@@ -7,7 +7,9 @@ import VueRouter from 'vue-router'
 import router from './router'
 import Vuesax from 'vuesax'
 import 'vuesax/dist/vuesax.css'
+import Slider from '@jeremyhamm/vue-slider'
 
+Vue.use(Slider)
 Vue.use(Vuesax)
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)

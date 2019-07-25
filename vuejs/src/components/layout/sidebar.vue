@@ -1,20 +1,22 @@
-<template lang="html">
-  <div id="parentx">
-    <vs-button @click="active=!active" color="primary" type="filled">...</vs-button>
-    <vs-sidebar parent="body" default-index="1"  color="primary" class="sidebarx" spacer v-model="active">
-      <div class="header-sidebar" slot="header">
-        <vs-avatar  size="70px" src="https://randomuser.me/api/portraits/men/85.jpg"/>
-      </div>
-    </vs-sidebar>
+<template >
+  <div>
+    <slider
+      :width="300"
+      format="push"
+      direction="left"
+      :opacity="0.15"
+      :links="[{'id': 1, 'text': 'Link 1', 'url': 'https://github.com'}, {'id': 2, 'text': 'Link 2', 'url': 'https://github.com'}]"
+    ></slider>
   </div>
-
 </template>
 
 <script>
+import Slider from "@jeremyhamm/vue-slider";
+
 export default {
-  data: () => ({
-    active: false
-  })
+  components: {
+    slider: Slider
+  }
 };
 </script>
 
