@@ -5,8 +5,10 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueRouter from 'vue-router'
 import router from './router'
+import Vuesax from 'vuesax'
+import 'vuesax/dist/vuesax.css'
 
-
+Vue.use(Vuesax)
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
 
