@@ -2,7 +2,7 @@
   <div class="login">
     <div class="container">
       <div class="row" id="block">
-        <div class="col-md-5 mx-auto mt-5">
+        <div class="col-md-4 mx-auto mt-5">
           <form name="login_form" id="login_form" @submit.prevent="login" class="form_login">
             <article class="block">
               <header class="clearfix">
@@ -116,6 +116,7 @@ export default {
   margin-bottom: 0px;
   color: #24a0d1;
   font-size: 14px;
+  padding: 9px;
   
 }
 .form-group input {
@@ -124,15 +125,15 @@ export default {
   font-size: 14px;
   border: 0;
   font-family: inherit;
-  padding: 12px 0;
   height: 48px;
   font-size: 16px;
   font-weight: 500;
   border-bottom: 2px solid #c8ccd4;
+  padding: 6px;
 }
-/* .form-group{
-  background: white;
-}
+ .form-group{
+  /* background: white; */
+ }/*
 .block{
   background:white;
 } */
