@@ -13,8 +13,10 @@
     "bootstrap-vue": "^2.0.0-rc.27",
     "core-js": "^2.6.5",
     "global": "^4.4.0",
+    "vee-validate": "^2.2.13",
     "vue": "^2.6.10",
     "vue-router": "^3.0.7",
+    "vue-slider": "^1.1.1",
     "vuesax": "^3.9.0"
   },
   "devDependencies": {
