@@ -121,7 +121,6 @@ export default {
 }
 .form-group input {
   margin-bottom: 0px;
-
   font-size: 14px;
   border: 0;
   font-family: inherit;
@@ -131,9 +130,10 @@ export default {
   border-bottom: 2px solid #c8ccd4;
   padding: 6px;
 }
- .form-group{
-  /* background: white; */
- }/*
+ /* .form-group{
+  background: white;
+ } */
+ /*
 .block{
   background:white;
 } */

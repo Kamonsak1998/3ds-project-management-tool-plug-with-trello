@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>Test</p>
     <div class="container">
       <div class="row">
         <div class="col-md-5 mx-auto mt-5">
@@ -10,7 +9,7 @@
                 <h4 class="left">Create a new account</h4>
               </header>
               <div class="block-inner mt-4">
-                <div class="form-group ">
+                <div class="form-group">
                   <label for="username" class="col-form-label">E-mail</label>
                   <br />
                   <input
@@ -42,11 +41,11 @@
                     :class="{ 'is-invalid': submitted && errors.has('password')}"
                   />
                   <div
-                  v-if="submitted && errors.has('password')"
-                  class="invalid-feedback"
-                >{{errors.first('password')}}</div>
+                    v-if="submitted && errors.has('password')"
+                    class="invalid-feedback"
+                  >{{errors.first('password')}}</div>
                 </div>
-                
+
                 <div class="form-group">
                   <label for="username" class="col-form-label">First name</label>
                   <br />
@@ -65,7 +64,7 @@
                     class="invalid-feedback"
                   >{{ errors.first('firstname') }}</div>
                 </div>
-                
+
                 <div class="form-group">
                   <label for="username" class="col-form-label">Last name</label>
                   <br />
@@ -97,7 +96,7 @@
                     v-validate="'required|numeric|max:10'"
                     :class="{ 'is-invalid': submitted && errors.has('phone') }"
                   />
-                     <div
+                  <div
                     v-if="submitted && errors.has('phone')"
                     class="invalid-feedback"
                   >{{ errors.first('phone') }}</div>
@@ -133,7 +132,6 @@ export default {
       this.submitted = true;
       this.$validator.validate().them(valid => {
         if (valid) {
-
         }
       });
     }
@@ -174,5 +172,4 @@ export default {
   font-weight: 500;
   border-bottom: 2px solid #c8ccd4;
 }
-
 </style>
