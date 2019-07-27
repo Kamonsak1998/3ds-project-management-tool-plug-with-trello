@@ -1,10 +1,9 @@
 <template>
   <div id="app">
-    <Header />
     <Sidebar />
+    <Header />
     <main class="Site-content">
-      <router-view>
-      </router-view>
+      <router-view />
     </main>
     <Footer />
   </div>
@@ -26,7 +25,7 @@ export default {
 
 <style>
 #app {
-   background-color: #f8f9f9;
+  background-color: #f8f9f9;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
