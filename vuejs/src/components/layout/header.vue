@@ -4,7 +4,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="#">
-        <img class="navbar-brand-full" src="@/assets/3dslogo.png" width="100" height="30" alt="Trello Logo" />
+        <img class="navbar-brand-full" src="@/assets/3dslogo.png" width="100" height="30" alt="3DS Logo" />
         <img class="navbar-brand-minimized" src="@/assets/3dslogo.png" width="60" height="20" alt="3DS Logo">
       </a>
       <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
@@ -37,9 +37,4 @@
     </header>
 </template>
 
-<style>
-.navbar {
-  background-color: white;
-  color: #bdc3c7;
-}
-</style>
+
