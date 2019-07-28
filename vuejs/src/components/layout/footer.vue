@@ -10,7 +10,7 @@
   margin-top: 30px;
   color: black;
   text-align: center;
-  background-color: #f8f9f9;
+  background-color: white;
 }
 </style>
 
