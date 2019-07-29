@@ -2,10 +2,10 @@
   <div id="app">
     <Header />
     <Sidebar />
-    <main class="Site-content ">
+    <main class="main">
       <router-view />
     </main>
-    <Footer />
+    <Footer  class="app-footer"/>
   </div>
 </template>
 
@@ -35,7 +35,11 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-.Site-content {
-  flex: 1;
+
+.main {
+  margin-top: 50px;
+  flex: 1
 }
+
+
 </style>

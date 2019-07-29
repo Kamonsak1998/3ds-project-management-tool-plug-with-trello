@@ -9,9 +9,9 @@
   position: relative;
   margin-top: 30px;
   color: black;
-  text-align: center;
   background-color: white;
 }
+
 </style>
 
 
