@@ -5,7 +5,7 @@
     <main class="main">
       <router-view />
     </main>
-    <Footer  class="app-footer"/>
+    <Footer />
   </div>
 </template>
 

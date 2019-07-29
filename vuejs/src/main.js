@@ -13,6 +13,11 @@ Vue.use(VeeValidate);
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 
+const token = localStorage.getItem('token')
+if( token && token != ""){
+  store.commit('setToken', token)
+}
+
 Vue.config.productionTip = false
 
 new Vue({
