@@ -19,6 +19,7 @@
                     placeholder="Enter e-mail"
                     v-model="output.email"
                     v-validate="'required|email'"
+                    ref="email"
                     :class="{ 'is-invalid': submitted && errors.has('email') }"
                   />
                   <div
@@ -26,46 +27,52 @@
                     class="invalid-feedback"
                   >{{ errors.first('email') }}</div>
                 </div>
+
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="icon-lock"></i>
-                    </span>
-                  </div>
+                      <span class="input-group-text">
+                        <i class="icon-lock"></i>
+                      </span>
+                    </div>
                   <input
+                    v-validate="'required|min:6|max:12'"
+                    :class="{ 'is-invalid': submitted && errors.has('password')}"
                     name="password"
                     type="password"
                     class="form-control"
-                    placeholder="Enter password"
-                    v-model="output.password"
-                    v-validate="'required|min:6|max:35|confirmed'"
-                    :class="{ 'is-invalid': submitted && errors.has('password')}"
+                    placeholder="Password"
+                    ref="password"
                   />
                   <div
                     v-if="submitted && errors.has('password')"
                     class="invalid-feedback"
-                  >{{errors.first('password')}}</div>
+                  >{{errors.first('password')}}
+                  </div>
                 </div>
+
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="icon-lock"></i>
-                    </span>
-                  </div>
+                      <span class="input-group-text">
+                        <i class="icon-lock"></i>
+                      </span>
+                    </div>
                   <input
-                    name="password"
+                    v-validate="'required|confirmed:password'"
+                    :class="{ 'is-invalid': submitted && errors.has('password_confirmation')}"
+                    name="password_confirmation"
                     type="password"
                     class="form-control"
                     placeholder="Repeat password"
-                    v-model="output.password"
-                    v-validate="'required|confirmed:password'"
-                    :class="{ 'is-invalid': submitted && errors.has('password')}"
                   />
-                  <div
-                    v-if="submitted && errors.has('password')"
+                 <div
+                    v-if="submitted && errors.has('password_confirmation')"
                     class="invalid-feedback"
-                  >{{errors.first('password')}}</div>
+                  >{{errors.first('password_confirmation')}}
+                  </div>
                 </div>
+                
+
+
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -86,6 +93,7 @@
                     class="invalid-feedback"
                   >{{ errors.first('firstname') }}</div>
                 </div>
+
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -154,9 +162,7 @@ export default {
     addUser: function() {
       this.submitted = true;
       this.$validator.validate().them(valid => {
-        if (valid) {
-          console.log(success);
-        }
+        if (valid) {}
       });
     }
   }
