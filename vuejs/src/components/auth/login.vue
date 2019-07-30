@@ -18,9 +18,10 @@
                     <input
                       class="form-control"
                       type="email"
+                      name="email"
                       placeholder="Enter your e-mail..."
                       v-model="email"
-                      v-validate="'required'"
+                      v-validate="'required|email'"
                       :class="{ 'is-invalid': submitted && errors.has('email') }"
                     />
                     <div
@@ -39,7 +40,7 @@
                       type="password"
                       name="password"
                       placeholder="Enter your password..."
-                      v-validate="'required'"
+                      v-validate="'required|password'"
                       v-model="password"
                       :class="{ 'is-invalid': submitted && errors.has('password')}"
                     />
@@ -48,15 +49,11 @@
                       class="invalid-feedback"
                     >{{ errors.first('password') }}</div>
                   </div>
-                  <div class="row">
-
-                      <button type="submit" class="btn">Login</button>
-
-                  </div>
+                 <button  class="btnlogin"  type="submit">Login</button>
                 </div>
               </div>
             </div>
-            <a href="#" class="pull-left">Create a new account</a>
+            <a href="/register" class="pull-left">Create a new account</a>
             <a
               data-toggle="modal"
               id="reset_password"
@@ -96,7 +93,7 @@ export default {
 </script>
 
 <style>
-.btn {
+.btnlogin {
   color: #ffffff;
   font: 15px;
   font-family: sans-serif;
