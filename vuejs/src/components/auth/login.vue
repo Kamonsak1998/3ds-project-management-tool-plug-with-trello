@@ -1,54 +1,68 @@
 <template>
   <div class="login">
     <div class="container">
-      <div class="row" id="block">
-        <div class="col-md-4 mx-auto mt-5">
+      <div class="row">
+        <div class="col-md-6 mx-auto mt-5">
           <form name="login_form" id="login_form" @submit.prevent="login" class="form_login">
-            <article class="block">
-              <header class="clearfix">
-                <h4 class="left">Sign in</h4>
-              </header>
-              <div class="block-inner">
-                <div class="form-group mb-4" >
-                  <label for="email" class="col-form-label">E-mail</label>
-                  <br />
-                  <input
-                    type="email"
-                    name="email"
-                    class="required form-control"
-                    value
-                    placeholder="Enter your e-mail..."
-                    v-model="email"
-                    v-validate="'required'"
-                    :class="{ 'is-invalid': submitted && errors.has('email') }"
-                  />
-                  <div
-                    v-if="submitted && errors.has('email')"
-                    class="invalid-feedback"
-                  >{{ errors.first('email') }}</div>
-                </div>
-                <div class="form-group">
-                  <label for="password" class="col-form-label">Password</label>
-                  <br />
-                  <input
-                    name="password"
-                    type="password"
-                    class="required form-control"
-                    style
-                    placeholder="Enter your password..."
-                    v-validate="'required'"
-                     v-model="password"
-                    :class="{ 'is-invalid': submitted && errors.has('password')}"
-                  />
-                  <div
-                    v-show="errors.has('password')"
-                    class="invalid-feedback"
-                  >{{ errors.first('password') }}</div>
+            <div class="card-group">
+              <div class="card p-4">
+                <div class="card-body">
+                  <h1>Login</h1>
+                  <p class="text-muted">Sign In to your account</p>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="icon-user"></i>
+                      </span>
+                    </div>
+                    <input
+                      class="form-control"
+                      type="email"
+                      placeholder="Enter your e-mail..."
+                      v-model="email"
+                      v-validate="'required'"
+                      :class="{ 'is-invalid': submitted && errors.has('email') }"
+                    />
+                    <div
+                      v-if="submitted && errors.has('email')"
+                      class="invalid-feedback"
+                    >{{ errors.first('email') }}</div>
+                  </div>
+                  <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="icon-lock"></i>
+                      </span>
+                    </div>
+                    <input
+                      class="form-control"
+                      type="password"
+                      name="password"
+                      placeholder="Enter your password..."
+                      v-validate="'required'"
+                      v-model="password"
+                      :class="{ 'is-invalid': submitted && errors.has('password')}"
+                    />
+                    <div
+                      v-show="errors.has('password')"
+                      class="invalid-feedback"
+                    >{{ errors.first('password') }}</div>
+                  </div>
+                  <div class="row">
+
+                      <button type="submit" class="btn">Login</button>
+
+                  </div>
                 </div>
               </div>
-              <br />
-              <button class="btnlogin" type="submit">SIGN IN</button>
-            </article>
+            </div>
+            <a href="#" class="pull-left">Create a new account</a>
+            <a
+              data-toggle="modal"
+              id="reset_password"
+              href="#resetpw-modal"
+              class="pull-right"
+            >Forgot your password?</a>
           </form>
         </div>
       </div>
@@ -60,7 +74,7 @@
 
 <script>
 export default {
-  name: "login",  
+  name: "login",
   data: function() {
     return {
       submitted: false,
@@ -82,28 +96,20 @@ export default {
 </script>
 
 <style>
-.btnlogin {
+.btn {
   color: #ffffff;
   font: 15px;
   font-family: sans-serif;
   background: #1f1f1f;
   padding: 14px 40px;
   border: #ffffff;
+  width: 100%;
 }
 .btn-title {
   color: #ffffff;
   font: 15px;
   font-family: sans-serif;
 }
-/* .white-block {
-  display: block;
-  display: inline;
-  border-radius: 3px;
-  border: 2px solid lightgray;
-} */
-/* .article {
-  position: relative;
-} */
 .block-inner {
   border-radius: 10px;
   /* border: 1px lightgray; */
@@ -117,7 +123,6 @@ export default {
   color: #24a0d1;
   font-size: 14px;
   padding: 9px;
-  
 }
 .form-group input {
   margin-bottom: 0px;
@@ -130,84 +135,16 @@ export default {
   border-bottom: 2px solid #c8ccd4;
   padding: 6px;
 }
- /* .form-group{
-  background: white;
- } */
- /*
-.block{
-  background:white;
-} */
-
-
-/* .inp {
-  position: relative;
-  margin: auto;
-  width: 100%;
-  max-width: 280px;
-  /* transform: rotateX(45deg) rotateY(-10deg) rotate(25deg) scale(2); 
-}*/
-/* .label {
-  position: absolute;
-  top: 16px;
-  left: 0;
-  font-size: 16px;
-  color: #9098a9;
-  font-weight: 500;
-  transform-origin: 0 0;
-  transition: all 0.2s ease;
-} */
-
-/* .border {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  width: 100%;
-  background: #0077ff;
-  transform: scaleX(0);
-  transform-origin: 0 0;
-  transition: all 0.15s ease;
-} */
-/* input {
-  -webkit-appearance: none;
-  width: 100%;
-  border: 0;
-  font-family: inherit;
-  padding: 12px 0;
-  height: 48px;
-  font-size: 16px;
-  font-weight: 500;
-  border-bottom: 2px solid #c8ccd4;
-  background: none;
-  border-radius: 0;
-  color: #223254;
-  transition: all 0.15s ease;
-} */
-
-/* .input-field label {
-     color: #000;
-   }
- 
-   .input-field input[type=text]:focus + label {
-     color: #000;
-   }
-
-   .input-field input[type=text]:focus {
-     border-bottom: 1px solid #000;
-     box-shadow: 0 1px 0 0 #000;
-   }
- 
-   .input-field input[type=text].valid {
-     border-bottom: 1px solid #000;
-     box-shadow: 0 1px 0 0 #000;
-   }
-  
-   .input-field input[type=text].invalid {
-     border-bottom: 1px solid #000;
-     box-shadow: 0 1px 0 0 #000;
-   }
-
-   .input-field .prefix.active {
-     color: #000;
-   }  */
+.pull-left {
+    float: left !important;
+    margin-top: 10px;
+}
+.pull-right {
+    float: right !important;
+    margin-top: 10px;
+}
+form {
+    display: block;
+    margin-top: 0em;
+}
 </style>

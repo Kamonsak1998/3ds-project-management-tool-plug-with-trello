@@ -2,111 +2,44 @@
   <div>
     <div class="container">
       <div class="row">
-        <div class="col-md-5 mx-auto mt-5">
-          <form name="login_form" id="login_form" class="form_login" @submit.prevent="addUser()">
-            <article>
-              <header class="clearfix">
-                <h4 class="left">Create a new account</h4>
-              </header>
-              <div class="block-inner mt-4">
-                <div class="form-group">
-                  <label for="username" class="col-form-label">E-mail</label>
-                  <br />
-                  <input
-                    type="text"
-                    name="email"
-                    class="required form-control"
-                    value
-                    placeholder="Enter your e-mail..."
-                    v-model="output.email"
-                    v-validate="'required|email'"
-                    :class="{'is-invalid' : submitted && errors.has('email')}"
-                  />
-                  <div
-                    v-if="submitted && errors.has('email')"
-                    class="invalid-feedback"
-                  >{{ errors.first('email') }}</div>
+        <div class="col-md-6 mx-auto mt-5">
+          <div class="card mx-4">
+            <div class="card-body p-4">
+              <h1>Register</h1>
+              <p class="text-muted">Create your account</p>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-user"></i>
+                  </span>
                 </div>
-                <div class="form-group">
-                  <label for="username" class="col-form-label">Password</label>
-                  <br />
-                  <input
-                    name="password"
-                    type="password"
-                    class="required form-control"
-                    style
-                    placeholder="Enter your password..."
-                    v-model="output.password"
-                    v-validate="'required|min:6|max:12'"
-                    :class="{ 'is-invalid': submitted && errors.has('password')}"
-                  />
-                  <div
-                    v-if="submitted && errors.has('password')"
-                    class="invalid-feedback"
-                  >{{errors.first('password')}}</div>
-                </div>
-
-                <div class="form-group">
-                  <label for="username" class="col-form-label">First name</label>
-                  <br />
-                  <input
-                    name="firstname"
-                    type="firstname"
-                    class="required form-control"
-                    style
-                    placeholder="Enter your first name..."
-                    v-model="output.firstname"
-                    v-validate="'required|max:15'"
-                    :class="{ 'is-invalid': submitted && errors.has('firstname') }"
-                  />
-                  <div
-                    v-if="submitted && errors.has('firstname')"
-                    class="invalid-feedback"
-                  >{{ errors.first('firstname') }}</div>
-                </div>
-
-                <div class="form-group">
-                  <label for="username" class="col-form-label">Last name</label>
-                  <br />
-                  <input
-                    name="lastname"
-                    type="lastname"
-                    class="required form-control"
-                    style
-                    placeholder="Enter your last name..."
-                    v-model="output.lastname"
-                    v-validate="'required|max:15'"
-                    :class="{ 'is-invalid': submitted && errors.has('lastname') }"
-                  />
-                  <div
-                    v-if="submitted && errors.has('lastname')"
-                    class="invalid-feedback"
-                  >{{ errors.first('lastname') }}</div>
-                </div>
-                <div class="form-group">
-                  <label for="username" class="col-form-label">Phone</label>
-                  <br />
-                  <input
-                    name="phone"
-                    type="phone"
-                    class="required form-control"
-                    style
-                    placeholder="Enter your phone..."
-                    v-model="output.phone"
-                    v-validate="'required|numeric|max:10'"
-                    :class="{ 'is-invalid': submitted && errors.has('phone') }"
-                  />
-                  <div
-                    v-if="submitted && errors.has('phone')"
-                    class="invalid-feedback"
-                  >{{ errors.first('phone') }}</div>
-                </div>
+                <input class="form-control" type="text" placeholder="Username" />
               </div>
-              <br />
-              <button type="submit" class="btnregister">SIGN UP</button>
-              <br />
-            </article>
-          </form>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">@</span>
+                </div>
+                <input class="form-control" type="text" placeholder="Email" />
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-lock"></i>
+                  </span>
+                </div>
+                <input class="form-control" type="password" placeholder="Password" />
+              </div>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-lock"></i>
+                  </span>
+                </div>
+                <input class="form-control" type="password" placeholder="Repeat password" />
+              </div>
+              <button class="btn btn-block btn-success" type="button">Create Account</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
