@@ -81,7 +81,7 @@
                   </div>
                   <input
                     class="form-control"
-                    type="password"
+                    type="text"
                     name="firstname"
                     placeholder="Enter firstname"
                     v-model="output.firstname"
@@ -102,7 +102,7 @@
                   </div>
                   <input
                     class="form-control"
-                    type="password"
+                    type="text"
                     name="lastname"
                     placeholder="Enter lastname"
                     v-model="output.lastname"
@@ -122,7 +122,7 @@
                   </div>
                   <input
                     class="form-control"
-                    type="password"
+                    type="text"
                     name="phone"
                     placeholder="Enter phone"
                     v-model="output.phone"
