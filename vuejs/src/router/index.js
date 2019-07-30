@@ -17,7 +17,7 @@ export default new Router({
             component: () => import('@/components/auth/register')
         },
         {
-            path: '/auth/Confirmemail',
+            path: '/auth/confirmemail',
             name: 'Confirmemail',
             component: () => import('@/components/Confirmemail/Confirmemail')
         },
