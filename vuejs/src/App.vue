@@ -1,10 +1,16 @@
 <template>
   <div id="app">
     <Header />
-    <Sidebar />
-    <main class="main">
-      <router-view />
-    </main>
+    <div class="app-body">
+      <Sidebar />
+      <main class="main">
+        <div class="container-fluid">
+          <!-- <div class="animated fadeIn"> -->
+            <router-view />
+          <!-- </div> -->
+        </div>
+      </main>
+    </div>
     <Footer />
   </div>
 </template>
@@ -37,9 +43,7 @@ export default {
 }
 
 .main {
-  margin-top: 50px;
-  flex: 1
+  flex: 1;
+  margin-bottom: 10px;
 }
-
-
 </style>

@@ -1,11 +1,13 @@
 <template>
-  <!-- <div class="app-body"> -->
     <div class="sidebar">
       <nav class="sidebar-nav">
         <ul class="nav">
-          <a class="nav-link dashboard" href="#">Dashboard</a>
           <li class="nav-item">
-
+            <a class="nav-link" href="index.html">
+              <i class="nav-icon icon-speedometer"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item"></li>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-star"></i> User
@@ -27,12 +29,6 @@
       </nav>
       <button class="sidebar-minimizer brand-minimizer" type="button"></button>
     </div>
-  <!-- </div> -->
 </template>
 
-<style>
-.dashboard{
-  margin-top: 50px
-}
-</style>
 
