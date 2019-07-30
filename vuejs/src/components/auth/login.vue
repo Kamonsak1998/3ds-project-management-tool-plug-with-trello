@@ -53,7 +53,9 @@
                 </div>
               </div>
             </div>
-            <a href="/register" class="pull-left">Create a new account</a>
+             <router-link class="pull-left" :to="{name : 'register'}">
+               Create a new account
+                </router-link>
             <a
               data-toggle="modal"
               id="reset_password"
