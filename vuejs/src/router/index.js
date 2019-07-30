@@ -26,6 +26,11 @@ export default new Router({
             name: 'success',
             component: () => import('@/components/auth/Confirmemail/success')
         },
+        {
+            path: '/leaderBoard/leaderboard',
+            name: 'leaderboard',
+            component: () => import('@/components/leaderBoard/Leaderboard')
+        },
         
     ],
 
