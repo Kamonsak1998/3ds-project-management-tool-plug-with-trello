@@ -8,7 +8,10 @@ import router from './router';
 import 'vuesax/dist/vuesax.css';
 import VeeValidate from 'vee-validate';
 import { store } from './store';
-
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+ 
+Vue.use(VueAxios, axios)
 Vue.use(VeeValidate);
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
