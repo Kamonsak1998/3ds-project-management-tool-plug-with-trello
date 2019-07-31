@@ -1,28 +1,27 @@
 <template>
-  <div>
-      <button @click="click">
-          click
-      </button>
-  </div>
+   <div>
+     <apexchart width="500" type="bar" :options="chartOptions" :series="series"></apexchart>
+   </div>
 </template>
 
+
 <script>
-import axios from "axios";
 export default {
-  mounted() {
-   
-  },
-  methods: {    
-      click(){
-           axios
-      .get(
-        "https://api.trello.com/1/boards/5d36c7de529359859075da3a?fields=name&lists=all&list_fields=all,url&key=94950bb5fc0cd8bb15072e48e7e3010e&token=9f4f27201a97a252fe6b4bc3b9daccfa182a60c190d1edb301fda87f471438ae"
-      )
-      .then(res => {
-          console.log(res);
-          
-      });
+    data: function() {
+      return {
+        chartOptions: {
+          chart: {
+            id: 'vuechart-example'
+          },
+          xaxis: {
+            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+          }
+        },
+        series: [{
+          name: 'series-1',
+          data: [30, 40, 35, 50, 49, 60, 70, 91]
+        }]
       }
-  },
+    },
 };
 </script>
