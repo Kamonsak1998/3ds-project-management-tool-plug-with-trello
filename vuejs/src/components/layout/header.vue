@@ -11,9 +11,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <ul class="nav navbar-nav d-md-down-none">
-        <li class="nav-item px-3">
-          <a class="nav-link" href="#">Dashboard</a>
-        </li>
+
       </ul>
       <ul class="nav navbar-nav ml-auto">
         <li class="nav-item d-md-down-none">
@@ -38,3 +36,5 @@
 </template>
 
 
+<style>
+</style>

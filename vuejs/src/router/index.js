@@ -7,24 +7,29 @@ export default new Router({
     base: process.env.BASE_URL,
     routes: [     
         {
-            path: '/',
+            path: '/auth/login',
             name: 'login',
             component: () => import('@/components/auth/login')
         },
         {
-            path: '/register',
+            path: '/auth/register',
             name: 'register',
             component: () => import('@/components/auth/register')
         },
         {
-            path: '/Confirmemail',
+            path: '/auth/confirmemail',
             name: 'Confirmemail',
-            component: () => import('@/components/Confirmemail/Confirmemail')
+            component: () => import('@/components/auth/Confirmemail/Confirmemail')
         },
         {
-            path: '/success',
+            path: '/auth/success',
             name: 'success',
-            component: () => import('@/components/Confirmemail/success')
+            component: () => import('@/components/auth/Confirmemail/success')
+        },
+        {
+            path: '/leaderBoard/leaderboard',
+            name: 'leaderboard',
+            component: () => import('@/components/leaderBoard/Leaderboard')
         },
         
     ],

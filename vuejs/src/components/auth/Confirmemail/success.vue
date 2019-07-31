@@ -10,7 +10,9 @@
         <h2>Success! You have confirmed your email address.</h2>
         <br />
         <br />
-        <button class="btnlogin">OK,let's go!</button>
+         <router-link :to="{name : 'login'}">
+               <button class="btnlogin">OK,let's go!</button>
+                </router-link>
         </form>
       </div>
     </div>
@@ -21,9 +23,9 @@
 <script>
 export default {
     methods:{
-        login:function(){
-            this.$router.push("/login");
-        }
+        // login:function(){
+        //     this.$router.push("/login");
+        // }
     }
 
 };
