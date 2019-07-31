@@ -5,7 +5,7 @@ Vue.use(Router)
 export default new Router({
     mode: 'history',
     base: process.env.BASE_URL,
-    routes: [     
+    routes: [
         {
             path: '/auth/login',
             name: 'login',
@@ -31,7 +31,12 @@ export default new Router({
             name: 'leaderboard',
             component: () => import('@/components/leaderBoard/Leaderboard')
         },
-        
+        {
+            path: '/history',
+            name: 'history',
+            component: () => import('@/components/history/history')
+        }
+
     ],
 
 })
