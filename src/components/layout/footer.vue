@@ -14,7 +14,6 @@
 <style>
 .app-footer {
   position: relative;
-  margin-top: 30px;
   color: black;
   background-color: white;
 }
