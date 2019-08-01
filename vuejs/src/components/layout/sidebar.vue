@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar text-left">
     <nav class="sidebar-nav">
       <ul class="nav">
         <li class="nav-item">
