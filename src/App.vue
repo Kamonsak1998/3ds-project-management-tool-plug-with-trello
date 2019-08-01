@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <Header />
-    <div class="app-body">
+    <div class="app-body ">
       <Sidebar />
       <main class="main">
-        <div class="container-fluid py-5">
+        <div class="container-fluid ">
           <div class="animated fadeIn">
             <router-view />
           </div>
@@ -36,7 +36,7 @@ export default {
   min-height: 100vh;
   flex-direction: column;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;  
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
@@ -44,6 +44,5 @@ export default {
 
 .main {
   flex: 1;
-  margin-bottom: 10px;
 }
 </style>
