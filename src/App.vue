@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <Header />
-    <div class="app-body ">
+    <div class="app-body">
       <Sidebar />
-      <main class="main">
-        <div class="container-fluid ">
+      <main class="main p-5">
+        <div class="container-fluid ">  
           <div class="animated fadeIn">
             <router-view />
           </div>
