@@ -5,9 +5,9 @@
       <Sidebar />
       <main class="main">
         <div class="container-fluid">
-          <!-- <div class="animated fadeIn"> -->
+          <div class="animated fadeIn">
             <router-view />
-          <!-- </div> -->
+          </div>
         </div>
       </main>
     </div>
