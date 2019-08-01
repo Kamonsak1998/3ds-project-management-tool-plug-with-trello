@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar text-left">
     <nav class="sidebar-nav">
       <ul class="nav">
         <li class="nav-item">
@@ -26,7 +26,12 @@
           </ul>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name : 'charts'}">
+          <router-link class="nav-link" :to="{name : 'leaderboard'}">
+            <i class="nav-icon icon-pie-chart"></i> LeaderBoard
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{name : 'history'}">
             <i class="nav-icon icon-pie-chart"></i> Charts
           </router-link>
         </li>
