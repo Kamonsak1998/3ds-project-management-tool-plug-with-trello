@@ -4,7 +4,7 @@
     <div class="app-body">
       <Sidebar />
       <main class="main">
-        <div class="container-fluid">
+        <div class="container-fluid py-5">
           <div class="animated fadeIn">
             <router-view />
           </div>

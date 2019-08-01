@@ -32,9 +32,9 @@ export default new Router({
             component: () => import('@/components/leaderBoard/Leaderboard')
         },
         {
-            path: '/',
-            name: 'history',
-            component: () => import('@/components/history/history')
+            path: '/history/charts',
+            name: 'charts',
+            component: () => import('@/components/history/charts')
         }
 
     ],
