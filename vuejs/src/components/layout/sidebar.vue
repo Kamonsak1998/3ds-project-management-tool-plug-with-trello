@@ -31,7 +31,7 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name : 'history'}">
+          <router-link class="nav-link" :to="{name : 'charts'}">
             <i class="nav-icon icon-pie-chart"></i> Charts
           </router-link>
         </li>
