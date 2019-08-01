@@ -33,8 +33,8 @@ export default new Router({
         },
         {
             path: '/',
-            name: 'history',
-            component: () => import('@/components/history/history')
+            name: 'charts',
+            component: () => import('@/components/history/charts')
         }
 
     ],

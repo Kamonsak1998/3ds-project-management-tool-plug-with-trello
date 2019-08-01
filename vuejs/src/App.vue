@@ -4,10 +4,10 @@
     <div class="app-body">
       <Sidebar />
       <main class="main">
-        <div class="container-fluid">
-          <!-- <div class="animated fadeIn"> -->
+        <div class="container-fluid py-5">
+          <div class="animated fadeIn">
             <router-view />
-          <!-- </div> -->
+          </div>
         </div>
       </main>
     </div>
