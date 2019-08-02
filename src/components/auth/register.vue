@@ -134,7 +134,7 @@
                     class="invalid-feedback"
                   >{{ errors.first('phone') }}</div>
                 </div>
-                <button class="btn btn-block btn-success" type="submit">Create Account</button>
+                <button class="btn btn-block btn-success shadow p-3 rounded" type="submit">Create Account</button>
               </div>
             </form>
           </div>
