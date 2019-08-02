@@ -1,10 +1,10 @@
 <template>
-  <div class="animated fadeIn">
-    <b-card header="Bar Chart">
-      <Bar />
+  <div class="animated fadeIn ">
+    <b-card class="shadow p-3 mb-5 bg-white rounded">
+      <Bar  />
     </b-card>
     <b-card-group columns class="card-columns">
-      <b-card header="Bar Column">
+      <b-card class="shadow p-3 mb-5 bg-white rounded">
         <BarColumn />
       </b-card>
     </b-card-group>
