@@ -1,10 +1,15 @@
 <template>
-  <div class="animated fadeIn ">
-    <b-card class="shadow p-3 mb-5 bg-white rounded ">
-      <Bar  />
-    </b-card>
-    <b-card-group columns class="card-columns">
+  <div>
+    <b-card-group rows class="card-rows">
       <b-card class="shadow p-3 mb-5 bg-white rounded">
+        <Bar />
+      </b-card>
+    </b-card-group>
+    <b-card-group columns class="card-columns cols-2">
+      <b-card class="shadow p-3 bg-white rounded">
+        <BarColumn />
+      </b-card>
+      <b-card class="shadow p-3 bg-white rounded">
         <BarColumn />
       </b-card>
     </b-card-group>
@@ -22,3 +27,4 @@ export default {
   }
 };
 </script>
+
