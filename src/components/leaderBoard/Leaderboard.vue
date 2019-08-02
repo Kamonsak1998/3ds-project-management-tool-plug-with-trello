@@ -1,20 +1,18 @@
 <template>
   <b-container class="bv-example-row mt-5">
-    <div class="col-lg-10 mx-auto">
+    <div class="col-lg-8   mx-auto">
       <div class="card-body shadow-sm p-0 mb-5 bg-white rounded">
         <table class="table table-outlined table-striped table-hover">
           <thead>
             <tr>
-              <th>No.</th>
               <th>Rank</th>
               <th>Name</th>
               <th>Score</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="trcell" v-for="item in items" :key="item">
-              <td>1</td>
-              <td>{{item.Rank}}</td>
+            <tr class="trcell" v-for="(item,key) in items" :key="item">
+              <td>{{key+1}}</td>
               <td>{{item.Name}}</td>
               <td>{{item.Score}}</td>
             </tr>
@@ -30,30 +28,7 @@
         shadown
         outlined
         :items="items"
-      >
-        <div>
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#">Prev</a>
-            </li>
-            <li class="page-item active">
-              <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">4</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
-        </div>
-      </b-table>
+      ></b-table>
     </div>
   </b-container>
 </template>
@@ -63,7 +38,7 @@ export default {
   data() {
     return {
       items: [
-        { Rank: "1", Name: "BahBenz", Score: "100" },
+        { Rank: "9", Name: "BahBenz", Score: "100" },
         { Rank: "2", Name: "arram", Score: "200" },
         { Rank: "3", Name: "gono", Score: "300" },
         { Rank: "4", Name: "arnon", Score: "400" }
