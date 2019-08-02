@@ -4,8 +4,8 @@
       <div class="row">
         <div class="col-md-6 mx-auto mt-5">
           <form name="login_form" id="login_form" @submit.prevent="login" class="form_login">
-            <div class="card-group">
-              <div class="card p-4">
+            <div class="card-group ">
+              <div class="card p-4 shadow p-3 mb-5 bg-white rounded">
                 <div class="card-body">
                   <h1>Login</h1>
                   <p class="text-muted">Sign In to your account</p>
