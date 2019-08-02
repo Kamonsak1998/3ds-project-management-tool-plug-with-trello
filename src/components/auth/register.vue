@@ -3,11 +3,13 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 mx-auto mt-5">
-          <div class="card mx-4 shadow p-3 mb-5 bg-white rounded">
+          <div class="card shadow p-4 bg-white rounded">
             <form @submit.prevent="addUser">
-              <div class="card-body p-4">
+              <div class="text-center">
                 <h1>Register</h1>
                 <p class="text-muted">Create your account</p>
+              </div>
+              <div class="card-body text-left">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">@</span>
@@ -30,10 +32,10 @@
 
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="icon-lock"></i>
-                      </span>
-                    </div>
+                    <span class="input-group-text">
+                      <i class="icon-lock"></i>
+                    </span>
+                  </div>
                   <input
                     v-validate="'required|min:6|max:12'"
                     :class="{ 'is-invalid': submitted && errors.has('password')}"
@@ -46,16 +48,15 @@
                   <div
                     v-if="submitted && errors.has('password')"
                     class="invalid-feedback"
-                  >{{errors.first('password')}}
-                  </div>
+                  >{{errors.first('password')}}</div>
                 </div>
 
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="icon-lock"></i>
-                      </span>
-                    </div>
+                    <span class="input-group-text">
+                      <i class="icon-lock"></i>
+                    </span>
+                  </div>
                   <input
                     v-validate="'required|confirmed:password'"
                     :class="{ 'is-invalid': submitted && errors.has('password_confirmation')}"
@@ -64,14 +65,11 @@
                     class="form-control"
                     placeholder="Repeat password"
                   />
-                 <div
+                  <div
                     v-if="submitted && errors.has('password_confirmation')"
                     class="invalid-feedback"
-                  >{{errors.first('password_confirmation')}}
-                  </div>
+                  >{{errors.first('password_confirmation')}}</div>
                 </div>
-                
-
 
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -104,6 +102,7 @@
                     class="form-control"
                     type="text"
                     name="lastname"
+                    pattern="[A-Za-z]{1}"
                     placeholder="Enter lastname"
                     v-model="output.lastname"
                     v-validate="'required|max:15'"
@@ -124,6 +123,7 @@
                     class="form-control"
                     type="text"
                     name="phone"
+                    pattern="[0][0-9]{9}"
                     placeholder="Enter phone"
                     v-model="output.phone"
                     v-validate="'required|numeric|max:10'"
@@ -134,7 +134,10 @@
                     class="invalid-feedback"
                   >{{ errors.first('phone') }}</div>
                 </div>
-                <button class="btn btn-block btn-success shadow p-3 rounded" type="submit">Create Account</button>
+                <button
+                  class="btn btn-block btn-success shadow p-3 rounded"
+                  type="submit"
+                >Create Account</button>
               </div>
             </form>
           </div>
@@ -161,8 +164,9 @@ export default {
   methods: {
     addUser: function() {
       this.submitted = true;
-      this.$validator.validate().them(valid => {
-        if (valid) {}
+      this.$validator.validate().then(valid => {
+        if (valid) {
+        }
       });
     }
   }

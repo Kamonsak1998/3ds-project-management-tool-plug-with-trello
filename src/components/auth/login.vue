@@ -4,12 +4,14 @@
       <div class="row">
         <div class="col-md-6 mx-auto mt-5">
           <form name="login_form" id="login_form" @submit.prevent="login" class="form_login">
-            <div class="card-group ">
-              <div class="card p-4 shadow p-3 mb-5 bg-white rounded">
-                <div class="card-body">
+            <div class="card-group">
+              <div class="card p-4 shadow bg-white rounded">
+                <div class="text-center">
                   <h1>Login</h1>
                   <p class="text-muted">Sign In to your account</p>
-                  <div class="input-group mb-3">
+                </div>
+                <div class="card-body text-left">
+                  <div class="input-group mb-4">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
                         <i class="icon-user"></i>
@@ -40,7 +42,7 @@
                       type="password"
                       name="password"
                       placeholder="Enter your password..."
-                      v-validate="'required|password'"
+                      v-validate="'required'"
                       v-model="password"
                       :class="{ 'is-invalid': submitted && errors.has('password')}"
                     />
@@ -49,13 +51,11 @@
                       class="invalid-feedback"
                     >{{ errors.first('password') }}</div>
                   </div>
-                 <button  class="btnlogin shadow p-3 rounded"  type="submit">Login</button>
+                  <button class="btnlogin shadow p-3 rounded" type="submit">Login</button>
                 </div>
               </div>
             </div>
-             <router-link class="pull-left" :to="{name : 'register'}">
-               Create a new account
-                </router-link>
+            <router-link class="pull-left" :to="{name : 'register'}">Create a new account</router-link>
             <a
               data-toggle="modal"
               id="reset_password"
@@ -86,7 +86,7 @@ export default {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
-          alert("12345");
+        
         }
       });
     }
@@ -135,15 +135,15 @@ export default {
   padding: 6px;
 }
 .pull-left {
-    float: left !important;
-    margin-top: 10px;
+  float: left !important;
+  margin-top: 10px;
 }
 .pull-right {
-    float: right !important;
-    margin-top: 10px;
+  float: right !important;
+  margin-top: 10px;
 }
 form {
-    display: block;
-    margin-top: 0em;
+  display: block;
+  margin-top: 0em;
 }
 </style>
