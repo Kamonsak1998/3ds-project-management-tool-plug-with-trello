@@ -49,7 +49,7 @@
                       class="invalid-feedback"
                     >{{ errors.first('password') }}</div>
                   </div>
-                 <button  class="btnlogin"  type="submit">Login</button>
+                 <button  class="btnlogin shadow p-3 rounded"  type="submit">Login</button>
                 </div>
               </div>
             </div>
