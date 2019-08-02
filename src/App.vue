@@ -31,7 +31,7 @@ export default {
 
 <style>
 #app {
-  background-color: #f8f9f9;
+  background-color: #FDEDEC ;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
