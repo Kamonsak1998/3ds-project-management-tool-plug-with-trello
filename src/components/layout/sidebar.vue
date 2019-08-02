@@ -3,11 +3,21 @@
     <nav class="sidebar-nav">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="/">
             <i class="nav-icon icon-speedometer"></i> Dashboard
           </a>
         </li>
         <li class="nav-item"></li>
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{name : 'leaderboard'}">
+            <i class="nav-icon icon-pie-chart"></i> LeaderBoard
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{name : 'charts'}">
+            <i class="nav-icon icon-pie-chart"></i> Charts
+          </router-link>
+        </li>
         <li class="nav-item nav-dropdown">
           <a class="nav-link nav-dropdown-toggle" href="#">
             <i class="nav-icon icon-star"></i> User
@@ -24,16 +34,6 @@
               </router-link>
             </li>
           </ul>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{name : 'leaderboard'}">
-            <i class="nav-icon icon-pie-chart"></i> LeaderBoard
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{name : 'charts'}">
-            <i class="nav-icon icon-pie-chart"></i> Charts
-          </router-link>
         </li>
       </ul>
     </nav>
