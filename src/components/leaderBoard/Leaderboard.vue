@@ -1,38 +1,37 @@
 <template>
   <b-container class="bv-example-row mt-5">
-    <!-- <b-row align-v="center" class="hight">
-      <b-col>Rank</b-col>
-      <b-col cols="5">Name</b-col>
-      <b-col>score</b-col>
-    </b-row>
-    <b-row v-for="item in item" :key="item">
-      <b-col>1</b-col>
-      <b-col>2</b-col>
-      <b-col>3</b-col>
-    </b-row> -->
-
-    <b-row>
-      <b-table col-lg-5 striped hover outlined :items="items"></b-table>
-    </b-row>
-
     <div class="col-lg-10 mx-auto">
-      <div class="card">
-        <div class="card-header">
-          <i class="fa fa-align-justify"></i> Sprint 1 
-        </div>
-        <div class="card-body">
-          <table class="table table-responsive-sm table-striped">
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Name</th>
-                <th>Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              
-            </tbody>
-          </table>
+      <div class="card-body shadow-sm p-0 mb-5 bg-white rounded">
+        <table class="table table-outlined table-striped table-hover">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Rank</th>
+              <th>Name</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="trcell" v-for="item in items" :key="item">
+              <td>1</td>
+              <td>{{item.Rank}}</td>
+              <td>{{item.Name}}</td>
+              <td>{{item.Score}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <b-table
+        class="b-table shadow-sm p-3 mb-5 bg-white rounded"
+        striped
+        hover
+        Bordered
+        shadown
+        outlined
+        :items="items"
+      >
+        <div>
           <ul class="pagination">
             <li class="page-item">
               <a class="page-link" href="#">Prev</a>
@@ -54,7 +53,7 @@
             </li>
           </ul>
         </div>
-      </div>
+      </b-table>
     </div>
   </b-container>
 </template>
@@ -64,10 +63,10 @@ export default {
   data() {
     return {
       items: [
-        { age: 40, first_name: "Dickerson", last_name: "Macdonald" },
-        { age: 21, first_name: "Larsen", last_name: "Shaw" },
-        { age: 89, first_name: "Geneva", last_name: "Wilson" },
-        { age: 38, first_name: "Jami", last_name: "Carney" }
+        { Rank: "1", Name: "BahBenz", Score: "100" },
+        { Rank: "2", Name: "arram", Score: "200" },
+        { Rank: "3", Name: "gono", Score: "300" },
+        { Rank: "4", Name: "arnon", Score: "400" }
       ]
     };
   }
@@ -75,15 +74,29 @@ export default {
 </script>
 
 <style>
-/* .table thead th {
-  vertical-align: bottom;
-  border-bottom: 2px solid #dee2e6;
-  text-align: center;
-} */
+.tableheader {
+  font-size: 17px;
+}
 .hight {
   min-height: 4rem;
   margin-top: 50px;
 
   font-size: 20px;
+}
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 0rem;
+}
+.striped {
+  background-color: #c8ced3;
+}
+.b-table {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 10rem;
+}
+.tr td :hover {
+  background-color: black;
 }
 </style>
