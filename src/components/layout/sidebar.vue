@@ -3,9 +3,9 @@
     <nav class="sidebar-nav">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link" href="/">
+          <router-link class="nav-link" :to="{name : 'login'}">
             <i class="nav-icon icon-speedometer"></i> Dashboard
-          </a>
+          </router-link>
         </li>
         <li class="nav-item"></li>
         <li class="nav-item">
@@ -20,7 +20,7 @@
         </li>
         <li class="nav-item nav-dropdown">
           <a class="nav-link nav-dropdown-toggle" href="#">
-            <i class="nav-icon icon-star"></i> User
+            <i class="nav-icon icon-user"></i> User
           </a>
           <ul class="nav-dropdown-items">
             <li class="nav-item">
