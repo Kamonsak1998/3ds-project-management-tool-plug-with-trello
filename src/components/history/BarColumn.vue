@@ -1,6 +1,6 @@
 <template>
   <div class="chart-wrapper">
-    <apexchart width="100%" height="350" type="bar" :options="chartOptions" :series="series"></apexchart>
+    <apexchart width="100%" height="300" type="bar" :options="chartOptions" :series="series"></apexchart>
   </div>
 </template>
 
