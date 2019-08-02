@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 mx-auto mt-5">
-          <div class="card mx-4">
+          <div class="card mx-4 shadow p-3 mb-5 bg-white rounded">
             <form @submit.prevent="addUser">
               <div class="card-body p-4">
                 <h1>Register</h1>
