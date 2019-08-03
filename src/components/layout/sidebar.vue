@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar text-left">
+  <div class="sidebar text-left ">
     <nav class="sidebar-nav">
       <ul class="nav">
         <li class="nav-item">
@@ -42,3 +42,8 @@
 </template>
 
 
+<style>
+/* .sidebar {
+  border-radius: 25px;
+} */
+</style>
