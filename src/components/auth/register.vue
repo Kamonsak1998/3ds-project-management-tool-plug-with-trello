@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 mx-auto mt-5">
-          <div class="card shadow p-4 bg-white rounded">
+          <div class="card shadow p-4 bg-white">
             <form @submit.prevent="addUser">
               <div class="text-center">
                 <h1>Register</h1>
@@ -135,10 +135,7 @@
                     class="invalid-feedback"
                   >{{ errors.first('phone') }}</div>
                 </div>
-                <button
-                  class="btn btn-block btn-success shadow p-3 rounded"
-                  type="submit"
-                >Create Account</button>
+                <button class="btn btn-block btn-success shadow p-3" type="submit">Create Account</button>
               </div>
             </form>
           </div>
@@ -176,6 +173,12 @@ export default {
 
 
 <style>
+.card{
+  border-radius: 25px;
+}
+.btn {
+  border-radius: 25px;
+}
 .btnregister {
   color: #ffffff;
   font: 15px;

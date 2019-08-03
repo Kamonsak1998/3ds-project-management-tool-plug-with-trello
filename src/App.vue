@@ -3,8 +3,8 @@
     <Header />
     <div class="app-body">
       <Sidebar />
-      <main class="main p-4">
-        <div class="container-fluid ">  
+      <main class="main">
+        <div class="container-fluid">
           <div class="animated fadeIn">
             <router-view />
           </div>
@@ -31,12 +31,17 @@ export default {
 
 <style>
 #app {
-  background-color: #FDEDEC ;
+  background-image: url("./assets/BG.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height:100vh;
+  width: 100%;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;  
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;

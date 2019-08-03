@@ -5,7 +5,7 @@
         <div class="col-md-6 mx-auto mt-5">
           <form name="login_form" id="login_form" @submit.prevent="login" class="form_login">
             <div class="card-group">
-              <div class="card p-4 shadow bg-white rounded">
+              <div class="card p-4 shadow bg-white">
                 <div class="text-center">
                   <h1>Login</h1>
                   <p class="text-muted">Sign In to your account</p>
@@ -51,7 +51,7 @@
                       class="invalid-feedback"
                     >{{ errors.first('password') }}</div>
                   </div>
-                  <button class="btnlogin shadow p-3 rounded" type="submit">Login</button>
+                  <button class="btnlogin shadow p-3 " type="submit">Login</button>
                 </div>
               </div>
             </div>
@@ -86,7 +86,6 @@ export default {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
-        
         }
       });
     }
@@ -95,7 +94,11 @@ export default {
 </script>
 
 <style>
+.card{
+  border-radius: 25px;
+}
 .btnlogin {
+  border-radius: 25px;
   color: #ffffff;
   font: 15px;
   font-family: sans-serif;
