@@ -1,7 +1,7 @@
 <template>
   <b-container class="bv-example-row mt-5">
-    <div class="col-lg-8   mx-auto">
-      <div class="card-body shadow-sm p-0 mb-5 bg-white rounded">
+    <div class="col-lg-9   mx-auto">
+      <div class="card-body shadow p-0 bg-white rounded">
         <table class="table table-outlined table-striped table-hover">
           <thead>
             <tr>
@@ -41,7 +41,13 @@ export default {
         { Rank: "9", Name: "BahBenz", Score: "100" },
         { Rank: "2", Name: "arram", Score: "200" },
         { Rank: "3", Name: "gono", Score: "300" },
-        { Rank: "4", Name: "arnon", Score: "400" }
+        { Rank: "3", Name: "gono", Score: "300" },
+        { Rank: "3", Name: "gono", Score: "300" },
+        { Rank: "3", Name: "gono", Score: "300" },
+        { Rank: "3", Name: "gono", Score: "300" },
+        { Rank: "3", Name: "gono", Score: "300" },
+        { Rank: "3", Name: "gono", Score: "300" },
+        { Rank: "4", Name: "arnon", Score: "400" },
       ]
     };
   }

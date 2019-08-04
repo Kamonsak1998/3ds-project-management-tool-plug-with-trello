@@ -72,7 +72,11 @@
 
 
 <script>
+
+const sign = require('jsonwebtoken').sign;
+
 export default {
+  
   name: "login",
   data: function() {
     return {
