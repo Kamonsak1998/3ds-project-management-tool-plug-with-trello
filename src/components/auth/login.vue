@@ -51,7 +51,8 @@
                       class="invalid-feedback"
                     >{{ errors.first('password') }}</div>
                   </div>
-                  <button class="btnlogin shadow p-3 " type="submit">Login</button>
+                  <button class="btnlogin shadow p-3 mb-3" type="submit">Login</button>
+                  <button type="button" class="btn btn-pill btn-info" @click="Auth">Login with trello</button>
                 </div>
               </div>
             </div>
@@ -72,6 +73,8 @@
 
 
 <script>
+import { OAuth } from "oauthio-web";
+// import axios from "axios";
 export default {
   name: "login",
   data: function() {
@@ -81,22 +84,38 @@ export default {
       password: ""
     };
   },
+  // created() {
+  //   OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
+  //   OAuth.popup("trello")
+  //     .done(function(result) {
+  //       console.log(result);
+  //       // do some stuff with result
+  //     })
+  //     .fail(function(err) {
+  //       //handle error with err
+  //     });
+  // },
   methods: {
-    login: function() {
-      this.submitted = true;
-      this.$validator.validate().then(valid => {
-        if (valid) {
-        }
-      });
+    Auth() {
+      OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
+      OAuth.popup("trello")
+        .done(function(result) {
+          console.log(result);
+          // do some stuff with result
+        })
+        .fail(function(err) {
+          //handle error with err
+        });
     }
   }
 };
 </script>
 
 <style>
-.card{
+.card {
   border-radius: 25px;
 }
+
 .btnlogin {
   border-radius: 25px;
   color: #ffffff;

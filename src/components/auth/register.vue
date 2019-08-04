@@ -162,10 +162,10 @@ export default {
   methods: {
     addUser: function() {
       this.submitted = true;
-      this.$validator.validate().then(valid => {
-        if (valid) {
-        }
-      });
+      // this.$validator.validate().then(valid => {
+      //   if (valid) {
+      //   }
+      // });
     }
   }
 };
