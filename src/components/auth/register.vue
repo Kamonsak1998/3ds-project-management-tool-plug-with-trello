@@ -141,11 +141,7 @@
                     class="invalid-feedback"
                   >{{ errors.first('phone') }}</div>
                 </div>
-<<<<<<< Updated upstream
-                <button class="btn btn-block btn-success shadow p-3" type="submit">Create Account</button>
-=======
                 <button data-cy="input-register-btnregister " class="btnregister" type="submit">Create Account</button>
->>>>>>> Stashed changes
               </div>
             </form>
           </div>

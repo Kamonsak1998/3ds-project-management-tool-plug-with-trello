@@ -53,11 +53,7 @@
                       class="invalid-feedback"
                     >{{ errors.first('password') }}</div>
                   </div>
-<<<<<<< Updated upstream
-                  <button class="btnlogin shadow p-3 " type="submit">Login</button>
-=======
                  <button data-cy="input-login-btnlogin"  class="btnlogin"  type="submit">Login</button>
->>>>>>> Stashed changes
                 </div>
               </div>
             </div>
