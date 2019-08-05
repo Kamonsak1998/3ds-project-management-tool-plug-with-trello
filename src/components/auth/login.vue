@@ -3,19 +3,22 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 mx-auto mt-5">
-          <form name="login_form" id="login_form" @submit.prevent="login" class="form_login">
+          <form name="login_form" id="login_form" @submit.prevent="logIn" class="form_login">
             <div class="card-group">
-              <div class="card p-4">
-                <div class="card-body">
+              <div class="card p-4 shadow bg-white">
+                <div class="text-center">
                   <h1>Login</h1>
                   <p class="text-muted">Sign In to your account</p>
-                  <div class="input-group mb-3">
+                </div>
+                <div class="card-body text-left">
+                  <div class="input-group mb-4">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
                         <i class="icon-user"></i>
                       </span>
                     </div>
                     <input
+                      data-cy="input-login-email"
                       class="form-control"
                       type="email"
                       name="email"
@@ -36,11 +39,12 @@
                       </span>
                     </div>
                     <input
+                      data-cy="input-login-password"
                       class="form-control"
                       type="password"
                       name="password"
                       placeholder="Enter your password..."
-                      v-validate="'required|password'"
+                      v-validate="'required'"
                       v-model="password"
                       :class="{ 'is-invalid': submitted && errors.has('password')}"
                     />
@@ -49,13 +53,19 @@
                       class="invalid-feedback"
                     >{{ errors.first('password') }}</div>
                   </div>
-                 <button  class="btnlogin"  type="submit">Login</button>
+
+                  <button data-cy="input-login-btnlogin" class="btnlogin" type="submit">Login</button>
+
+                  <button class="btnlogin shadow p-3 mb-3" type="submit">Login</button>
+                  <button
+                    type="button"
+                    class="btn btn-pill btn-info shadow w-100"
+                    @click="Auth"
+                  >Login with trello</button>
                 </div>
               </div>
             </div>
-             <router-link class="pull-left" :to="{name : 'register'}">
-               Create a new account
-                </router-link>
+            <router-link class="pull-left" :to="{name : 'register'}">Create a new account</router-link>
             <a
               data-toggle="modal"
               id="reset_password"
@@ -72,9 +82,8 @@
 
 
 <script>
-
-const sign = require('jsonwebtoken').sign;
-
+import { OAuth } from "oauthio-web";
+// import axios from "axios";
 export default {
   
   name: "login",
@@ -85,12 +94,35 @@ export default {
       password: ""
     };
   },
+  // created() {
+  //   OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
+  //   OAuth.popup("trello")
+  //     .done(function(result) {
+  //       console.log(result);
+  //       // do some stuff with result
+  //     })
+  //     .fail(function(err) {
+  //       //handle error with err
+  //     });
+  // },
   methods: {
-    login: function() {
+    Auth() {
+      OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
+      OAuth.popup("trello")
+        .done(function(result) {
+          if (result) {
+            console.log(result);
+          }
+          // do some stuff with result
+        })
+        .fail(function(err) {
+          //handle error with err
+        });
+    },
+    logIn() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
-          alert("12345");
         }
       });
     }
@@ -99,7 +131,12 @@ export default {
 </script>
 
 <style>
+.card {
+  border-radius: 25px;
+}
+
 .btnlogin {
+  border-radius: 25px;
   color: #ffffff;
   font: 15px;
   font-family: sans-serif;
@@ -139,15 +176,15 @@ export default {
   padding: 6px;
 }
 .pull-left {
-    float: left !important;
-    margin-top: 10px;
+  float: left !important;
+  margin-top: 10px;
 }
 .pull-right {
-    float: right !important;
-    margin-top: 10px;
+  float: right !important;
+  margin-top: 10px;
 }
 form {
-    display: block;
-    margin-top: 0em;
+  display: block;
+  margin-top: 0em;
 }
 </style>
