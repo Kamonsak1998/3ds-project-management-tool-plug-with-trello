@@ -6,7 +6,7 @@
           <form name="login_form" id="login_form" @submit.prevent="logIn" class="form_login">
             <div class="card-group">
               <div class="card p-4 shadow bg-white">
-                <div class="text-center"> 
+                <div class="text-center">
                   <h1>Login</h1>
                   <p class="text-muted">Sign In to your account</p>
                 </div>
@@ -52,7 +52,11 @@
                     >{{ errors.first('password') }}</div>
                   </div>
                   <button class="btnlogin shadow p-3 mb-3" type="submit">Login</button>
-                  <button type="button" class="btn btn-pill btn-info shadow w-100" @click="Auth">Login with trello</button>
+                  <button
+                    type="button"
+                    class="btn btn-pill btn-info shadow w-100"
+                    @click="Auth"
+                  >Login with trello</button>
                 </div>
               </div>
             </div>
@@ -76,7 +80,10 @@
 
 import { OAuth } from "oauthio-web";
 import axios from "axios";
+<<<<<<< HEAD
 
+=======
+>>>>>>> auth
 export default {
   name: "login",
   data: function() {
@@ -86,22 +93,14 @@ export default {
       password: ""
     };
   },
-  // created() {
-  //   OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
-  //   OAuth.popup("trello")
-  //     .done(function(result) {
-  //       console.log(result);
-  //       // do some stuff with result
-  //     })
-  //     .fail(function(err) {
-  //       //handle error with err
-  //     });
-  // },
   methods: {
     Auth() {
       OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
-      OAuth.popup("trello")
+      var provider = "trello";
+
+      OAuth.popup(provider)
         .done(function(result) {
+<<<<<<< HEAD
           
           let authtoken = result.authtoken
           
@@ -127,11 +126,31 @@ export default {
             
           }
          
+=======
+          result
+            .me()
+            .done(function(response) {
+              let toKen = result.oauth_token;
+              // let idUser = response.raw.id;
+              axios
+                .post("https://07f73f0f.ngrok.io/getdashboard", {
+                  toKen
+                  // idUser
+                })
+                .then(res => {
+                  console.log(res);
+                });
+            })
+            .fail(function(err) {
+              //handle error with err
+            });
+>>>>>>> auth
         })
         .fail(function(err) {
          
         });
     },
+<<<<<<< HEAD
     // logIn(){
     //   this.submitted = true;
     //   this.$validator.validate().then(valid => {
@@ -140,6 +159,15 @@ export default {
     //     }
     //   });
     // }
+=======
+    logIn() {
+      this.submitted = true;
+      this.$validator.validate().then(valid => {
+        if (valid) {
+        }
+      });
+    }
+>>>>>>> auth
   }
 };
 </script>
