@@ -16,6 +16,7 @@
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.27",
     "core-js": "^2.6.5",
+    "cypress": "^3.4.1",
     "global": "^4.4.0",
     "simple-line-icons": "^2.4.1",
     "vee-validate": "^2.2.13",
