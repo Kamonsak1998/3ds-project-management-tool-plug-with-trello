@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 mx-auto mt-5">
-          <form name="login_form" id="login_form" @submit.prevent="login" class="form_login">
+          <form name="login_form" id="login_form" @submit.prevent="logIn" class="form_login">
             <div class="card-group">
               <div class="card p-4 shadow bg-white">
                 <div class="text-center">
@@ -18,7 +18,7 @@
                       </span>
                     </div>
                     <input
-                          data-cy="input-login-email"
+                      data-cy="input-login-email"
                       class="form-control"
                       type="email"
                       name="email"
@@ -39,7 +39,7 @@
                       </span>
                     </div>
                     <input
-                    data-cy="input-login-password"
+                      data-cy="input-login-password"
                       class="form-control"
                       type="password"
                       name="password"
@@ -53,7 +53,15 @@
                       class="invalid-feedback"
                     >{{ errors.first('password') }}</div>
                   </div>
-                 <button data-cy="input-login-btnlogin"  class="btnlogin"  type="submit">Login</button>
+
+                  <button data-cy="input-login-btnlogin" class="btnlogin" type="submit">Login</button>
+
+                  <button class="btnlogin shadow p-3 mb-3" type="submit">Login</button>
+                  <button
+                    type="button"
+                    class="btn btn-pill btn-info shadow w-100"
+                    @click="Auth"
+                  >Login with trello</button>
                 </div>
               </div>
             </div>
@@ -74,6 +82,8 @@
 
 
 <script>
+import { OAuth } from "oauthio-web";
+// import axios from "axios";
 export default {
   name: "login",
   data: function() {
@@ -83,8 +93,32 @@ export default {
       password: ""
     };
   },
+  // created() {
+  //   OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
+  //   OAuth.popup("trello")
+  //     .done(function(result) {
+  //       console.log(result);
+  //       // do some stuff with result
+  //     })
+  //     .fail(function(err) {
+  //       //handle error with err
+  //     });
+  // },
   methods: {
-    login: function() {
+    Auth() {
+      OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
+      OAuth.popup("trello")
+        .done(function(result) {
+          if (result) {
+            console.log(result);
+          }
+          // do some stuff with result
+        })
+        .fail(function(err) {
+          //handle error with err
+        });
+    },
+    logIn() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
@@ -96,9 +130,10 @@ export default {
 </script>
 
 <style>
-.card{
+.card {
   border-radius: 25px;
 }
+
 .btnlogin {
   border-radius: 25px;
   color: #ffffff;

@@ -18,6 +18,7 @@
     "core-js": "^2.6.5",
     "cypress": "^3.4.1",
     "global": "^4.4.0",
+    "oauthio-web": "^0.6.2",
     "simple-line-icons": "^2.4.1",
     "vee-validate": "^2.2.13",
     "vue": "^2.6.10",
