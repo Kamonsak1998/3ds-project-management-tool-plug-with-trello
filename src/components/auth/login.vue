@@ -54,9 +54,9 @@
                     >{{ errors.first('password') }}</div>
                   </div>
 
-                  <button data-cy="input-login-btnlogin" class="btnlogin" type="submit">Login</button>
+          
 
-                  <button class="btnlogin shadow p-3 mb-3" type="submit">Login</button>
+                  <button data-cy="input-login-btnlogin" class="btnlogin shadow p-3 mb-3" type="submit">Login</button>
                   <button
                     type="button"
                     class="btn btn-pill btn-info shadow w-100"
