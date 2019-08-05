@@ -73,8 +73,10 @@
 
 
 <script>
+
 import { OAuth } from "oauthio-web";
-// import axios from "axios";
+import axios from "axios";
+
 export default {
   name: "login",
   data: function() {
@@ -101,22 +103,38 @@ export default {
       OAuth.popup("trello")
         .done(function(result) {
           if(result){
-            console.log(result);
+             console.log(result);
+              axios.get("http://localhost:9000/getboard")
+            .then(res => {
+              console.log(12345)
+              // const token = res.data.acctoken;
+              // const stat = res.data.accstat;
+              if (stat == true) {
+                // this.$store.commit("setToken", token);
+                this.$router.push("/dashBoards");
+              }
+            
+            })
+            .catch(() => {
+              // localStorage.removeItem("token");
+              alert("WTF !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            });
             
           }
-          // do some stuff with result
+         
         })
         .fail(function(err) {
-          //handle error with err
+         
         });
     },
-    logIn(){
-      this.submitted = true;
-      this.$validator.validate().then(valid => {
-        if (valid) {
-        }
-      });
-    }
+    // logIn(){
+    //   this.submitted = true;
+    //   this.$validator.validate().then(valid => {
+    //     if (valid) {
+          
+    //     }
+    //   });
+    // }
   }
 };
 </script>
