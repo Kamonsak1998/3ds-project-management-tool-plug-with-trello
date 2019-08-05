@@ -35,7 +35,14 @@ export default new Router({
             path: '/history/charts',
             name: 'charts',
             component: () => import('@/components/history/charts')
+        },
+        {
+            path: '/dashboards',
+            name: 'dashboards',
+            component: () => import('@/components/view/dashBoards')
         }
+
+
 
     ],
 
