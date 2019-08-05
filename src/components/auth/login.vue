@@ -102,9 +102,14 @@ export default {
       OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
       OAuth.popup("trello")
         .done(function(result) {
+          
+          let authtoken = result.authtoken
+          
           if(result){
+
              console.log(result);
-              axios.get("http://localhost:9000/getboard")
+
+              axios.get("https://api.trello.com/1/actions/592f11060f95a3d3d46a987a")
             .then(res => {
               console.log(12345)
               // const token = res.data.acctoken;

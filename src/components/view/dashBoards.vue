@@ -68,12 +68,11 @@ import axios from "axios";
 export default {
   data() {
     return {
-      bound: 0,
       results: [
         {
           title: "BENZ",
           prevDesc:
-            "With supporting text below as a natural lead-in to additional content."
+            "With supporting text below as a natural ith supporting text below as a naturlead-in to additional content."
         },
         {
           title: "NON",
@@ -122,8 +121,11 @@ export default {
   padding-left: 60px;
   /* float: right; */
   padding-top: 50px;
+  
 }
 .card {
   border-radius: 25px;
+  /* height:100%; */
+  /* overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2; */
 }
 </style>
