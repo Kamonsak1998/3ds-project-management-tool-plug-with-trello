@@ -80,10 +80,6 @@
 
 import { OAuth } from "oauthio-web";
 import axios from "axios";
-<<<<<<< HEAD
-
-=======
->>>>>>> auth
 export default {
   name: "login",
   data: function() {
@@ -100,33 +96,6 @@ export default {
 
       OAuth.popup(provider)
         .done(function(result) {
-<<<<<<< HEAD
-          
-          let authtoken = result.authtoken
-          
-          if(result){
-
-             console.log(result);
-
-              axios.get("https://api.trello.com/1/actions/592f11060f95a3d3d46a987a")
-            .then(res => {
-              console.log(12345)
-              // const token = res.data.acctoken;
-              // const stat = res.data.accstat;
-              if (stat == true) {
-                // this.$store.commit("setToken", token);
-                this.$router.push("/dashBoards");
-              }
-            
-            })
-            .catch(() => {
-              // localStorage.removeItem("token");
-              alert("WTF !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            });
-            
-          }
-         
-=======
           result
             .me()
             .done(function(response) {
@@ -144,22 +113,11 @@ export default {
             .fail(function(err) {
               //handle error with err
             });
->>>>>>> auth
         })
         .fail(function(err) {
          
         });
     },
-<<<<<<< HEAD
-    // logIn(){
-    //   this.submitted = true;
-    //   this.$validator.validate().then(valid => {
-    //     if (valid) {
-          
-    //     }
-    //   });
-    // }
-=======
     logIn() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
@@ -167,7 +125,6 @@ export default {
         }
       });
     }
->>>>>>> auth
   }
 };
 </script>
