@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="container">
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-sm-4">
           <div class="card p-4 shadow bg-white">
             <div class="card-body">
@@ -31,6 +31,7 @@
           </div>
         </div>
         <div class="col-sm-4">
+
           <div class="card p-4 shadow bg-white">
             <div class="card-body">
               <h5 class="card-title">Special title treatment</h5>
@@ -41,7 +42,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- <button
         type="submit"
         @click="auth"
@@ -50,7 +51,7 @@
       <div class="row">
         <div v-for="(result,i) in results" :key="i" class="col-sm-4">
           <div class="card p-4 shadow bg-white text-center">
-            {{ result.title }}
+            <!-- {{ result.title }} -->
             <div class="card-body">
               <p class="card-text" v-html="result.prevDesc"></p>
               <a href="#" class="btn btn-primary">Go somewhere</a>
@@ -64,7 +65,6 @@
 
 <script>
 import axios from "axios";
-
 export default {
   data() {
     return {
@@ -117,14 +117,30 @@ export default {
 
 <style>
 .row {
-  text-align: left;
+  /* text-align: left;
   padding-left: 60px;
-  /* float: right; */
-  padding-top: 50px;
+  float: right;
+  padding-top: 50px; */
+  padding-top: 50px;  
+  
   
 }
 .card {
-  border-radius: 25px;
+  /* padding-top:10px; */
+  /* white-space: nowrap;  */
+  width: 250px; 
+  /* overflow: hidden; */
+
+  /* height:100%; */
+  /* overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2; */
+}
+.card-text {
+  font-size: 25px;
+  /* padding-top:10px; */
+  white-space: nowrap; 
+  width: 140px; 
+  overflow: hidden;
+   text-overflow: ellipsis
   /* height:100%; */
   /* overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2; */
 }
