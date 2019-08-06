@@ -1,17 +1,17 @@
 <template>
-  <b-container class="bv-example-row mt-5">
-    <div class="col-lg-9   mx-auto">
-      <div class="card-body shadow p-0 bg-white rounded">
-        <table class="table table-outlined table-striped table-hover">
+  <div class="container">
+    <div class="col-lg-9 mx-auto">
+      <div class="table100 ver6 m-b-110 shadow">
+        <table data-vertable="ver6">
           <thead>
-            <tr>
+            <tr class="row100 head">
               <th>Rank</th>
               <th>Name</th>
               <th>Score</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="trcell" v-for="(item,key) in items" :key="item">
+            <tr class="row100" v-for="(item,key) in items" :key="item">
               <td>{{key+1}}</td>
               <td>{{item.Name}}</td>
               <td>{{item.Score}}</td>
@@ -19,18 +19,8 @@
           </tbody>
         </table>
       </div>
-
-      <!-- <b-table
-        class="b-table shadow-sm p-3 mb-5 bg-white rounded"
-        striped
-        hover
-        Bordered
-        shadown
-        outlined
-        :items="items"
-      ></b-table> -->
     </div>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -38,46 +28,165 @@ export default {
   data() {
     return {
       items: [
-        { Rank: "9", Name: "BahBenz", Score: "100" },
-        { Rank: "2", Name: "arram", Score: "200" },
-        { Rank: "3", Name: "gono", Score: "300" },
-        { Rank: "3", Name: "gono", Score: "300" },
-        { Rank: "3", Name: "gono", Score: "300" },
-        { Rank: "3", Name: "gono", Score: "300" },
-        { Rank: "3", Name: "gono", Score: "300" },
-        { Rank: "3", Name: "gono", Score: "300" },
-        { Rank: "3", Name: "gono", Score: "300" },
-        { Rank: "4", Name: "arnon", Score: "400" },
+        { Name: "BahBenz", Score: "100" },
+        { Name: "arram", Score: "200" },
+        { Name: "gono", Score: "300" },
+        { Name: "gono", Score: "300" },
+        { Name: "gono", Score: "300" },
+        { Name: "gono", Score: "300" },
+        { Name: "gono", Score: "300" },
+        { Name: "gono", Score: "300" },
+        { Name: "gono", Score: "300" },
+        { Name: "arnon", Score: "400" }
       ]
     };
   }
 };
 </script>
-
+                  
 <style>
-.tableheader {
-  font-size: 17px;
-}
-.hight {
-  min-height: 4rem;
-  margin-top: 50px;
 
+/*//////////////////////////////////////////////////////////////////
+[ RESTYLE TAG ]*/
+* {
+	margin: 0px; 
+	padding: 0px; 
+	box-sizing: border-box;
+}
+
+body, html {
+	height: 100%;
+	font-family: sans-serif;
+}
+
+/* ------------------------------------ */
+a {
+	margin: 0px;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+}
+
+a:focus {
+	outline: none !important;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+/* ------------------------------------ */
+h1,h2,h3,h4,h5,h6 {margin: 0px;}
+
+p {margin: 0px;}
+
+ul, li {
+	margin: 0px;
+	list-style-type: none;
+}
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ Table ]*/
+
+  .limiter {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .container-table100 {
+    width: 100%;
+    min-height: 100vh;
+    background: #d1d1d1;
+
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 33px 30px;
+  }
+
+  .wrap-table100 {
+    width: 1300px;
+  }
+
+/*//////////////////////////////////////////////////////////////////
+[ Table ]*/
+table {
+  width: 100%;
+  background-color: #fff;
+}
+
+th, td {
+  font-weight: unset;
+  padding-right: 10px;
+}
+
+.column100 {
+  width: 130px;
+  padding-left: 25px;
+}
+
+
+.row100.head th {
+  padding-top: 24px;
+  padding-bottom: 20px;
+}
+
+.row100 td {
+  padding-top: 18px;
+  padding-bottom: 14px;
+}
+
+/*******************table100******************* */
+
+.table100.ver6 {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #7918f2;
+  background: -webkit-linear-gradient(-68deg, #ec9696 , #fd0101);
+  background: -o-linear-gradient(-68deg, #ec9696 , #fd0101);
+  background: -moz-linear-gradient(-68deg, #ec9696 , #fd0101);
+  background: linear-gradient(-68deg, #ec9696 , #fd0101);
+}
+
+.table100.ver6 table {
+  background-color: transparent;
+}
+
+.table100.ver6 td {
+  font-family: Montserrat-Regular;
+  font-size: 17px;
+  color: #fff;
+  line-height: 1.4;
+}
+
+.table100.ver6 th {
+  font-family: Montserrat-Medium;
   font-size: 20px;
+  color: #fff;
+  line-height: 1.4;
+  text-transform: uppercase;
+
+  background-color: rgba(255,255,255,0.32);
 }
-.card-body {
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
-  padding: 0rem;
+
+.table100.ver6 .row100:hover td {
+  background-color: rgba(255,255,255,0.1);
 }
-.striped {
-  background-color: #c8ced3;
+
+.table100.ver6 .hov-column-ver6 {
+  background-color: rgba(255,255,255,0.1);
 }
-.b-table {
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
-  padding: 10rem;
-}
-.tr td :hover {
-  background-color: black;
+
+
+.table100.ver6 .row100 td:hover {
+  background-color: rgba(255,255,255,0.2);
 }
 </style>
