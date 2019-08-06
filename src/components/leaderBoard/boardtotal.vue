@@ -1,19 +1,19 @@
 <template>
   <div class="container">
-    <div class="col-lg-9 mx-auto">
+    <div class="col-lg-9 mx-auto ">
       <div class="table100 ver6 m-b-110 shadow">
         <table data-vertable="ver6">
           <thead>
             <tr class="row100 head">
-              <th>Rank</th>
-              <th>Name</th>
-              <th>Score</th>
+              <th><b>Rank</b></th>
+              <th><b>Name</b></th>
+              <th><b>Score</b></th>
             </tr>
           </thead>
           <tbody>
             <tr class="row100" v-for="(item,key) in items" :key="item">
               <td>{{key+1}}</td>
-              <td>{{item.Name}}</td>
+              <td><b>{{item.Name}}</b></td>
               <td>{{item.Score}}</td>
             </tr>
           </tbody>
@@ -47,17 +47,7 @@ export default {
 <style>
 
 /*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
-* {
-	margin: 0px; 
-	padding: 0px; 
-	box-sizing: border-box;
-}
 
-body, html {
-	height: 100%;
-	font-family: sans-serif;
-}
 
 /* ------------------------------------ */
 a {
@@ -77,14 +67,7 @@ a:hover {
 }
 
 /* ------------------------------------ */
-h1,h2,h3,h4,h5,h6 {margin: 0px;}
 
-p {margin: 0px;}
-
-ul, li {
-	margin: 0px;
-	list-style-type: none;
-}
 
 
 
@@ -121,6 +104,7 @@ ul, li {
 table {
   width: 100%;
   background-color: #fff;
+  padding:50px;
 }
 
 th, td {
@@ -154,22 +138,24 @@ th, td {
   background: -o-linear-gradient(-68deg, #ec9696 , #fd0101);
   background: -moz-linear-gradient(-68deg, #ec9696 , #fd0101);
   background: linear-gradient(-68deg, #ec9696 , #fd0101);
+
 }
 
 .table100.ver6 table {
   background-color: transparent;
+  padding-bottom: 50px;
 }
 
 .table100.ver6 td {
-  font-family: Montserrat-Regular;
-  font-size: 17px;
+  /* font-family: Montserrat-Regular; */
+  font-size: 16px;
   color: #fff;
   line-height: 1.4;
 }
 
 .table100.ver6 th {
-  font-family: Montserrat-Medium;
-  font-size: 20px;
+  /* font-family: Montserrat-Medium; */
+  font-size: 18px;
   color: #fff;
   line-height: 1.4;
   text-transform: uppercase;
@@ -188,5 +174,8 @@ th, td {
 
 .table100.ver6 .row100 td:hover {
   background-color: rgba(255,255,255,0.2);
+}
+.m-b-110 {
+    margin-bottom: 110px;
 }
 </style>
