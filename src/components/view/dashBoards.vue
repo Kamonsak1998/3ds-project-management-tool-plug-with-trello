@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div v-for="(result,i) in results" :key="i" class="col-sm-4">
-          <div class="card p-4 shadow bg-white text-center">
+          <div class="card-dash p-4 shadow bg-white text-center">
             <!-- {{ result.title }} -->
             <div class="card-body">
               <p class="card-text" v-html="result.prevDesc"></p>
@@ -80,7 +80,7 @@ export default {
   
   
 }
-.card {
+.card-dash{
   /* padding-top:10px; */
   /* white-space: nowrap;  */
   width: 250px; 
