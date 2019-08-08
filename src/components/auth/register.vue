@@ -15,6 +15,7 @@
                     <span class="input-group-text">@</span>
                   </div>
                   <input
+                    data-cy="input-register-email"
                     class="form-control"
                     type="text"
                     name="email"
@@ -37,6 +38,7 @@
                     </span>
                   </div>
                   <input
+                    data-cy="input-register-password"
                     v-validate="'required|min:6|max:12'"
                     :class="{ 'is-invalid': submitted && errors.has('password')}"
                     name="password"
@@ -58,6 +60,7 @@
                     </span>
                   </div>
                   <input
+                    data-cy="input-register-repassword"
                     v-validate="'required|confirmed:password'"
                     :class="{ 'is-invalid': submitted && errors.has('password_confirmation')}"
                     name="password_confirmation"
@@ -78,6 +81,7 @@
                     </span>
                   </div>
                   <input
+                  data-cy="input-register-firstname"
                     class="form-control"
                     type="text"
                     name="firstname"
@@ -100,6 +104,7 @@
                     </span>
                   </div>
                   <input
+                    data-cy="input-register-lastname"
                     class="form-control"
                     type="text"
                     name="lastname"
@@ -121,6 +126,7 @@
                     </span>
                   </div>
                   <input
+                    data-cy="input-register-phone"
                     class="form-control"
                     type="text"
                     name="phone"
@@ -135,7 +141,7 @@
                     class="invalid-feedback"
                   >{{ errors.first('phone') }}</div>
                 </div>
-                <button class="btn btn-block btn-success shadow p-3" type="submit">Create Account</button>
+                <button data-cy="input-register-btnregister " class="btnregister" type="submit">Create Account</button>
               </div>
             </form>
           </div>

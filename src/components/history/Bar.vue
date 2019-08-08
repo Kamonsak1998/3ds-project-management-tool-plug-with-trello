@@ -1,6 +1,6 @@
 <template>
   <div class="chart-wrapper">
-    <apexchart height="350" type="bar" :options="chartOptions" :series="series"></apexchart>
+    <apexchart height="350px" type="bar" :options="chartOptions" :series="series"></apexchart>
     <!-- <div>
       <button @click="updateChart">Update!</button>
     </div>-->
