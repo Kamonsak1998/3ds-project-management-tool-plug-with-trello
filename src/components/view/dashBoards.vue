@@ -1,60 +1,15 @@
 <template>
   <div class="login">
     <div class="container">
-      <!-- <div class="row">
-        <div class="col-sm-4">
-          <div class="card p-4 shadow bg-white">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p
-                class="card-text"
-              >With supporting text below as a natural lead-in to additional content.
-              With supporting text below as a natural lead-in to additional content.
-              With supporting text below as a natural lead-in to additional content.
-              With supporting text below as a natural lead-in to additional content.
-              With supporting text below as a natural lead-in to additional content.
-              With supporting text below as a natural lead-in to additional content.
-              With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="card p-4 shadow bg-white">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p
-                class="card-text"
-              >With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-
-          <div class="card p-4 shadow bg-white">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p
-                class="card-text"
-              >With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <button
-        type="submit"
-        @click="auth"
-        class="btn btn-success"
-      >ค้นหา</button>-->
       <div class="row">
         <div v-for="(result,i) in results" :key="i" class="col-sm-4">
           <div class="card p-4 shadow bg-white text-center">
             <!-- {{ result.title }} -->
             <div class="card-body">
               <p class="card-text" v-html="result.prevDesc"></p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+               <!-- <router-link :to="{name : 'leaderboard'}">
+                   <a href="#" class="btn btn-primary">Select Project</a>
+                </router-link> -->
             </div>
           </div>
         </div>
@@ -72,19 +27,19 @@ export default {
         {
           title: "BENZ",
           prevDesc:
-            "With supporting text below as a natural ith supporting text below as a naturlead-in to additional content."
+            "ProJect 1 "
         },
         {
           title: "NON",
-          prevDesc: "NON1"
+          prevDesc: "Project 2 "
         },
         {
           title: "arram",
-          prevDesc: "desc3"
+          prevDesc: "Project 3 "
         },
         {
           title: "gono",
-          prevDesc: "desc7"
+          prevDesc: "Project 4 "
         },
         {
           title: "beam",
@@ -133,15 +88,19 @@ export default {
 
   /* height:100%; */
   /* overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2; */
+  border-radius: 25px;
 }
 .card-text {
   font-size: 25px;
   /* padding-top:10px; */
   white-space: nowrap; 
-  width: 140px; 
+  width: 140px;
   overflow: hidden;
-   text-overflow: ellipsis
+   text-overflow: ellipsis;
   /* height:100%; */
   /* overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2; */
+}
+.btn{
+  margin:2px;
 }
 </style>

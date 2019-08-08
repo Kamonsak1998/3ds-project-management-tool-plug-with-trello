@@ -53,14 +53,10 @@
                       class="invalid-feedback"
                     >{{ errors.first('password') }}</div>
                   </div>
-<<<<<<< HEAD
-                  <button class="btnlogin shadow p-3 mb-3" type="submit">Login</button>
-=======
 
           
 
                   <button data-cy="input-login-btnlogin" class="btnlogin shadow p-3 mb-3" type="submit">Login</button>
->>>>>>> leaderBoard
                   <button
                     type="button"
                     class="btn btn-pill btn-info shadow w-100"
@@ -106,7 +102,6 @@ export default {
 
       OAuth.popup(provider)
         .done(function(result) {
-<<<<<<< HEAD
           result
             .me()
             .done(function(response) {
@@ -124,12 +119,6 @@ export default {
             .fail(function(err) {
               //handle error with err
             });
-=======
-          if (result) {
-            console.log(result);
-          }
-          // do some stuff with result
->>>>>>> leaderBoard
         })
         .fail(function(err) {
          
