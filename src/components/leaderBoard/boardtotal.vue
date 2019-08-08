@@ -12,9 +12,9 @@
           </thead>
           <tbody>
             <tr class="row100" v-for="(item,key) in items" :key="item">
-              <td>{{key+1}}</td>
-              <td><b>{{item.Name}}</b></td>
-              <td>{{item.Score}}</td>
+              <td  class="column100 column1" data-column="column" >{{key+1}}</td>
+              <td  class="column100 column" data-column="column"><b>{{item.Name}}</b></td>
+              <td  class="column100 column" data-column="column">{{item.Score}}</td>
             </tr>
           </tbody>
         </table>
@@ -50,6 +50,10 @@ export default {
 
 
 /* ------------------------------------ */
+
+a:hover {
+	text-decoration: none;
+}
 a {
 	margin: 0px;
 	transition: all 0.4s;
@@ -151,8 +155,8 @@ th, td {
   background-color: rgba(255,255,255,0.1);
 }
 
-.table100.ver6 .hov-column-ver6 {
-  background-color: rgba(255,255,255,0.1);
+.table100.ver6 .hov-column1-ver6 {
+  background-color: rgba(37, 70, 218, 0.1);
 }
 
 
@@ -162,4 +166,7 @@ th, td {
 .m-b-110 {
     margin-bottom: 110px;
 }
+/* .container{
+  align: right;
+} */
 </style>
