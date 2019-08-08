@@ -3,7 +3,7 @@
     <nav class="sidebar-nav">
       <ul class="nav">
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name : 'login'}">
+          <router-link class="nav-link" :to="{name : 'dashboards'}">
             <i class="nav-icon icon-speedometer"></i> Dashboard
           </router-link>
         </li>

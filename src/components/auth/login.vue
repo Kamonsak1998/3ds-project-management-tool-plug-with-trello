@@ -54,9 +54,9 @@
                     >{{ errors.first('password') }}</div>
                   </div>
 
-                  <button data-cy="input-login-btnlogin" class="btnlogin" type="submit">Login</button>
+          
 
-                  <button class="btnlogin shadow p-3 mb-3" type="submit">Login</button>
+                  <button data-cy="input-login-btnlogin" class="btnlogin shadow p-3 mb-3" type="submit">Login</button>
                   <button
                     type="button"
                     class="btn btn-pill btn-info shadow w-100"
@@ -82,9 +82,11 @@
 
 
 <script>
+
 import { OAuth } from "oauthio-web";
-// import axios from "axios";
+import axios from "axios";
 export default {
+  
   name: "login",
   data: function() {
     return {
@@ -93,29 +95,33 @@ export default {
       password: ""
     };
   },
-  // created() {
-  //   OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
-  //   OAuth.popup("trello")
-  //     .done(function(result) {
-  //       console.log(result);
-  //       // do some stuff with result
-  //     })
-  //     .fail(function(err) {
-  //       //handle error with err
-  //     });
-  // },
   methods: {
     Auth() {
       OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
-      OAuth.popup("trello")
+      var provider = "trello";
+
+      OAuth.popup(provider)
         .done(function(result) {
-          if (result) {
-            console.log(result);
-          }
-          // do some stuff with result
+          result
+            .me()
+            .done(function(response) {
+              let toKen = result.oauth_token;
+              // let idUser = response.raw.id;
+              axios
+                .post("https://07f73f0f.ngrok.io/getdashboard", {
+                  toKen
+                  // idUser
+                })
+                .then(res => {
+                  console.log(res);
+                });
+            })
+            .fail(function(err) {
+              //handle error with err
+            });
         })
         .fail(function(err) {
-          //handle error with err
+         
         });
     },
     logIn() {
