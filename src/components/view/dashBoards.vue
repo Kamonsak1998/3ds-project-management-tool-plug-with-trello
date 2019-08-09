@@ -3,10 +3,9 @@
     <div class="container">
       <div class="row">
         <div v-for="(result,i) in results" :key="i" class="col-sm-4">
-          <div class="card p-4 shadow bg-white text-center">
-            <!-- {{ result.title }} -->
+          <div class="card-dash p-4 shadow bg-white text-center">
             <div class="card-body">
-              <p class="card-text" v-html="result.prevDesc"></p>
+              <p class="card-text"  v-html="result.prevDesc"></p>
                <!-- <router-link :to="{name : 'leaderboard'}">
                    <a href="#" class="btn btn-primary">Select Project</a>
                 </router-link> -->
@@ -27,7 +26,8 @@ export default {
         {
           title: "BENZ",
           prevDesc:
-            "ProJect 1 "
+            "ProJect 1 ",
+          color:"primary"
         },
         {
           title: "NON",
@@ -49,56 +49,32 @@ export default {
       ]
     };
   },
-  mounted: {},
+  
   methods: {
-    auth() {
-      axios.get("http://localhost:9000/getboard").then(res => {
-        console.log(res);
-        // const token = res.data.acctoken;
-        // const stat = res.data.accstat;
-        if (stat == true) {
-          // this.$store.commit("setToken", token);
-          // this.$router.push("/dashBoards");
-        }
-      });
-    }
-
-    // login:function(){
-    //     this.$router.push("/login");
-    // }
+   
   }
 };
 </script>
 
 <style>
 .row {
-  /* text-align: left;
-  padding-left: 60px;
-  float: right;
-  padding-top: 50px; */
+  
   padding-top: 50px;  
   
   
 }
-.card {
-  /* padding-top:10px; */
-  /* white-space: nowrap;  */
-  width: 250px; 
-  /* overflow: hidden; */
+.card-dash{
+  margin-top: 15px;
 
-  /* height:100%; */
-  /* overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2; */
+  width: 250px; 
   border-radius: 25px;
 }
 .card-text {
   font-size: 25px;
-  /* padding-top:10px; */
   white-space: nowrap; 
   width: 140px;
   overflow: hidden;
    text-overflow: ellipsis;
-  /* height:100%; */
-  /* overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2; */
 }
 .btn{
   margin:2px;
