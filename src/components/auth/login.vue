@@ -61,12 +61,6 @@
               </div>
             </div>
             <router-link class="pull-left" :to="{name : 'register'}">Create a new account</router-link>
-            <a
-              data-toggle="modal"
-              id="reset_password"
-              href="#resetpw-modal"
-              class="pull-right"
-            >Forgot your password?</a>
           </form>
         </div>
       </div>
@@ -77,13 +71,9 @@
 
 
 <script>
-
 import { OAuth } from "oauthio-web";
 import axios from "axios";
-<<<<<<< HEAD
-
-=======
->>>>>>> auth
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "login",
   data: function() {
@@ -93,73 +83,42 @@ export default {
       password: ""
     };
   },
+  computed: {
+    ...mapGetters(["token"])
+  },
   methods: {
+    ...mapActions(["getToken"]),
     Auth() {
-      OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
-      var provider = "trello";
+      axios
+        .get("http://90ab7888.ngrok.io/signin")
+        .then(result => {
+          const trello = result.data.URL;
+          console.log(result);
 
-      OAuth.popup(provider)
-        .done(function(result) {
-<<<<<<< HEAD
-          
-          let authtoken = result.authtoken
-          
-          if(result){
-
-             console.log(result);
-
-              axios.get("https://api.trello.com/1/actions/592f11060f95a3d3d46a987a")
-            .then(res => {
-              console.log(12345)
-              // const token = res.data.acctoken;
-              // const stat = res.data.accstat;
-              if (stat == true) {
-                // this.$store.commit("setToken", token);
-                this.$router.push("/dashBoards");
-              }
-            
-            })
-            .catch(() => {
-              // localStorage.removeItem("token");
-              alert("WTF !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            });
-            
-          }
-         
-=======
-          result
-            .me()
-            .done(function(response) {
-              let toKen = result.oauth_token;
-              // let idUser = response.raw.id;
-              axios
-                .post("https://07f73f0f.ngrok.io/getdashboard", {
-                  toKen
-                  // idUser
-                })
-                .then(res => {
-                  console.log(res);
-                });
-            })
-            .fail(function(err) {
-              //handle error with err
-            });
->>>>>>> auth
+          window.open(
+            trello,
+            "trello",
+            "height=768,width=1366,left=10,top=10,titlebar=no,toolbar=no,menubar=no,location=no,directories=no,status=no"
+          );
         })
-        .fail(function(err) {
-         
+        .catch(err => {
+          alert(err);
         });
+      // const self = this;
+      // OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
+      // var provider = "trello";
+      // let authtoken = "";
+      // OAuth.popup(provider)
+      //   .done(function(result) {
+      //     authtoken = result.oauth_token;
+      //     self.getToken(authtoken);
+      //   })
+      //   .fail(function(err) {
+      //     alert(err);
+      //   });
     },
-<<<<<<< HEAD
-    // logIn(){
-    //   this.submitted = true;
-    //   this.$validator.validate().then(valid => {
-    //     if (valid) {
-          
-    //     }
-    //   });
-    // }
-=======
+    authenticationSuccess() {},
+    authenticationFailure() {},
     logIn() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
@@ -167,7 +126,6 @@ export default {
         }
       });
     }
->>>>>>> auth
   }
 };
 </script>
