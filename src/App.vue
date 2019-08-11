@@ -31,11 +31,11 @@ export default {
 
 <style>
 #app {
-  background-image: url("./assets/BG.png");
+  background-image: url("./assets/Bgver2.png");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  height:100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   min-height: 100vh;
@@ -47,6 +47,17 @@ export default {
   color: #2c3e50;
 }
 
+@media only screen and (max-width: 768px) {
+  #app {
+    background-image: url("./assets/BgMobile.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+  }
+}
 .main {
   flex: 1;
 }
