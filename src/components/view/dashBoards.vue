@@ -5,10 +5,10 @@
         <div v-for="(result,i) in results" :key="i" class="col-sm-4">
           <div class="card-dash p-4 shadow bg-white text-center">
             <div class="card-body">
-              <p class="card-text"  v-html="result.prevDesc"></p>
-               <!-- <router-link :to="{name : 'leaderboard'}">
+              <p class="card-text" v-html="result.prevDesc"></p>
+              <!-- <router-link :to="{name : 'leaderboard'}">
                    <a href="#" class="btn btn-primary">Select Project</a>
-                </router-link> -->
+              </router-link>-->
             </div>
           </div>
         </div>
@@ -19,15 +19,31 @@
 
 <script>
 import axios from "axios";
+import { mapGetters } from "vuex";
 export default {
+  mounted: function() {
+    if (this.token != "") {
+      axios
+        .post("https://487c92b9.ngrok.io/getdashboard", this.token)
+        .then(Response => {
+          console.log(Response);
+        });
+      return;
+    } else {
+      this.$router.push("/auth/login");
+      return;
+    }
+  },
+  computed: {
+    ...mapGetters(["token"])
+  },
   data() {
     return {
       results: [
         {
           title: "BENZ",
-          prevDesc:
-            "ProJect 1 ",
-          color:"primary"
+          prevDesc: "ProJect 1 ",
+          color: "primary"
         },
         {
           title: "NON",
@@ -49,34 +65,29 @@ export default {
       ]
     };
   },
-  
-  methods: {
-   
-  }
+
+  methods: {}
 };
 </script>
 
 <style>
 .row {
-  
-  padding-top: 50px;  
-  
-  
+  padding-top: 50px;
 }
-.card-dash{
+.card-dash {
   margin-top: 15px;
 
-  width: 250px; 
+  width: 250px;
   border-radius: 25px;
 }
 .card-text {
   font-size: 25px;
-  white-space: nowrap; 
+  white-space: nowrap;
   width: 140px;
   overflow: hidden;
-   text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
-.btn{
-  margin:2px;
+.btn {
+  margin: 2px;
 }
 </style>
