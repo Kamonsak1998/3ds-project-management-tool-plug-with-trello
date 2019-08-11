@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar text-left ">
+  <div class="sidebar text-left">
     <nav class="sidebar-nav">
       <ul class="nav">
         <li class="nav-item">
@@ -13,16 +13,21 @@
             <i class="nav-icon icon-user"></i> User
           </a>
           <ul class="nav-dropdown-items">
-            <li class="nav-item">
+            <li class="nav-item" v-if="isLoggedIn">
+              <a class="nav-link" href @click=" logout">
+                <i class="nav-icon icon-star"></i>Logout
+              </a>
+            </li>
+            <li class="nav-item" v-else>
               <router-link class="nav-link" :to="{name : 'login'}">
                 <i class="nav-icon icon-star"></i> Login
               </router-link>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link class="nav-link" :to="{name : 'register'}">
                 <i class="nav-icon icon-star"></i> Register
               </router-link>
-            </li>
+            </li>-->
           </ul>
         </li>
         <li class="nav-item">
@@ -41,9 +46,22 @@
   </div>
 </template>
 
+<script>
+import { mapGetters } from "vuex";
 
-<style>
-/* .sidebar {
-  border-radius: 25px;
-} */
-</style>
+export default {
+  computed: {
+    ...mapGetters(["token"]),
+    isLoggedIn: function() {
+      return this.token;
+    }
+  },
+  methods: {
+    logout: function() {
+      location.reload();
+      return localStorage.removeItem("token");
+    }
+  }
+ 
+};
+</script>

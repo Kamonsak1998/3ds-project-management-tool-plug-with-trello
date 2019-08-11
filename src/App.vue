@@ -31,7 +31,7 @@ export default {
 
 <style>
 #app {
-  background-image: url("./assets/BG.png");
+  background-image: url("./assets/Bgver2.png");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
