@@ -18,6 +18,7 @@ Vue.use(VueRouter);
 
 
 const token = localStorage.getItem('token')
+
 if (token && token != "") {
   store.commit('addToken', token)
 }
