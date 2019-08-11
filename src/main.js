@@ -23,8 +23,6 @@ Vue.use(VueRouter);
 const token = localStorage.getItem('token')
 if (token && token != "") {
   store.commit('addToken', token)
-  console.log(token);
-
 }
 
 Vue.config.productionTip = false
