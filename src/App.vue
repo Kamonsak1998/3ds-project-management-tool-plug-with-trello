@@ -3,7 +3,7 @@
     <Header />
     <div class="app-body">
       <Sidebar />
-      <main class="main">
+      <main class="main p-4">
         <div class="container-fluid">
           <div class="animated fadeIn">
             <router-view />

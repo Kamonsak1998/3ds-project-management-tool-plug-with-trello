@@ -1,10 +1,15 @@
 <template>
-  <div class="animated fadeIn">
-    <b-card-group columns class="card-columns">
-      <b-card header="Bar Chart">
+  <div>
+    <b-card-group rows class="card-rows">
+      <b-card class="shadow p-3 mb-5 bg-white rounded">
         <Bar />
       </b-card>
-      <b-card header="Bar Column">
+    </b-card-group>
+    <b-card-group columns class="card-columns cols-2">
+      <b-card class="shadow p-3 bg-white rounded">
+        <BarColumn />
+      </b-card>
+      <b-card class="shadow p-3 bg-white rounded">
         <BarColumn />
       </b-card>
     </b-card-group>
@@ -13,8 +18,8 @@
 
 
 <script>
-import Bar from '@/components/history/Bar.vue'
-import BarColumn from '@/components/history/BarColumn.vue'
+import Bar from "@/components/history/Bar.vue";
+import BarColumn from "@/components/history/BarColumn.vue";
 export default {
   components: {
     Bar,
@@ -22,3 +27,4 @@ export default {
   }
 };
 </script>
+

@@ -18,6 +18,7 @@
                       </span>
                     </div>
                     <input
+                      data-cy="input-login-email"
                       class="form-control"
                       type="email"
                       name="email"
@@ -38,6 +39,7 @@
                       </span>
                     </div>
                     <input
+                      data-cy="input-login-password"
                       class="form-control"
                       type="password"
                       name="password"
@@ -101,22 +103,19 @@ export default {
     ...mapActions(["getToken"]),
     Auth() {
       const self = this;
-      const pusher = this.$router.push("/dashboards");
+      const next = this.$router.push("/dashboards");
       OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
       var provider = "trello";
       OAuth.popup(provider)
         .done(function(result) {
-          const authtoken = result.oauth_token;
-          if (authtoken) {
-            self.getToken(authtoken);
-            this.$router.push("/dashboards");
-          }
-          // result
-          //   .me()
-          //   .done(function(response) {})
-          //   .fail(function(err) {
-          //     //handle error with err
-          //   });
+          const token = result.oauth_token;
+          axios
+            .post("http://93f616c1.ngrok.io/getdashboard", token)
+            .then(Response => {
+              console.log(Response);
+              self.getToken(token); 
+              next;
+            });
         })
         .fail(function(err) {
           alert(err);
