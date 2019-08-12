@@ -110,20 +110,10 @@ export default {
       OAuth.popup(provider)
         .done(function(result) {
           const token = result.oauth_token;
-          console.log(result);
-          result
-            .me()
-            .done(function(response) {
-              const idUser = response.raw.id;
-              if (token != "") {
+          if (token != "") {
                 self.getToken(token);
-                // self.getUser(idUser);
                 self.$router.push("/dashboards");
               }
-            })
-            .fail(function(err) {
-              //handle error with err
-            });
         })
         .fail(function(err) {
           alert(err);

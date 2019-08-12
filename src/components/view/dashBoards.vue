@@ -24,9 +24,9 @@ export default {
   mounted: function() {
     if (this.token != "") {
       axios
-        .post("http://f4d4472f.ngrok.io/getdashboard", this.token)
+        .post("http://ddc1cade.ngrok.io/getdashboard", { token: this.token })
         .then(Response => {
-          console.log('Db',Response);
+          console.log("Db", Response);
         });
       return;
     } else {
@@ -35,7 +35,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["token","idUser"])
+    ...mapGetters(["token", "idUser"])
   },
   data() {
     return {
