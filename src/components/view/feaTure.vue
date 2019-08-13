@@ -36,8 +36,10 @@
 </template>
 
 <script>
+import axios from "axios";
+import { mapGetters } from "vuex";
 export default {
-   mounted: function() {
+  mounted: function() {
     if (this.idBoard != "") {
       return;
     } else {
@@ -46,7 +48,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([ "idBoard"])
+    ...mapGetters(["idBoard"])
   },
   data() {
     return {
@@ -69,15 +71,11 @@ export default {
         }
       ]
     };
-  },
-
- 
-   
+  }
 };
 </script>
 
 <style>
-
 .card-leader {
   margin-top: 100px;
   border-radius: 25px;
@@ -91,12 +89,12 @@ export default {
 .card-Set {
   margin-top: 100px;
   border-radius: 25px;
-  background: linear-gradient(40deg,#ffd86f,#fc6262)!important;
+  background: linear-gradient(40deg, #ffd86f, #fc6262) !important;
 }
 .card-Burn {
   margin-top: 100px;
   border-radius: 25px;
-  background: linear-gradient(40deg,#45cafc,#303f9f)!important;
+  background: linear-gradient(40deg, #45cafc, #303f9f) !important;
 }
 .card-text {
   font-size: 20px;
@@ -111,7 +109,6 @@ export default {
 .btn {
   margin: 2px;
 }
-
 
 .card-text:last-child {
   margin-bottom: 0;
