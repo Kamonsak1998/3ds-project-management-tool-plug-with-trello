@@ -11,11 +11,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="row100" v-for="(item,key) in items" :key="item">
+            <!-- <tr class="row100" v-for="(item,key) in items" :key="item">
               <td  class="column100 column1" data-column="column" >{{key+1}}</td>
               <td  class="column100 column" data-column="column"><b>{{item.Name}}</b></td>
               <td  class="column100 column" data-column="column">{{item.Score}}</td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </div>
@@ -135,14 +135,14 @@ th, td {
 }
 
 .table100.ver6 td {
-  /* font-family: Montserrat-Regular; */
+  
   font-size: 16px;
   color: #fff;
   line-height: 1.4;
 }
 
 .table100.ver6 th {
-  /* font-family: Montserrat-Medium; */
+  
   font-size: 18px;
   color: #fff;
   line-height: 1.4;
@@ -166,7 +166,11 @@ th, td {
 .m-b-110 {
     margin-bottom: 110px;
 }
-/* .container{
-  align: right;
-} */
+.container {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: 0;
+    margin-left: 0;
+}
 </style>

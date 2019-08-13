@@ -37,4 +37,11 @@ export default {
 </script>
 
 <style>
+/* .container {
+    width: 0%;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-left: 0;
+} */
 </style>
