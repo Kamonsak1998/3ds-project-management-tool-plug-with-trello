@@ -61,4 +61,12 @@ export default {
 .main {
   flex: 1;
 }
+@font-face {
+  font-family: kano;
+  src: url("./assets/Kano_Regular/Kano.otf");
+  /* font-weight: bold; */
+}
+* {
+  font-family: kano;
+}
 </style>
