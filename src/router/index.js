@@ -42,7 +42,7 @@ export default new Router({
             component: () => import('@/components/view/dashBoards')
         },
         {
-            path: '/feaTure',
+            path: '/feature',
             name: 'feaTure',
             component: () => import('@/components/view/feaTure')
         }

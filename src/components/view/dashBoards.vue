@@ -50,7 +50,7 @@ export default {
     setboard(result, index) {
       const boardid = result[index].id;
       this.getBoard(boardid);
-
+      this.$router.push("/feature");
       // axios
       //   .post("http://ddc1cade.ngrok.io/setboardid", {
       //     token: this.token,
