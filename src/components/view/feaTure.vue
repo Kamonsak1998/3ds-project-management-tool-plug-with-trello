@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data() {
     return {
@@ -46,21 +45,7 @@ export default {
   },
   mounted: {},
   methods: {
-    auth() {
-      axios.get("http://localhost:9000/getboard").then(res => {
-        console.log(res);
-        // const token = res.data.acctoken;
-        // const stat = res.data.accstat;
-        if (stat == true) {
-          // this.$store.commit("setToken", token);
-          // this.$router.push("/dashBoards");
-        }
-      });
-    }
-
-    // login:function(){
-    //     this.$router.push("/login");
-    // }
+    
   }
 };
 </script>
