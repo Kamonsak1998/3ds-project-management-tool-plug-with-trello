@@ -37,6 +37,17 @@
 
 <script>
 export default {
+   mounted: function() {
+    if (this.idBoard != "") {
+      return;
+    } else {
+      this.$router.push("/dashboards");
+      return;
+    }
+  },
+  computed: {
+    ...mapGetters([ "idBoard"])
+  },
   data() {
     return {
       results: [
@@ -60,15 +71,13 @@ export default {
     };
   },
 
-  methods: {
-    
-  }
+ 
+   
 };
 </script>
 
 <style>
-.row {
-}
+
 .card-leader {
   margin-top: 100px;
   border-radius: 25px;
@@ -103,8 +112,7 @@ export default {
   margin: 2px;
 }
 
-.card-body {
-}
+
 .card-text:last-child {
   margin-bottom: 0;
   text-align: center;
