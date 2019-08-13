@@ -11,7 +11,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> 
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
   mounted: function() {
     if (this.token != "") {
       axios
-        .post("http://ddc1cade.ngrok.io/getdashboard", { token: this.token })
+        .post("http://6454d735.ngrok.io/getdashboard", { token: this.token })
         .then(Response => {
           console.log("Db", Response);
           this.results = Response.data.board
