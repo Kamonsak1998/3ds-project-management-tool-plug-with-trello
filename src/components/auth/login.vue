@@ -79,7 +79,6 @@
 
 <script>
 import { OAuth } from "oauthio-web";
-import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "login",

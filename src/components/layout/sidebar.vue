@@ -59,9 +59,10 @@ export default {
   methods: {
     logout: function() {
       location.reload();
-      return localStorage.removeItem("token");
+      localStorage.removeItem("token");
+      localStorage.removeItem("idBoard");
+      return;
     }
   }
- 
 };
 </script>
