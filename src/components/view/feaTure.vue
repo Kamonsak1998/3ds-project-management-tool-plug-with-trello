@@ -38,6 +38,17 @@
 <script>
 import axios from "axios";
 export default {
+   mounted: function() {
+    if (this.idBoard != "") {
+      return;
+    } else {
+      this.$router.push("/dashboards");
+      return;
+    }
+  },
+  computed: {
+    ...mapGetters([ "idBoard"])
+  },
   data() {
     return {
       results: [
