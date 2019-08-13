@@ -61,29 +61,13 @@ export default {
     };
   },
 
-  methods: {
-    auth() {
-      axios.get("http://localhost:9000/getboard").then(res => {
-        console.log(res);
-        // const token = res.data.acctoken;
-        // const stat = res.data.accstat;
-        if (stat == true) {
-          // this.$store.commit("setToken", token);
-          // this.$router.push("/dashBoards");
-        }
-      });
-    }
-
-    // login:function(){
-    //     this.$router.push("/login");
-    // }
-  }
+ 
+   
 };
 </script>
 
 <style>
-.row {
-}
+
 .card-leader {
   margin-top: 100px;
   border-radius: 25px;
@@ -118,8 +102,7 @@ export default {
   margin: 2px;
 }
 
-.card-body {
-}
+
 .card-text:last-child {
   margin-bottom: 0;
   text-align: center;
