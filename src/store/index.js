@@ -7,7 +7,8 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state:{
-        token : ''
+        token : '',
+        idUser : ''
     },
     getters,
     mutations,
