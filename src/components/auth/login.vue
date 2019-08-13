@@ -54,9 +54,11 @@
                     >{{ errors.first('password') }}</div>
                   </div>
                   <button class="btnlogin shadow p-3 mb-3" type="submit">Login</button>
-                  <button type="button" class="btn btn-pill btn-info shadow w-100" @click="Auth">
-                    <i class="nav-icon icon-trello"></i>Login with trello
-                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-pill btn-info shadow w-100"
+                    @click="Auth"
+                  >Login with trello</button>
                 </div>
               </div>
             </div>
@@ -103,23 +105,27 @@ export default {
     ...mapActions(["getToken"]),
     Auth() {
       const self = this;
-      const next = this.$router.push("/dashboards");
       OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
       var provider = "trello";
       OAuth.popup(provider)
         .done(function(result) {
           const token = result.oauth_token;
-          axios
-            .post("http://93f616c1.ngrok.io/getdashboard", token)
-            .then(Response => {
-              console.log(Response);
-              self.getToken(token); 
-              next;
-            });
+          if (token != "") {
+                self.getToken(token);
+                self.$router.push("/dashboards");
+              }
         })
         .fail(function(err) {
           alert(err);
         });
+
+      // axios
+      //   .post("http://93f616c1.ngrok.io/getdashboard", token)
+      //   .then(Response => {
+      //     console.log(Response);
+      // self.getToken(token);
+      // next;
+      //   });
     }
   },
   logIn() {
