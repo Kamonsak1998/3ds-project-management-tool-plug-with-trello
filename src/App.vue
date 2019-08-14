@@ -63,7 +63,7 @@ export default {
 }
 @font-face {
   font-family: kano;
-  src: url("./assets/Kano_Regular/Kano.otf");
+  src: url("./assets/montserrat/Montserrat-Regular.ttf");
   /* font-weight: bold; */
 }
 * {
