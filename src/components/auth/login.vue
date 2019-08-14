@@ -116,13 +116,6 @@ export default {
           alert(err);
         });
 
-      // axios
-      //   .post("http://93f616c1.ngrok.io/getdashboard", token)
-      //   .then(Response => {
-      //     console.log(Response);
-      // self.getToken(token);
-      // next;
-      //   });
     }
   },
   logIn() {
