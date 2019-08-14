@@ -10,8 +10,8 @@
           :title="result.name"
           style="max-width: 30rem;"
           align="center"
-          border-variant="dark"
-          class="imgbg cursor"
+          border-variant="0"
+          class="imgbg cursor shadow-lg "
           @click="setboard(results,index)"
         ></b-card>
       </div>
@@ -66,9 +66,11 @@ export default {
 .imgbg {
   width: 100%;
   height: 180px;
+  border-radius: 25px;
 }
 
 .card-img {
+  border-radius: 25px;
   width: 100%;
   height: 100%;
 }
