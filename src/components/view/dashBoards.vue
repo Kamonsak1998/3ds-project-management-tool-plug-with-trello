@@ -37,7 +37,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["token", "idUser"])
+    ...mapGetters(["token"])
   },
   data() {
     return {
@@ -51,12 +51,6 @@ export default {
       const boardid = result[index].id;
       this.getBoard(boardid);
       this.$router.push("/feature");
-      // axios
-      //   .post("http://ddc1cade.ngrok.io/setboardid", {
-      //     token: this.token,
-      //     boardid: boardid
-      //   })
-      //   .then(Response => {});
     }
   }
 };
