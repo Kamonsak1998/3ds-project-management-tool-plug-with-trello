@@ -3,16 +3,19 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 mx-auto mt-5">
-          <div class="card mx-4 shadow p-3 mb-5 bg-white rounded">
+          <div class="card shadow p-4 bg-white">
             <form @submit.prevent="addUser">
-              <div class="card-body p-4">
+              <div class="text-center">
                 <h1>Register</h1>
                 <p class="text-muted">Create your account</p>
+              </div>
+              <div class="card-body text-left">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">@</span>
                   </div>
                   <input
+                    data-cy="input-register-email"
                     class="form-control"
                     type="text"
                     name="email"
@@ -30,11 +33,12 @@
 
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="icon-lock"></i>
-                      </span>
-                    </div>
+                    <span class="input-group-text">
+                      <i class="icon-lock"></i>
+                    </span>
+                  </div>
                   <input
+                    data-cy="input-register-password"
                     v-validate="'required|min:6|max:12'"
                     :class="{ 'is-invalid': submitted && errors.has('password')}"
                     name="password"
@@ -46,17 +50,17 @@
                   <div
                     v-if="submitted && errors.has('password')"
                     class="invalid-feedback"
-                  >{{errors.first('password')}}
-                  </div>
+                  >{{errors.first('password')}}</div>
                 </div>
 
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="icon-lock"></i>
-                      </span>
-                    </div>
+                    <span class="input-group-text">
+                      <i class="icon-lock"></i>
+                    </span>
+                  </div>
                   <input
+                    data-cy="input-register-repassword"
                     v-validate="'required|confirmed:password'"
                     :class="{ 'is-invalid': submitted && errors.has('password_confirmation')}"
                     name="password_confirmation"
@@ -64,14 +68,11 @@
                     class="form-control"
                     placeholder="Repeat password"
                   />
-                 <div
+                  <div
                     v-if="submitted && errors.has('password_confirmation')"
                     class="invalid-feedback"
-                  >{{errors.first('password_confirmation')}}
-                  </div>
+                  >{{errors.first('password_confirmation')}}</div>
                 </div>
-                
-
 
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -80,9 +81,11 @@
                     </span>
                   </div>
                   <input
+                  data-cy="input-register-firstname"
                     class="form-control"
                     type="text"
                     name="firstname"
+                    pattern="^[a-zA-Z-ก-๏\s]+$"
                     placeholder="Enter firstname"
                     v-model="output.firstname"
                     v-validate="'required|max:15'"
@@ -101,9 +104,11 @@
                     </span>
                   </div>
                   <input
+                    data-cy="input-register-lastname"
                     class="form-control"
                     type="text"
                     name="lastname"
+                    pattern="^[a-zA-Z-ก-๏\s]+$"
                     placeholder="Enter lastname"
                     v-model="output.lastname"
                     v-validate="'required|max:15'"
@@ -121,9 +126,11 @@
                     </span>
                   </div>
                   <input
+                    data-cy="input-register-phone"
                     class="form-control"
                     type="text"
                     name="phone"
+                    pattern="^0([8|9|6])([0-9]{8}$)"
                     placeholder="Enter phone"
                     v-model="output.phone"
                     v-validate="'required|numeric|max:10'"
@@ -134,7 +141,7 @@
                     class="invalid-feedback"
                   >{{ errors.first('phone') }}</div>
                 </div>
-                <button class="btn btn-block btn-success" type="submit">Create Account</button>
+                <button data-cy="input-register-btnregister " class="btnregister" type="submit">Create Account</button>
               </div>
             </form>
           </div>
@@ -161,9 +168,10 @@ export default {
   methods: {
     addUser: function() {
       this.submitted = true;
-      this.$validator.validate().them(valid => {
-        if (valid) {}
-      });
+      // this.$validator.validate().then(valid => {
+      //   if (valid) {
+      //   }
+      // });
     }
   }
 };
@@ -171,6 +179,12 @@ export default {
 
 
 <style>
+.card{
+  border-radius: 25px;
+}
+.btn {
+  border-radius: 25px;
+}
 .btnregister {
   color: #ffffff;
   font: 15px;
