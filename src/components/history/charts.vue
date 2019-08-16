@@ -9,9 +9,6 @@
       <b-card class="shadow p-3 bg-white rounded">
         <BarColumn />
       </b-card>
-      <b-card class="shadow p-3 bg-white rounded">
-        <BarColumn />
-      </b-card>
     </b-card-group>
   </div>
 </template>
@@ -31,7 +28,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([ "idBoard"])
+    ...mapGetters(["idBoard"])
   },
   components: {
     Bar,
