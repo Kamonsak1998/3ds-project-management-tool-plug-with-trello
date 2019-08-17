@@ -13,7 +13,7 @@ export default {
       axios
         .post("http://localhost:9000/gethistory", {
           token: this.token,
-          boardid: this.idBoard
+          idBoard: this.idBoard
         })
         .then(res => {
           this.series[0] = {...this.series[0], ...{
@@ -35,8 +35,8 @@ export default {
   data: function() {
     return {
       series: [{
-        name : ["aa","bb"],
-        data : [1,2]
+        name : [],
+        data : []
       }],
       chartOptions: {
         plotOptions: {
