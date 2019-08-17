@@ -1,5 +1,5 @@
 <template>
-  <div class="chart-wrapper">
+  <div class="animated fadeIn">
     <apexchart height="350px" type="bar" :options="chartOptions" :series="series"></apexchart>
   </div>
 </template>
@@ -16,14 +16,20 @@ export default {
           idBoard: this.idBoard
         })
         .then(res => {
-          this.series[0] = {...this.series[0], ...{
-              data: res.data.ScoreTotal.data
-            }}
-          this.chartOptions = {...this.chartOptions, ...{
+          this.series[0] = {
+            ...this.series[0],
+            ...{
+              data: res.data.scoreOfSprint[0].data
+            }
+          };
+          this.chartOptions = {
+            ...this.chartOptions,
+            ...{
               xaxis: {
                 categories: res.data.ScoreTotal.name
               }
-            }}
+            }
+          };
         });
     } else {
       this.$router.push("/dashboards");
@@ -34,10 +40,7 @@ export default {
   },
   data: function() {
     return {
-      series: [{
-        name : [],
-        data : []
-      }],
+      series: [0],
       chartOptions: {
         plotOptions: {
           chart: {
@@ -63,7 +66,7 @@ export default {
           }
         },
         xaxis: {
-          categories : []
+          categories: [""]
         }
       }
     };
