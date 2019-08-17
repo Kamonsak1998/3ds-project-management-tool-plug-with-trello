@@ -13,12 +13,17 @@ export default {
       axios
         .post("http://localhost:9000/gethistory", {
           token: this.token,
-          boardid: this.idBoard
+          idBoard: this.idBoard
         })
         .then(res => {
-          this.series = res.data.scoreOfSprint;
-          console.log(res);
-          
+          this.series[0] = {...this.series[0], ...{
+              data: res.data.ScoreTotal.data
+            }}
+          this.chartOptions = {...this.chartOptions, ...{
+              xaxis: {
+                categories: res.data.ScoreTotal.name
+              }
+            }}
         });
     } else {
       this.$router.push("/dashboards");
@@ -29,7 +34,10 @@ export default {
   },
   data: function() {
     return {
-      series: [],
+      series: [{
+        name : [],
+        data : []
+      }],
       chartOptions: {
         plotOptions: {
           chart: {
@@ -43,7 +51,7 @@ export default {
           }
         },
         subtitle: {
-          text: "Total",
+          text: "Name",
           align: "left",
           margin: 10,
           offsetX: 0,
