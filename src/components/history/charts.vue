@@ -2,7 +2,7 @@
   <div class="animated fadeIn">
     <b-card-group rows class="card-rows">
       <b-card class="shadow p-3 mb-5 bg-white rounded">
-        <BarColumn />
+        <BarColumn v-bind:model="model" />
       </b-card>
     </b-card-group>
     <b-card-group rows class="card-rows">

@@ -22,26 +22,19 @@
 </template>
 
 <script>
-import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
   name: "Bar",
-  props: ["model"],
-  mounted: function() {
-    this.series[0] = {
-      ...this.series[0],
-      ...{
-        data: this.model.scoreOfSprint[0].data
-      }
-    };
-    // this.chartOptions = {
-    //   ...this.chartOptions,
-    //   ...{
-    //     xaxis: {
-    //       categories: this.model.ScoreTotal.name
-    //     }
-    //   }
-    // };
+  props: {
+    model: {
+      required: true
+    }
+  },
+  created() {
+    setTimeout(() => {
+      this.series[0] = { ...this.series[0], ...{ data: this.model.scoreOfSprint[0].data } };
+      this.chartOptions = { ...this.chartOptions, ...{ xaxis: { categories: this.model.ScoreTotal.name } } };
+    }, 1500);
   },
   computed: {
     ...mapGetters(["idBoard", "token"])
@@ -62,7 +55,7 @@ export default {
           }
         },
         subtitle: {
-          text: "Name",
+          text: "Sprint",
           align: "left",
           margin: 10,
           offsetX: 0,

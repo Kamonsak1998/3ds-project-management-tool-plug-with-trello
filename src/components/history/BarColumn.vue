@@ -22,10 +22,20 @@
 </template>
 
 <script>
-import axios from "axios";
 import { mapGetters } from "vuex";
-
 export default {
+  name: "BarTotal",
+  props: {
+    model: {
+      required: true
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.series[0] = { ...this.series[0], ...{ data: this.model.ScoreTotal.data } };
+      this.chartOptions = { ...this.chartOptions, ...{xaxis: {categories: this.model.ScoreTotal.name} } };
+    }, 1500);
+  },
   // mounted: function() {
   //   if (this.idBoard != "") {
   //     axios
