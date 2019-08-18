@@ -34,7 +34,7 @@
 import moment from 'moment'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
-// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faCaretLeft, faCaretRight)
 
@@ -110,7 +110,7 @@ export default {
   },
   watch: {},
   filters: {},
-  // components: { FontAwesomeIcon }
+  components: { FontAwesomeIcon }
 }
 </script>
 

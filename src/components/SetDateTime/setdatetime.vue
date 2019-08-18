@@ -1,7 +1,6 @@
 <template>
-  <div id="app" class="container">
+  <div class="container">
     <h2 class="my-4 pb-2 border-bottom"></h2>
-      
     <h3 class="pb-2 border-bottom">Set Date Time Stamp</h3>
     <div class="mb-4">
       <date-range-picker v-on:submit="submitted" />
@@ -32,6 +31,9 @@ export default {
     }
   },
   methods: {
+    setscore(arr){
+        this.parameter[arr[0]] = arr[1]
+    },
     submitted: function(range) {
       console.log(range)
     },

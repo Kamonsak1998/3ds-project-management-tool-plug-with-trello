@@ -41,11 +41,9 @@
           @blur="inputDate"      
         /> -->
       </div>
-
          <p>Sprint Period</p>
         <input type="text" class="form-control w-100 daterangepicker-date-input" ref="endDate"  @focus="step = 'selectEndDate'" v-model="total">
         <br>
-
       <div class="form-group form-inline justify-content-end mb-0">
         <button type="button" class="btn btn-light" @click="clear">Reset</button>
         <button
@@ -60,6 +58,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import moment from "moment";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
@@ -179,10 +178,12 @@ export default {
     },
     // Submit button
     submit: function() {
-      this.$emit("submit", {
-        startDate: this.startDate,
-        endDate: this.endDate,
-      });
+      let startDate = this.startDate;
+      let endDate  = this.endDate;
+      let sprint = this.total;
+      axios.post("http://localhost:9000/setdatetime",{startDate,endDate,sprint})
+      .then(res => {
+      })
     }
 
   },
@@ -191,10 +192,7 @@ export default {
       this.selectRange(rangeKey);
     },
     total: function(value) {
-      this.week = 7,
-      console.log(111,value,this.startDate.format())
       this.endDate = moment(this.startDate, "YYYY-MM-DD").add(7 * value,'days')
-      console.log(this.endDate) 
     },
 
     range: function() {
