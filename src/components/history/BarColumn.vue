@@ -32,37 +32,10 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      this.series[0] = { ...this.series[0], ...{ data: this.model.ScoreTotal.data } };
-      this.chartOptions = { ...this.chartOptions, ...{xaxis: {categories: this.model.ScoreTotal.name} } };
-    }, 1500);
+      this.series[0] = { ...this.series[0], ...{ data: this.model.ScoreTotal.data } }; 
+      this.chartOptions = {  ...this.chartOptions, ...{ xaxis: { categories: this.model.ScoreTotal.name } } };
+    }, 2000);
   },
-  // mounted: function() {
-  //   if (this.idBoard != "") {
-  //     axios
-  //       .post("http://localhost:9000/gethistory", {
-  //         token: this.token,
-  //         idBoard: this.idBoard
-  //       })
-  //       .then(res => {
-  //         this.series[0] = {
-  //           ...this.series[0],
-  //           ...{
-  //             data: res.data.ScoreTotal.data
-  //           }
-  //         };
-  //         this.chartOptions = {
-  //           ...this.chartOptions,
-  //           ...{
-  //             xaxis: {
-  //               categories: res.data.ScoreTotal.name
-  //             }
-  //           }
-  //         };
-  //       });
-  //   } else {
-  //     this.$router.push("/dashboards");
-  //   }
-  // },
   computed: {
     ...mapGetters(["idBoard", "token"])
   },

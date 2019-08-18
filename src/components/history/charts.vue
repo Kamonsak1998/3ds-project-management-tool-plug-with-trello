@@ -30,7 +30,7 @@ export default {
       axios.post('http://localhost:9000/gethistory',{ token: this.token,idBoard: this.idBoard}).then(resp => {
         this.model = resp.data
         console.log('chart',this.model);
-      })
+      }).catch(err => { alert(err) })
       return;
       
     } else {
