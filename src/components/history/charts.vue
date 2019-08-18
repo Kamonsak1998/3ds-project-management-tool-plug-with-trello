@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="animated fadeIn">
     <b-card-group rows class="card-rows">
       <b-card class="shadow p-3 mb-5 bg-white rounded">
-        <Bar />
+        <BarColumn v-bind:model="model" />
       </b-card>
     </b-card-group>
-    <b-card-group columns class="card-columns cols-2">
-      <b-card class="shadow p-3 bg-white rounded">
-        <BarColumn />
+    <b-card-group rows class="card-rows">
+      <b-card class="shadow p-3 mb-5 bg-white rounded">
+        <Bar v-bind:model="model" />
       </b-card>
     </b-card-group>
   </div>
@@ -18,17 +18,28 @@
 import Bar from "@/components/history/Bar.vue";
 import BarColumn from "@/components/history/BarColumn.vue";
 import { mapGetters } from "vuex";
+import axios from "axios";
 export default {
+  data() {
+    return {
+      model: Object
+    };
+  },
   mounted: function() {
     if (this.idBoard != "") {
+      axios.post('http://localhost:9000/gethistory',{ token: this.token,idBoard: this.idBoard}).then(resp => {
+        this.model = resp.data
+        console.log('chart',this.model);
+      }).catch(err => { alert(err) })
       return;
+      
     } else {
       this.$router.push("/dashboards");
       return;
     }
   },
   computed: {
-    ...mapGetters(["idBoard"])
+    ...mapGetters(["idBoard","token"])
   },
   components: {
     Bar,
