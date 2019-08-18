@@ -1,6 +1,23 @@
 <template>
   <div class="animated fadeIn">
-    <apexchart height="350px" type="bar" :options="chartOptions" :series="series"></apexchart>
+    <p>
+      <label>
+        <b>Select Theme</b>
+      </label> &nbsp;
+      <select @change="updateTheme">
+        <option value="palette1">Theme 1</option>
+        <option value="palette2">Theme 2</option>
+        <option value="palette3">Theme 3</option>
+        <option value="palette4">Theme 4</option>
+        <option value="palette5">Theme 5</option>
+        <option value="palette6">Theme 6</option>
+        <option value="palette7">Theme 7</option>
+        <option value="palette8">Theme 8</option>
+        <option value="palette9">Theme 9</option>
+        <option value="palette10">Theme 10</option>
+      </select>
+    </p>
+    <apexchart height="350" type="bar" :options="chartOptions" :series="series"></apexchart>
   </div>
 </template>
 
@@ -27,6 +44,9 @@ export default {
             ...{
               xaxis: {
                 categories: res.data.ScoreTotal.name
+              },
+              subtitle: {
+                text: res.data.scoreOfSprint[0].title
               }
             }
           };
@@ -40,7 +60,7 @@ export default {
   },
   data: function() {
     return {
-      series: [0],
+      series: [],
       chartOptions: {
         plotOptions: {
           chart: {
@@ -66,10 +86,19 @@ export default {
           }
         },
         xaxis: {
-          categories: [""]
+          categories: []
         }
       }
     };
+  },
+  methods: {
+    updateTheme(e) {
+      this.chartOptions = {
+        theme: {
+          palette: e.target.value
+        }
+      };
+    }
   }
 };
 </script>
