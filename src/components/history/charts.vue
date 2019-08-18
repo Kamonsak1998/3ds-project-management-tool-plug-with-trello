@@ -27,17 +27,18 @@ export default {
   },
   mounted: function() {
     if (this.idBoard != "") {
-      axios.post("http://localhost:9000/gethistory", { token: this.token , idBoard: this.idBoard }).then(resp => {
-        this.model = resp.data
-        console.log('charts', this.model); 
+      axios.post('http://localhost:9000/gethistory',{ token: this.token,idBoard: this.idBoard}).then(resp => {
+        this.model = resp
+        console.log('chart',this.model);
       })
+      return;
     } else {
       this.$router.push("/dashboards");
       return;
     }
   },
   computed: {
-    ...mapGetters(["idBoard"])
+    ...mapGetters(["idBoard","token"])
   },
   components: {
     Bar,
