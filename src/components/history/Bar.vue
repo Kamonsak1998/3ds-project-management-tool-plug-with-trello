@@ -25,36 +25,44 @@
 import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
-  mounted: function() {
-    if (this.idBoard != "") {
-      axios
-        .post("http://localhost:9000/gethistory", {
-          token: this.token,
-          idBoard: this.idBoard
-        })
-        .then(res => {
-          this.series[0] = {
-            ...this.series[0],
-            ...{
-              data: res.data.scoreOfSprint[0].data
-            }
-          };
-          this.chartOptions = {
-            ...this.chartOptions,
-            ...{
-              xaxis: {
-                categories: res.data.ScoreTotal.name
-              },
-              subtitle: {
-                text: res.data.scoreOfSprint[0].title
-              }
-            }
-          };
-        });
-    } else {
-      this.$router.push("/dashboards");
-    }
+  name: "Bar",
+  props: ["model"],
+  created() {
+    setTimeout(function() {
+      console.log("Bar :", this.model);
+    }, 3000);
   },
+  // mounted: function() {
+  //   if (this.idBoard != "") {
+  //     axios
+  // .post("http://localhost:9000/gethistory", {
+  //   token: this.token,
+  //   idBoard: this.idBoard
+  // })
+  //       .then(res => {
+  //         this.series[0] = {
+  //           ...this.series[0],
+  //           ...{
+  //             data: res.data.scoreOfSprint[0].data
+  //           }
+  //         };
+  //         this.chartOptions = {
+  //           ...this.chartOptions,
+  //           ...{
+  //             xaxis: {
+  //               categories: res.data.ScoreTotal.name
+  //             },
+  //             subtitle: {
+  //               text: res.data.scoreOfSprint[0].title
+  //             }
+  //           }
+  //         };
+  //       });
+  //   } else {
+  //     this.$router.push("/dashboards");
+  //   }
+  // },
+
   computed: {
     ...mapGetters(["idBoard", "token"])
   },

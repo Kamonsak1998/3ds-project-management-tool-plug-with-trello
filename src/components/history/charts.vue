@@ -7,7 +7,7 @@
     </b-card-group>
     <b-card-group rows class="card-rows">
       <b-card class="shadow p-3 mb-5 bg-white rounded">
-        <Bar />
+        <Bar v-bind:model="model" />
       </b-card>
     </b-card-group>
   </div>
@@ -18,10 +18,19 @@
 import Bar from "@/components/history/Bar.vue";
 import BarColumn from "@/components/history/BarColumn.vue";
 import { mapGetters } from "vuex";
+import axios from "axios";
 export default {
+  data() {
+    return {
+      model: Object
+    };
+  },
   mounted: function() {
     if (this.idBoard != "") {
-      return;
+      axios.post("http://localhost:9000/gethistory", { token: this.token , idBoard: this.idBoard }).then(resp => {
+        this.model = resp.data
+        console.log('charts', this.model); 
+      })
     } else {
       this.$router.push("/dashboards");
       return;
