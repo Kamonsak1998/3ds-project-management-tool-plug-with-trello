@@ -1,25 +1,24 @@
 <template>
-  <div class="login">
     <div class="container">
       <div class="row">
         <div class="col-sm-3">
-          <div class="card-leader p-4 shadow bg-white">
-            <router-link :to="{name : 'leaderboard'}">
+          <router-link :to="{name : 'leaderboard'}">
+            <div class="card-leader p-4 shadow bg-white">
               <div class="card-body text-white">
-                <p class="card-text">LeaderBoard</p>
+                <p class="card-text">Leader Board</p>
               </div>
-            </router-link>
-          </div>
+            </div>
+          </router-link>
         </div>
 
         <div class="col-sm-3">
-          <div class="card-History p-4 shadow bg-white">
-            <router-link :to="{name : 'charts'}">
+          <router-link :to="{name : 'charts'}">
+            <div class="card-History p-4 shadow bg-white">
               <div class="card-body text-white">
                 <p class="card-text">History</p>
               </div>
-            </router-link>
-          </div>
+            </div>
+          </router-link>
         </div>
         <div class="col-sm-3">
           <div class="card-Set p-4 shadow bg-white">
@@ -37,7 +36,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -81,22 +79,27 @@ export default {
 </script>
 
 <style>
+
 .card-leader {
+  height: 60%;
   margin-top: 100px;
   border-radius: 25px;
   background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
 }
 .card-History {
+  height: 60%;
   margin-top: 100px;
   border-radius: 25px;
   background: linear-gradient(40deg, #ff6ec4, #7873f5) !important;
 }
 .card-Set {
+  height: 60%;
   margin-top: 100px;
   border-radius: 25px;
   background: linear-gradient(40deg, #ffd86f, #fc6262) !important;
 }
 .card-Burn {
+  height: 60%;
   margin-top: 100px;
   border-radius: 25px;
   background: linear-gradient(40deg, #45cafc, #303f9f) !important;
@@ -110,11 +113,6 @@ export default {
   /* text-overflow: ellipsis; */
   /* height:100%; */
 }
-
-.btn {
-  margin: 2px;
-}
-
 .card-text:last-child {
   margin-bottom: 0;
   text-align: center;
