@@ -5,7 +5,9 @@
         <BarColumn v-bind:model="model" />
       </b-card>
     </b-card-group>
-    <b-card-group rows class="card-rows">
+    <b-card-group rows class="card-rows" v-for="(models,index) in this.model.scoreOfSprint" :key="index">
+      {{index}}
+      {{models}}
       <b-card class="shadow p-3 mb-5 bg-white rounded">
         <Bar v-bind:model="model" />
       </b-card>
@@ -26,24 +28,7 @@ export default {
     };
   },
   mounted: function() {
-    if (this.idBoard != "") {
-      axios
-        .post("http://localhost:9000/gethistory", {
-          token: this.token,
-          idBoard: this.idBoard
-        })
-        .then(resp => {
-          this.model = resp.data;
-          console.log("chart", this.model);
-        })
-        .catch(err => {
-          alert(err);
-        });
-      return;
-    } else {
-      this.$router.push("/dashboards");
-      return;
-    }
+    this.getHistory()
   },
   computed: {
     ...mapGetters(["idBoard", "token"])
@@ -51,6 +36,29 @@ export default {
   components: {
     Bar,
     BarColumn
+  },
+  methods:{
+    getHistory(){
+      if (this.idBoard != "") {
+        axios
+                .post("http://localhost:9000/gethistory", {
+                  token: this.token,
+                  idBoard: this.idBoard
+                })
+                .then(resp => {
+                  this.model = resp.data;
+                  console.log("chart", this.model);
+                })
+                .catch(err => {
+                  alert(err);
+                });
+        return;
+      } else {
+        this.$router.push("/dashboards");
+        return;
+      }
+    },
+
   }
 };
 </script>
