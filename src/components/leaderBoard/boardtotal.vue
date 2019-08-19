@@ -97,12 +97,12 @@ table {
 
 th, td {
   font-weight: unset;
-  padding-right: 10px;
+  padding-right: 0px;
 }
 
 .column100 {
   width: 130px;
-  padding-left: 25px;
+  padding-left: 0px;
 }
 
 
@@ -166,4 +166,5 @@ th, td {
 .m-b-110 {
     margin-bottom: 110px;
 }
+
 </style>
