@@ -6,8 +6,6 @@
       </b-card>
     </b-card-group>
     <b-card-group rows class="card-rows" v-for="(models,index) in this.model.scoreOfSprint" :key="index">
-      {{index}}
-      {{models}}
       <b-card class="shadow p-3 mb-5 bg-white rounded">
         <Bar v-bind:model="model" />
       </b-card>
@@ -25,7 +23,6 @@ export default {
   data() {
     return {
       model: Object,
-      index: [this.models]
     };
   },
   mounted: function() {
@@ -59,7 +56,6 @@ export default {
         return;
       }
     },
-
   }
 };
 </script>

@@ -33,9 +33,9 @@ export default {
       required: true
     }
   },
-  // mounted() {
-   
-  // },
+  mounted() {
+   this.setData()
+  },
   computed: {
     ...mapGetters(["idBoard", "token"])
   },
@@ -77,12 +77,10 @@ export default {
         }
       };
     },
-    setData(index){
-      setTimeout(() => {
-            this.series[index] = { ...this.series[index], ...{ data: this.model.scoreOfSprint[index].data } };
+    setData(index){   
+            this.series[0] = { ...this.series[index], ...{ data: this.model.scoreOfSprint[index].data } };
             this.chartOptions = { ...this.chartOptions, ...{ xaxis: { categories: this.model.ScoreTotal.name } } };
-            this.chartOptions = { ...this.chartOptions, ...{ subtitle: { text: this.model.scoreOfSprint[index].date } } };
-          }, 2000);
+            this.chartOptions = { ...this.chartOptions, ...{ subtitle: { text: this.model.scoreOfSprint[index].title } } };
           }
         }
 };
