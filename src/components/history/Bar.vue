@@ -34,11 +34,7 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => {
-      this.series[0] = { ...this.series[0], ...{ data: this.model.scoreOfSprint[0].data } };
-      this.chartOptions = { ...this.chartOptions, ...{ xaxis: { categories: this.model.ScoreTotal.name } } };
-      this.chartOptions = { ...this.chartOptions, ...{ subtitle: { text: this.model.scoreOfSprint[0].date } } };
-    }, 2000);
+   this.setData()
   },
   computed: {
     ...mapGetters(["idBoard", "token"])
@@ -80,7 +76,12 @@ export default {
           palette: e.target.value
         }
       };
-    }
-  }
+    },
+    setData(index){   
+            this.series[0] = { ...this.series[index], ...{ data: this.model.scoreOfSprint[index].data } };
+            this.chartOptions = { ...this.chartOptions, ...{ xaxis: { categories: this.model.ScoreTotal.name } } };
+            this.chartOptions = { ...this.chartOptions, ...{ subtitle: { text: this.model.scoreOfSprint[index].title } } };
+          }
+        }
 };
 </script>
