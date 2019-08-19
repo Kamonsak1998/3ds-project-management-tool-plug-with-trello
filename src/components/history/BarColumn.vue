@@ -31,10 +31,7 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => {
-      this.series[0] = { ...this.series[0], ...{ data: this.model.ScoreTotal.data } }; 
-      this.chartOptions = {  ...this.chartOptions, ...{ xaxis: { categories: this.model.ScoreTotal.name } } };
-    }, 2000);
+    this.setData()
   },
   computed: {
     ...mapGetters(["idBoard", "token"])
@@ -84,6 +81,12 @@ export default {
           palette: e.target.value
         }
       };
+    },
+    setData(){
+      setTimeout(() => {
+      this.series[0] = { ...this.series[0], ...{ data: this.model.ScoreTotal.data } }; 
+      this.chartOptions = {  ...this.chartOptions, ...{ xaxis: { categories: this.model.ScoreTotal.name } } };
+    }, 2000);
     }
   }
 };

@@ -106,12 +106,9 @@ export default {
 }
 .card-text {
   font-size: 20px;
-  /* padding-top:10px; */
-
   text-align: center;
-  /* overflow: hidden; */
-  /* text-overflow: ellipsis; */
-  /* height:100%; */
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
 }
 .card-text:last-child {
   margin-bottom: 0;
