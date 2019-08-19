@@ -11,7 +11,7 @@
           style="max-width: 30rem;"
           align="center"
           border-variant="0"
-          class="imgbg cursor shadow-lg "
+          class="imgbg cursor shadow-lg text"
           @click="setboard(results,index)"
         ></b-card>
       </div>
@@ -70,5 +70,9 @@ export default {
 }
 .cursor {
   cursor: pointer;
+}
+.text {
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
 }
 </style>
