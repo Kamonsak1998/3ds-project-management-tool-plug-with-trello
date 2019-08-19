@@ -63,7 +63,7 @@ export default {
           offsetY: 0,
           floating: false,
           style: {
-            fontSize: "16px",
+            fontSize: "20px",
             color: "#000000"
           }
         },
