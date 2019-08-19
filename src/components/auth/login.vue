@@ -53,25 +53,19 @@
                       class="invalid-feedback"
                     >{{ errors.first('password') }}</div>
                   </div>
-
-          
-
-                  <button data-cy="input-login-btnlogin" class="btnlogin shadow p-3 mb-3" type="submit">Login</button>
-                  <button
-                    type="button"
-                    class="btn btn-pill btn-info shadow w-100"
-                    @click="Auth"
-                  >Login with trello</button>
+                  <button class="btnlogin shadow p-3 mb-3" type="submit">Login</button>
+                  <button type="button" class="btn btn-pill btn-info shadow w-100" @click="Auth">
+                    <i class="icon-social-tumblr"></i> &nbsp; Login with trello
+                  </button>
                 </div>
               </div>
             </div>
-            <router-link class="pull-left" :to="{name : 'register'}">Create a new account</router-link>
             <a
-              data-toggle="modal"
-              id="reset_password"
-              href="#resetpw-modal"
-              class="pull-right"
-            >Forgot your password?</a>
+              href="https://trello.com/signup"
+              class="pull-left"
+              target="_blank"
+            >Create a new account</a>
+            <!-- <router-link class="pull-left" :to="{name : 'register'}">Create a new account</router-link> -->
           </form>
         </div>
       </div>
@@ -82,11 +76,9 @@
 
 
 <script>
-
 import { OAuth } from "oauthio-web";
-import axios from "axios";
+import { mapActions, mapGetters } from "vuex";
 export default {
-  
   name: "login",
   data: function() {
     return {
@@ -95,42 +87,43 @@ export default {
       password: ""
     };
   },
+  mounted: function() {
+    if (this.token != "") {
+      this.$router.push("/dashboards");
+      return;
+    } else {
+      return;
+    }
+  },
+  computed: {
+    ...mapGetters(["token"])
+  },
   methods: {
+    ...mapActions(["getToken"]),
     Auth() {
+      const self = this;
       OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
       var provider = "trello";
-
       OAuth.popup(provider)
         .done(function(result) {
-          result
-            .me()
-            .done(function(response) {
-              let toKen = result.oauth_token;
-              // let idUser = response.raw.id;
-              axios
-                .post("https://07f73f0f.ngrok.io/getdashboard", {
-                  toKen
-                  // idUser
-                })
-                .then(res => {
-                  console.log(res);
-                });
-            })
-            .fail(function(err) {
-              //handle error with err
-            });
+          const token = result.oauth_token;
+          if (token != "") {
+            self.getToken(token);
+            self.$router.push("/dashboards");
+          }
         })
         .fail(function(err) {
-         
+          alert(err);
         });
-    },
-    logIn() {
-      this.submitted = true;
-      this.$validator.validate().then(valid => {
-        if (valid) {
-        }
-      });
+
     }
+  },
+  logIn() {
+    this.submitted = true;
+    // this.$validator.validate().then(valid => {
+    //   if (valid) {
+    //   }
+    // });
   }
 };
 </script>

@@ -1,18 +1,19 @@
 <template>
-  <div class="login">
-    <div class="container">
-      <div class="row">
-        <div v-for="(result,i) in results" :key="i" class="col-sm-4">
-          <div class="card-dash p-4 shadow bg-white text-center">
-            <!-- {{ result.title }} -->
-            <div class="card-body">
-              <p class="card-text"  v-html="result.prevDesc"></p>
-               <!-- <router-link :to="{name : 'leaderboard'}">
-                   <a href="#" class="btn btn-primary">Select Project</a>
-                </router-link> -->
-            </div>
-          </div>
-        </div>
+  <div class="container pt-5">
+    <div class="row">
+      <div v-for="(result,index) in results" :key="index" class="col-sm-4">
+        <b-card
+          overlay
+          :img-src="result.prefs.backgroundImage"
+          img-alt="Card Image"
+          text-variant="white"
+          :title="result.name"
+          style="max-width: 30rem;"
+          align="center"
+          border-variant="0"
+          class="imgbg cursor shadow-lg "
+          @click="setboard(results,index)"
+        ></b-card>
       </div>
     </div>
   </div>
@@ -20,81 +21,60 @@
 
 <script>
 import axios from "axios";
+import { mapActions, mapGetters } from "vuex";
 export default {
+  mounted: function() {
+    if (this.token != "") {
+      axios
+        .post("http://localhost:9000/getdashboard", { token: this.token })
+        .then(Response => {
+          this.results = Response.data.board;
+        });
+      return;
+    } else {
+      this.$router.push("/auth/login");
+      return;
+    }
+  },
+  computed: {
+    ...mapGetters(["token", "idUser"])
+  },
   data() {
     return {
-      results: [
-        {
-          title: "BENZ",
-          prevDesc:
-            "ProJect 1 ",
-          color:"primary"
-        },
-        {
-          title: "NON",
-          prevDesc: "Project 2 "
-        },
-        {
-          title: "arram",
-          prevDesc: "Project 3 "
-        },
-        {
-          title: "gono",
-          prevDesc: "Project 4 "
-        },
-        {
-          title: "beam",
-          prevDesc:
-            "With supporting text below as a natural lead-in to additional content"
-        }
-      ]
+      results: []
     };
   },
-  mounted: {},
-  methods: {
-    auth() {
-      axios.get("http://localhost:9000/getboard").then(res => {
-        console.log(res);
-        // const token = res.data.acctoken;
-        // const stat = res.data.accstat;
-        if (stat == true) {
-          // this.$store.commit("setToken", token);
-          // this.$router.push("/dashBoards");
-        }
-      });
-    }
 
-    // login:function(){
-    //     this.$router.push("/login");
-    // }
+  methods: {
+    ...mapActions(["getBoard"]),
+    setboard(result, index) {
+      const boardid = result[index].id;
+      this.getBoard(boardid);
+      this.$router.push("/feature");
+      // axios
+      //   .post("http://ddc1cade.ngrok.io/setboardid", {
+      //     token: this.token,
+      //     boardid: boardid
+      //   })
+      //   .then(Response => {});
+    }
   }
 };
 </script>
 
 <style>
-.row {
-  
-  padding-top: 50px;  
-  
-  
-}
-.card-dash{
-  margin-top: 15px;
-  /* white-space: nowrap;  */
-  width: 250px; 
-  /* overflow: hidden; */
-  /* height:100%; */
-  /* overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2; */
+.imgbg {
+  width: 100%;
+  height: 180px;
   border-radius: 25px;
 }
-.card-text {
-  font-size: 25px;
-  white-space: nowrap; 
-  width: 140px;
-  overflow: hidden;
-   text-overflow: ellipsis;
+
+.card-img {
+  border-radius: 25px;
+  width: 100%;
+  height: 100%;
 }
-.btn{
-  margin:2px;
+.cursor {
+  cursor: pointer;
 }
 </style>
