@@ -4,17 +4,16 @@ export const addToken = (state, newToken) => {
 
 
 }
-export const addUser = (state, newUser) => {
-    state.idUser = newUser
-    localStorage.setItem('idUser', newUser)
-    console.log('user',newUser);
+export const addBoard = (state, newBoard) => {
+    state.idBoard = newBoard
+    localStorage.setItem('idBoard', newBoard)
     
 
 }
 export const removeToken = (state) => {
     state.token = ''
-    state.idUser = ''
+    state.idBoard = ''
     localStorage.setItem('token', '')
-    localStorage.setItem('idUser', '')
+    localStorage.setItem('idBoard', '')
 
 }

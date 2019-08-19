@@ -18,9 +18,14 @@ Vue.use(VueRouter);
 
 
 const token = localStorage.getItem('token')
+const idBoard = localStorage.getItem('idBoard')
 
 if (token && token != "") {
   store.commit('addToken', token)
+}
+
+if (idBoard && idBoard != "") {
+  store.commit('addBoard', idBoard)
 }
 
 Vue.config.productionTip = false

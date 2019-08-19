@@ -54,11 +54,9 @@
                     >{{ errors.first('password') }}</div>
                   </div>
                   <button class="btnlogin shadow p-3 mb-3" type="submit">Login</button>
-                  <button
-                    type="button"
-                    class="btn btn-pill btn-info shadow w-100"
-                    @click="Auth"
-                  >Login with trello</button>
+                  <button type="button" class="btn btn-pill btn-info shadow w-100" @click="Auth">
+                    <i class="icon-social-tumblr"></i> &nbsp; Login with trello
+                  </button>
                 </div>
               </div>
             </div>
@@ -79,7 +77,6 @@
 
 <script>
 import { OAuth } from "oauthio-web";
-import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "login",
@@ -111,21 +108,14 @@ export default {
         .done(function(result) {
           const token = result.oauth_token;
           if (token != "") {
-                self.getToken(token);
-                self.$router.push("/dashboards");
-              }
+            self.getToken(token);
+            self.$router.push("/dashboards");
+          }
         })
         .fail(function(err) {
           alert(err);
         });
 
-      // axios
-      //   .post("http://93f616c1.ngrok.io/getdashboard", token)
-      //   .then(Response => {
-      //     console.log(Response);
-      // self.getToken(token);
-      // next;
-      //   });
     }
   },
   logIn() {

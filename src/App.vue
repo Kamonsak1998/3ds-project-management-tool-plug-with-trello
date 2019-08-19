@@ -61,4 +61,12 @@ export default {
 .main {
   flex: 1;
 }
+@font-face {
+  font-family: kano;
+  src: url("./assets/montserrat/Montserrat-Regular.ttf");
+  /* font-weight: bold; */
+}
+* {
+  font-family: kano;
+}
 </style>

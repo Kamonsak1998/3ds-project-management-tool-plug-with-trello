@@ -4,19 +4,27 @@
       <ul class="nav">
         <li class="nav-item">
           <router-link class="nav-link" :to="{name : 'dashboards'}">
-            <i class="nav-icon icon-speedometer"></i> Dashboard
+            <i class="nav-icon icon-home"></i> Dashboard
           </router-link>
         </li>
         <li class="nav-item"></li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{name : 'leaderboard'}">
-            <i class="nav-icon icon-pie-chart"></i> LeaderBoard
+
+        <li class="nav-item nav-dropdown" v-if="isBoards">
+          <router-link class="nav-link nav-dropdown-toggle" :to="{name : 'feature'}">
+            <i class="nav-icon icon-list"></i> Feature
           </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{name : 'charts'}">
-            <i class="nav-icon icon-pie-chart"></i> Charts
-          </router-link>
+          <ul class="nav-dropdown-items">
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{name : 'charts'}">
+                <i class="nav-icon icon-chart"></i> Charts
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{name : 'leaderboard'}">
+                <i class="nav-icon icon-pie-chart"></i> LeaderBoard
+              </router-link>
+            </li>
+          </ul>
         </li>
         <li class="nav-item nav-dropdown">
           <a class="nav-link nav-dropdown-toggle" href="#">
@@ -25,12 +33,12 @@
           <ul class="nav-dropdown-items">
             <li class="nav-item" v-if="isLoggedIn">
               <a class="nav-link" href @click=" logout">
-                <i class="nav-icon icon-star"></i>Logout
+                <i class="nav-icon icon-logout"></i>Logout
               </a>
             </li>
             <li class="nav-item" v-else>
               <router-link class="nav-link" :to="{name : 'login'}">
-                <i class="nav-icon icon-star"></i> Login
+                <i class="nav-icon icon-login"></i> Login
               </router-link>
             </li>
             <!-- <li class="nav-item">
@@ -51,17 +59,21 @@ import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(["token"]),
+    ...mapGetters(["token", "idBoard"]),
     isLoggedIn: function() {
       return this.token;
+    },
+    isBoards: function() {
+      return this.idBoard;
     }
   },
   methods: {
     logout: function() {
       location.reload();
-      return localStorage.removeItem("token");
+      localStorage.removeItem("token");
+      localStorage.removeItem("idBoard");
+      return;
     }
   }
- 
 };
 </script>
