@@ -5,8 +5,8 @@
         <BarColumn v-bind:model="model" />
       </b-card>
     </b-card-group>
-    <b-card-group rows class="card-rows">
-      <b-card class="shadow p-3 mb-5 bg-white rounded">
+    <b-card-group rows class="card-rows" v-for="(models,index) in model" :key="index" >
+      <b-card class="shadow p-3 mb-5 bg-white rounded" >
         <Bar v-bind:model="model" />
       </b-card>
     </b-card-group>
@@ -22,7 +22,8 @@ import axios from "axios";
 export default {
   data() {
     return {
-      model: Object
+      model: Object,
+      index: [this.models]
     };
   },
   mounted: function() {
@@ -35,6 +36,7 @@ export default {
         .then(resp => {
           this.model = resp.data;
           console.log("chart", this.model);
+          this.setData()
         })
         .catch(err => {
           alert(err);
@@ -51,7 +53,12 @@ export default {
   components: {
     Bar,
     BarColumn
-  }
+  },
+  methods: {
+    setData(models){ 
+      this.$emit('setData',this.models)
+    }
+  },
 };
 </script>
 
