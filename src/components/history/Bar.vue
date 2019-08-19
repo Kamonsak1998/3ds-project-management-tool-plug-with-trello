@@ -18,15 +18,13 @@
                     <option value="palette10">Theme 10</option>
                 </select>
             </p>
-            <apexchart height="350" type="bar" :options="chartOptions" :series="series"></apexchart>
+            <apexchart height="350px" type="bar" :options="chartOptions" :series="series"></apexchart>
         </div>
 
     </div>
 </template>
 
 <script>
-    import {mapGetters} from "vuex";
-
     export default {
         name: "Bar",
         props: {
@@ -35,12 +33,10 @@
             }
         },
         mounted() {
-            this.series[0] = {...this.series[1], ...{data: this.model.data}};
+            this.series[0] = {...this.series[0], ...{data: this.model.data}};
             this.chartOptions = {...this.chartOptions, ...{xaxis: {categories: this.model.name}}};
             this.chartOptions = {...this.chartOptions, ...{subtitle: {text: this.model.date}}};
-        },
-        computed: {
-            ...mapGetters(["idBoard", "token"])
+            this.chartOptions = {...this.chartOptions, ...{title: {text: this.model.title}}};
         },
         data: function () {
             return {
@@ -54,16 +50,23 @@
                             }
                         }
                     },
+                     title: {
+                      text: '',
+                      margin: 10,
+                        x: -20,
+                        floating: false,
+                        style: {
+                            fontSize: "20px",
+                        }
+                    },
                     subtitle: {
                         text: "",
                         align: "left",
                         margin: 10,
-                        offsetX: 0,
-                        offsetY: 0,
+                        x: -20,
                         floating: false,
                         style: {
-                            fontSize: "20px",
-                            color: "#000000"
+                            fontSize: "15px",
                         }
                     },
                     xaxis: {
