@@ -1,60 +1,45 @@
 <template>
-  <div class="d-flex daterangepicker-row">
-    <!-- Calendars -->
-    <div class="daterangepicker-col" v-for="calendarIndex in calendarCount" :key="calendarIndex">
-      <date-range-picker-calendar
-        :calendarIndex="calendarIndex"
-        :calendarCount="calendarCount"
-        :month="month"
-        :startDate="startDate"
-        :endDate="endDate"
-        :step="step"
-        v-on:goToPrevMonth="goToPrevMonth"
-        v-on:goToNextMonth="goToNextMonth"
-        v-on:selectDate="selectDate"
-        v-on:nextStep="nextStep"
-      />
-    </div>
-
-    <!-- Right form -->
-    <div class="daterangepicker-col">
-       <p>Start Sprint</p>
-      <div class="form-group form-inline flex-nowrap">
-        <input
-          type="text"
-          class="form-control w-100 daterangepicker-date-input"
-          ref="startDate"
-          :value="startDate | dateFormat"  
-          @focus="step = 'selectStartDate'"
-          @blur="inputDate"
-        />         
-        <!-- <span class="mx-2">
-          <font-awesome-icon icon="caret-right" fixed-width />
-        </span>
-       
+   <b-container class="bv-example-row">
+  <b-row>
+    <b-col  v-for="calendarIndex in calendarCount" :key="calendarIndex" ><date-range-picker-calendar
+          :calendarIndex="calendarIndex"
+          :calendarCount="calendarCount"
+          :month="month"
+          :startDate="startDate"
+          :endDate="endDate"
+          :step="step"
+          v-on:goToPrevMonth="goToPrevMonth"
+          v-on:goToNextMonth="goToNextMonth"
+          v-on:selectDate="selectDate"
+          v-on:nextStep="nextStep"
+        /></b-col>
+    <b-col><p>Start Sprint</p>
+        <div class="form-group form-inline flex-nowrap">
+          <input
+            type="text"
+            class="form-control w-100 daterangepicker-date-input"
+            ref="startDate"
+            :value="startDate | dateFormat"
+            @focus="step = 'selectStartDate'"
+            @blur="inputDate"
+          />
+        </div>
+         <p>Sprint Period</p>
         <input
           type="text"
           class="form-control w-100 daterangepicker-date-input"
           ref="endDate"
-          :value="endDate | dateFormat"
           @focus="step = 'selectEndDate'"
-          @blur="inputDate"      
-        /> -->
-      </div>
-         <p>Sprint Period</p>
-        <input type="text" class="form-control w-100 daterangepicker-date-input" ref="endDate"  @focus="step = 'selectEndDate'" v-model="total">
-        <br>
-      <div class="form-group form-inline justify-content-end mb-0">
-        <button type="button" class="btn btn-light" @click="clear">Reset</button>
-        <button
-          type="button"
-          class="btn btn-primary ml-2"
-          
-          @click="submit"
-        >Submit</button>
-      </div>
-    </div>
-  </div>
+          v-model="total"
+        />
+        <br />
+        <div class="form-group form-inline justify-content-end mb-0">
+          <button type="button" class="btn btn-light" @click="clear">Reset</button>
+          <button type="button" class="btn btn-primary ml-2" @click="submit">Submit</button>
+        </div>
+        </b-col>
+  </b-row>
+</b-container>
 </template>
 
 <script>
@@ -77,8 +62,7 @@ export default {
     ranges: {
       type: Object,
       default: function() {
-        return {
-        };
+        return {};
       }
     },
     defaultRangeSelect: {
@@ -86,10 +70,10 @@ export default {
       default: "currentMonth"
     }
   },
-  data () {
+  data() {
     return {
-      total:'',
-      sprint:'',
+      total: "",
+      sprint: "",
       startDate: moment.utc(),
       endDate: moment.utc(),
       rangeSelect: null,
@@ -107,16 +91,14 @@ export default {
     // For multi prop watchers
     range: function() {
       return this.startDate, this.endDate;
-    },
-   
+    }
   },
 
   methods: {
-    
     clear: function() {
       this.startDate = moment.utc();
       this.endDate = moment.utc();
-      this.total= '';
+      this.total = "";
       this.$refs.startDate.focus();
     },
 
@@ -179,20 +161,34 @@ export default {
     // Submit button
     submit: function() {
       let startDate = this.startDate;
-      let endDate  = this.endDate;
+      let endDate = this.endDate;
       let sprint = this.total;
-      axios.post("http://localhost:9000/setdatetime",{startDate,endDate,sprint})
-      .then(res => {
-      })
+      console.log(startDate);
+      console.log(endDate);
+      console.log(sprint);
+      axios
+        .post("https://3c7ad5d7.ngrok.io/setdate", {
+          startDate,
+          endDate,
+          sprint
+        })
+        .then(res => {})
+        .catch(err => {
+          if ((err.message = "Sprint error")) {
+            alert("Sprint not found");
+          }
+        });
     }
-
   },
   watch: {
     rangeSelect: function(rangeKey) {
       this.selectRange(rangeKey);
     },
     total: function(value) {
-      this.endDate = moment(this.startDate, "YYYY-MM-DD").add(7 * value,'days')
+      this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
+        7 * value,
+        "days"
+      );
     },
 
     range: function() {
@@ -228,8 +224,7 @@ export default {
     // Initialize ranges
     this.rangeSelect = this.defaultRangeSelect;
   },
-  components: { DateRangePickerCalendar, FontAwesomeIcon 
-  }
+  components: { DateRangePickerCalendar, FontAwesomeIcon }
 };
 </script>
 
@@ -253,8 +248,8 @@ export default {
 }
 
 .daterangepicker-range {
-    background-color: red !important;
-    color: #ffffff;
+  background-color: red !important;
+  color: #ffffff;
 }
 /* Date input focus */
 .daterangepicker-date-input:focus {
