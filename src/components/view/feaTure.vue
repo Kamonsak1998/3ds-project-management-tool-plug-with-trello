@@ -4,28 +4,33 @@
       <div class="row">
         <div class="col-sm-3">
           <div class="card-leader p-4 shadow bg-white">
-            <div class="card-body">
-              <p class="card-text">LeaderBoard</p>
-            </div>
+            <router-link :to="{name : 'leaderboard'}">
+              <div class="card-body text-white">
+                <p class="card-text">LeaderBoard</p>
+              </div>
+            </router-link>
           </div>
         </div>
+
         <div class="col-sm-3">
           <div class="card-History p-4 shadow bg-white">
-            <div class="card-body">
-              <p class="card-text">History</p>
-            </div>
+            <router-link :to="{name : 'charts'}">
+              <div class="card-body text-white">
+                <p class="card-text">History</p>
+              </div>
+            </router-link>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="card-Set p-4 shadow bg-white">
-            <div class="card-body">
+            <div class="card-body text-white">
               <p class="card-text">Set date of sprint</p>
             </div>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="card-Burn p-4 shadow bg-white">
-            <div class="card-body">
+            <div class="card-body text-white">
               <p class="card-text">Burn down chart</p>
             </div>
           </div>
@@ -36,7 +41,20 @@
 </template>
 
 <script>
+import axios from "axios";
+import { mapGetters } from "vuex";
 export default {
+  mounted: function() {
+    if (this.idBoard != "") {
+      return;
+    } else {
+      this.$router.push("/dashboards");
+      return;
+    }
+  },
+  computed: {
+    ...mapGetters(["idBoard"])
+  },
   data() {
     return {
       results: [
@@ -58,17 +76,11 @@ export default {
         }
       ]
     };
-  },
-
-  methods: {
-    
   }
 };
 </script>
 
 <style>
-.row {
-}
 .card-leader {
   margin-top: 100px;
   border-radius: 25px;
@@ -82,12 +94,12 @@ export default {
 .card-Set {
   margin-top: 100px;
   border-radius: 25px;
-  background: linear-gradient(40deg,#ffd86f,#fc6262)!important;
+  background: linear-gradient(40deg, #ffd86f, #fc6262) !important;
 }
 .card-Burn {
   margin-top: 100px;
   border-radius: 25px;
-  background: linear-gradient(40deg,#45cafc,#303f9f)!important;
+  background: linear-gradient(40deg, #45cafc, #303f9f) !important;
 }
 .card-text {
   font-size: 20px;
@@ -103,8 +115,6 @@ export default {
   margin: 2px;
 }
 
-.card-body {
-}
 .card-text:last-child {
   margin-bottom: 0;
   text-align: center;
