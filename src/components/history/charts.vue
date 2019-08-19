@@ -27,19 +27,26 @@ export default {
   },
   mounted: function() {
     if (this.idBoard != "") {
-      axios.post('http://localhost:9000/gethistory',{ token: this.token,idBoard: this.idBoard}).then(resp => {
-        this.model = resp.data
-        console.log('chart',this.model);
-      }).catch(err => { alert(err) })
+      axios
+        .post("http://localhost:9000/gethistory", {
+          token: this.token,
+          idBoard: this.idBoard
+        })
+        .then(resp => {
+          this.model = resp.data;
+          console.log("chart", this.model);
+        })
+        .catch(err => {
+          alert(err);
+        });
       return;
-      
     } else {
       this.$router.push("/dashboards");
       return;
     }
   },
   computed: {
-    ...mapGetters(["idBoard","token"])
+    ...mapGetters(["idBoard", "token"])
   },
   components: {
     Bar,
