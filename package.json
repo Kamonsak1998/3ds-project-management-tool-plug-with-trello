@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "@coreui/coreui": "^2.1.12",
+    "@fortawesome/fontawesome-svg-core": "^1.2.21",
+    "@fortawesome/free-solid-svg-icons": "^5.10.1",
+    "@fortawesome/vue-fontawesome": "^0.1.6",
     "@jeremyhamm/vue-slider": "^0.1.16",
     "@vue/cli": "^3.9.3",
     "apexcharts": "^3.8.3",
@@ -17,6 +20,7 @@
     "bootstrap-vue": "^2.0.0-rc.27",
     "core-js": "^2.6.5",
     "global": "^4.4.0",
+    "moment": "^2.24.0",
     "oauthio-web": "^0.6.2",
     "simple-line-icons": "^2.4.1",
     "vee-validate": "^2.2.13",
@@ -25,6 +29,7 @@
     "vue-axios": "^2.1.4",
     "vue-router": "^3.0.7",
     "vue-slider": "^1.1.1",
+    "vue-tables-2": "^1.4.70",
     "vuex": "^3.1.1"
   },
   "devDependencies": {
