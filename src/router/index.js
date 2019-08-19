@@ -43,7 +43,7 @@ export default new Router({
         },
         {
             path: '/feature',
-            name: 'feaTure',
+            name: 'feature',
             component: () => import('@/components/view/feaTure')
         },
         {
