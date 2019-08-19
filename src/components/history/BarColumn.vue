@@ -17,13 +17,11 @@
                 <option value="palette10">Theme 10</option>
             </select>
         </p>
-        <apexchart width="100%" height="350" type="bar" :options="chartOptions" :series="series"></apexchart>
+        <apexchart height="350px" type="bar" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>
 
 <script>
-    import {mapGetters} from "vuex";
-
     export default {
         name: "BarTotal",
         props: {
@@ -35,9 +33,6 @@
         mounted() {
             this.series[0] = {...this.series[0], ...{data: this.model.data}};
             this.chartOptions = {...this.chartOptions, ...{xaxis: {categories: this.model.name}}};
-        },
-        computed: {
-            ...mapGetters(["idBoard", "token"])
         },
         data: function () {
             return {

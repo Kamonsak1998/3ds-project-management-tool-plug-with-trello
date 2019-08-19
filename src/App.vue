@@ -35,6 +35,7 @@ export default {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   height: 100%;
   width: 100%;
   display: flex;
