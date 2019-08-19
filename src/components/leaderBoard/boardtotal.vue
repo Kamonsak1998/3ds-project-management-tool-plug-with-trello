@@ -166,11 +166,4 @@ th, td {
 .m-b-110 {
     margin-bottom: 110px;
 }
-.container {
-    width: 100%;
-    padding-right: 0px;
-    padding-left: 0px;
-    margin-right: 0;
-    margin-left: 0;
-}
 </style>
