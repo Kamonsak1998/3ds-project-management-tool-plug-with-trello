@@ -10,13 +10,13 @@
               <th><b>Score</b></th>
             </tr>
           </thead>
-          <tbody>
+          <!-- <tbody>
             <tr class="row100" v-for="(item,key) in items" :key="item">
               <td  class="column100 column1" data-column="column" >{{key+1}}</td>
               <td  class="column100 column" data-column="column"><b>{{item.Name}}</b></td>
               <td  class="column100 column" data-column="column">{{item.Score}}</td>
             </tr>
-          </tbody>
+          </tbody> -->
         </table>
       </div>
     </div>
