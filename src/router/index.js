@@ -47,7 +47,7 @@ export default new Router({
             component: () => import('@/components/view/feaTure')
         },
         {
-            path: '/SetDateTime/SetDateTime',
+            path: '/SetDateTime',
             name: 'SetDateTime',
             component: () => import('@/components/SetDateTime/setdatetime')
         }

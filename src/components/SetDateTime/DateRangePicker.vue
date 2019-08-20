@@ -169,7 +169,9 @@ export default {
           endDate,
           sprint
         })
-        // .then(res => {})
+        // .then(res => {
+
+        // })
         // .catch(err => {
         //   if ((err.message = "Sprint error")) {
         //     alert("Sprint not found");
@@ -183,7 +185,7 @@ export default {
     },
     total: function(value) {
       this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-        7 * value,
+        6 * value,
         "days"
       );
     },
