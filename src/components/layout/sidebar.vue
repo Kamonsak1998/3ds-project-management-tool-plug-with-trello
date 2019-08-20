@@ -8,7 +8,6 @@
           </router-link>
         </li>
         <li class="nav-item"></li>
-
         <li class="nav-item nav-dropdown" v-if="isBoards">
           <router-link class="nav-link nav-dropdown-toggle" :to="{name : 'feature'}">
             <i class="nav-icon icon-list"></i> Feature
