@@ -1,14 +1,35 @@
 <template>
-  <div>
+  <div class="container-fluid">
     <div class="animated fadeIn loading" v-if="isShowModel === false">
       <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
     </div>
-    <div class="animated fadeIn" v-if="isShowModel === true">
+
+    <div class="animated fadeIn font text-c" v-if="isShowModel === true">
+      <h1>HISTORY</h1>
+      <hr class="my-4" />
       <b-card-group rows class="card-rows">
         <b-card class="shadow p-3 mb-5 bg-white rounded">
           <BarColumn v-bind:model="TotalModel" />
         </b-card>
       </b-card-group>
+
+      <carousel
+        :navigationEnabled="true"
+        :perPageCustom="[[360, 1], [1024, 4],[768,2]]"
+        :mouseDrag="true"
+        :touchDrag="true"
+        class="mb-4"
+      >
+        <slide v-for="(models,index) in this.SprintModel.scoreOfSprint" :key="index">
+          <div class="card bg-primary cardsprit mr-1 ml-1 shadow rounded">
+            <div class="card-body">
+              <div class="text-value">{{SprintModel.scoreOfSprint[index].title}}</div>
+              <div>{{SprintModel.scoreOfSprint[index].date}}</div>
+            </div>
+          </div>
+        </slide>
+      </carousel>
+
       <b-card-group columns class="card-columns mb-4">
         <div class="cols-3" v-for="(models,index) in this.SprintModel.scoreOfSprint" :key="index">
           <b-card class="shadow p-3 mb-5 bg-white rounded">
@@ -25,6 +46,7 @@
 import Bar from "@/components/history/Bar.vue";
 import BarColumn from "@/components/history/BarColumn.vue";
 import { mapGetters } from "vuex";
+import { Carousel, Slide } from "vue-carousel";
 import axios from "axios";
 
 export default {
@@ -46,7 +68,9 @@ export default {
   },
   components: {
     Bar,
-    BarColumn
+    BarColumn,
+    Carousel,
+    Slide
   },
   methods: {
     getHistory() {
@@ -80,10 +104,21 @@ export default {
 </script>
 
 <style >
+@media screen and (max-width: 768px) {
+  .carousel {
+  }
+}
 .loading {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 45%;
+}
+.font h1 {
+  font-size: 70px;
+  margin-bottom: 10px;
+}
+.cardsprit {
+  height: 200px;
 }
 </style>
 
