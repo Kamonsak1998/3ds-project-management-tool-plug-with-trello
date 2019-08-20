@@ -26,7 +26,8 @@
     </div> -->
 
     <div class="allboard-row container">
-      <div class="row head-allboard " >
+      <div class="row-head shadow" >
+        <div class="row">
         <div class="col -text-center">
           <b>Rank</b>
         </div>
@@ -36,8 +37,10 @@
         <div class="col -text-center">
           <b>Score</b>
         </div>
+        </div>
       </div>
-      <div class="row text-center " v-for="(item,key) in items" :key="item">
+      <br>
+      <div class="row text-center shadow-lg" v-for="(item,key) in items" :key="item">
         <div class="col">{{key+1}}</div>
         <div class="col">
           <b>{{item.Name}}</b>
@@ -78,7 +81,7 @@ export default {
   box-shadow: 7px;
 }
 .row {
-  box-shadow: 1px 10px 50px rgb(160, 160, 160);
+  /* box-shadow: 1px 10px 50px rgb(160, 160, 160); */
 }
 .col-text-center{
   padding-top: 20px;
