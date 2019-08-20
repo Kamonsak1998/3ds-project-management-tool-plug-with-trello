@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <boardtotal></boardtotal>
-    <!-- <allboard></allboard> -->
+    <allboard></allboard>
   </div>
 </template>
 
