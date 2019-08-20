@@ -1,15 +1,22 @@
 <template>
-  <div class="animated fadeIn">
-    <b-card-group rows class="card-rows">
-      <b-card class="shadow p-3 mb-5 bg-white rounded">
-        <BarColumn v-bind:model="model" />
-      </b-card>
-    </b-card-group>
-    <b-card-group rows class="card-rows" v-for="(models,index) in this.model.scoreOfSprint" :key="index">
-      <b-card class="shadow p-3 mb-5 bg-white rounded">
-        <Bar v-bind:model="model" />
-      </b-card>
-    </b-card-group>
+  <div>
+    <div class="animated fadeIn loading" v-if="isShowModel === false">
+      <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
+    </div>
+    <div class="animated fadeIn" v-if="isShowModel === true">
+      <b-card-group rows class="card-rows">
+        <b-card class="shadow p-3 mb-5 bg-white rounded">
+          <BarColumn v-bind:model="TotalModel" />
+        </b-card>
+      </b-card-group>
+      <b-card-group columns class="card-columns mb-4">
+        <div class="cols-3" v-for="(models,index) in this.SprintModel.scoreOfSprint" :key="index">
+          <b-card class="shadow p-3 mb-5 bg-white rounded">
+            <Bar v-bind:model="SprintModel.scoreOfSprint[index]" />
+          </b-card>
+        </div>
+      </b-card-group>
+    </div>
   </div>
 </template>
 
@@ -19,14 +26,20 @@ import Bar from "@/components/history/Bar.vue";
 import BarColumn from "@/components/history/BarColumn.vue";
 import { mapGetters } from "vuex";
 import axios from "axios";
+
 export default {
   data() {
     return {
-      model: Object,
+      variants: ["dark"],
+      TotalModel: Object,
+      SprintModel: {
+        scoreOfSprint: Object
+      },
+      isShowModel: false
     };
   },
   mounted: function() {
-    this.getHistory()
+    this.getHistory();
   },
   computed: {
     ...mapGetters(["idBoard", "token"])
@@ -35,28 +48,42 @@ export default {
     Bar,
     BarColumn
   },
-  methods:{
-    getHistory(){
+  methods: {
+    getHistory() {
       if (this.idBoard != "") {
         axios
-                .post("http://localhost:9000/gethistory", {
-                  token: this.token,
-                  idBoard: this.idBoard
-                })
-                .then(resp => {
-                  this.model = resp.data;
-                  console.log("chart", this.model);
-                })
-                .catch(err => {
-                  alert(err);
-                });
+          .post("http://localhost:9000/gethistory", {
+            token: this.token,
+            idBoard: this.idBoard
+          })
+          .then(resp => {
+            this.TotalModel = resp.data.ScoreTotal;
+            this.SprintModel = {
+              ...this.SprintModel,
+              ...{
+                scoreOfSprint: resp.data.scoreOfSprint
+              }
+            };
+            this.isShowModel = true;
+          })
+          .catch(err => {
+            alert(err);
+          });
         return;
       } else {
         this.$router.push("/dashboards");
         return;
       }
-    },
+    }
   }
 };
 </script>
+
+<style >
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+</style>
 
