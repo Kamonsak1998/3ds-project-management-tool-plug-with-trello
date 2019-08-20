@@ -24,7 +24,6 @@
         </tbody>
       </table>
     </div> -->
-<<<<<<< Updated upstream
 
     <div class="allboard-row container">
       <div class="row-head shadow" >
@@ -46,13 +45,6 @@
         <div class="col">
           <b>{{item.Name}}</b>
         </div>
-=======
-  
-    <div class="allboard-row container">
-      <div class="row text-center"  v-for="(item,key) in items" :key="item"  >
-        <div class="col">{{key+1}}</div>
-        <div class="col"><b>{{item.Name}}</b></div>
->>>>>>> Stashed changes
         <div class="col">{{item.Score}}</div>
       </div>
     </div>
@@ -81,7 +73,6 @@ export default {
   methods: {}
 };
 </script>
-<<<<<<< Updated upstream
 
 <style>
 
@@ -115,53 +106,4 @@ div.allboard-row.container {
 }
 
 
-=======
-
-<style>
-/* tr.row-allboard{
-  color: white;
-  text-shadow: 2px 2px 4px #000000;
-  padding-top: 70px;
-  padding-bottom: 20px;
-} */
-/* td.col-allboard {
-  color: blue;
-  background: transparent;
-  border: 20%;
-} */
-/* 
-.col-allboard {
-  padding-bottom: 15px;
-  background-color: transparent;
-  border: 10px solid;
-  text-align: center;
-  border-color: transparent;
-} */
-.allboard-row .row + .row {
-  margin-top: 1rem;
-  box-shadow: 5px;
-}
-.row{
-  box-shadow: 0px 10px 10px lightgrey;
-}
-.col {
-  widows: 50%;
-  height:60px;
-  color: black;
-  background: white;
-  -ms-flex-preferred-size: 0;
-  flex-basis: 0;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  max-width: 100%;
-  
-}
-/* .allboard-row {
-  box-shadow: 0px 0px 40px lightgray;
-} */
-/* tr.allboard-row .row + .row {
-  margin-top: 1rem;
-  box-shadow: 5px;
-} */
->>>>>>> Stashed changes
 </style>
