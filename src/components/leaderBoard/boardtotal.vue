@@ -79,21 +79,20 @@ a:hover {
 
 /*//////////////////////////////////////////////////////////////////
 [ Table ]*/
-
+/* 
 .limiter {
   width: 100%;
   margin: 0 auto;
-}
+} */
 
-.wrap-table100 {
+/* .wrap-table100 {
   width: 1300px;
-}
+} */
 
 /*//////////////////////////////////////////////////////////////////
 [ Table ]*/
 table {
   width: 100%;
-  /* background-color: #fff; */
   padding: 50px;
 }
 

@@ -164,7 +164,7 @@ export default {
       let endDate = this.endDate;
       let sprint = this.total;
       axios
-        .post("https://3c7ad5d7.ngrok.io/setdate", {
+        .post("http://5f9ed32e.ngrok.io/setdate", {
           startDate,
           endDate,
           sprint
