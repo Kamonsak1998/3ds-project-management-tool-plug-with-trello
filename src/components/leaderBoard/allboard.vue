@@ -28,18 +28,17 @@
     <div class="allboard-row container">
       <div class="row-head shadow" >
         <div class="row">
-        <div class="col -text-center">
+        <div class="col col-head ">
           <b>Rank</b>
         </div>
-        <div class="col -text-center">
+        <div class="col col-head ">
           <b>Name</b>
         </div>
-        <div class="col -text-center">
+        <div class="col col-head ">
           <b>Score</b>
         </div>
         </div>
       </div>
-      <br>
       <div class="row text-center shadow-lg" v-for="(item,key) in items" :key="item">
         <div class="col">{{key+1}}</div>
         <div class="col">
@@ -77,32 +76,28 @@ export default {
 <style>
 
 .allboard-row .row + .row {
-  margin-top: 10px;
+  margin-top: 8px;
   box-shadow: 7px;
 }
 .row {
   /* box-shadow: 1px 10px 50px rgb(160, 160, 160); */
 }
-.col-text-center{
+.text-center{
   padding-top: 20px;
-  width: 296px;
-  height: 60px;
-  color: white;
-  background: blue;
-  max-width: 100%;
-}
-.col{
-  padding-top: 20px;
-  width: 20%;
   height: 60px;
   color: white;
   background: red;
-  max-width: 100%;
 }
 div.allboard-row.container {
   text-align: center;
   margin: auto;
-  width: 80%;
+  /* width: 80%; */
+}
+.col-head{
+  padding-top: 20px;
+  height: 60px;
+  color: white;
+  background: red;
 }
 
 
