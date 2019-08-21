@@ -27,6 +27,7 @@
     "vue": "^2.6.10",
     "vue-apexcharts": "^1.4.0",
     "vue-axios": "^2.1.4",
+    "vue-carousel": "^0.18.0",
     "vue-router": "^3.0.7",
     "vue-slider": "^1.1.1",
     "vue-tables-2": "^1.4.70",
