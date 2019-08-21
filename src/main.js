@@ -35,11 +35,9 @@ if (idBoard && idBoard != "") {
 
 if (startDate && startDate != "") {
   store.commit('addStartDate', startDate)
-  console.log('StartDate',startDate)
 }
 if (Sprint && Sprint != "") {
   store.commit('addSprint', Sprint)
-  console.log('Sprint',Sprint)
 }
 
 Vue.config.productionTip = false
