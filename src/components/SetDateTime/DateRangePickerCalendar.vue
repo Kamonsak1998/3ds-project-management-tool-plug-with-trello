@@ -90,7 +90,7 @@ export default {
         this.selectDate(day)
       }
     },
-    dayClick: function(day) {
+    dayClick: function() {
       if (this.step != null) {
         this.nextStep()
       }

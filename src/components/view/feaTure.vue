@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
   mounted: function() {

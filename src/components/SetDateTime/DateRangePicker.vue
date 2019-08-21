@@ -47,7 +47,7 @@ import axios from "axios";
 import moment from "moment";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
 
 library.add(faCaretRight);
@@ -163,21 +163,18 @@ export default {
       let startDate = this.startDate;
       let endDate = this.endDate;
       let sprint = this.total;
-      console.log(startDate);
-      console.log(endDate);
-      console.log(sprint);
       axios
         .post("https://3c7ad5d7.ngrok.io/setdate", {
           startDate,
           endDate,
           sprint
         })
-        .then(res => {})
-        .catch(err => {
-          if ((err.message = "Sprint error")) {
-            alert("Sprint not found");
-          }
-        });
+        // .then(res => {})
+        // .catch(err => {
+        //   if ((err.message = "Sprint error")) {
+        //     alert("Sprint not found");
+        //   }
+        // });
     }
   },
   watch: {
@@ -224,7 +221,7 @@ export default {
     // Initialize ranges
     this.rangeSelect = this.defaultRangeSelect;
   },
-  components: { DateRangePickerCalendar, FontAwesomeIcon }
+  components: { DateRangePickerCalendar }
 };
 </script>
 

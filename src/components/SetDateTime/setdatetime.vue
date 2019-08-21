@@ -13,16 +13,16 @@
 import moment from 'moment'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCalendarAlt, faCaretDown } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import BModal from 'bootstrap-vue/es/components/modal/modal'
+// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+// import BModal from 'bootstrap-vue/es/components/modal/modal'
 import BModalDirective from 'bootstrap-vue/es/directives/modal/modal'
-import BPopover from 'bootstrap-vue/es/components/popover/popover'
+// import BPopover from 'bootstrap-vue/es/components/popover/popover'
 import DateRangePicker from '@/components/SetDateTime/DateRangePicker'
 
 library.add(faCalendarAlt, faCaretDown)
 
 export default {
-  components: { DateRangePicker, FontAwesomeIcon, BModal, BPopover },
+  components: { DateRangePicker  },
   directives: { 'b-modal': BModalDirective },
   data: () => {
     return {
@@ -34,8 +34,8 @@ export default {
     setscore(arr){
         this.parameter[arr[0]] = arr[1]
     },
-    submitted: function(range) {
-      console.log(range)
+    submitted: function() {
+      // console.log(range)
     },
     // Modal methods
     submittedModal: function(range) {
