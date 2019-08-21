@@ -24,20 +24,10 @@ import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
 export default {
   mounted: function() {
-    if (this.token != "") {
-      axios
-        .post("http://localhost:9000/getdashboard", { token: this.token })
-        .then(Response => {
-          this.results = Response.data.board;
-        });
-      return;
-    } else {
-      this.$router.push("/auth/login");
-      return;
-    }
+    this.getboardtrello();
   },
   computed: {
-    ...mapGetters(["token", "idUser"])
+    ...mapGetters(["token"])
   },
   data() {
     return {
@@ -51,12 +41,19 @@ export default {
       const boardid = result[index].id;
       this.getBoard(boardid);
       this.$router.push("/feature");
-      // axios
-      //   .post("http://ddc1cade.ngrok.io/setboardid", {
-      //     token: this.token,
-      //     boardid: boardid
-      //   })
-      //   .then(Response => {});
+    },
+    getboardtrello() {
+      if (this.token != "") {
+        axios
+          .post("http://localhost:9000/getdashboard", { token: this.token })
+          .then(Response => {
+            this.results = Response.data.board;
+          });
+        return;
+      } else {
+        this.$router.push("/auth/login");
+        return;
+      }
     }
   }
 };
