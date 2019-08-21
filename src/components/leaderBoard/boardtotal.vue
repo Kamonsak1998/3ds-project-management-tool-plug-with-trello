@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="boardtotal">
     <div class="col-lg-9 mx-auto">
       <div class="table100 ver6 m-b-110 shadow">
         <table data-vertable="ver6">
@@ -165,4 +165,5 @@ td {
 .m-b-110 {
   margin-bottom: 110px;
 }
+
 </style>
