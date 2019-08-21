@@ -9,6 +9,9 @@ import VueAxios from 'vue-axios'
 import VueApexCharts from 'vue-apexcharts'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VueCarousel from 'vue-carousel';
+
+Vue.use(VueCarousel);
 Vue.use(BootstrapVue)
 Vue.use(VueApexCharts)
 Vue.component('apexchart', VueApexCharts)
