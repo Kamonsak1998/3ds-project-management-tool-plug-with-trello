@@ -4,7 +4,7 @@
       <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
     </div>
 
-    <div class="animated fadeIn font text-c" v-if="isShowModel === true">
+    <div class="animated fadeIn font" v-if="isShowModel === true">
       <h1>HISTORY</h1>
       <hr class="my-4" />
       <b-card-group rows class="card-rows">
@@ -104,17 +104,13 @@ export default {
 </script>
 
 <style >
-@media screen and (max-width: 768px) {
-  .carousel {
-  }
-}
 .loading {
   position: absolute;
   top: 50%;
   left: 45%;
 }
 .font h1 {
-  font-size: 70px;
+  font-size: xxx-large;
   margin-bottom: 10px;
 }
 .cardsprit {
