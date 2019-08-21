@@ -58,7 +58,7 @@ import moment from "moment";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
-
+import { mapActions, mapGetters } from "vuex";
 library.add(faCaretRight);
 
 export default {
@@ -95,6 +95,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(["startDates", "Sprints"]),
     nextMonth: function() {
       return moment.utc(this.month).add(1, "month");
     },
@@ -169,19 +170,16 @@ export default {
       this.nextStep();
     },
     // Submit button
+    ...mapActions(["getStartDate", "getSprint"]),
     submit: function() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
-          let startDate = this.startDate;
           let endDate = this.endDate;
-          let sprint = this.total;
+          this.getStartDate(this.startDate);
+          this.getSprint(this.total);
           axios
-            .post("http://5f9ed32e.ngrok.io/setdate", {
-              startDate,
-              endDate,
-              sprint
-            })
+            .post("http://localhost:9000/setdate", { startDate: this.startDates, Sprint: this.Sprints, endDate })
             .then(res => {
               alert("บันทึกข้อมูลเรียบร้อย");
             })
