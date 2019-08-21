@@ -1,78 +1,88 @@
 <template>
-  <div class="chart-wrapper">
-    <apexchart height="350px" type="bar" :options="chartOptions" :series="series"></apexchart>
-    <!-- <div>
-      <button @click="updateChart">Update!</button>
-    </div>-->
-  </div>
+    <div class="animated fadeIn">
+        <div>
+            <p>
+                <label>
+                    <b>Select Theme</b>
+                </label> &nbsp;
+                <select @change="updateTheme">
+                    <option value="palette1">Theme 1</option>
+                    <option value="palette2">Theme 2</option>
+                    <option value="palette3">Theme 3</option>
+                    <option value="palette4">Theme 4</option>
+                    <option value="palette5">Theme 5</option>
+                    <option value="palette6">Theme 6</option>
+                    <option value="palette7">Theme 7</option>
+                    <option value="palette8">Theme 8</option>
+                    <option value="palette9">Theme 9</option>
+                    <option value="palette10">Theme 10</option>
+                </select>
+            </p>
+            <apexchart height="350px" type="bar" :options="chartOptions" :series="series"></apexchart>
+        </div>
+
+    </div>
 </template>
 
 <script>
-export default {
-  name: "BarExample",
-  data: function() {
-    return {
-      series: [
-        {
-          name: "sprint 1",
-          data: [44, 55, 41, 64, 22, 43, 21]
-        },
-        {
-          name: "sprint 2",
-          data: [53, 32, 33, 52, 13, 44, 32]
-        }
-      ],
-      chartOptions: {
-        plotOptions: {
-          bar: {
-            horizontal: true,
-            dataLabels: {
-              position: "top"
+    export default {
+        name: "Bar",
+        props: {
+            model: {
+                required: true
             }
-          }
         },
-        dataLabels: {
-          enabled: true,
-          offsetX: -6,
-          style: {
-            fontSize: "12px",
-            colors: ["#fff"]
-          }
+        mounted() {
+            this.series[0] = {...this.series[0], ...{data: this.model.data}};
+            this.chartOptions = {...this.chartOptions, ...{xaxis: {categories: this.model.name}}};
+            this.chartOptions = {...this.chartOptions, ...{subtitle: {text: this.model.date}}};
+            this.chartOptions = {...this.chartOptions, ...{title: {text: this.model.title}}};
         },
-        stroke: {
-          show: true,
-          width: 1,
-          colors: ["#fff"]
+        data: function () {
+            return {
+                series: [],
+                chartOptions: {
+                    plotOptions: {
+                        bar: {
+                            horizontal: true,
+                            dataLabels: {
+                                position: "top"
+                            }
+                        }
+                    },
+                     title: {
+                      text: '',
+                      margin: 10,
+                        x: -20,
+                        floating: false,
+                        style: {
+                            fontSize: "20px",
+                        }
+                    },
+                    subtitle: {
+                        text: "",
+                        align: "left",
+                        margin: 10,
+                        x: -20,
+                        floating: false,
+                        style: {
+                            fontSize: "15px",
+                        }
+                    },
+                    xaxis: {
+                        categories: []
+                    }
+                }
+            };
         },
-
-        xaxis: {
-          categories: ["Arm", "Beam", "Godji", "Ben", "Nino", "Non"]
+        methods: {
+            updateTheme(e) {
+                this.chartOptions = {
+                    theme: {
+                        palette: e.target.value
+                    }
+                };
+            }
         }
-      }
     };
-  }
-
-  //   methods: {
-  //     updateChart() {
-  //       const max = 90;
-  //       const min = 20;
-  //       const newData = this.series[0].data.map(() => {
-  //         return Math.floor(Math.random() * (max - min + 1)) + min;
-  //       });
-
-  //       const colors = ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0"];
-
-  //       // Make sure to update the whole options config and not just a single property to allow the Vue watch catch the change.
-  //       this.chartOptions = {
-  //         colors: [colors[Math.floor(Math.random() * colors.length)]]
-  //       };
-  //       // In the same way, update the series option
-  //       this.series = [
-  //         {
-  //           data: newData
-  //         }
-  //       ];
-  //     }
-  //   }
-};
 </script>

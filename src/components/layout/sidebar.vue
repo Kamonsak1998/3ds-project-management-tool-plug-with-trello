@@ -8,11 +8,10 @@
           </router-link>
         </li>
         <li class="nav-item"></li>
-
         <li class="nav-item nav-dropdown" v-if="isBoards">
-          <a class="nav-link nav-dropdown-toggle" href="#">
+          <router-link class="nav-link nav-dropdown-toggle" :to="{name : 'feature'}">
             <i class="nav-icon icon-list"></i> Feature
-          </a>
+          </router-link>
           <ul class="nav-dropdown-items">
             <li class="nav-item">
               <router-link class="nav-link" :to="{name : 'charts'}">
@@ -59,13 +58,13 @@ import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(["token","idBoard"]),
+    ...mapGetters(["token", "idBoard"]),
     isLoggedIn: function() {
       return this.token;
     },
     isBoards: function() {
       return this.idBoard;
-    },
+    }
   },
   methods: {
     logout: function() {

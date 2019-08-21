@@ -1,42 +1,45 @@
 <template>
-  <div class="login">
     <div class="container">
       <div class="row">
         <div class="col-sm-3">
-          <div class="card-leader p-4 shadow bg-white">
-            <div class="card-body">
-              <p class="card-text">LeaderBoard</p>
+          <router-link :to="{name : 'leaderboard'}">
+            <div class="card-leader p-4 shadow bg-white">
+              <div class="card-body text-white">
+                <p class="card-text">Leader Board</p>
+              </div>
             </div>
-          </div>
+          </router-link>
         </div>
+
         <div class="col-sm-3">
-          <div class="card-History p-4 shadow bg-white">
-            <div class="card-body">
-              <p class="card-text">History</p>
+          <router-link :to="{name : 'charts'}">
+            <div class="card-History p-4 shadow bg-white">
+              <div class="card-body text-white">
+                <p class="card-text">History</p>
+              </div>
             </div>
-          </div>
+          </router-link>
         </div>
         <div class="col-sm-3">
           <div class="card-Set p-4 shadow bg-white">
-            <div class="card-body">
+            <div class="card-body text-white">
               <p class="card-text">Set date of sprint</p>
             </div>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="card-Burn p-4 shadow bg-white">
-            <div class="card-body">
+            <div class="card-body text-white">
               <p class="card-text">Burn down chart</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
   mounted: function() {
@@ -76,40 +79,37 @@ export default {
 </script>
 
 <style>
+
 .card-leader {
+  height: 60%;
   margin-top: 100px;
   border-radius: 25px;
   background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
 }
 .card-History {
+  height: 60%;
   margin-top: 100px;
   border-radius: 25px;
   background: linear-gradient(40deg, #ff6ec4, #7873f5) !important;
 }
 .card-Set {
+  height: 60%;
   margin-top: 100px;
   border-radius: 25px;
   background: linear-gradient(40deg, #ffd86f, #fc6262) !important;
 }
 .card-Burn {
+  height: 60%;
   margin-top: 100px;
   border-radius: 25px;
   background: linear-gradient(40deg, #45cafc, #303f9f) !important;
 }
 .card-text {
   font-size: 20px;
-  /* padding-top:10px; */
-
   text-align: center;
-  /* overflow: hidden; */
-  /* text-overflow: ellipsis; */
-  /* height:100%; */
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
 }
-
-.btn {
-  margin: 2px;
-}
-
 .card-text:last-child {
   margin-bottom: 0;
   text-align: center;
