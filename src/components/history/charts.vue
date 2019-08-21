@@ -20,22 +20,19 @@
         :touchDrag="true"
         class="mb-4"
       >
-        <slide v-for="(models,index) in this.SprintModel.scoreOfSprint" :key="index">
+        <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index">
           <div class="card bg-primary cardsprit mr-1 ml-1 shadow rounded">
-            <div class="card-body">
-              <div class="text-value">{{SprintModel.scoreOfSprint[index].title}}</div>
-              <div>{{SprintModel.scoreOfSprint[index].date}}</div>
+            <div class="card-body" @click="selectSprint(SprintModel.scoreOfSprint,index)">
+              <div class="text-value">{{models.title}}</div>
+              <div>{{models.date}}</div>
             </div>
           </div>
         </slide>
       </carousel>
-
-      <b-card-group columns class="card-columns mb-4">
-        <div class="cols-3" v-for="(models,index) in this.SprintModel.scoreOfSprint" :key="index">
-          <b-card class="shadow p-3 mb-5 bg-white rounded">
-            <Bar v-bind:model="SprintModel.scoreOfSprint[index]" />
-          </b-card>
-        </div>
+      <b-card-group rows class="card-rows">
+        <b-card class="shadow p-3 mb-5 bg-white rounded">
+          <BarColumn v-bind:model="TotalModel" />
+        </b-card>
       </b-card-group>
     </div>
   </div>
@@ -54,6 +51,7 @@ export default {
     return {
       variants: ["dark"],
       TotalModel: Object,
+      select: Object,
       SprintModel: {
         scoreOfSprint: Object
       },
@@ -73,6 +71,13 @@ export default {
     Slide
   },
   methods: {
+    selectSprint(models,index){
+      alert(models[index].title);
+      console.log(models[index]);
+      console.log(index);
+      
+      
+    },
     getHistory() {
       if (this.idBoard != "") {
         axios
