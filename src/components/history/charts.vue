@@ -15,27 +15,25 @@
 
       <carousel
         :navigationEnabled="true"
-        :perPageCustom="[[360, 1], [1024, 4],[768,2]]"
+        :perPageCustom="[[360, 1], [1024, 3],[768,2]]"
         :mouseDrag="true"
         :touchDrag="true"
         class="mb-4"
       >
-        <slide v-for="(models,index) in this.SprintModel.scoreOfSprint" :key="index">
-          <div class="card bg-primary cardsprit mr-1 ml-1 shadow rounded">
-            <div class="card-body">
-              <div class="text-value">{{SprintModel.scoreOfSprint[index].title}}</div>
-              <div>{{SprintModel.scoreOfSprint[index].date}}</div>
+        <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index">
+          <div class="card bg-primary cardsprit mr-1 ml-1 shadow rounded" v-on:click="isWaitCard =!isWaitCard">
+            <div class="card-body" @click="selectSprint(SprintModel.scoreOfSprint,index)">
+              <div class="text-value">{{models.title}}</div>
+              <div>{{models.date}}</div>
             </div>
           </div>
         </slide>
       </carousel>
 
-      <b-card-group columns class="card-columns mb-4">
-        <div class="cols-3" v-for="(models,index) in this.SprintModel.scoreOfSprint" :key="index">
-          <b-card class="shadow p-3 mb-5 bg-white rounded">
-            <Bar v-bind:model="SprintModel.scoreOfSprint[index]" />
-          </b-card>
-        </div>
+      <b-card-group rows class="card-rows" v-if="isWaitCard === true">
+        <b-card class="shadow p-3 mb-5 bg-white rounded">
+          <Bar v-bind:model="select" />
+        </b-card>
       </b-card-group>
     </div>
   </div>
@@ -54,10 +52,12 @@ export default {
     return {
       variants: ["dark"],
       TotalModel: Object,
+      select: Object,
       SprintModel: {
         scoreOfSprint: Object
       },
-      isShowModel: false
+      isShowModel: false,
+      isWaitCard:false
     };
   },
   mounted: function() {
@@ -73,6 +73,9 @@ export default {
     Slide
   },
   methods: {
+    selectSprint(models,index){
+      this.select = models[index]
+    },
     getHistory() {
       if (this.idBoard != "") {
         axios
