@@ -15,13 +15,13 @@
 
       <carousel
         :navigationEnabled="true"
-        :perPageCustom="[[360, 1], [1024, 4],[768,2]]"
+        :perPageCustom="[[360, 1], [1024, 3],[768,2]]"
         :mouseDrag="true"
         :touchDrag="true"
         class="mb-4"
       >
         <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index">
-          <div class="card bg-primary cardsprit mr-1 ml-1 shadow rounded">
+          <div class="card bg-primary cardsprit mr-1 ml-1 shadow rounded" v-on:click="isWaitCard =!isWaitCard">
             <div class="card-body" @click="selectSprint(SprintModel.scoreOfSprint,index)">
               <div class="text-value">{{models.title}}</div>
               <div>{{models.date}}</div>
@@ -29,9 +29,10 @@
           </div>
         </slide>
       </carousel>
-      <b-card-group rows class="card-rows">
+
+      <b-card-group rows class="card-rows" v-if="isWaitCard === true">
         <b-card class="shadow p-3 mb-5 bg-white rounded">
-          <BarColumn v-bind:model="TotalModel" />
+          <Bar v-bind:model="select" />
         </b-card>
       </b-card-group>
     </div>
@@ -55,7 +56,8 @@ export default {
       SprintModel: {
         scoreOfSprint: Object
       },
-      isShowModel: false
+      isShowModel: false,
+      isWaitCard:false
     };
   },
   mounted: function() {
@@ -72,11 +74,7 @@ export default {
   },
   methods: {
     selectSprint(models,index){
-      alert(models[index].title);
-      console.log(models[index]);
-      console.log(index);
-      
-      
+      this.select = models[index]
     },
     getHistory() {
       if (this.idBoard != "") {
