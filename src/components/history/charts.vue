@@ -11,6 +11,9 @@
         <b-card class="shadow mb-5 bg-white rounded">
           <BarColumn v-bind:model="TotalModel" />
         </b-card>
+        <b-card class="shadow mb-5 bg-white rounded">
+          <burndownChart />
+        </b-card>
       </b-card-group> 
         <carousel :navigationEnabled="true" :perPageCustom="[[360, 1], [1024, 3],[768,2]]" :mouseDrag="true" :touchDrag="true"  class="mb-4" >
         <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index" >
