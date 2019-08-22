@@ -36,14 +36,14 @@ export default {
       items: [
         { Name: "BahBenz", Score: "100" },
         { Name: "arram", Score: "200" },
+        { Name: "Arnon Kitcharoenpaibul", Score: "300" },
+        { Name: "Arram Sibunrueang", Score: "300" },
+        { Name: "Arram Sibunrueang", Score: "300" },
+        { Name: "Chanon Charatsuttikul", Score: "300" },
+        { Name: "Kamonsak Jongwilaikasem", Score: "300" },
         { Name: "gono", Score: "300" },
         { Name: "gono", Score: "300" },
-        { Name: "gono", Score: "300" },
-        { Name: "gono", Score: "300" },
-        { Name: "gono", Score: "300" },
-        { Name: "gono", Score: "300" },
-        { Name: "gono", Score: "300" },
-        { Name: "arnon", Score: "400" }
+        { Name: "Arnon Kitcharoenpaibul", Score: "400" }
       ]
     };
   }
@@ -117,6 +117,11 @@ td {
 .row100 td {
   padding-top: 18px;
   padding-bottom: 14px;
+}
+
+.row100 .row100 + .row100 {
+  margin-top: 10px;
+  box-shadow: 7px;
 }
 
 /*******************table100******************* */

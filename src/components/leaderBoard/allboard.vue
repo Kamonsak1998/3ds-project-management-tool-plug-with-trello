@@ -1,5 +1,5 @@
 <template>
-  <div class="container-allboard">
+  <div class="col-lg-9 mx-auto">
     <div class="allboard-row spinner" v-if="like===false">
       <b-spinner variant="primary" type="grow" label="Spinning"></b-spinner>
     </div>
@@ -7,21 +7,19 @@
     <div class="allboard-row allboard" v-if="like===true">
       <div class="row row-head">   
           <div class="col col-head">
-            <h5><b>Rank</b></h5>
+          <b>Rank</b>
           </div>
           <div class="col col-head">
-             <h5><b>Name</b></h5>
-          
+            <b>Name</b>
           </div>
           <div class="col col-head">
-             <h5><b>Score</b></h5>
-           
+           <b>Score</b>     
           </div>
       </div>
       <div class="row allboard-body" v-for="(user,key) in users" :key="user">
-        <div class="col number-rank"><h5>{{key+1}}</h5></div>
-        <div class="col"><h5>{{user.name}}</h5></div>
-        <div class="col point"><h5>{{user.point}}</h5></div>
+        <div class="col col-body">{{key+1}}</div>
+        <div class="col col-body">{{user.name}}</div>
+        <div class="col col-body">{{user.point}}</div>
       </div>
     </div>
   </div>
@@ -89,12 +87,12 @@ export default {
     background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
     -webkit-box-shadow: 0px 3px 20px rgb(160, 160, 160);
     box-shadow: 0px 3px 20px rgb(160, 160, 160);
-    /* font-size: 20px; */
+    font-size: 20px;
 }
 }
-.allboard-row .row + .row {
+.allboard-row .row-head + .row-head {
   margin-top: 10px;
-  /* box-shadow: 7px; */
+  box-shadow: 7px;
 }
 .allboard-body {
 
@@ -103,30 +101,40 @@ export default {
   color: white;
   background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
   box-shadow: 0px 3px 20px rgb(160, 160, 160);
-  font-size: 10px;
+  font-size: 16px;
 }
 div.allboard-row {
-  text-align: center;
   margin: auto;
-  width: 75%;
+  width: 95%;
 }
 .col-head {
   padding-top: 20px;
   height: 60px;
   color: black;
   background: transparent;
-  /* font-size: 10px; */
+  font-size: 10px;
 }
 div.row.allboard-body {
+  border-collapse: collapse;
   margin-top: 8px;
-}
-.container-allboard {
-}
-.point {
-  /* text-align: right; */
+  
 }
 .spinner {
   padding-top: 20%;
+}
+.col-body{
+    width: 130px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-weight: unset;
+    line-height: 1.4;
+}
+.col-head{
+    font-size: 18px;
+    color: black;
+    line-height: 1.4;
+    text-transform: uppercase;
+    background-color: rgba(255, 255, 255, 0.32);
 }
 </style>
 
