@@ -8,7 +8,7 @@
       <h1>HISTORY</h1>
       <hr class="my-4" />
       <b-card-group rows class="card-rows">
-        <b-card class="shadow p-3 mb-5 bg-white rounded">
+        <b-card class="shadow mb-5 bg-white rounded">
           <BarColumn v-bind:model="TotalModel" />
         </b-card>
       </b-card-group>
@@ -20,21 +20,24 @@
         :touchDrag="true"
         class="mb-4"
       >
-        <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index">
-          <div class="card bg-primary cardsprit mr-1 ml-1 shadow rounded" v-on:click="isWaitCard =!isWaitCard">
-            <div class="card-body" @click="selectSprint(SprintModel.scoreOfSprint,index)">
-              <div class="text-value">{{models.title}}</div>
-              <div>{{models.date}}</div>
+        <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index" >
+          <div class="card bg-primary cardsprit mr-1 ml-1 shadow rounded">
+            <div class="card-body" @click="selectSprint(SprintModel.scoreOfSprint,index)" v-b-modal.modal-xl > 
+              <div class="text-value" >{{models.title}}</div>
+              <div>{{models.date}}</div>             
             </div>
           </div>
         </slide>
       </carousel>
 
-      <b-card-group rows class="card-rows" v-if="isWaitCard === true">
-        <b-card class="shadow p-3 mb-5 bg-white rounded">
+       <b-modal id="modal-xl" size="xl" title="Bootstrap-Vue" hide-footer hide-header centered	 >
+          <Bar v-bind:model="select" />
+       </b-modal >
+      <!-- <b-card-group rows class="card-rows" v-if="isWaitCard === true">
+        <b-card class="shadow mb-5 bg-white rounded">
           <Bar v-bind:model="select" />
         </b-card>
-      </b-card-group>
+      </b-card-group> -->
     </div>
   </div>
 </template>
@@ -50,6 +53,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      boxTwo: '',
       variants: ["dark"],
       TotalModel: Object,
       select: Object,
@@ -75,6 +79,7 @@ export default {
   methods: {
     selectSprint(models,index){
       this.select = models[index]
+      this.isWaitCard = true
     },
     getHistory() {
       if (this.idBoard != "") {
