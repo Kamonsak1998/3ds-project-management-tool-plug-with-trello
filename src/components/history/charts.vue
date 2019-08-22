@@ -53,7 +53,6 @@ import axios from "axios";
 export default {
   data() {
     return {
-      boxTwo: '',
       variants: ["dark"],
       TotalModel: Object,
       select: Object,
