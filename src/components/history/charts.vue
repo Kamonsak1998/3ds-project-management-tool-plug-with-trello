@@ -11,18 +11,8 @@
         <b-card class="shadow mb-5 bg-white rounded">
           <BarColumn v-bind:model="TotalModel" />
         </b-card>
-        <b-card class="shadow mb-5 bg-white rounded">
-          <burndownChart />
-        </b-card>
-      </b-card-group>
-
-      <carousel
-        :navigationEnabled="true"
-        :perPageCustom="[[360, 1], [1024, 3],[768,2]]"
-        :mouseDrag="true"
-        :touchDrag="true"
-        class="mb-4"
-      >
+      </b-card-group> 
+        <carousel :navigationEnabled="true" :perPageCustom="[[360, 1], [1024, 3],[768,2]]" :mouseDrag="true" :touchDrag="true"  class="mb-4" >
         <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index" >
           <div class="card bg-primary cardsprit mr-1 ml-1 shadow rounded">
             <div class="card-body" @click="selectSprint(SprintModel.scoreOfSprint,index)" v-b-modal.modal-xl > 
@@ -31,16 +21,10 @@
             </div>
           </div>
         </slide>
-      </carousel>
-
+        </carousel>
        <b-modal id="modal-xl" size="xl" title="Bootstrap-Vue" hide-footer hide-header centered	 >
           <Bar v-bind:model="select" />
        </b-modal >
-      <!-- <b-card-group rows class="card-rows" v-if="isWaitCard === true">
-        <b-card class="shadow mb-5 bg-white rounded">
-          <Bar v-bind:model="select" />
-        </b-card>
-      </b-card-group> -->
     </div>
   </div>
 </template>
