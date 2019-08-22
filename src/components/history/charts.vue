@@ -7,9 +7,12 @@
     <div class="animated fadeIn font" v-if="isShowModel === true">
       <h1>HISTORY</h1>
       <hr class="my-4" />
-      <b-card-group rows class="card-rows">
+      <b-card-group columns class="card-rows cols-2">
         <b-card class="shadow mb-5 bg-white rounded">
           <BarColumn v-bind:model="TotalModel" />
+        </b-card>
+        <b-card class="shadow mb-5 bg-white rounded">
+          <burndownChart />
         </b-card>
       </b-card-group>
 
@@ -46,6 +49,7 @@
 <script>
 import Bar from "@/components/history/Bar.vue";
 import BarColumn from "@/components/history/BarColumn.vue";
+import burndownChart from "@/components/burndownChart/burndownChart.vue";
 import { mapGetters } from "vuex";
 import { Carousel, Slide } from "vue-carousel";
 import axios from "axios";
@@ -72,6 +76,7 @@ export default {
   components: {
     Bar,
     BarColumn,
+    burndownChart,
     Carousel,
     Slide
   },
