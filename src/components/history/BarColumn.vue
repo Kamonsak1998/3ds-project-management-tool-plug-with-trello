@@ -27,7 +27,6 @@
         props: {
             model: {
                 required: true,
-                showModel: false,
             },
         },
         mounted() {

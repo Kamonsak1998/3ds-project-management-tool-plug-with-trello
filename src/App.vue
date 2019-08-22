@@ -58,6 +58,9 @@ export default {
     height: 100%;
     width: 100%;
   }
+  .main .container-fluid {
+    padding: 0 0px;
+  }
 }
 .main {
   flex: 1;
