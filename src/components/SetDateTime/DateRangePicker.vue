@@ -1,7 +1,8 @@
 <template>
-   <b-container class="bv-example-row">
-  <b-row>
-    <b-col  v-for="calendarIndex in calendarCount" :key="calendarIndex" ><date-range-picker-calendar
+  <b-container class="bv-example-row">
+    <b-row>
+      <b-col v-for="calendarIndex in calendarCount" :key="calendarIndex">
+        <date-range-picker-calendar
           :calendarIndex="calendarIndex"
           :calendarCount="calendarCount"
           :month="month"
@@ -12,8 +13,10 @@
           v-on:goToNextMonth="goToNextMonth"
           v-on:selectDate="selectDate"
           v-on:nextStep="nextStep"
-        /></b-col>
-    <b-col><p>Start Sprint</p>
+        />
+      </b-col>
+      <b-col>
+        <p>Start Sprint</p>
         <div class="form-group form-inline flex-nowrap">
           <input
             type="text"
@@ -24,22 +27,29 @@
             @blur="inputDate"
           />
         </div>
-         <p>Sprint Period</p>
+        <p>Sprint Period</p>
         <input
+          name="total"
           type="text"
           class="form-control w-100 daterangepicker-date-input"
           ref="endDate"
           @focus="step = 'selectEndDate'"
           v-model="total"
+          v-validate="'required|numeric|max:3'"
+          :class="{ 'is-invalid': submitted && errors.has('total') }"
         />
+        <div
+          v-if="submitted && errors.has('phone')"
+          class="invalid-feedback"
+        >{{ errors.first('phone') }}</div>
         <br />
         <div class="form-group form-inline justify-content-end mb-0">
           <button type="button" class="btn btn-light" @click="clear">Reset</button>
           <button type="button" class="btn btn-primary ml-2" @click="submit">Submit</button>
         </div>
-        </b-col>
-  </b-row>
-</b-container>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -47,9 +57,8 @@ import axios from "axios";
 import moment from "moment";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
-
+import { mapActions, mapGetters } from "vuex";
 library.add(faCaretRight);
 
 export default {
@@ -81,10 +90,12 @@ export default {
         .utc()
         .subtract(1, "month")
         .startOf("month"),
-      step: null
+      step: null,
+      submitted: false
     };
   },
   computed: {
+    ...mapGetters(["startDates", "Sprints"]),
     nextMonth: function() {
       return moment.utc(this.month).add(1, "month");
     },
@@ -159,22 +170,26 @@ export default {
       this.nextStep();
     },
     // Submit button
+    ...mapActions(["getStartDate", "getSprint"]),
     submit: function() {
-      let startDate = this.startDate;
-      let endDate = this.endDate;
-      let sprint = this.total;
-      axios
-        .post("http://5f9ed32e.ngrok.io/setdate", {
-          startDate,
-          endDate,
-          sprint
-        })
-        // .then(res => {})
-        // .catch(err => {
-        //   if ((err.message = "Sprint error")) {
-        //     alert("Sprint not found");
-        //   }
-        // });
+      this.submitted = true;
+      this.$validator.validate().then(valid => {
+        if (valid) {
+          let endDate = this.endDate;
+          this.getStartDate(this.startDate);
+          this.getSprint(this.total);
+          axios
+            .post("http://localhost:9000/setdate", { startDate: this.startDates, Sprint: this.Sprints, endDate })
+            .then(res => {
+              alert("บันทึกข้อมูลเรียบร้อย");
+            })
+            .catch(err => {
+              if ((err.message = "Sprint error")) {
+                alert("Sorry Connection not found");
+              }
+            });
+        }
+      });
     }
   },
   watch: {
@@ -183,7 +198,7 @@ export default {
     },
     total: function(value) {
       this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-        7 * value,
+        6 * value,
         "days"
       );
     },
