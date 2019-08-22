@@ -130,7 +130,7 @@ div.row.allboard-body {
     line-height: 1.4;
 }
 .col-head{
-    font-size: 18px;
+    font-size: 15px;
     color: black;
     line-height: 1.4;
     text-transform: uppercase;
