@@ -201,10 +201,16 @@ export default {
       this.selectRange(rangeKey);
     },
     total: function(value) {
-      this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-        6 * value,
-        "days"
-      );
+      if (value <= 1){
+        this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
+                6 * value,
+                "days"
+        );
+      }else{
+        this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
+                7 * value -1,"days");  
+      }
+     
     },
 
     range: function() {
