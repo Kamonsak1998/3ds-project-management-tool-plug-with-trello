@@ -94,8 +94,12 @@ export default {
       submitted: false
     };
   },
+  mounted: function (){
+    
+  },
+
   computed: {
-    ...mapGetters(["startDates", "Sprints"]),
+    ...mapGetters(["startDates", "Sprints","idBoard"]),
     nextMonth: function() {
       return moment.utc(this.month).add(1, "month");
     },
@@ -179,7 +183,7 @@ export default {
           this.getStartDate(this.startDate);
           this.getSprint(this.total);
           axios
-            .post("http://localhost:9000/setdate", { startDate: this.startDates, Sprint: this.Sprints, endDate })
+            .post("http://localhost:9000/setdate", { startDate: this.startDates, Sprint: this.Sprints, endDate, idBoard: this.idBoard })
             .then(res => {
               alert("บันทึกข้อมูลเรียบร้อย");
             })
@@ -197,10 +201,16 @@ export default {
       this.selectRange(rangeKey);
     },
     total: function(value) {
-      this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-        6 * value,
-        "days"
-      );
+      if (value <= 1){
+        this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
+                6 * value,
+                "days"
+        );
+      }else{
+        this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
+                7 * value -1,"days");  
+      }
+     
     },
 
     range: function() {

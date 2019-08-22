@@ -116,7 +116,7 @@ export default {
 
 <style>
 .daterangepicker-calendar-row {
-  font-size: 14px;
+  font-size: 12px;
   /*max-width: 230px;*/
 }
 
