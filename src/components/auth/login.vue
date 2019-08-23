@@ -97,18 +97,19 @@ export default {
   },
   computed: {
     ...mapGetters(["token"])
-  },
+  },  
   methods: {
     ...mapActions(["getToken"]),
     Auth() {
       const self = this;
       OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
       var provider = "trello";
-      OAuth.popup(provider)
-        .done(function(result) {
-          const token = result.oauth_token;
-          if (token != "") {
-            self.getToken(token);
+      OAuth.popup(provider,{cache: true})
+        .done(function(trello) {
+          console.log(trello.status);
+          const token = trello.oauth_token;
+          self.getToken(token);
+          if (this.token != "") {
             self.$router.push("/dashboards");
           }
         })
