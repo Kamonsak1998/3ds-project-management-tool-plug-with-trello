@@ -99,7 +99,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["startDates", "Sprints","idBoard"]),
+    ...mapGetters(["startDates", "Sprints","idBoard","newBoard"]),
     nextMonth: function() {
       return moment.utc(this.month).add(1, "month");
     },
@@ -183,7 +183,7 @@ export default {
           this.getStartDate(this.startDate);
           this.getSprint(this.total);
           axios
-            .post("http://localhost:9000/setdate", { startDate: this.startDates, Sprint: this.Sprints, endDate, idBoard: this.idBoard })
+            .post("http://localhost:9000/setdate", { startDate: this.startDates, Sprint: this.Sprints, endDate, idBoard: this.idBoard ,boardName : this.newBoard})
             .then(res => {
               alert("บันทึกข้อมูลเรียบร้อย");
             })
