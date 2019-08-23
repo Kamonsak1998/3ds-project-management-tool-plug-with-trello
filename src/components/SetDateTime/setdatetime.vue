@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <h2 class="my-4 pb-2 border-bottom"></h2>
-    <h3 class="pb-2 border-bottom">Set Date Time Stamp</h3>
+      <h1 class="pb-4"> Set Date Time Stamp</h1>
+     <!-- <h3 class="pb-2 border-bottom"></h3> -->
     <div class="mb-4">
       <date-range-picker v-on:submit="submitted" />
     </div>
-    <h3 class="pb-2 border-bottom"></h3>
+    <!-- <h3 class="pb-2 border-bottom"></h3> -->
   </div>
 </template>
 
@@ -84,7 +84,6 @@ export default {
 </script>
 
 <style>
-
 
 .popover {
   max-width: 800px;

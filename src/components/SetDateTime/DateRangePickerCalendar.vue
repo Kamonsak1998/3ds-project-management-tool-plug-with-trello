@@ -1,7 +1,7 @@
 <template>
   <div class="daterangepicker-calendar">
     <div class="d-flex align-items-center">
-      <div class="p-1" :class="calendarIndex == 1 ? '' : 'invisible'">
+      <div class="p-4" :class="calendarIndex == 1 ? '' : 'invisible'">
         <button type="button" class="btn btn-sm btn-light" @mousedown.prevent @click="goToPrevMonth">
           <font-awesome-icon icon="caret-left" fixed-width />
         </button>

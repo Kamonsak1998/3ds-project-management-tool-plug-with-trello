@@ -1,6 +1,6 @@
 <template>
   <b-container class="bv-example-row">
-    <b-row>
+    <div class="card ">  <b-row>
       <b-col v-for="calendarIndex in calendarCount" :key="calendarIndex">
         <date-range-picker-calendar
           :calendarIndex="calendarIndex"
@@ -15,7 +15,7 @@
           v-on:nextStep="nextStep"
         />
       </b-col>
-      <b-col>
+      <b-col class="col-setdate">
         <p>Start Sprint</p>
         <div class="form-group form-inline flex-nowrap">
           <input
@@ -33,7 +33,7 @@
           type="text"
           class="form-control w-100 daterangepicker-date-input"
           ref="endDate"
-          @focus="step = 'selectEndDate'"
+          pattern="[1-9]{8}$"
           v-model="total"
           v-validate="'required|numeric|max:3'"
           :class="{ 'is-invalid': submitted && errors.has('total') }"
@@ -48,7 +48,8 @@
           <button type="button" class="btn btn-primary ml-2" @click="submit">Submit</button>
         </div>
       </b-col>
-    </b-row>
+    </b-row></div>
+  
   </b-container>
 </template>
 
@@ -74,10 +75,6 @@ export default {
         return {};
       }
     },
-    defaultRangeSelect: {
-      type: String,
-      default: "currentMonth"
-    }
   },
   data() {
     return {
@@ -197,9 +194,6 @@ export default {
     }
   },
   watch: {
-    rangeSelect: function(rangeKey) {
-      this.selectRange(rangeKey);
-    },
     total: function(value) {
       if (value <= 1){
         this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
@@ -212,39 +206,11 @@ export default {
       }
      
     },
-
-    range: function() {
-      let predefinedRange = false;
-      // Predefined ranges
-      for (const rangeKey of Object.keys(this.ranges)) {
-        const range = this.ranges[rangeKey];
-        if (
-          this.startDate.isSame(range.startDate) &&
-          this.endDate.isSame(range.endDate)
-        ) {
-          predefinedRange = true;
-          if (this.rangeSelect !== rangeKey) {
-            this.rangeSelect = rangeKey;
-          }
-        }
-      }
-
-      // Custom range
-      if (!predefinedRange) {
-        if (this.rangeSelect !== "custom") {
-          this.rangeSelect = "custom";
-        }
-      }
-    }
   },
   filters: {
     dateFormat: function(value) {
       return value ? value.format("YYYY-MM-DD") : "";
     }
-  },
-  created: function() {
-    // Initialize ranges
-    this.rangeSelect = this.defaultRangeSelect;
   },
   components: { DateRangePickerCalendar }
 };
@@ -278,4 +244,9 @@ export default {
   border-color: #17a2b8 !important;
   box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25) !important;
 }
+.col-setdate{
+  /* color: red; */
+  padding: 40px;
+}
+
 </style>
