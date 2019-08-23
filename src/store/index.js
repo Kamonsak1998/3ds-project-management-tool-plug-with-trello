@@ -10,7 +10,8 @@ export const store = new Vuex.Store({
         token: '',
         idBoard: '',
         startDate: '',
-        Sprint: ''
+        Sprint: '',
+        nameBoard:''
     },
     getters,
     mutations,
