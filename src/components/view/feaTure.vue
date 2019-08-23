@@ -20,7 +20,7 @@
       </div>
 
       <div class="col-sm-4">
-        <router-link :to="{name : 'leaderboard'}">
+        <router-link :to="{name : 'charts'}">
           <div class="card text-white bg-info">
             <div class="card-body card-body-feature History-f pb-0">
               <div class="card-body-feature">
@@ -33,7 +33,7 @@
       </div>
 
       <div class="col-sm-4">
-        <router-link :to="{name : 'leaderboard'}">
+        <router-link :to="{name : 'setdatetime'}">
           <div class="card text-white bg-warning">
             <div class="card-body card-body-feature Set-date-f pb-0">
               <div class="card-body-feature">
