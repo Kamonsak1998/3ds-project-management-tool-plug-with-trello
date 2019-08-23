@@ -49,7 +49,6 @@
 </template>
 
 <script>
-// import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
   mounted: function() {
@@ -89,25 +88,14 @@ export default {
 </script>
 
 <style>
-.leaderboard-f {
-  /* background-color: #20a8d8 !important; */
-}
 .card.bg-primary {
   border-color: #187da0;
 }
 /***********/
-.History-f {
-  /* background-color: #63c2de !important; */
-}
 .card.bg-info {
   border-color: #2eadd3;
 }
-
 /**********/
-.Set-date-f {
-  /* background-color: #ffc107 !important; */
-
-}
 .card.bg-warning {
   border-color: #c69500;
 }
@@ -115,7 +103,6 @@ export default {
 .card-body-feature {
   width: 100%;
   height: 120px;
-  /* flex: 1 1 auto; */
   padding-top: 17px;
 }
 .text-value {
