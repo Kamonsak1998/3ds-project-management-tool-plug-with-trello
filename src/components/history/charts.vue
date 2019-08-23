@@ -115,13 +115,8 @@ export default {
   height: 200px;
   cursor: pointer;
   background-color:whitesmoke;
-  /* background: linear-gradient(-68deg,#fbd5de, #ec9696); */
-}
-
-.text-value{
-  color: white;
   text-shadow: 2px 2px 4px #000000;
-   
+  color: white;
 }
 </style>
 
