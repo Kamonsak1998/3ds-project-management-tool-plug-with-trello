@@ -55,10 +55,10 @@
 
 <script>
 import { mapGetters } from "vuex";
-
+import { OAuth } from "oauthio-web";
 export default {
   computed: {
-    ...mapGetters(["token", "idBoard"]),
+    ...mapGetters(["token", "idBoard", "startDates", "Sprints", "newBoard"]),
     isLoggedIn: function() {
       return this.token;
     },
@@ -71,6 +71,10 @@ export default {
       location.reload();
       localStorage.removeItem("token");
       localStorage.removeItem("idBoard");
+      localStorage.removeItem("startDates");
+      localStorage.removeItem("Sprints");
+      localStorage.removeItem("newBoard");
+      OAuth.clearCache();
       return;
     }
   }
