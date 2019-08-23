@@ -6,41 +6,44 @@
         </router-link>
       </div>-->
 
-      
-      <div class="col-sm-4 ">
-        <div class="card text-white bg-primary">
-          <div class="card-body card-body-feature leaderboard-f pb-0">
-            <div class="card-body-feature">
-              <i class="icons font-2xl  d-block cui-dashboard"></i>
-              <div class="text-value"><router-link class="boardff" :to="{name : 'leaderboard'}">Leader Board</router-link></div>
-            </div>     
-          </div>
-        </div>
-      </div>
-
-        <div class="col-sm-4 ">
-        <div class="card text-white bg-info">
-          <div class="card-body card-body-feature History-f pb-0">
-            <div class="card-body-feature">
-              <i class="icon-chart font-2xl  d-block "></i>
-              <div class="text-value"><router-link class="boardff" :to="{name : 'charts'}">History</router-link></div>
+      <div class="col-sm-4">
+        <router-link :to="{name : 'leaderboard'}">
+          <div class="card text-white bg-primary">
+            <div class="card-body card-body-feature leaderboard-f pb-0">
+              <div class="card-body-feature">
+                <i class="icons font-2xl d-block cui-dashboard"></i>
+                <div class="text-value">Leader Board</div>
+              </div>
             </div>
           </div>
-        </div>
+        </router-link>
       </div>
 
-        <div class="col-sm-4 ">
-        <div class="card text-white bg-warning">
-          <div class="card-body card-body-feature Set-date-f  pb-0">
-            <div class="card-body-feature">
-              <i class="icon-calendar font-2xl d-block "></i>
-              <div class="text-value"><router-link class="boardff" :to="{name : 'setdatetime'}">Set date of sprint</router-link></div>
+      <div class="col-sm-4">
+        <router-link :to="{name : 'leaderboard'}">
+          <div class="card text-white bg-info">
+            <div class="card-body card-body-feature History-f pb-0">
+              <div class="card-body-feature">
+                <i class="icon-chart font-2xl d-block"></i>
+                <div class="text-value">History</div>
+              </div>
             </div>
           </div>
-        </div>
+        </router-link>
       </div>
 
-      
+      <div class="col-sm-4">
+        <router-link :to="{name : 'leaderboard'}">
+          <div class="card text-white bg-warning">
+            <div class="card-body card-body-feature Set-date-f pb-0">
+              <div class="card-body-feature">
+                <i class="icon-calendar font-2xl d-block"></i>
+                <div class="text-value">Set date of sprint</div>
+              </div>
+            </div>
+          </div>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -87,26 +90,26 @@ export default {
 
 <style>
 .leaderboard-f {
-      background-color: #20a8d8!important;
+  background-color: #20a8d8 !important;
 }
 .card.bg-primary {
-    border-color: #187da0;
+  border-color: #187da0;
 }
 /***********/
-.History-f{
-  background-color: #63c2de!important;
+.History-f {
+  background-color: #63c2de !important;
 }
 .card.bg-info {
-    border-color: #2eadd3;
+  border-color: #2eadd3;
 }
 
 /**********/
 .Set-date-f {
-  background-color: #ffc107!important;
+  background-color: #ffc107 !important;
   border-color: #c69500;
 }
 .card.bg-warning {
-    border-color: #c69500;
+  border-color: #c69500;
 }
 /***********/
 .card-body-feature {
@@ -116,13 +119,16 @@ export default {
   padding-top: 17px;
 }
 .text-value {
-    font-size: 20px;
-    font-weight: 600;
+  font-size: 20px;
+  font-weight: 600;
 }
-.boardff{
+.boardff {
   color: white;
-  text-align: center; 
+  text-align: center;
   text-decoration: none;
   display: inline-block;
+}
+.text-value {
+  color: white;
 }
 </style>
