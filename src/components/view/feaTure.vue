@@ -1,41 +1,51 @@
 <template>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-3">
-          <router-link :to="{name : 'leaderboard'}">
-            <div class="card-leader p-4 shadow bg-white">
-              <div class="card-body text-white">
-                <p class="card-text">Leader Board</p>
-              </div>
-            </div>
-          </router-link>
-        </div>
+  <div class="container">
+    <div class="row">
+      <!--  <div class="col-sm-3">
+        <router-link :to="{name : 'leaderboyard'}">
+        </router-link>
+      </div>-->
 
-        <div class="col-sm-3">
-          <router-link :to="{name : 'charts'}">
-            <div class="card-History p-4 shadow bg-white">
-              <div class="card-body text-white">
-                <p class="card-text">History</p>
+      <div class="col-sm-4">
+        <router-link :to="{name : 'leaderboard'}">
+          <div class="card text-white bg-primary">
+            <div class="card-body card-body-feature leaderboard-f pb-0">
+              <div class="card-body-feature">
+                <i class="icons font-2xl d-block cui-dashboard"></i>
+                <div class="text-value">Leader Board</div>
               </div>
             </div>
-          </router-link>
-        </div>
-        <div class="col-sm-3">
-          <div class="card-Set p-4 shadow bg-white">
-            <div class="card-body text-white">
-              <p class="card-text">Set date of sprint</p>
+          </div>
+        </router-link>
+      </div>
+
+      <div class="col-sm-4">
+        <router-link :to="{name : 'charts'}">
+          <div class="card text-white bg-info">
+            <div class="card-body card-body-feature History-f pb-0">
+              <div class="card-body-feature">
+                <i class="icon-chart font-2xl d-block"></i>
+                <div class="text-value">History</div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="card-Burn p-4 shadow bg-white">
-            <div class="card-body text-white">
-              <p class="card-text">Burn down chart</p>
+        </router-link>
+      </div>
+
+      <div class="col-sm-4">
+        <router-link :to="{name : 'setdatetime'}">
+          <div class="card text-white bg-warning">
+            <div class="card-body card-body-feature Set-date-f pb-0">
+              <div class="card-body-feature">
+                <i class="icon-calendar font-2xl d-block"></i>
+                <div class="text-value">Set date of sprint</div>
+              </div>
             </div>
           </div>
-        </div>
+        </router-link>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -79,39 +89,46 @@ export default {
 </script>
 
 <style>
+.leaderboard-f {
+  /* background-color: #20a8d8 !important; */
+}
+.card.bg-primary {
+  border-color: #187da0;
+}
+/***********/
+.History-f {
+  /* background-color: #63c2de !important; */
+}
+.card.bg-info {
+  border-color: #2eadd3;
+}
 
-.card-leader {
-  height: 60%;
-  margin-top: 100px;
-  border-radius: 25px;
-  background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
+/**********/
+.Set-date-f {
+  /* background-color: #ffc107 !important; */
+
 }
-.card-History {
-  height: 60%;
-  margin-top: 100px;
-  border-radius: 25px;
-  background: linear-gradient(40deg, #ff6ec4, #7873f5) !important;
+.card.bg-warning {
+  border-color: #c69500;
 }
-.card-Set {
-  height: 60%;
-  margin-top: 100px;
-  border-radius: 25px;
-  background: linear-gradient(40deg, #ffd86f, #fc6262) !important;
+/***********/
+.card-body-feature {
+  width: 100%;
+  height: 120px;
+  /* flex: 1 1 auto; */
+  padding-top: 17px;
 }
-.card-Burn {
-  height: 60%;
-  margin-top: 100px;
-  border-radius: 25px;
-  background: linear-gradient(40deg, #45cafc, #303f9f) !important;
-}
-.card-text {
+.text-value {
   font-size: 20px;
-  text-align: center;
-  color: white;
-  text-shadow: 2px 2px 4px #000000;
+  font-weight: 600;
 }
-.card-text:last-child {
-  margin-bottom: 0;
+.boardff {
+  color: white;
   text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+.text-value {
+  color: white;
 }
 </style>

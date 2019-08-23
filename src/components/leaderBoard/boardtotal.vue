@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="boardtotal">
     <div class="col-lg-9 mx-auto">
       <div class="table100 ver6 m-b-110 shadow">
         <table data-vertable="ver6">
@@ -16,15 +16,13 @@
               </th>
             </tr>
           </thead>
-          <!-- <tbody>
+          <tbody>
             <tr class="row100" v-for="(item,key) in items" :key="item">
-              <td class="column100 column1" data-column="column">{{key+1}}</td>
-              <td class="column100 column" data-column="column">
-                <b>{{item.Name}}</b>
-              </td>
-              <td class="column100 column" data-column="column">{{item.Score}}</td>
+              <td class="column100 column" >{{key+1}}</td>
+              <td class="column100 column" ><b>{{item.Name}}</b></td>
+              <td class="column100 column" >{{item.Score}}</td>
             </tr>
-          </tbody> -->
+          </tbody>
         </table>
       </div>
     </div>
@@ -38,14 +36,14 @@ export default {
       items: [
         { Name: "BahBenz", Score: "100" },
         { Name: "arram", Score: "200" },
+        { Name: "Arnon Kitcharoenpaibul", Score: "300" },
+        { Name: "Arram Sibunrueang", Score: "300" },
+        { Name: "Arram Sibunrueang", Score: "300" },
+        { Name: "Chanon Charatsuttikul", Score: "300" },
+        { Name: "Kamonsak Jongwilaikasem", Score: "300" },
         { Name: "gono", Score: "300" },
         { Name: "gono", Score: "300" },
-        { Name: "gono", Score: "300" },
-        { Name: "gono", Score: "300" },
-        { Name: "gono", Score: "300" },
-        { Name: "gono", Score: "300" },
-        { Name: "gono", Score: "300" },
-        { Name: "arnon", Score: "400" }
+        { Name: "Arnon Kitcharoenpaibul", Score: "400" }
       ]
     };
   }
@@ -81,21 +79,20 @@ a:hover {
 
 /*//////////////////////////////////////////////////////////////////
 [ Table ]*/
-
+/* 
 .limiter {
   width: 100%;
   margin: 0 auto;
-}
+} */
 
-.wrap-table100 {
+/* .wrap-table100 {
   width: 1300px;
-}
+} */
 
 /*//////////////////////////////////////////////////////////////////
 [ Table ]*/
 table {
   width: 100%;
-  background-color: #fff;
   padding: 50px;
 }
 
@@ -120,6 +117,11 @@ td {
 .row100 td {
   padding-top: 18px;
   padding-bottom: 14px;
+}
+
+.row100 .row100 + .row100 {
+  margin-top: 10px;
+  box-shadow: 7px;
 }
 
 /*******************table100******************* */
@@ -168,4 +170,5 @@ td {
 .m-b-110 {
   margin-bottom: 110px;
 }
+
 </style>
