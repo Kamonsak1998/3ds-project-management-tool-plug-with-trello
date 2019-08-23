@@ -9,6 +9,9 @@ import VueAxios from 'vue-axios'
 import VueApexCharts from 'vue-apexcharts'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VueCarousel from 'vue-carousel';
+
+Vue.use(VueCarousel);
 Vue.use(BootstrapVue)
 Vue.use(VueApexCharts)
 Vue.component('apexchart', VueApexCharts)
@@ -19,6 +22,8 @@ Vue.use(VueRouter);
 
 const token = localStorage.getItem('token')
 const idBoard = localStorage.getItem('idBoard')
+const startDate = localStorage.getItem('startDate')
+const Sprint = localStorage.getItem('Sprint')
 
 if (token && token != "") {
   store.commit('addToken', token)
@@ -26,6 +31,13 @@ if (token && token != "") {
 
 if (idBoard && idBoard != "") {
   store.commit('addBoard', idBoard)
+}
+
+if (startDate && startDate != "") {
+  store.commit('addStartDate', startDate)
+}
+if (Sprint && Sprint != "") {
+  store.commit('addSprint', Sprint)
 }
 
 Vue.config.productionTip = false

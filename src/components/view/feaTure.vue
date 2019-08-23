@@ -1,41 +1,43 @@
 <template>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-3">
-          <router-link :to="{name : 'leaderboard'}">
-            <div class="card-leader p-4 shadow bg-white">
-              <div class="card-body text-white">
-                <p class="card-text">Leader Board</p>
-              </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+        <router-link :to="{name : 'leaderboard'}">
+          <div class="card-leader p-4 shadow bg-white">
+            <div class="card-body text-white">
+              <p class="card-text">Leader Board</p>
             </div>
-          </router-link>
-        </div>
+          </div>
+        </router-link>
+      </div>
 
-        <div class="col-sm-3">
-          <router-link :to="{name : 'charts'}">
-            <div class="card-History p-4 shadow bg-white">
-              <div class="card-body text-white">
-                <p class="card-text">History</p>
-              </div>
+      <div class="col-sm-3">
+        <router-link :to="{name : 'charts'}">
+          <div class="card-History p-4 shadow bg-white">
+            <div class="card-body text-white">
+              <p class="card-text">History</p>
             </div>
-          </router-link>
-        </div>
-        <div class="col-sm-3">
+          </div>
+        </router-link>
+      </div>
+      <div class="col-sm-3">
+        <router-link :to="{name : 'setdatetime'}">
           <div class="card-Set p-4 shadow bg-white">
             <div class="card-body text-white">
               <p class="card-text">Set date of sprint</p>
             </div>
           </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="card-Burn p-4 shadow bg-white">
-            <div class="card-body text-white">
-              <p class="card-text">Burn down chart</p>
-            </div>
+        </router-link>
+      </div>
+      <div class="col-sm-3">
+        <div class="card-Burn p-4 shadow bg-white">
+          <div class="card-body text-white">
+            <p class="card-text">Burn down chart</p>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -79,7 +81,6 @@ export default {
 </script>
 
 <style>
-
 .card-leader {
   height: 60%;
   margin-top: 100px;
@@ -106,12 +107,9 @@ export default {
 }
 .card-text {
   font-size: 20px;
-  /* padding-top:10px; */
-
   text-align: center;
-  /* overflow: hidden; */
-  /* text-overflow: ellipsis; */
-  /* height:100%; */
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
 }
 .card-text:last-child {
   margin-bottom: 0;
