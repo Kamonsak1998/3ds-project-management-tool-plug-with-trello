@@ -1,4 +1,5 @@
 <template>
+<<<<<<< Updated upstream
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
@@ -10,6 +11,15 @@
           </div>
         </router-link>
       </div>
+=======
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <router-link :to="{name : 'leaderboard'}">
+            <div ></div>
+          </router-link>
+        </div>
+>>>>>>> Stashed changes
 
       <div class="col-sm-3">
         <router-link :to="{name : 'charts'}">
@@ -84,7 +94,7 @@ export default {
 .card-leader {
   height: 60%;
   margin-top: 100px;
-  border-radius: 25px;
+  border-radius: 10px;
   background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
 }
 .card-History {
