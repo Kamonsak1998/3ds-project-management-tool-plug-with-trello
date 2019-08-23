@@ -17,10 +17,10 @@
       </b-card-group> 
         <carousel :navigationEnabled="true" :perPageCustom="[[360, 1], [1024, 3],[768,2]]"  :mouseDrag="true" :touchDrag="true"  class="mb-4" >
           <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index" >
-            <div class="card bg-primary cardsprit mr-1 ml-1 shadow">
-              <div class="card-body" @click="selectSprint(SprintModel.scoreOfSprint,index)" v-b-modal.modal-xl > 
-                <div class="text-value" >{{models.title}}</div>
-                <div class="text-value">{{models.date}}</div>             
+            <div class="card cardsprit mr-1 ml-1 shadow">
+              <div class="card-body" @click="selectSprint(SprintModel.scoreOfSprint,index)" v-b-modal.modal-xl >  
+                  <div class="text-value" >{{models.title}}</div>
+                  <div class="text-value">{{models.date}}</div>             
               </div>
             </div>
           </slide>
@@ -114,9 +114,14 @@ export default {
   border-radius: 25px;
   height: 200px;
   cursor: pointer;
+  background-color:whitesmoke;
+  /* background: linear-gradient(-68deg,#fbd5de, #ec9696); */
 }
+
 .text-value{
-   text-shadow: 2px 2px 4px #000000;
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+   
 }
 </style>
 

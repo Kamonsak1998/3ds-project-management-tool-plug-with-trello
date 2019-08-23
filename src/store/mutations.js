@@ -14,15 +14,21 @@ export const addSprint = (state, newSprint) => {
     state.Sprint = newSprint
     localStorage.setItem('Sprint', newSprint)
 }
+export const addNameBoard = (state, newNameBoard) =>{
+    state.nameBoard = newNameBoard
+    localStorage.setItem('nameBoard', newNameBoard)
+}
 
 export const removeToken = (state) => {
     state.token = ''
     state.idBoard = ''
     state.startDate = ''
     state.Sprint = ''
+    state.nameBoard = ''
     localStorage.setItem('token', '')
     localStorage.setItem('idBoard', '')
     localStorage.setItem('startDate', '')
     localStorage.setItem('Sprint', '')
+    localStorage.setItem('nameBoard', '')
 
 }

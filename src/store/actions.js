@@ -10,3 +10,6 @@ export function getStartDate({ commit }, startDate) {
 export function getSprint({ commit }, Sprint) {
   commit('addSprint', Sprint)
 }
+export function getNameBoard({ commit }, nameBoard) {
+  commit('addNameBoard', nameBoard)
+}

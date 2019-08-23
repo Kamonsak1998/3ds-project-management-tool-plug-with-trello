@@ -27,7 +27,7 @@ export default {
     this.getboardtrello();
   },
   computed: {
-    ...mapGetters(["token"])
+    ...mapGetters(["token", "idBoard"])
   },
   data() {
     return {
@@ -36,11 +36,17 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getBoard"]),
+    ...mapActions(["getBoard", "getNameBoard"]),
     setboard(result, index) {
       const boardid = result[index].id;
+      const nameBoard = result[index].name;
       this.getBoard(boardid);
-      this.$router.push("/feature");
+      this.getNameBoard(nameBoard);
+      if (this.idBoard != "") {
+        this.$router.push("/feature");
+      } else {
+        return;
+      }
     },
     getboardtrello() {
       if (this.token != "") {
