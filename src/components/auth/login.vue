@@ -106,7 +106,6 @@ export default {
       var provider = "trello";
       OAuth.popup(provider,{cache: true})
         .done(function(trello) {
-          console.log(trello.status);
           const token = trello.oauth_token;
           self.getToken(token);
           if (this.token != "") {

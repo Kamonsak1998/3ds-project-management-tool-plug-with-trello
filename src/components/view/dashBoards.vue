@@ -53,8 +53,6 @@ export default {
         axios
           .post("http://localhost:9000/getdashboard", { token: this.token })
           .then(Response => {
-            console.log(Response);
-            
             this.results = Response.data.board;
           });
         return;
