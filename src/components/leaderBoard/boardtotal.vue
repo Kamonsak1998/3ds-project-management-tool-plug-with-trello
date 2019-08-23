@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="boardtotal">
     <div class="col-lg-9 mx-auto">
       <div class="table100 ver6 m-b-110 shadow">
         <table data-vertable="ver6">
@@ -36,14 +36,14 @@ export default {
       items: [
         { Name: "BahBenz", Score: "100" },
         { Name: "arram", Score: "200" },
+        { Name: "Arnon Kitcharoenpaibul", Score: "300" },
+        { Name: "Arram Sibunrueang", Score: "300" },
+        { Name: "Arram Sibunrueang", Score: "300" },
+        { Name: "Chanon Charatsuttikul", Score: "300" },
+        { Name: "Kamonsak Jongwilaikasem", Score: "300" },
         { Name: "gono", Score: "300" },
         { Name: "gono", Score: "300" },
-        { Name: "gono", Score: "300" },
-        { Name: "gono", Score: "300" },
-        { Name: "gono", Score: "300" },
-        { Name: "gono", Score: "300" },
-        { Name: "gono", Score: "300" },
-        { Name: "arnon", Score: "400" }
+        { Name: "Arnon Kitcharoenpaibul", Score: "400" }
       ]
     };
   }
@@ -119,6 +119,11 @@ td {
   padding-bottom: 14px;
 }
 
+.row100 .row100 + .row100 {
+  margin-top: 10px;
+  box-shadow: 7px;
+}
+
 /*******************table100******************* */
 
 .table100.ver6 {
@@ -165,4 +170,5 @@ td {
 .m-b-110 {
   margin-bottom: 110px;
 }
+
 </style>
