@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import boardtotal from "@/components/leaderBoard/boardtotal.vue";
+// import boardtotal from "@/components/leaderBoard/boardtotal.vue";
 import allboard from "@/components/leaderBoard/allboard.vue";
 import { mapGetters } from "vuex";
 export default {
