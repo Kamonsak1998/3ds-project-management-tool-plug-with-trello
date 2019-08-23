@@ -3,31 +3,27 @@
     <div class="row">
       <!--  <div class="col-sm-3">
         <router-link :to="{name : 'leaderboyard'}">
-          <div class="card card-feature p-4 shadow bg-white">
-            <div class="card-body text-white">
-              <p class="icon"></p>
-              <p class="card-text">Leader Board</p>
-            </div>
-          </div>
         </router-link>
       </div>-->
+
+      
       <div class="col-sm-4 ">
         <div class="card text-white bg-primary">
-          <div class="card-body card-body-feature leaderboard pb-0">
+          <div class="card-body card-body-feature leaderboard-f pb-0">
             <div class="card-body-feature">
-              <i class="icons font-2xl float-left d-block cui-dashboard"></i>
-              <div class="text-value">Leader Board</div>
-            </div>
+              <i class="icons font-2xl  d-block cui-dashboard"></i>
+              <div class="text-value"><router-link class="boardff" :to="{name : 'leaderboard'}">Leader Board</router-link></div>
+            </div>     
           </div>
         </div>
       </div>
 
         <div class="col-sm-4 ">
         <div class="card text-white bg-info">
-          <div class="card-body card-body-feature History pb-0">
+          <div class="card-body card-body-feature History-f pb-0">
             <div class="card-body-feature">
-              <i class="icon-chart font-2xl float-left d-block "></i>
-              <div class="text-value">History</div>
+              <i class="icon-chart font-2xl  d-block "></i>
+              <div class="text-value"><router-link class="boardff" :to="{name : 'charts'}">History</router-link></div>
             </div>
           </div>
         </div>
@@ -35,10 +31,10 @@
 
         <div class="col-sm-4 ">
         <div class="card text-white bg-warning">
-          <div class="card-body card-body-feature Set-date  pb-0">
+          <div class="card-body card-body-feature Set-date-f  pb-0">
             <div class="card-body-feature">
-              <i class="icon-calendar font-2xl float-left d-block "></i>
-              <div class="text-value">Set date of sprint</div>
+              <i class="icon-calendar font-2xl  d-block "></i>
+              <div class="text-value"><router-link class="boardff" :to="{name : 'setdatetime'}">Set date of sprint</router-link></div>
             </div>
           </div>
         </div>
@@ -90,14 +86,14 @@ export default {
 </script>
 
 <style>
-.leaderboard {
+.leaderboard-f {
       background-color: #20a8d8!important;
 }
 .card.bg-primary {
     border-color: #187da0;
 }
 /***********/
-.History {
+.History-f{
   background-color: #63c2de!important;
 }
 .card.bg-info {
@@ -105,7 +101,7 @@ export default {
 }
 
 /**********/
-.Set-date {
+.Set-date-f {
   background-color: #ffc107!important;
   border-color: #c69500;
 }
@@ -113,22 +109,20 @@ export default {
     border-color: #c69500;
 }
 /***********/
-.Burn-down {
- background-color: #f86c6b!important;
-}
-.bg-danger {
-    background-color: #f86c6b!important;
-}
-
-/*************/
 .card-body-feature {
   width: 100%;
   height: 120px;
-  flex: 1 1 auto;
+  /* flex: 1 1 auto; */
   padding-top: 17px;
 }
 .text-value {
     font-size: 20px;
     font-weight: 600;
+}
+.boardff,a:link, a:visited {
+  color: white;
+  text-align: center; 
+  text-decoration: none;
+  display: inline-block;
 }
 </style>
