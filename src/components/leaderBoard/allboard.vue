@@ -1,7 +1,8 @@
 <template>
   <div class="col-lg-9 mx-auto">
-    <div class="allboard-row spinner" v-if="like===false">
-      <b-spinner variant="primary" type="grow" label="Spinning"></b-spinner>
+  
+    <div class="animated fadeIn loading" v-if="like === false">
+      <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
     </div>
 
     <div class="allboard-row allboard" v-if="like===true">
@@ -69,8 +70,8 @@ export default {
           this.like = true;
         })
         .catch(err => {
-          if ((err.message = "city not found")) {
-            alert("city not found");
+          if ((err.message = "connection lost")) {
+            alert("connection lost");
           }
         });
     }
@@ -93,6 +94,11 @@ export default {
 .allboard-row .row-head + .row-head {
   margin-top: 10px;
   box-shadow: 7px;
+}
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 45%;
 }
 .allboard-body {
 
