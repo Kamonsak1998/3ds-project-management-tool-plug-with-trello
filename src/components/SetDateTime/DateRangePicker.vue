@@ -33,6 +33,7 @@
             name="total"
             type="text"
             class="form-control w-100 daterangepicker-date-input"
+             pattern="^[1-9]+$"
             ref="endDate"
             v-model="total"
             v-validate="'required|numeric|max:3'"
@@ -92,7 +93,9 @@ export default {
       submitted: false
     };
   },
-  mounted: function() {},
+  mounted: function() {
+ 
+  },
 
   computed: {
     ...mapGetters(["startDates", "Sprints", "idBoard", "newBoard"]),
@@ -176,6 +179,7 @@ export default {
     }
   },
   watch: {
+
     total: function(value) {
       if (value <= 1) {
         this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
