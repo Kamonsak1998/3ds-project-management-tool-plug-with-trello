@@ -31,7 +31,7 @@ export default {
   },
  mounted: function() {
     if (this.idBoard != "") {
-      // console.log(1234);
+       // console.log(1234);
       
       return;
     } else {
