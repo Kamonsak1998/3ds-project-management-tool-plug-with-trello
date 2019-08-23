@@ -90,14 +90,14 @@ export default {
 
 <style>
 .leaderboard-f {
-  background-color: #20a8d8 !important;
+  /* background-color: #20a8d8 !important; */
 }
 .card.bg-primary {
   border-color: #187da0;
 }
 /***********/
 .History-f {
-  background-color: #63c2de !important;
+  /* background-color: #63c2de !important; */
 }
 .card.bg-info {
   border-color: #2eadd3;
@@ -105,8 +105,8 @@ export default {
 
 /**********/
 .Set-date-f {
-  background-color: #ffc107 !important;
-  border-color: #c69500;
+  /* background-color: #ffc107 !important; */
+
 }
 .card.bg-warning {
   border-color: #c69500;
