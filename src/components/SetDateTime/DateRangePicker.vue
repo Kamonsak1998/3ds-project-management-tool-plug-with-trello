@@ -1,6 +1,6 @@
 <template>
   <b-container class="bv-example-row row-setdate">
-    <div class="card">
+    <div class="card card-setdate">
       <b-row>
         <b-col v-for="calendarIndex in calendarCount" :key="calendarIndex">
           <date-range-picker-calendar
@@ -33,7 +33,7 @@
             name="total"
             type="text"
             class="form-control w-100 daterangepicker-date-input"
-            ref="total"
+            ref="endDate"
             v-model="total"
             v-validate="'required|numeric|max:3'"
             :class="{ 'is-invalid': submitted && errors.has('total') }"
@@ -60,6 +60,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
 import { mapActions, mapGetters } from "vuex";
+import { log } from 'util';
 library.add(faCaretRight);
 
 export default {
@@ -78,10 +79,10 @@ export default {
   },
   data() {
     return {
-      total: '0',
-      sprint: "",
+      total: '',
       startDate: moment.utc(),
-      endDate: moment.utc(),
+      endDate: '',
+      enddated: moment.utc(),
       rangeSelect: null,
       month: moment
         .utc()
@@ -121,8 +122,8 @@ export default {
     selectDate: function(date) {
       if (this.step === "selectStartDate") {
         this.startDate = date;
-      } else if (this.step === "total") {
-        // this.endDate = date;
+      } else if (this.step === "endDate") {
+        this.endDate = date;
       }
     },
     // Step flow for date range selections
@@ -130,10 +131,10 @@ export default {
     nextStep: function() {
       if (this.step === "selectStartDate") {
         this.step = "selectEndDate";
-        this.$refs.total.focus();
-      } else if (this.step === "total") {
-        // this.step = null;
-        // this.$refs.endDate.blur();
+        this.$refs.endDate.focus();
+      } else if (this.step === "endDate") {
+        this.step = null;
+        this.$refs.endDate.blur();
       }
     },
 
@@ -147,12 +148,10 @@ export default {
     },
     // Submit button
     ...mapActions(["getStartDate", "getSprint"]),
-    submit: function() {
+    submit: function() {  
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
-          console.log(this.startDate);
-          console.log(this.endDate);
           let endDate = this.endDate;
           this.getStartDate(this.startDate);
           this.getSprint(this.total);
@@ -240,5 +239,8 @@ export default {
     /* width: 200%; */
     /* margin-right: -15px; */
     /* margin-left: -5px; */
+}
+.card-setdate{
+  border-radius:10px
 }
 </style>
