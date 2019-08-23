@@ -33,7 +33,7 @@
         <div class="card text-white bg-warning">
           <div class="card-body card-body-feature Set-date-f  pb-0">
             <div class="card-body-feature">
-              <i class="icon-calendar font-2xl  d-block "></i>
+              <i class="icon-calendar font-2xl d-block "></i>
               <div class="text-value"><router-link class="boardff" :to="{name : 'setdatetime'}">Set date of sprint</router-link></div>
             </div>
           </div>
@@ -119,7 +119,7 @@ export default {
     font-size: 20px;
     font-weight: 600;
 }
-.boardff,a:link, a:visited {
+.boardff{
   color: white;
   text-align: center; 
   text-decoration: none;
