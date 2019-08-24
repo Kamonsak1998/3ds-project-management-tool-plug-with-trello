@@ -11,7 +11,7 @@
           style="max-width: 30rem;"
           align="center"
           border-variant="0"
-          class="imgbg cursor shadow-lg text"
+          class="imgbg cursor shadow-lg text block"
           @click="setboard(results,index)"
         ></b-card>
       </div>
@@ -53,8 +53,6 @@ export default {
         axios
           .post("http://localhost:9000/getdashboard", { token: this.token })
           .then(Response => {
-            console.log(Response);
-            
             this.results = Response.data.board;
           });
         return;
@@ -67,7 +65,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+
 .imgbg {
   width: 100%;
   height: 180px;
@@ -85,5 +84,33 @@ export default {
 .text {
   color: white;
   text-shadow: 2px 2px 4px #000000;
+}
+.block:hover {
+  z-index: 100;
+  -webkit-animation: scale 0.3s linear;
+  -moz-animation: scale 0.3s linear;
+  animation: scale 0.3s linear;
+  transform-origin: 50% 50%;
+  animation-fill-mode: forwards;
+}
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+    -webkit-box-shadow: 10px 10px 60px 10px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 10px 10px 60px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 10px 10px 60px 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes scaledown {
+  0% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
