@@ -61,7 +61,6 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
 import { mapActions, mapGetters } from "vuex";
-import { log } from 'util';
 library.add(faCaretRight);
 
 export default {
@@ -166,11 +165,11 @@ export default {
               idBoard: this.idBoard,
               boardName: this.newBoard
             })
-            .then(res => {
+            .then(() => {
               alert("บันทึกข้อมูลเรียบร้อย");
             })
             .catch(err => {
-              if ((err.message = "Sprint error")) {
+              if ((err)) {
                 alert("Sorry Connection not found");
               }
             });
