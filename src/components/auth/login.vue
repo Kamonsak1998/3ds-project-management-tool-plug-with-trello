@@ -1,74 +1,10 @@
 <template>
   <div class="login">
     <div class="container">
-      <div class="row">
-        <div class="col-md-6 mx-auto mt-5">
-          <form name="login_form" id="login_form" @submit.prevent="logIn" class="form_login">
-            <div class="card-group">
-              <div class="card p-4 shadow bg-white">
-                <div class="text-center">
-                  <h1>Login</h1>
-                  <p class="text-muted">Sign In to your account</p>
-                </div>
-                <div class="card-body text-left">
-                  <div class="input-group mb-4">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="icon-user"></i>
-                      </span>
-                    </div>
-                    <input
-                      data-cy="input-login-email"
-                      class="form-control"
-                      type="email"
-                      name="email"
-                      placeholder="Enter your e-mail..."
-                      v-model="email"
-                      v-validate="'required|email'"
-                      :class="{ 'is-invalid': submitted && errors.has('email') }"
-                    />
-                    <div
-                      v-if="submitted && errors.has('email')"
-                      class="invalid-feedback"
-                    >{{ errors.first('email') }}</div>
-                  </div>
-                  <div class="input-group mb-4">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="icon-lock"></i>
-                      </span>
-                    </div>
-                    <input
-                      data-cy="input-login-password"
-                      class="form-control"
-                      type="password"
-                      name="password"
-                      placeholder="Enter your password..."
-                      v-validate="'required'"
-                      v-model="password"
-                      :class="{ 'is-invalid': submitted && errors.has('password')}"
-                    />
-                    <div
-                      v-show="errors.has('password')"
-                      class="invalid-feedback"
-                    >{{ errors.first('password') }}</div>
-                  </div>
-                  <button class="btnlogin shadow p-3 mb-3" type="submit">Login</button>
-                  <button type="button" class="btn btn-pill btn-info shadow w-100" @click="Auth">
-                    <i class="icon-social-tumblr"></i> &nbsp; Login with trello
-                  </button>
-                </div>
-              </div>
-            </div>
-            <a
-              href="https://trello.com/signup"
-              class="pull-left"
-              target="_blank"
-            >Create a new account</a>
-            <!-- <router-link class="pull-left" :to="{name : 'register'}">Create a new account</router-link> -->
-          </form>
-        </div>
-      </div>
+      <img class="bglogin" src="@/assets/circle.png" alt />
+      <button class="buttons" @click="Auth()">
+        <span>Login</span>
+      </button>
     </div>
   </div>
 </template>
@@ -80,31 +16,19 @@ import { OAuth } from "oauthio-web";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "login",
-  data: function() {
-    return {
-      submitted: false,
-      email: "",
-      password: ""
-    };
-  },
   mounted: function() {
-    if (this.token != "") {
-      this.$router.push("/dashboards");
-      return;
-    } else {
-      return;
-    }
+    this.checkToken();
   },
   computed: {
     ...mapGetters(["token"])
-  },  
+  },
   methods: {
     ...mapActions(["getToken"]),
     Auth() {
       const self = this;
       OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
       var provider = "trello";
-      OAuth.popup(provider,{cache: true})
+      OAuth.popup(provider, { cache: true })
         .done(function(trello) {
           const token = trello.oauth_token;
           self.getToken(token);
@@ -115,74 +39,88 @@ export default {
         .fail(function(err) {
           alert(err);
         });
-
+    },
+    checkToken() {
+      if (this.token != "") {
+        this.$router.push("/dashboards");
+        return;
+      } else {
+        return;
+      }
     }
-  },
-  logIn() {
-    this.submitted = true;
-    // this.$validator.validate().then(valid => {
-    //   if (valid) {
-    //   }
-    // });
   }
 };
 </script>
 
-<style>
-.card {
-  border-radius: 25px;
-}
-
-.btnlogin {
-  border-radius: 25px;
-  color: #ffffff;
-  font: 15px;
-  font-family: sans-serif;
-  background: #1f1f1f;
-  padding: 14px 40px;
-  border: #ffffff;
-  width: 100%;
-}
-.btn-title {
-  color: #ffffff;
-  font: 15px;
-  font-family: sans-serif;
-}
-.block-inner {
-  border-radius: 10px;
-  /* border: 1px lightgray; */
-  text-align: left;
-  font: 5px;
-  box-sizing: border-box;
-}
-
-.form-group label {
-  margin-bottom: 0px;
-  color: #24a0d1;
-  font-size: 14px;
-  padding: 9px;
-}
-.form-group input {
-  margin-bottom: 0px;
-  font-size: 14px;
+<style lang="scss" >
+.buttons {
+  font-size: 18px;
+  text-shadow: 2px 2px 4px #000000;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: 0.025em;
+  background: #379aff;
+  padding: 18px 0 11px;
+  cursor: pointer;
   border: 0;
-  font-family: inherit;
-  height: 48px;
-  font-size: 16px;
-  font-weight: 500;
-  border-bottom: 2px solid #c8ccd4;
-  padding: 6px;
+  border-radius: 2px;
+  min-width: 120px;
+  overflow: hidden;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.pull-left {
-  float: left !important;
-  margin-top: 10px;
-}
-.pull-right {
-  float: right !important;
-  margin-top: 10px;
-}
-form {
+
+.buttons span {
   display: block;
-  margin-top: 0em;
+  position: relative;
+  z-index: 10;
+}
+
+.buttons:after,
+.buttons:before {
+  padding: 36px 0 11px;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: calc(-100% - 30px);
+  height: calc(100% - 29px);
+  width: calc(100% + 20px);
+  color: #fff;
+  border-radius: 2px;
+  transform: skew(-25deg);
+}
+
+.buttons:after {
+  background: #fff;
+  transition: left 0.8s cubic-bezier(0.86, 0, 0.07, 1) 0.2s;
+  z-index: 0;
+  opacity: 0.8;
+}
+
+.buttons:before {
+  background: linear-gradient(40deg, #ff9966, #ff6666, #cc66cc) !important;
+  z-index: 5;
+  transition: left 1s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.buttons:hover:after {
+  left: calc(0% - 10px);
+  transition: left 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.buttons:hover:before {
+  left: calc(0% - 10px);
+  transition: left 1s cubic-bezier(0.86, 0, 0.07, 1);
+}
+.bglogin {
+  width: 620px;
+  height: 620px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
