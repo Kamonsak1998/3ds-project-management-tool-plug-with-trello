@@ -17,16 +17,6 @@ export default new Router({
             component: () => import('@/components/auth/register')
         },
         {
-            path: '/auth/confirmemail',
-            name: 'Confirmemail',
-            component: () => import('@/components/auth/Confirmemail/Confirmemail')
-        },
-        {
-            path: '/auth/success',
-            name: 'success',
-            component: () => import('@/components/auth/Confirmemail/success')
-        },
-        {
             path: '/leaderBoard/leaderboard',
             name: 'leaderboard',
             component: () => import('@/components/leaderBoard/Leaderboard')
@@ -47,8 +37,8 @@ export default new Router({
             component: () => import('@/components/view/feaTure')
         },
         {
-            path: '/SetDateTime/SetDateTime',
-            name: 'SetDateTime',
+            path: '/setdatetime',
+            name: 'setdatetime',
             component: () => import('@/components/SetDateTime/setdatetime')
         }
 

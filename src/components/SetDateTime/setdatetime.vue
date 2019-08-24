@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <h2 class="my-4 pb-2 border-bottom"></h2>
-    <h3 class="pb-2 border-bottom">Set Date Time Stamp</h3>
+      <h1 class="pb-4"> Set Date Time Stamp</h1>
+     <!-- <h3 class="pb-2 border-bottom"></h3> -->
     <div class="mb-4">
       <date-range-picker v-on:submit="submitted" />
     </div>
-    <h3 class="pb-2 border-bottom"></h3>
+    <!-- <h3 class="pb-2 border-bottom"></h3> -->
   </div>
 </template>
 
@@ -13,11 +13,10 @@
 import moment from 'moment'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCalendarAlt, faCaretDown } from '@fortawesome/free-solid-svg-icons'
-// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-// import BModal from 'bootstrap-vue/es/components/modal/modal'
 import BModalDirective from 'bootstrap-vue/es/directives/modal/modal'
-// import BPopover from 'bootstrap-vue/es/components/popover/popover'
 import DateRangePicker from '@/components/SetDateTime/DateRangePicker'
+import { mapGetters } from "vuex";
+
 
 library.add(faCalendarAlt, faCaretDown)
 
@@ -29,6 +28,20 @@ export default {
       startDate: moment.utc().subtract(1, 'month').startOf('month'),
       endDate: moment.utc().subtract(1, 'month').endOf('month').startOf('day')
     }
+  },
+ mounted: function() {
+    if (this.idBoard != "") {
+       // console.log(1234);
+      
+      return;
+    } else {
+      this.$router.push("/dashboards");
+      return;
+        // console.log(1234);
+    }
+  },
+  computed: {
+    ...mapGetters(["idBoard"])
   },
   methods: {
     setscore(arr){
@@ -71,7 +84,6 @@ export default {
 </script>
 
 <style>
-
 
 .popover {
   max-width: 800px;

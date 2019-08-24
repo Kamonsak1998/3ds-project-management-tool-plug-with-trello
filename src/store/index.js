@@ -6,9 +6,12 @@ import * as actions from './actions'
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
-    state:{
-        token : '',
-        idBoard : ''
+    state: {
+        token: '',
+        idBoard: '',
+        startDate: '',
+        Sprint: '',
+        nameBoard:''
     },
     getters,
     mutations,
