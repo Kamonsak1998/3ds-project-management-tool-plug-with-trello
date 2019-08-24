@@ -105,7 +105,8 @@ export default {
 .loading {
   position: absolute;
   top: 50%;
-  left: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .font h1 {
   font-size: xxx-large;
