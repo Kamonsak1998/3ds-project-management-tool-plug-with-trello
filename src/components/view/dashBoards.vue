@@ -53,7 +53,7 @@ export default {
         axios
           .post("http://localhost:9000/getdashboard", { token: this.token })
           .then(Response => {
-            this.results = Response.data.board;
+            this.results = Response.data;
           });
         return;
       } else {
@@ -66,7 +66,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 .imgbg {
   width: 100%;
   height: 180px;
