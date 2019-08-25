@@ -28,7 +28,7 @@
               @blur="inputDate"
             />
           </div>
-          <p>Sprint Period</p>
+          <p>Sprint Period (Day)</p>
           <input
             name="total"
             type="text"
@@ -61,7 +61,6 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
 import { mapActions, mapGetters } from "vuex";
-import { log } from 'util';
 library.add(faCaretRight);
 
 export default {
@@ -166,11 +165,11 @@ export default {
               idBoard: this.idBoard,
               boardName: this.newBoard
             })
-            .then(res => {
+            .then(() => {
               alert("บันทึกข้อมูลเรียบร้อย");
             })
             .catch(err => {
-              if ((err.message = "Sprint error")) {
+              if ((err)) {
                 alert("Sorry Connection not found");
               }
             });
@@ -181,17 +180,21 @@ export default {
   watch: {
 
     total: function(value) {
-      if (value <= 1) {
+      // if (value <= 1) {
+      //   this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
+      //     6 * value,
+      //     "days"
+      //   );
+      // } else {
+      //   this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
+      //     7 * value - 1,
+      //     "days"
+      //   );
+      // }
         this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-          6 * value,
+          1 * value -1 ,
           "days"
         );
-      } else {
-        this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-          7 * value - 1,
-          "days"
-        );
-      }
     }
   },
   filters: {

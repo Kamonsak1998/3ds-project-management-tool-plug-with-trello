@@ -60,17 +60,16 @@ export default {
   methods: {
     getUserData() {
       axios
-        .post("http://6052cfa0.ngrok.io/getleaderboard", {
+        .post("http://localhost:9000/getleaderboard", {
           token: this.token,
           idBoard: this.idBoard
         })
         .then(response => {
-          console.log(response);
           this.users = response.data.leaderboard;
           this.like = true;
         })
         .catch(err => {
-          if ((err.message = "connection lost")) {
+          if ((err)) {
             alert("connection lost");
           }
         });
