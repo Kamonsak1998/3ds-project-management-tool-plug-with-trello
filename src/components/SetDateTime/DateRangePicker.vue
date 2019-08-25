@@ -28,7 +28,7 @@
               @blur="inputDate"
             />
           </div>
-          <p>Sprint Period</p>
+          <p>Sprint Period (Day)</p>
           <input
             name="total"
             type="text"
@@ -180,17 +180,21 @@ export default {
   watch: {
 
     total: function(value) {
-      if (value <= 1) {
+      // if (value <= 1) {
+      //   this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
+      //     6 * value,
+      //     "days"
+      //   );
+      // } else {
+      //   this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
+      //     7 * value - 1,
+      //     "days"
+      //   );
+      // }
         this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-          6 * value,
+          1 * value -1 ,
           "days"
         );
-      } else {
-        this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-          7 * value - 1,
-          "days"
-        );
-      }
     }
   },
   filters: {
