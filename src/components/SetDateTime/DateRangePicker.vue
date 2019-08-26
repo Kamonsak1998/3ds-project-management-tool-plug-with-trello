@@ -131,13 +131,13 @@ export default {
         });
     },
     reset :function (){
-      this.total = '0';
+      this.total = '';
       this.endDate = '';
     },
     clear: function() {
       this.startDate = moment.utc();
       this.endDate = '';
-      this.total = '0';
+      this.total = '';
       this.$refs.startDate.focus();
     },
 
