@@ -11,9 +11,13 @@
           style="max-width: 30rem;"
           align="center"
           border-variant="0"
-          class="imgbg cursor shadow-lg text block"
+          class="imgbg shadow-lg block"
           @click="setboard(results,index)"
-        ></b-card>
+        >
+          <h3 class="animate-text">
+            <b-card-text>Choose this project</b-card-text>
+          </h3>
+        </b-card>
       </div>
     </div>
   </div>
@@ -70,19 +74,28 @@ export default {
   width: 100%;
   height: 180px;
   border-radius: 25px;
+  overflow: hidden;
+  cursor: pointer;
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
 }
-
 .card-img {
   border-radius: 25px;
   width: 100%;
   height: 100%;
 }
-.cursor {
-  cursor: pointer;
+h3 {
+  font-weight: 100;
+  font-style: italic;
+  transform: translateX(200px);
 }
-.text {
-  color: white;
-  text-shadow: 2px 2px 4px #000000;
+.animate-text {
+  opacity: 0;
+  transition: all 0.6s ease-in-out;
+}
+.block:hover .animate-text {
+  transform: translateX(0);
+  opacity: 1;
 }
 .block:hover {
   z-index: 100;

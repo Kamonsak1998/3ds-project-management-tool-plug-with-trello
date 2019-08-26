@@ -24,10 +24,19 @@
               class="form-control w-100 daterangepicker-date-input"
               ref="startDate"
               :value="startDate | dateFormat"
+              @click="reset"
               @focus="step = 'selectStartDate'"
               @blur="inputDate"
             />
           </div>
+           <input
+            name="total"
+            type="text"
+            class="form-control w-100 daterangepicker-date-input"
+              :value="startDated | dateFormat"
+            disabled='true'
+          />
+            <br />
           <p>Sprint Period (Day)</p>
           <input
             name="total"
@@ -79,8 +88,10 @@ export default {
   },
   data() {
     return {
+      boolean:true,
       total: '',
-      startDate: moment.utc(),
+      startDate:moment.utc(),
+      startDated:moment.utc("YYYY-MM-DD"),
       endDate: '',
       enddated: moment.utc(),
       rangeSelect: null,
@@ -93,7 +104,7 @@ export default {
     };
   },
   mounted: function() {
- 
+     this.checkDate();
   },
 
   computed: {
@@ -108,10 +119,25 @@ export default {
   },
 
   methods: {
+     checkDate: function() {
+      axios
+        .post("http://localhost:9000/checkdate", { idBoard: this.idBoard })
+        .then(res => {
+          if (res.data.status == true) {  
+            // console.log( this.startDated);
+            this.startDated = moment(res.data.startDate, "YYYY-MM-DD")
+            this.total = res.data.Sprint;
+          }
+        });
+    },
+    reset :function (){
+      this.total = '';
+      this.endDate = '';
+    },
     clear: function() {
       this.startDate = moment.utc();
-      this.endDate = moment.utc();
-      this.total = "";
+      this.endDate = '';
+      this.total = '';
       this.$refs.startDate.focus();
     },
 
@@ -129,7 +155,6 @@ export default {
       }
     },
     // Step flow for date range selections
-
     nextStep: function() {
       if (this.step === "selectStartDate") {
         this.step = "selectEndDate";
@@ -167,6 +192,7 @@ export default {
             })
             .then(() => {
               alert("บันทึกข้อมูลเรียบร้อย");
+              this.$router.push('/feature')
             })
             .catch(err => {
               if ((err)) {
@@ -178,7 +204,6 @@ export default {
     }
   },
   watch: {
-
     total: function(value) {
       // if (value <= 1) {
       //   this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
@@ -195,7 +220,16 @@ export default {
           1 * value -1 ,
           "days"
         );
-    }
+    },
+     range: function() {
+      let predefinedRange = false;
+      // Custom range
+      if (!predefinedRange) {
+        if (this.rangeSelect !== "custom") {
+          this.rangeSelect = "custom";
+        }
+      }
+    },
   },
   filters: {
     dateFormat: function(value) {

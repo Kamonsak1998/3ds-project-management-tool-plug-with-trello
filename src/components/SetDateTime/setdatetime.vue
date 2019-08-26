@@ -53,7 +53,7 @@ export default {
     // Modal methods
     submittedModal: function(range) {
       this.startDate = range.startDate
-      this.endDate = range.endDate
+      this.endDate = '';
       this.closeModal()
     },
     cancelledModal: function() {
