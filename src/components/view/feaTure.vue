@@ -50,39 +50,31 @@
 
 <script>
 import { mapGetters } from "vuex";
+import axios from "axios";
 export default {
   mounted: function() {
-    if (this.idBoard != "") {
-      return;
-    } else {
-      this.$router.push("/dashboards");
-      return;
-    }
+    this.checkidBoard();
+    // this.checkDate();
   },
   computed: {
-    ...mapGetters(["idBoard"])
+    ...mapGetters(["idBoard", "Sprints"])
   },
-  data() {
-    return {
-      results: [
-        {
-          title: "BENZ",
-          prevDesc: "LeaderBoard"
-        },
-        {
-          title: "NON",
-          prevDesc: "History"
-        },
-        {
-          title: "arram",
-          prevDesc: "Set date of sprint"
-        },
-        {
-          title: "beam",
-          prevDesc: "Burn down chart"
-        }
-      ]
-    };
+  methods: {
+    checkidBoard() {
+      if (this.idBoard != "") {
+        return;
+      } else {
+        this.$router.push("/dashboards");
+        return;
+      }
+    },
+    // checkDate() {
+    //   if (this.Sprints != "") {
+    //     return
+    //   }else{
+    //     this.$router.push("/setdatetime");
+    //   }
+    // }
   }
 };
 </script>
