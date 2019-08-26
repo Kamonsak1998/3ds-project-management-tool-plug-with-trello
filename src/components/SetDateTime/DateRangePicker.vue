@@ -33,7 +33,7 @@
             name="total"
             type="text"
             class="form-control w-100 daterangepicker-date-input"
-             pattern="^[1-9]+$"
+            pattern="^[1-9]+$"
             ref="endDate"
             v-model="total"
             v-validate="'required|numeric|max:3'"
@@ -79,9 +79,9 @@ export default {
   },
   data() {
     return {
-      total: '',
+      total: "",
       startDate: moment.utc(),
-      endDate: '',
+      endDate: "",
       enddated: moment.utc(),
       rangeSelect: null,
       month: moment
@@ -93,7 +93,7 @@ export default {
     };
   },
   mounted: function() {
- 
+    this.checkDate();
   },
 
   computed: {
@@ -108,6 +108,17 @@ export default {
   },
 
   methods: {
+    checkDate: function() {
+      axios
+        .post("http://localhost:9000/checkdate", { idBoard: this.idBoard })
+        .then(res => {
+          console.log(res);
+          if (res.status = true) {
+            // this.startDate = res.data.startDate
+            this.total = res.data.Sprint
+          }
+        });
+    },
     clear: function() {
       this.startDate = moment.utc();
       this.endDate = moment.utc();
@@ -150,7 +161,7 @@ export default {
     },
     // Submit button
     ...mapActions(["getStartDate", "getSprint"]),
-    submit: function() {  
+    submit: function() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
@@ -166,10 +177,13 @@ export default {
               boardName: this.newBoard
             })
             .then(() => {
-              alert("บันทึกข้อมูลเรียบร้อย");
+              if (this.Sprints != "") {
+                alert("บันทึกข้อมูลเรียบร้อย");
+                this.$router.push("/feature");
+              }
             })
             .catch(err => {
-              if ((err)) {
+              if (err) {
                 alert("Sorry Connection not found");
               }
             });
@@ -178,7 +192,6 @@ export default {
     }
   },
   watch: {
-
     total: function(value) {
       // if (value <= 1) {
       //   this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
@@ -191,10 +204,10 @@ export default {
       //     "days"
       //   );
       // }
-        this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-          1 * value -1 ,
-          "days"
-        );
+      this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
+        1 * value - 1,
+        "days"
+      );
     }
   },
   filters: {
@@ -239,15 +252,15 @@ export default {
   padding: 40px;
 }
 .row-setdate {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    /* width: 200%; */
-    /* margin-right: -15px; */
-    /* margin-left: -5px; */
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  /* width: 200%; */
+  /* margin-right: -15px; */
+  /* margin-left: -5px; */
 }
-.card-setdate{
-  border-radius:10px
+.card-setdate {
+  border-radius: 10px;
 }
 </style>
