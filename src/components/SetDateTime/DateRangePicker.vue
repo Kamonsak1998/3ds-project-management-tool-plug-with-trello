@@ -192,6 +192,7 @@ export default {
             })
             .then(() => {
               alert("บันทึกข้อมูลเรียบร้อย");
+              this.$router.push('/feature')
             })
             .catch(err => {
               if ((err)) {
