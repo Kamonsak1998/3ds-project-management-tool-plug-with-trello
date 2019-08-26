@@ -82,7 +82,6 @@ export default {
       total: "",
       startDate: moment.utc(),
       endDate: "",
-      enddated: moment.utc(),
       rangeSelect: null,
       month: moment
         .utc()
@@ -121,7 +120,6 @@ export default {
     },
     clear: function() {
       this.startDate = moment.utc();
-      this.endDate = moment.utc();
       this.total = "";
       this.$refs.startDate.focus();
     },
@@ -131,6 +129,14 @@ export default {
     },
     goToNextMonth: function() {
       this.month = moment.utc(this.month).add(1, "month");
+    },
+    selectRange: function(rangeKey) {
+      let predefinedRange = false;
+      // Custom range
+      if (!predefinedRange && this.step == null) {
+        this.step = "selectStartDate";
+        this.$refs.startDate.focus();
+      }
     },
     selectDate: function(date) {
       if (this.step === "selectStartDate") {
@@ -192,6 +198,9 @@ export default {
     }
   },
   watch: {
+     rangeSelect: function(rangeKey) {
+      this.selectRange(rangeKey);
+    },
     total: function(value) {
       // if (value <= 1) {
       //   this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
@@ -208,6 +217,29 @@ export default {
         1 * value - 1,
         "days"
       );
+    },
+       range: function() {
+      let predefinedRange = false;
+      // Predefined ranges
+      for (const rangeKey of Object.keys(this.ranges)) {
+        const range = this.ranges[rangeKey];
+        if (
+          this.startDate.isSame(range.startDate) &&
+          this.endDate.isSame(range.endDate)
+        ) {
+          predefinedRange = true;
+          if (this.rangeSelect !== rangeKey) {
+            this.rangeSelect = rangeKey;
+          }
+        }
+      }
+
+      // Custom range
+      if (!predefinedRange) {
+        if (this.rangeSelect !== "custom") {
+          this.rangeSelect = "custom";
+        }
+      }
     }
   },
   filters: {
