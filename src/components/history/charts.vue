@@ -8,7 +8,7 @@
       <h1>HISTORY</h1>
       <hr class="my-4" />
       <b-card-group columns class="card-rows cols-2">
-        <b-card class="shadow mb-5 bg-white rounded">
+        <b-card class="shadow mb-5 bg-white rounded" >
           <BarColumn v-bind:model="TotalModel" />
         </b-card>
         <b-card class="shadow mb-5 bg-white rounded">
@@ -19,9 +19,8 @@
           <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index" >
             <div class="card cardsprit mr-1 ml-1 shadow bg-primary">
               <div class="card-body" @click="selectSprint(SprintModel.scoreOfSprint,index)" v-b-modal.modal-xl >  
-                   <i class="icon-chart font-2xl float-left d-block"></i>
                   <div class="text-value" >{{models.title}}</div>
-                  <div class="text-value">{{models.date}}</div>             
+                  <div class="text-value">{{models.startDate}} - {{ models.endDate}}</div>          
               </div>
             </div>
           </slide>
