@@ -1,109 +1,145 @@
 <template>
-  <div class="container-allboard">
-    <!-- <div class="table-allboard">
-      <table class="ver6">
-        <tr class="head-allboard">
-          <th>
-            <b>Rank</b>
-          </th>
-          <th>
-            <b>Name</b>
-          </th>
-          <th>
-            <b>Score</b>
-          </th>
-        </tr>
-        <tbody>
-          <tr class="allboard-row" v-for="(item,key) in items" :key="item">
-            <td class="col-allboard">{{key+1}}</td>
-            <td class="col-allboard">
-              <b>{{item.Name}}</b>
-            </td>
-            <td class="col-allboard">{{item.Score}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div> -->
+  <div class="col-lg-9 mx-auto">
+  
+    <div class="animated fadeIn loading" v-if="like === false">
+      <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
+    </div>
 
-    <div class="allboard-row container">
-      <div class="row-head shadow" >
-        <div class="row">
-        <div class="col -text-center">
+    <div class="allboard-row allboard" v-if="like===true">
+      <div class="row row-head">   
+          <div class="col col-head">
           <b>Rank</b>
-        </div>
-        <div class="col -text-center">
-          <b>Name</b>
-        </div>
-        <div class="col -text-center">
-          <b>Score</b>
-        </div>
-        </div>
+          </div>
+          <div class="col col-head">
+            <b>Name</b>
+          </div>
+          <div class="col col-head">
+           <b>Score</b>     
+          </div>
       </div>
-      <br>
-      <div class="row text-center shadow-lg" v-for="(item,key) in items" :key="item">
-        <div class="col">{{key+1}}</div>
-        <div class="col">
-          <b>{{item.Name}}</b>
-        </div>
-        <div class="col">{{item.Score}}</div>
+      <div class="row allboard-body" v-for="(user,key) in users" :key="user">
+        <div class="col col-body">{{key+1}}</div>
+        <div class="col col-body">{{user.name}}</div>
+        <div class="col col-body">{{user.point}}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
+      like: false,
       key: 1,
+      users: [],
+      user: { name: "", point: 0 },
       items: [
-        { Name: "BahBenz", Score: "100" },
-        { Name: "arram", Score: "200" },
-        { Name: "gono", Score: "300" }
-        // { Name: "gono", Score: "300" },
-        // { Name: "gono", Score: "300" },
-        // { Name: "gono", Score: "300" },
-        // { Name: "gono", Score: "300" },
-        // { Name: "gono", Score: "300" },
-        // { Name: "gono", Score: "300" },
-        // { Name: "arnon", Score: "400" }
+        { name: "BahBenz", point: "100" },
+        { name: "arram", point: "200" },
+        { name: "gono", point: "300" },
+        { name: "gono", point: "300" },
+        { name: "gono", point: "300" },
+        { name: "gono", point: "300" },
+        { name: "gono", point: "300" },
+        { name: "gono", point: "300" },
+        { name: "gono", point: "300" },
+        { name: "arnon", point: "400" }
       ]
     };
   },
-  methods: {}
+  mounted: function() {
+    this.getUserData();
+  },
+  computed: {
+    ...mapGetters(["idBoard", "token"])
+  },
+  methods: {
+    getUserData() {
+      axios
+        .post("http://localhost:9000/getleaderboard", {
+          token: this.token,
+          idBoard: this.idBoard
+        })
+        .then(response => {
+          this.users = response.data.leaderboard;
+          this.like = true;
+        })
+        .catch(err => {
+          if ((err)) {
+            alert("connection lost");
+          }
+        });
+    }
+  }
 };
 </script>
 
 <style>
-
-.allboard-row .row + .row {
+@media only screen and (max-width: 768px) {
+  .allboard-body {
+    padding-top: 8px;
+    height: 50px;
+    color: white;
+    background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
+    -webkit-box-shadow: 0px 3px 20px rgb(160, 160, 160);
+    box-shadow: 0px 3px 20px rgb(160, 160, 160);
+    font-size: 20px;
+}
+}
+.allboard-row .row-head + .row-head {
   margin-top: 10px;
   box-shadow: 7px;
 }
-.row {
-  /* box-shadow: 1px 10px 50px rgb(160, 160, 160); */
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 45%;
 }
-.col-text-center{
-  padding-top: 20px;
-  width: 296px;
+.allboard-body {
+
+  padding-top: 15px;
   height: 60px;
   color: white;
-  background: blue;
-  max-width: 100%;
+  background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
+  box-shadow: 0px 3px 20px rgb(160, 160, 160);
+  font-size: 16px;
 }
-.col{
-  padding-top: 20px;
-  width: 20%;
-  height: 60px;
-  color: white;
-  background: red;
-  max-width: 100%;
-}
-div.allboard-row.container {
-  text-align: center;
+div.allboard-row {
   margin: auto;
-  width: 80%;
+  width: 95%;
 }
-
-
+.col-head {
+  padding-top: 20px;
+  height: 60px;
+  color: black;
+  background: transparent;
+  font-size: 10px;
+}
+div.row.allboard-body {
+  border-collapse: collapse;
+  margin-top: 8px;
+  
+}
+.spinner {
+  padding-top: 20%;
+}
+.col-body{
+    width: 130px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-weight: unset;
+    line-height: 1.4;
+}
+.col-head{
+    font-size: 15px;
+    color: black;
+    line-height: 1.4;
+    text-transform: uppercase;
+    background-color: rgba(255, 255, 255, 0.32);
+}
 </style>
+

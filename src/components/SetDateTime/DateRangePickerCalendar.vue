@@ -1,7 +1,7 @@
 <template>
   <div class="daterangepicker-calendar">
     <div class="d-flex align-items-center">
-      <div class="p-1" :class="calendarIndex == 1 ? '' : 'invisible'">
+      <div class="p-4" :class="calendarIndex == 1 ? '' : 'invisible'">
         <button type="button" class="btn btn-sm btn-light" @mousedown.prevent @click="goToPrevMonth">
           <font-awesome-icon icon="caret-left" fixed-width />
         </button>
@@ -16,11 +16,11 @@
       </div>
     </div>
     
-    <div class="d-flex justify-content-between text-center daterangepicker-calendar-row">
+    <div class="d-flex pl-2 justify-content-between text-center daterangepicker-calendar-row">
       <div v-for="day in daysOfFirstWeek" :key="day.format('D')" class="col-day">{{ day.format('ddd') }}</div>
     </div>
 
-    <div class="d-flex flex-wrap justify-content-between text-center daterangepicker-calendar-row">
+    <div class="d-flex pl-2 flex-wrap justify-content-between text-center daterangepicker-calendar-row">
       <div v-for="day in days" :key="day.format('M-D')" class="col-day" :class="dayClass(day)"
         @mouseover="dayMouseOver(day)" @mousedown.prevent @click="dayClick(day)">
         {{ day.format('D') }}
@@ -116,7 +116,7 @@ export default {
 
 <style>
 .daterangepicker-calendar-row {
-  font-size: 14px;
+  font-size: 12px;
   /*max-width: 230px;*/
 }
 
@@ -127,10 +127,10 @@ export default {
   cursor: default;
 }
 
-.daterangepicker-range {
+/* .daterangepicker-range {
   background-color: #17a2b8 !important;
   color: #ffffff;
-}
+} */
 
 
 
