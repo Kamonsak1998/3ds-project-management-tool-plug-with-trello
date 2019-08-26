@@ -1,54 +1,65 @@
 <template>
-  <b-container class="bv-example-row">
-    <b-row>
-      <b-col v-for="calendarIndex in calendarCount" :key="calendarIndex">
-        <date-range-picker-calendar
-          :calendarIndex="calendarIndex"
-          :calendarCount="calendarCount"
-          :month="month"
-          :startDate="startDate"
-          :endDate="endDate"
-          :step="step"
-          v-on:goToPrevMonth="goToPrevMonth"
-          v-on:goToNextMonth="goToNextMonth"
-          v-on:selectDate="selectDate"
-          v-on:nextStep="nextStep"
-        />
-      </b-col>
-      <b-col>
-        <p>Start Sprint</p>
-        <div class="form-group form-inline flex-nowrap">
-          <input
+  <b-container class="bv-example-row row-setdate">
+    <div class="card card-setdate">
+      <b-row>
+        <b-col v-for="calendarIndex in calendarCount" :key="calendarIndex">
+          <date-range-picker-calendar
+            :calendarIndex="calendarIndex"
+            :calendarCount="calendarCount"
+            :month="month"
+            :startDate="startDate"
+            :endDate="endDate"
+            :step="step"
+            v-on:goToPrevMonth="goToPrevMonth"
+            v-on:goToNextMonth="goToNextMonth"
+            v-on:selectDate="selectDate"
+            v-on:nextStep="nextStep"
+          />
+        </b-col>
+        <b-col class="col-setdate">
+          <p>Start Sprint</p>
+          <div class="form-group form-inline flex-nowrap">
+            <input
+              type="text"
+              class="form-control w-100 daterangepicker-date-input"
+              ref="startDate"
+              :value="startDate | dateFormat"
+              @click="reset"
+              @focus="step = 'selectStartDate'"
+              @blur="inputDate"
+            />
+          </div>
+           <input
+            name="total"
             type="text"
             class="form-control w-100 daterangepicker-date-input"
-            ref="startDate"
-            :value="startDate | dateFormat"
-            @focus="step = 'selectStartDate'"
-            @blur="inputDate"
+              :value="startDated | dateFormat"
+            disabled='true'
           />
-        </div>
-        <p>Sprint Period</p>
-        <input
-          name="total"
-          type="text"
-          class="form-control w-100 daterangepicker-date-input"
-          ref="endDate"
-          @focus="step = 'selectEndDate'"
-          v-model="total"
-          v-validate="'required|numeric|max:3'"
-          :class="{ 'is-invalid': submitted && errors.has('total') }"
-        />
-        <div
-          v-if="submitted && errors.has('phone')"
-          class="invalid-feedback"
-        >{{ errors.first('phone') }}</div>
-        <br />
-        <div class="form-group form-inline justify-content-end mb-0">
-          <button type="button" class="btn btn-light" @click="clear">Reset</button>
-          <button type="button" class="btn btn-primary ml-2" @click="submit">Submit</button>
-        </div>
-      </b-col>
-    </b-row>
+            <br />
+          <p>Sprint Period (Day)</p>
+          <input
+            name="total"
+            type="text"
+            class="form-control w-100 daterangepicker-date-input"
+             pattern="^[1-9]+$"
+            ref="endDate"
+            v-model="total"
+            v-validate="'required|numeric|max:3'"
+            :class="{ 'is-invalid': submitted && errors.has('total') }"
+          />
+          <div
+            v-if="submitted && errors.has('phone')"
+            class="invalid-feedback"
+          >{{ errors.first('phone') }}</div>
+          <br />
+          <div class="form-group form-inline justify-content-end mb-0">
+            <button type="button" class="btn btn-light" @click="clear">Reset</button>
+            <button type="button" class="btn btn-primary ml-2" @click="submit">Submit</button>
+          </div>
+        </b-col>
+      </b-row>
+    </div>
   </b-container>
 </template>
 
@@ -73,18 +84,16 @@ export default {
       default: function() {
         return {};
       }
-    },
-    defaultRangeSelect: {
-      type: String,
-      default: "currentMonth"
     }
   },
   data() {
     return {
-      total: "",
-      sprint: "",
-      startDate: moment.utc(),
-      endDate: moment.utc(),
+      boolean:true,
+      total: '',
+      startDate:moment.utc(),
+      startDated:moment.utc("YYYY-MM-DD"),
+      endDate: '',
+      enddated: moment.utc(),
       rangeSelect: null,
       month: moment
         .utc()
@@ -94,12 +103,12 @@ export default {
       submitted: false
     };
   },
-  mounted: function (){
-    
+  mounted: function() {
+     this.checkDate();
   },
 
   computed: {
-    ...mapGetters(["startDates", "Sprints","idBoard"]),
+    ...mapGetters(["startDates", "Sprints", "idBoard", "newBoard"]),
     nextMonth: function() {
       return moment.utc(this.month).add(1, "month");
     },
@@ -110,10 +119,25 @@ export default {
   },
 
   methods: {
+     checkDate: function() {
+      axios
+        .post("http://localhost:9000/checkdate", { idBoard: this.idBoard })
+        .then(res => {
+          if (res.data.status == true) {  
+            // console.log( this.startDated);
+            this.startDated = moment(res.data.startDate, "YYYY-MM-DD")
+            this.total = res.data.Sprint;
+          }
+        });
+    },
+    reset :function (){
+      this.total = '';
+      this.endDate = '';
+    },
     clear: function() {
       this.startDate = moment.utc();
-      this.endDate = moment.utc();
-      this.total = "";
+      this.endDate = '';
+      this.total = '';
       this.$refs.startDate.focus();
     },
 
@@ -123,35 +147,10 @@ export default {
     goToNextMonth: function() {
       this.month = moment.utc(this.month).add(1, "month");
     },
-    selectRange: function(rangeKey) {
-      let predefinedRange = false;
-
-      // Predefined ranges
-      for (const _rangeKey of Object.keys(this.ranges)) {
-        const range = this.ranges[_rangeKey];
-        if (rangeKey === _rangeKey) {
-          predefinedRange = true;
-
-          if (!this.startDate.isSame(range.startDate)) {
-            this.startDate = moment.utc(range.startDate);
-          }
-          if (!this.endDate.isSame(range.endDate)) {
-            this.endDate = moment.utc(range.endDate);
-          }
-        }
-      }
-
-      // Custom range
-      if (!predefinedRange && this.step == null) {
-        this.step = "selectStartDate";
-        this.$refs.startDate.focus();
-      }
-    },
-
     selectDate: function(date) {
       if (this.step === "selectStartDate") {
         this.startDate = date;
-      } else if (this.step === "selectEndDate") {
+      } else if (this.step === "endDate") {
         this.endDate = date;
       }
     },
@@ -160,11 +159,12 @@ export default {
       if (this.step === "selectStartDate") {
         this.step = "selectEndDate";
         this.$refs.endDate.focus();
-      } else if (this.step === "selectEndDate") {
+      } else if (this.step === "endDate") {
         this.step = null;
         this.$refs.endDate.blur();
       }
     },
+
     // Try to update the step date from an input value
     inputDate: function(input) {
       let date = moment.utc(input.target.value, "YYYY-MM-DD");
@@ -175,7 +175,7 @@ export default {
     },
     // Submit button
     ...mapActions(["getStartDate", "getSprint"]),
-    submit: function() {
+    submit: function() {  
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
@@ -183,12 +183,19 @@ export default {
           this.getStartDate(this.startDate);
           this.getSprint(this.total);
           axios
-            .post("http://localhost:9000/setdate", { startDate: this.startDates, Sprint: this.Sprints, endDate, idBoard: this.idBoard })
-            .then(res => {
+            .post("http://localhost:9000/setdate", {
+              startDate: this.startDates,
+              Sprint: this.Sprints,
+              endDate,
+              idBoard: this.idBoard,
+              boardName: this.newBoard
+            })
+            .then(() => {
               alert("บันทึกข้อมูลเรียบร้อย");
+              this.$router.push('/feature')
             })
             .catch(err => {
-              if ((err.message = "Sprint error")) {
+              if ((err)) {
                 alert("Sorry Connection not found");
               }
             });
@@ -197,54 +204,37 @@ export default {
     }
   },
   watch: {
-    rangeSelect: function(rangeKey) {
-      this.selectRange(rangeKey);
-    },
     total: function(value) {
-      if (value <= 1){
+      // if (value <= 1) {
+      //   this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
+      //     6 * value,
+      //     "days"
+      //   );
+      // } else {
+      //   this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
+      //     7 * value - 1,
+      //     "days"
+      //   );
+      // }
         this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-                6 * value,
-                "days"
+          1 * value -1 ,
+          "days"
         );
-      }else{
-        this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-                7 * value -1,"days");  
-      }
-     
     },
-
-    range: function() {
+     range: function() {
       let predefinedRange = false;
-      // Predefined ranges
-      for (const rangeKey of Object.keys(this.ranges)) {
-        const range = this.ranges[rangeKey];
-        if (
-          this.startDate.isSame(range.startDate) &&
-          this.endDate.isSame(range.endDate)
-        ) {
-          predefinedRange = true;
-          if (this.rangeSelect !== rangeKey) {
-            this.rangeSelect = rangeKey;
-          }
-        }
-      }
-
       // Custom range
       if (!predefinedRange) {
         if (this.rangeSelect !== "custom") {
           this.rangeSelect = "custom";
         }
       }
-    }
+    },
   },
   filters: {
     dateFormat: function(value) {
       return value ? value.format("YYYY-MM-DD") : "";
     }
-  },
-  created: function() {
-    // Initialize ranges
-    this.rangeSelect = this.defaultRangeSelect;
   },
   components: { DateRangePickerCalendar }
 };
@@ -277,5 +267,21 @@ export default {
 .daterangepicker-date-input:focus {
   border-color: #17a2b8 !important;
   box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25) !important;
+}
+.col-setdate {
+  /* color: red; */
+  padding: 40px;
+}
+.row-setdate {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /* width: 200%; */
+    /* margin-right: -15px; */
+    /* margin-left: -5px; */
+}
+.card-setdate{
+  border-radius:10px
 }
 </style>

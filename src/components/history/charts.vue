@@ -14,20 +14,32 @@
         <b-card class="shadow mb-5 bg-white rounded">
           <burndownChart />
         </b-card>
-      </b-card-group> 
-        <carousel :navigationEnabled="true" :perPageCustom="[[360, 1], [1024, 3],[768,2]]" :mouseDrag="true" :touchDrag="true"  class="mb-4" >
-        <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index" >
-          <div class="card bg-primary cardsprit mr-1 ml-1 shadow rounded">
-            <div class="card-body" @click="selectSprint(SprintModel.scoreOfSprint,index)" v-b-modal.modal-xl > 
-              <div class="text-value" >{{models.title}}</div>
-              <div>{{models.date}}</div>             
+      </b-card-group>
+      <carousel
+        :navigationEnabled="true"
+        :perPageCustom="[[360, 1], [1024, 3],[768,2]]"
+        :mouseDrag="true"
+        class="mb-4"
+      >
+        <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index">
+          <div class="card cardsprit mr-1 ml-1 shadow bg-primary">
+            <div
+              class="card-body"
+              @click="selectSprint(SprintModel.scoreOfSprint,index)"
+              v-b-modal.modal-xl
+            >
+              <img src="@/assets/chart2.png" class="card-img" />
+              <div class="card-img-overlay">
+                <div class="text-value">{{models.title}}</div>
+                <div class="text-value">{{models.startDate}} - {{ models.endDate}}</div>
+              </div>
             </div>
           </div>
         </slide>
-        </carousel>
-       <b-modal id="modal-xl" size="xl" title="Bootstrap-Vue" hide-footer hide-header centered	 >
-          <Bar v-bind:model="select" />
-       </b-modal >
+      </carousel>
+      <b-modal id="modal-xl" size="xl" title="Bootstrap-Vue" hide-footer hide-header centered>
+        <Bar v-bind:model="select" />
+      </b-modal>
     </div>
   </div>
 </template>
@@ -50,8 +62,7 @@ export default {
       SprintModel: {
         scoreOfSprint: Object
       },
-      isShowModel: false,
-      isWaitCard:false
+      isShowModel: false
     };
   },
   mounted: function() {
@@ -68,9 +79,8 @@ export default {
     Slide
   },
   methods: {
-    selectSprint(models,index){
-      this.select = models[index]
-      this.isWaitCard = true
+    selectSprint(models, index) {
+      this.select = models[index];
     },
     getHistory() {
       if (this.idBoard != "") {
@@ -106,14 +116,20 @@ export default {
 .loading {
   position: absolute;
   top: 50%;
-  left: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .font h1 {
   font-size: xxx-large;
   margin-bottom: 10px;
 }
 .cardsprit {
+  overflow: hidden;
+  border-radius: 25px;
   height: 200px;
+  cursor: pointer;
+  text-shadow: 2px 2px 4px #000000;
+  color: white;
 }
 </style>
 

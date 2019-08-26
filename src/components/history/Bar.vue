@@ -35,7 +35,7 @@
         mounted() {
             this.series[0] = {...this.series[0], ...{data: this.model.data}};
             this.chartOptions = {...this.chartOptions, ...{xaxis: {categories: this.model.name}}};
-            this.chartOptions = {...this.chartOptions, ...{subtitle: {text: this.model.date}}};
+            this.chartOptions = {...this.chartOptions, ...{subtitle: {text: this.model.startDate+ " - " +this.model.endDate}}};
             this.chartOptions = {...this.chartOptions, ...{title: {text: this.model.title}}};
         },
         data: function () {
