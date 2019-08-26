@@ -81,7 +81,7 @@ export default {
     return {
       total: "",
       startDate: moment.utc(),
-      endDate: "",
+      endDate: '',
       rangeSelect: null,
       month: moment
         .utc()
@@ -141,9 +141,7 @@ export default {
     selectDate: function(date) {
       if (this.step === "selectStartDate") {
         this.startDate = date;
-      } else if (this.step === "endDate") {
-        this.endDate = date;
-      }
+      } 
     },
     // Step flow for date range selections
 
