@@ -54,7 +54,7 @@ import axios from "axios";
 export default {
   mounted: function() {
     this.checkidBoard();
-    // this.checkDate();
+    this.checkDate();
   },
   computed: {
     ...mapGetters(["idBoard", "Sprints"])
@@ -68,13 +68,15 @@ export default {
         return;
       }
     },
-    // checkDate() {
-    //   if (this.Sprints != "") {
-    //     return
-    //   }else{
-    //     this.$router.push("/setdatetime");
-    //   }
-    // }
+    checkDate: function() {
+      axios
+        .post("http://localhost:9000/checkdate", { idBoard: this.idBoard })
+        .then(res => {
+          if (res.data.status == false) {
+          this.$router.push("/setdatetime");
+          }
+        });
+    },
   }
 };
 </script>

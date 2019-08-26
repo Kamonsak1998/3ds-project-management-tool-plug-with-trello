@@ -112,9 +112,7 @@ export default {
       axios
         .post("http://localhost:9000/checkdate", { idBoard: this.idBoard })
         .then(res => {
-          console.log(res);
-          if (res.status = true) {
-            // this.startDate = res.data.startDate
+          if (res.data.status == true) {
             this.total = res.data.Sprint
           }
         });
