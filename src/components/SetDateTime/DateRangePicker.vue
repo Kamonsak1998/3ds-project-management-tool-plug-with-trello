@@ -24,16 +24,25 @@
               class="form-control w-100 daterangepicker-date-input"
               ref="startDate"
               :value="startDate | dateFormat"
+              @click="reset"
               @focus="step = 'selectStartDate'"
               @blur="inputDate"
             />
           </div>
+           <input
+            name="total"
+            type="text"
+            class="form-control w-100 daterangepicker-date-input"
+              :value="startDated | dateFormat"
+            disabled='true'
+          />
+            <br />
           <p>Sprint Period (Day)</p>
           <input
             name="total"
             type="text"
             class="form-control w-100 daterangepicker-date-input"
-            pattern="^[1-9]+$"
+             pattern="^[1-9]+$"
             ref="endDate"
             v-model="total"
             v-validate="'required|numeric|max:3'"
@@ -79,9 +88,12 @@ export default {
   },
   data() {
     return {
-      total: "",
-      startDate: moment.utc(),
+      boolean:true,
+      total: '',
+      startDate:moment.utc(),
+      startDated:moment.utc("YYYY-MM-DD"),
       endDate: '',
+      enddated: moment.utc(),
       rangeSelect: null,
       month: moment
         .utc()
@@ -92,7 +104,7 @@ export default {
     };
   },
   mounted: function() {
-    this.checkDate();
+     this.checkDate();
   },
 
   computed: {
@@ -107,20 +119,25 @@ export default {
   },
 
   methods: {
-    checkDate: function() {
+     checkDate: function() {
       axios
         .post("http://localhost:9000/checkdate", { idBoard: this.idBoard })
         .then(res => {
-          console.log(res);
-          if (res.status = true) {
-            // this.startDate = res.data.startDate
-            this.total = res.data.Sprint
+          if (res.status = true) {  
+            console.log( this.startDated);
+            this.startDated = moment(res.data.startDate, "YYYY-MM-DD")
+            this.total = res.data.Sprint;
           }
         });
     },
+    reset :function (){
+      this.total = '0';
+      this.endDate = '';
+    },
     clear: function() {
       this.startDate = moment.utc();
-      this.total = "";
+      this.endDate = '';
+      this.total = '0';
       this.$refs.startDate.focus();
     },
 
@@ -130,21 +147,14 @@ export default {
     goToNextMonth: function() {
       this.month = moment.utc(this.month).add(1, "month");
     },
-    selectRange: function(rangeKey) {
-      let predefinedRange = false;
-      // Custom range
-      if (!predefinedRange && this.step == null) {
-        this.step = "selectStartDate";
-        this.$refs.startDate.focus();
-      }
-    },
     selectDate: function(date) {
       if (this.step === "selectStartDate") {
         this.startDate = date;
-      } 
+      } else if (this.step === "endDate") {
+        this.endDate = date;
+      }
     },
     // Step flow for date range selections
-
     nextStep: function() {
       if (this.step === "selectStartDate") {
         this.step = "selectEndDate";
@@ -165,7 +175,7 @@ export default {
     },
     // Submit button
     ...mapActions(["getStartDate", "getSprint"]),
-    submit: function() {
+    submit: function() {  
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
@@ -181,13 +191,10 @@ export default {
               boardName: this.newBoard
             })
             .then(() => {
-              if (this.Sprints != "") {
-                alert("บันทึกข้อมูลเรียบร้อย");
-                this.$router.push("/feature");
-              }
+              alert("บันทึกข้อมูลเรียบร้อย");
             })
             .catch(err => {
-              if (err) {
+              if ((err)) {
                 alert("Sorry Connection not found");
               }
             });
@@ -196,9 +203,6 @@ export default {
     }
   },
   watch: {
-     rangeSelect: function(rangeKey) {
-      this.selectRange(rangeKey);
-    },
     total: function(value) {
       // if (value <= 1) {
       //   this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
@@ -211,34 +215,20 @@ export default {
       //     "days"
       //   );
       // }
-      this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-        1 * value - 1,
-        "days"
-      );
+        this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
+          1 * value -1 ,
+          "days"
+        );
     },
-       range: function() {
+     range: function() {
       let predefinedRange = false;
-      // Predefined ranges
-      for (const rangeKey of Object.keys(this.ranges)) {
-        const range = this.ranges[rangeKey];
-        if (
-          this.startDate.isSame(range.startDate) &&
-          this.endDate.isSame(range.endDate)
-        ) {
-          predefinedRange = true;
-          if (this.rangeSelect !== rangeKey) {
-            this.rangeSelect = rangeKey;
-          }
-        }
-      }
-
       // Custom range
       if (!predefinedRange) {
         if (this.rangeSelect !== "custom") {
           this.rangeSelect = "custom";
         }
       }
-    }
+    },
   },
   filters: {
     dateFormat: function(value) {
@@ -282,15 +272,15 @@ export default {
   padding: 40px;
 }
 .row-setdate {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  /* width: 200%; */
-  /* margin-right: -15px; */
-  /* margin-left: -5px; */
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /* width: 200%; */
+    /* margin-right: -15px; */
+    /* margin-left: -5px; */
 }
-.card-setdate {
-  border-radius: 10px;
+.card-setdate{
+  border-radius:10px
 }
 </style>
