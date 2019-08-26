@@ -7,7 +7,7 @@
       </div>-->
 
       <div class="col-sm-4">
-        <router-link :to="{name : 'leaderboard'}">
+        <router-link  style="text-decoration:none" :to="{name : 'leaderboard'}">
           <div class="card text-white bg-primary">
             <div class="card-body card-body-feature leaderboard-f pb-0">
               <div class="card-body-feature">
@@ -20,7 +20,7 @@
       </div>
 
       <div class="col-sm-4">
-        <router-link :to="{name : 'charts'}">
+        <router-link  style="text-decoration:none" :to="{name : 'charts'}">
           <div class="card text-white bg-info">
             <div class="card-body card-body-feature History-f pb-0">
               <div class="card-body-feature">
@@ -33,7 +33,7 @@
       </div>
 
       <div class="col-sm-4">
-        <router-link :to="{name : 'setdatetime'}">
+        <router-link  style="text-decoration:none" :to="{name : 'setdatetime'}">
           <div class="card text-white bg-warning">
             <div class="card-body card-body-feature Set-date-f pb-0">
               <div class="card-body-feature">
@@ -60,6 +60,7 @@ export default {
     ...mapGetters(["idBoard", "Sprints"])
   },
   methods: {
+    
     checkidBoard() {
       if (this.idBoard != "") {
         return;
@@ -85,13 +86,23 @@ export default {
 .card.bg-primary {
   border-color: #187da0;
 }
+
+.bg-primary:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
 /***********/
 .card.bg-info {
   border-color: #2eadd3;
 }
+.bg-info:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
 /**********/
 .card.bg-warning {
   border-color: #c69500;
+}
+.bg-warning:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 /***********/
 .card-body-feature {
