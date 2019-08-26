@@ -123,8 +123,8 @@ export default {
       axios
         .post("http://localhost:9000/checkdate", { idBoard: this.idBoard })
         .then(res => {
-          if (res.status = true) {  
-            console.log( this.startDated);
+          if (res.data.status == true) {  
+            // console.log( this.startDated);
             this.startDated = moment(res.data.startDate, "YYYY-MM-DD")
             this.total = res.data.Sprint;
           }
