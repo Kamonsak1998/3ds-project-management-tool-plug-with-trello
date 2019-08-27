@@ -14,16 +14,15 @@
 
       </ul>
       <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item d-md-down-none">
+        <!-- <li class="nav-item d-md-down-none">
           <a class="nav-link" href="#">
             <i class="icon-bell"></i>
-            <span class="badge badge-pill badge-danger">5</span>
+            <span class="badge badge-pill badge-danger"></span>
           </a>
-        </li>
-         <li class="nav-item d-md-down-none">
-          <a class="nav-link" href="#">
-            <i class="icon-location-pin"></i>
-          </a>
+        </li> -->
+         <li class="nav-item d-md-down-none mr-2" v-if="userName">
+            <i class="icon-user"></i>
+            {{this.userName}}
         </li>     
       </ul>
       <!-- <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" data-toggle="aside-menu-lg-show">
@@ -35,6 +34,14 @@
     </header>
 </template>
 
+<script>
+import {mapGetters} from 'vuex';
+export default {
+  computed:{
+    ...mapGetters(['userName'])
+  },
+}
+</script>
 
 <style>
 </style>

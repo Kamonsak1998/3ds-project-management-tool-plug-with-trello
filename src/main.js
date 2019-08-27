@@ -24,6 +24,7 @@ const token = localStorage.getItem('token')
 const idBoard = localStorage.getItem('idBoard')
 const startDate = localStorage.getItem('startDate')
 const Sprint = localStorage.getItem('Sprint')
+const userName = localStorage.getItem('userName')
 
 if (token && token != "") {
   store.commit('addToken', token)
@@ -38,6 +39,9 @@ if (startDate && startDate != "") {
 }
 if (Sprint && Sprint != "") {
   store.commit('addSprint', Sprint)
+}
+if (userName && userName != "") {
+  store.commit('addUsername', userName)
 }
 
 Vue.config.productionTip = false
