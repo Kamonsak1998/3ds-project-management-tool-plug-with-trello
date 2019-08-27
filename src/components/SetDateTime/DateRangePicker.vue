@@ -24,16 +24,25 @@
               class="form-control w-100 daterangepicker-date-input"
               ref="startDate"
               :value="startDate | dateFormat"
+              @click="reset"
               @focus="step = 'selectStartDate'"
               @blur="inputDate"
             />
           </div>
+           <input
+            name="total"
+            type="text"
+            class="form-control w-100 daterangepicker-date-input"
+              :value="startDated | dateFormat"
+            disabled='true'
+          />
+            <br />
           <p>Sprint Period (Day)</p>
           <input
             name="total"
             type="text"
             class="form-control w-100 daterangepicker-date-input"
-            pattern="^[1-9]+$"
+             pattern="^[1-9]+$"
             ref="endDate"
             v-model="total"
             v-validate="'required|numeric|max:3'"
@@ -79,9 +88,11 @@ export default {
   },
   data() {
     return {
-      total: "",
-      startDate: moment.utc(),
-      endDate: "",
+      boolean:true,
+      total: '',
+      startDate:moment.utc(),
+      startDated:moment.utc("YYYY-MM-DD"),
+      endDate: '',
       enddated: moment.utc(),
       rangeSelect: null,
       month: moment
@@ -93,7 +104,7 @@ export default {
     };
   },
   mounted: function() {
-    this.checkDate();
+     this.checkDate();
   },
 
   computed: {
@@ -108,19 +119,25 @@ export default {
   },
 
   methods: {
-    checkDate: function() {
+     checkDate: function() {
       axios
         .post("http://localhost:9000/checkdate", { idBoard: this.idBoard })
         .then(res => {
-          if (res.data.status == true) {
-            this.total = res.data.Sprint
+          if (res.data.status == true) {  
+            // console.log( this.startDated);
+            this.startDated = moment(res.data.startDate, "YYYY-MM-DD")
+            this.total = res.data.Sprint;
           }
         });
     },
+    reset :function (){
+      this.total = '';
+      this.endDate = '';
+    },
     clear: function() {
       this.startDate = moment.utc();
-      this.endDate = moment.utc();
-      this.total = "";
+      this.endDate = '';
+      this.total = '';
       this.$refs.startDate.focus();
     },
 
@@ -138,7 +155,6 @@ export default {
       }
     },
     // Step flow for date range selections
-
     nextStep: function() {
       if (this.step === "selectStartDate") {
         this.step = "selectEndDate";
@@ -159,7 +175,7 @@ export default {
     },
     // Submit button
     ...mapActions(["getStartDate", "getSprint"]),
-    submit: function() {
+    submit: function() {  
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
@@ -175,13 +191,11 @@ export default {
               boardName: this.newBoard
             })
             .then(() => {
-              if (this.Sprints != "") {
-                alert("บันทึกข้อมูลเรียบร้อย");
-                this.$router.push("/feature");
-              }
+              alert("บันทึกข้อมูลเรียบร้อย");
+              this.$router.push('/feature')
             })
             .catch(err => {
-              if (err) {
+              if ((err)) {
                 alert("Sorry Connection not found");
               }
             });
@@ -202,11 +216,20 @@ export default {
       //     "days"
       //   );
       // }
-      this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-        1 * value - 1,
-        "days"
-      );
-    }
+        this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
+          1 * value -1 ,
+          "days"
+        );
+    },
+     range: function() {
+      let predefinedRange = false;
+      // Custom range
+      if (!predefinedRange) {
+        if (this.rangeSelect !== "custom") {
+          this.rangeSelect = "custom";
+        }
+      }
+    },
   },
   filters: {
     dateFormat: function(value) {
@@ -250,15 +273,15 @@ export default {
   padding: 40px;
 }
 .row-setdate {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  /* width: 200%; */
-  /* margin-right: -15px; */
-  /* margin-left: -5px; */
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /* width: 200%; */
+    /* margin-right: -15px; */
+    /* margin-left: -5px; */
 }
-.card-setdate {
-  border-radius: 10px;
+.card-setdate{
+  border-radius:10px
 }
 </style>

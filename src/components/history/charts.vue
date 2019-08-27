@@ -22,7 +22,7 @@
         class="mb-4"
       >
         <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index">
-          <div class="card cardsprit mr-1 ml-1 shadow bg-primary">
+          <div class="card cardsprit mr-1 ml-1 shadow">
             <div
               class="card-body"
               @click="selectSprint(SprintModel.scoreOfSprint,index)"
@@ -123,9 +123,14 @@ export default {
   font-size: xxx-large;
   margin-bottom: 10px;
 }
+.card-img{
+  width: 100%;
+  height: 100%;
+}
 .cardsprit {
   overflow: hidden;
   border-radius: 25px;
+  background-color: whitesmoke;
   height: 200px;
   cursor: pointer;
   text-shadow: 2px 2px 4px #000000;
