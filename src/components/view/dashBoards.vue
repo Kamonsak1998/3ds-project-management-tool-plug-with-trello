@@ -10,7 +10,7 @@
           :title="result.name"
           style="max-width: 30rem;"
           align="center"
-          border-variant="dark"
+          border-variant="0"
           class="imgbg shadow-lg block"
           @click="setboard(results,index)"
         >
