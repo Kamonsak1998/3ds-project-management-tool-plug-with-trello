@@ -58,7 +58,7 @@ import { mapGetters } from "vuex";
 import { OAuth } from "oauthio-web";
 export default {
   computed: {
-    ...mapGetters(["token", "idBoard", "startDates", "Sprints", "newBoard"]),
+    ...mapGetters(["token", "idBoard", "startDates", "Sprints", "newBoard","userName"]),
     isLoggedIn: function() {
       return this.token;
     },
@@ -74,6 +74,7 @@ export default {
       localStorage.removeItem("startDates");
       localStorage.removeItem("Sprints");
       localStorage.removeItem("newBoard");
+      localStorage.removeItem("userName");
       OAuth.clearCache();
       return;
     }

@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
         idBoard: '',
         startDate: '',
         Sprint: '',
-        nameBoard:''
+        nameBoard:'',
+        userName:''
     },
     getters,
     mutations,

@@ -13,3 +13,6 @@ export function getSprint({ commit }, Sprint) {
 export function getNameBoard({ commit }, nameBoard) {
   commit('addNameBoard', nameBoard)
 }
+export function getUsername({ commit }, Username) {
+  commit('addUsername', Username)
+}
