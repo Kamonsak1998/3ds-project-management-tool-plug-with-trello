@@ -20,7 +20,7 @@
             <span class="badge badge-pill badge-danger"></span>
           </a>
         </li> -->
-         <li class="nav-item d-md-down-none mr-2">
+         <li class="nav-item d-md-down-none mr-2" v-if="userName">
             <i class="icon-user"></i>
             {{this.userName}}
         </li>     
