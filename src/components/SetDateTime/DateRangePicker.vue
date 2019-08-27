@@ -24,26 +24,21 @@
               class="form-control w-100 daterangepicker-date-input"
               ref="startDate"
               :value="startDate | dateFormat"
+              :disabled="validated"
               @click="reset"
               @focus="step = 'selectStartDate'"
               @blur="inputDate"
             />
           </div>
-           <input
-            name="total"
-            type="text"
-            class="form-control w-100 daterangepicker-date-input"
-              :value="startDated | dateFormat"
-            disabled='true'
-          />
-            <br />
+          <br />
           <p>Sprint Period (Day)</p>
           <input
             name="total"
             type="text"
             class="form-control w-100 daterangepicker-date-input"
-             pattern="^[1-9]+$"
+            pattern="^[1-9]+$"
             ref="endDate"
+            :disabled="validated"
             v-model="total"
             v-validate="'required|numeric|max:3'"
             :class="{ 'is-invalid': submitted && errors.has('total') }"
@@ -55,7 +50,7 @@
           <br />
           <div class="form-group form-inline justify-content-end mb-0">
             <button type="button" class="btn btn-light" @click="clear">Reset</button>
-            <button type="button" class="btn btn-primary ml-2" @click="submit">Submit</button>
+            <button type="button" class="btn btn-primary ml-2" @click="submit"  >Submit</button>
           </div>
         </b-col>
       </b-row>
@@ -67,7 +62,7 @@
 import axios from "axios";
 import moment from "moment";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import { faCaretRight, faSlash } from "@fortawesome/free-solid-svg-icons";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
 import { mapActions, mapGetters } from "vuex";
 library.add(faCaretRight);
@@ -88,11 +83,10 @@ export default {
   },
   data() {
     return {
-      boolean:true,
-      total: '',
-      startDate:moment.utc(),
-      startDated:moment.utc("YYYY-MM-DD"),
-      endDate: '',
+      validated: false,
+      total: "",
+      startDate: moment.utc(),
+      endDate: moment.utc(),
       enddated: moment.utc(),
       rangeSelect: null,
       month: moment
@@ -104,7 +98,7 @@ export default {
     };
   },
   mounted: function() {
-     this.checkDate();
+    this.checkDate();
   },
 
   computed: {
@@ -119,25 +113,25 @@ export default {
   },
 
   methods: {
-     checkDate: function() {
+    checkDate: function() {
       axios
         .post("http://localhost:9000/checkdate", { idBoard: this.idBoard })
         .then(res => {
-          if (res.data.status == true) {  
-            // console.log( this.startDated);
-            this.startDated = moment(res.data.startDate, "YYYY-MM-DD")
+          if (res.data.status == true) {
+            this.startDate = moment.utc(res.data.startDate, "YYYY/MM/DD")
             this.total = res.data.Sprint;
+            this.validated = res.data.status;    
           }
         });
     },
-    reset :function (){
-      this.total = '';
-      this.endDate = '';
+    reset: function() {
+      this.total = "";
     },
     clear: function() {
+      this.validated = false,
       this.startDate = moment.utc();
-      this.endDate = '';
-      this.total = '';
+      this.endDate = moment.utc();
+      this.total = "";
       this.$refs.startDate.focus();
     },
 
@@ -167,7 +161,7 @@ export default {
 
     // Try to update the step date from an input value
     inputDate: function(input) {
-      let date = moment.utc(input.target.value, "YYYY-MM-DD");
+      let date = moment.utc(input.target.value, "YYYY/MM/DD");
       if (date.isValid()) {
         this.selectDate(date);
       }
@@ -175,10 +169,11 @@ export default {
     },
     // Submit button
     ...mapActions(["getStartDate", "getSprint"]),
-    submit: function() {  
+    submit: function() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
+          this.validated = true;
           let endDate = this.endDate;
           this.getStartDate(this.startDate);
           this.getSprint(this.total);
@@ -186,6 +181,7 @@ export default {
             .post("http://localhost:9000/setdate", {
               startDate: this.startDates,
               Sprint: this.Sprints,
+              
               endDate,
               idBoard: this.idBoard,
               boardName: this.newBoard
@@ -195,7 +191,7 @@ export default {
               this.$router.push('/feature')
             })
             .catch(err => {
-              if ((err)) {
+              if (err) {
                 alert("Sorry Connection not found");
               }
             });
@@ -205,23 +201,12 @@ export default {
   },
   watch: {
     total: function(value) {
-      // if (value <= 1) {
-      //   this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-      //     6 * value,
-      //     "days"
-      //   );
-      // } else {
-      //   this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-      //     7 * value - 1,
-      //     "days"
-      //   );
-      // }
-        this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-          1 * value -1 ,
-          "days"
-        );
+      this.endDate = moment.utc(this.startDate, "YYYY/MM/DD").add(
+        1 * value - 1 ,
+        "days"
+      );
     },
-     range: function() {
+    range: function() {
       let predefinedRange = false;
       // Custom range
       if (!predefinedRange) {
@@ -229,11 +214,11 @@ export default {
           this.rangeSelect = "custom";
         }
       }
-    },
+    }
   },
   filters: {
     dateFormat: function(value) {
-      return value ? value.format("YYYY-MM-DD") : "";
+      return value ? value.format("YYYY/MM/DD") : "";
     }
   },
   components: { DateRangePickerCalendar }
@@ -273,15 +258,15 @@ export default {
   padding: 40px;
 }
 .row-setdate {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    /* width: 200%; */
-    /* margin-right: -15px; */
-    /* margin-left: -5px; */
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  /* width: 200%; */
+  /* margin-right: -15px; */
+  /* margin-left: -5px; */
 }
-.card-setdate{
-  border-radius:10px
+.card-setdate {
+  border-radius: 10px;
 }
 </style>
