@@ -19,7 +19,7 @@
         :navigationEnabled="true"
         :perPageCustom="[[360, 1], [1024, 3],[768,2]]"
         :mouseDrag="true"
-        class="mb-4"
+        class="mb-1"
       >
         <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index">
           <div class="card cardsprit mr-1 ml-1 shadow">
@@ -28,11 +28,9 @@
               @click="selectSprint(SprintModel.scoreOfSprint,index)"
               v-b-modal.modal-xl
             >
-              <img src="@/assets/chart2.png" class="card-img" />
-              <div class="card-img-overlay">
-                <div class="text-value">{{models.title}}</div>
-                <div class="text-value">{{models.startDate}} - {{ models.endDate}}</div>
-              </div>
+              <i class="icon-chart font-2xl d-block"></i>
+              <div class="text-value">{{models.title}}</div>
+              <div class="text-value">{{models.startDate}} - {{ models.endDate}}</div>
             </div>
           </div>
         </slide>
@@ -123,15 +121,11 @@ export default {
   font-size: xxx-large;
   margin-bottom: 10px;
 }
-.card-img{
-  width: 100%;
-  height: 100%;
-}
 .cardsprit {
   overflow: hidden;
-  border-radius: 25px;
-  background-color: whitesmoke;
-  height: 200px;
+  border-radius: 20px;
+  background-color:#AED6F1;
+  height: 120px;
   cursor: pointer;
   text-shadow: 2px 2px 4px #000000;
   color: white;

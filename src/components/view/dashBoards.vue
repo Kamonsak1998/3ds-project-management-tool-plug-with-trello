@@ -1,6 +1,9 @@
 <template>
   <div class="container pt-5">
-    <div class="row">
+    <div class="animated fadeIn loading" v-if="isShowModel === false">
+      <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
+    </div>  
+    <div class="row" v-if="isShowModel === true">
       <div v-for="(result,index) in results" :key="index" class="col-sm-4">
         <b-card
           overlay
@@ -35,7 +38,8 @@ export default {
   },
   data() {
     return {
-      results: []
+      results: [],
+      isShowModel: false
     };
   },
 
@@ -58,6 +62,7 @@ export default {
           .post("http://localhost:9000/getdashboard", { token: this.token })
           .then(Response => {
             this.results = Response.data;
+             this.isShowModel = true;
           });
         return;
       } else {
@@ -70,6 +75,12 @@ export default {
 </script>
 
 <style lang="scss">
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .imgbg {
   width: 100%;
   height: 180px;
