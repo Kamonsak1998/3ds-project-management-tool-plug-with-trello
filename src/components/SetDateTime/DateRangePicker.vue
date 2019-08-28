@@ -50,7 +50,7 @@
           <br />
           <div class="form-group form-inline justify-content-end mb-0">
             <button type="button" class="btn btn-light" @click="clear">Reset</button>
-            <button type="button" class="btn btn-primary ml-2" @click="submit"  >Submit</button>
+            <button type="button" class="btn btn-primary ml-2" @click="submit" :disabled="validated"  >Submit</button>
           </div>
         </b-col>
       </b-row>
@@ -62,7 +62,7 @@
 import axios from "axios";
 import moment from "moment";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCaretRight, faSlash } from "@fortawesome/free-solid-svg-icons";
+import { faCaretRight} from "@fortawesome/free-solid-svg-icons";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
 import { mapActions, mapGetters } from "vuex";
 library.add(faCaretRight);
@@ -119,8 +119,9 @@ export default {
         .then(res => {
           if (res.data.status == true) {
             this.startDate = moment.utc(res.data.startDate, "YYYY/MM/DD")
-            this.total = res.data.Sprint;
-            this.validated = res.data.status;    
+            this.totaled = res.data.Sprint;
+            this.validated = res.data.status;
+            this.total = parseInt(this.totaled)    
           }
         });
     },
@@ -172,6 +173,7 @@ export default {
     submit: function() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
+      this.total = parseInt(this.total)
         if (valid) {
           this.validated = true;
           let endDate = this.endDate;
@@ -180,7 +182,7 @@ export default {
           axios
             .post("http://localhost:9000/setdate", {
               startDate: this.startDates,
-              Sprint: this.Sprints,
+              sprintDay: this.Sprints,
               
               endDate,
               idBoard: this.idBoard,
