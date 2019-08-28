@@ -1,5 +1,5 @@
 <template>
-  <div class="leaderboard">
+  <div class="container">
     <!-- <boardtotal></boardtotal> -->
     <allboard></allboard>
   </div>

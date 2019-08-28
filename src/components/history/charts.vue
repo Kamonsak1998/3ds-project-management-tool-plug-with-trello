@@ -14,21 +14,28 @@
         <b-card class="shadow mb-5 bg-white rounded">
           <burndownChart />
         </b-card>
-      </b-card-group> 
-        <carousel :navigationEnabled="true" :perPageCustom="[[360, 1], [1024, 3],[768,2]]"  :mouseDrag="true" :touchDrag="true"  class="mb-4" >
-          <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index" >
-            <div class="card cardsprit mr-1 ml-1 shadow bg-primary">
-              <div class="card-body" @click="selectSprint(SprintModel.scoreOfSprint,index)" v-b-modal.modal-xl >  
-                   <i class="icon-chart font-2xl float-left d-block"></i>
-                  <div class="text-value" >{{models.title}}</div>
-                  <div class="text-value">{{models.date}}</div>             
-              </div>
+      </b-card-group>
+      <carousel
+        :navigationEnabled="true"
+        :perPageCustom="[[320, 1], [1024, 3],[768,2]]"
+        :mouseDrag="true"
+        class="mb-1"
+      >
+        <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index">
+          <div class="card cardsprit mr-1 ml-1 shadow">
+            <div class="card-body">
+              <div class="text-value">{{models.title}}</div>
+              <p>{{models.startDate}} - {{ models.endDate}}</p>
+              <button class="btn-hover color-8"  @click="selectSprint(SprintModel.scoreOfSprint,index)" v-b-modal.modal-xl>
+                <i class="icon-chart font-2xl d-block"></i>
+              </button>
             </div>
-          </slide>
-        </carousel>
-       <b-modal id="modal-xl" size="xl" title="Bootstrap-Vue" hide-footer hide-header centered	 >
-          <Bar v-bind:model="select" />
-       </b-modal >
+          </div>
+        </slide>
+      </carousel>
+      <b-modal id="modal-xl" size="xl" title="Bootstrap-Vue" hide-footer hide-header centered>
+        <Bar v-bind:model="select" />
+      </b-modal>
     </div>
   </div>
 </template>
@@ -51,7 +58,7 @@ export default {
       SprintModel: {
         scoreOfSprint: Object
       },
-      isShowModel: false,
+      isShowModel: false
     };
   },
   mounted: function() {
@@ -68,8 +75,8 @@ export default {
     Slide
   },
   methods: {
-    selectSprint(models,index){
-      this.select = models[index]
+    selectSprint(models, index) {
+      this.select = models[index];
     },
     getHistory() {
       if (this.idBoard != "") {
@@ -113,12 +120,51 @@ export default {
   margin-bottom: 10px;
 }
 .cardsprit {
-  border-radius: 25px;
-  height: 200px;
+  overflow: hidden;
+  border-radius: 20px;
+  background-color: #e3e8ed;
+  height: 160px;
   cursor: pointer;
-  background-color:whitesmoke;
-  text-shadow: 2px 2px 4px #000000;
-  color: white;
+  text-shadow: 2px 2px 4px white;
+  color: #3c4b64;
+}
+
+.btn-hover {
+  width: 100px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin: 5px;
+  height: 50px;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+
+  border-radius: 50px;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-hover:hover {
+  background-position: 100% 0;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-hover:focus {
+  outline: none;
+}
+.btn-hover.color-8 {
+  background-image: linear-gradient(
+    to right,
+    #29323c,
+    #485563,
+    #2b5876,
+    #4e4376
+  );
+  box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
 }
 </style>
 

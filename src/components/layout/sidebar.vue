@@ -8,7 +8,7 @@
           </router-link>
         </li>
         <li class="nav-item"></li>
-        <li class="nav-item nav-dropdown" v-if="isBoards">
+        <li class="nav-item nav-dropdown" v-if="idBoard">
           <router-link class="nav-link nav-dropdown-toggle" :to="{name : 'feature'}">
             <i class="nav-icon icon-list"></i> Feature
           </router-link>
@@ -30,7 +30,7 @@
             <i class="nav-icon icon-user"></i> User
           </a>
           <ul class="nav-dropdown-items">
-            <li class="nav-item" v-if="isLoggedIn">
+            <li class="nav-item" v-if="token">
               <a class="nav-link" href @click=" logout">
                 <i class="nav-icon icon-logout"></i>Logout
               </a>
@@ -58,13 +58,7 @@ import { mapGetters } from "vuex";
 import { OAuth } from "oauthio-web";
 export default {
   computed: {
-    ...mapGetters(["token", "idBoard", "startDates", "Sprints", "newBoard"]),
-    isLoggedIn: function() {
-      return this.token;
-    },
-    isBoards: function() {
-      return this.idBoard;
-    }
+    ...mapGetters(["token", "idBoard", "startDates", "Sprints", "newBoard","userName"]),
   },
   methods: {
     logout: function() {
@@ -74,9 +68,16 @@ export default {
       localStorage.removeItem("startDates");
       localStorage.removeItem("Sprints");
       localStorage.removeItem("newBoard");
+      localStorage.removeItem("userName");
       OAuth.clearCache();
       return;
     }
   }
 };
 </script>
+
+<style>
+  .sidebar{ 
+    border-top-right-radius: 30px;
+  }
+</style>
