@@ -24,10 +24,13 @@
               class="form-control w-100 daterangepicker-date-input"
               ref="startDate"
               :value="startDate | dateFormat"
+              :disabled="validated"
+              @click="reset"
               @focus="step = 'selectStartDate'"
               @blur="inputDate"
             />
           </div>
+          <br />
           <p>Sprint Period (Day)</p>
           <input
             name="total"
@@ -35,6 +38,7 @@
             class="form-control w-100 daterangepicker-date-input"
             pattern="^[1-9]+$"
             ref="endDate"
+            :disabled="validated"
             v-model="total"
             v-validate="'required|numeric|max:3'"
             :class="{ 'is-invalid': submitted && errors.has('total') }"
@@ -46,7 +50,7 @@
           <br />
           <div class="form-group form-inline justify-content-end mb-0">
             <button type="button" class="btn btn-light" @click="clear">Reset</button>
-            <button type="button" class="btn btn-primary ml-2" @click="submit">Submit</button>
+            <button type="button" class="btn btn-primary ml-2" @click="submit"  >Submit</button>
           </div>
         </b-col>
       </b-row>
@@ -58,7 +62,7 @@
 import axios from "axios";
 import moment from "moment";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import { faCaretRight, faSlash } from "@fortawesome/free-solid-svg-icons";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
 import { mapActions, mapGetters } from "vuex";
 library.add(faCaretRight);
@@ -79,9 +83,10 @@ export default {
   },
   data() {
     return {
+      validated: false,
       total: "",
       startDate: moment.utc(),
-      endDate: "",
+      endDate: moment.utc(),
       enddated: moment.utc(),
       rangeSelect: null,
       month: moment
@@ -113,11 +118,17 @@ export default {
         .post("http://localhost:9000/checkdate", { idBoard: this.idBoard })
         .then(res => {
           if (res.data.status == true) {
-            this.total = res.data.Sprint
+            this.startDate = moment.utc(res.data.startDate, "YYYY/MM/DD")
+            this.total = res.data.Sprint;
+            this.validated = res.data.status;    
           }
         });
     },
+    reset: function() {
+      this.total = "";
+    },
     clear: function() {
+      this.validated = false,
       this.startDate = moment.utc();
       this.endDate = moment.utc();
       this.total = "";
@@ -138,7 +149,6 @@ export default {
       }
     },
     // Step flow for date range selections
-
     nextStep: function() {
       if (this.step === "selectStartDate") {
         this.step = "selectEndDate";
@@ -151,7 +161,7 @@ export default {
 
     // Try to update the step date from an input value
     inputDate: function(input) {
-      let date = moment.utc(input.target.value, "YYYY-MM-DD");
+      let date = moment.utc(input.target.value, "YYYY/MM/DD");
       if (date.isValid()) {
         this.selectDate(date);
       }
@@ -163,6 +173,7 @@ export default {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
+          this.validated = true;
           let endDate = this.endDate;
           this.getStartDate(this.startDate);
           this.getSprint(this.total);
@@ -170,15 +181,14 @@ export default {
             .post("http://localhost:9000/setdate", {
               startDate: this.startDates,
               Sprint: this.Sprints,
+              
               endDate,
               idBoard: this.idBoard,
               boardName: this.newBoard
             })
             .then(() => {
-              if (this.Sprints != "") {
-                alert("บันทึกข้อมูลเรียบร้อย");
-                this.$router.push("/feature");
-              }
+              alert("บันทึกข้อมูลเรียบร้อย");
+              this.$router.push('/feature')
             })
             .catch(err => {
               if (err) {
@@ -191,26 +201,24 @@ export default {
   },
   watch: {
     total: function(value) {
-      // if (value <= 1) {
-      //   this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-      //     6 * value,
-      //     "days"
-      //   );
-      // } else {
-      //   this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-      //     7 * value - 1,
-      //     "days"
-      //   );
-      // }
-      this.endDate = moment(this.startDate, "YYYY-MM-DD").add(
-        1 * value - 1,
+      this.endDate = moment.utc(this.startDate, "YYYY/MM/DD").add(
+        1 * value - 1 ,
         "days"
       );
+    },
+    range: function() {
+      let predefinedRange = false;
+      // Custom range
+      if (!predefinedRange) {
+        if (this.rangeSelect !== "custom") {
+          this.rangeSelect = "custom";
+        }
+      }
     }
   },
   filters: {
     dateFormat: function(value) {
-      return value ? value.format("YYYY-MM-DD") : "";
+      return value ? value.format("YYYY/MM/DD") : "";
     }
   },
   components: { DateRangePickerCalendar }

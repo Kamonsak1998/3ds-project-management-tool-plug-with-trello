@@ -18,6 +18,10 @@ export const addNameBoard = (state, newNameBoard) =>{
     state.nameBoard = newNameBoard
     localStorage.setItem('nameBoard', newNameBoard)
 }
+export const addUsername = (state, newUsername) =>{
+    state.userName = newUsername
+    localStorage.setItem('userName', newUsername)
+}
 
 export const removeToken = (state) => {
     state.token = ''
@@ -25,10 +29,12 @@ export const removeToken = (state) => {
     state.startDate = ''
     state.Sprint = ''
     state.nameBoard = ''
+    state.userName = ''
     localStorage.setItem('token', '')
     localStorage.setItem('idBoard', '')
     localStorage.setItem('startDate', '')
     localStorage.setItem('Sprint', '')
     localStorage.setItem('nameBoard', '')
+    localStorage.setItem('userName', '')
 
 }
