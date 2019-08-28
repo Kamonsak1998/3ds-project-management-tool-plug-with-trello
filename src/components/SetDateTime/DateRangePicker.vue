@@ -102,7 +102,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["startDates", "Sprints", "idBoard", "newBoard"]),
+    ...mapGetters(["startDates", "Sprints", "idBoard", "newBoard","token"]),
     nextMonth: function() {
       return moment.utc(this.month).add(1, "month");
     },
@@ -183,10 +183,10 @@ export default {
             .post("http://localhost:9000/setdate", {
               startDate: this.startDates,
               sprintDay: this.Sprints,
-              
-              endDate,
+              endDate : endDate,
               idBoard: this.idBoard,
-              boardName: this.newBoard
+              boardName: this.newBoard,
+              token: this.token
             })
             .then(() => {
               alert("บันทึกข้อมูลเรียบร้อย");

@@ -13,7 +13,6 @@
           :title="result.name"
           style="max-width: 30rem;"
           align="center"
-          border-variant="0"
           class="imgbg shadow-lg block"
           @click="setboard(results,index)"
         >
@@ -82,6 +81,7 @@ export default {
   transform: translate(-50%, -50%);
 }
 .imgbg {
+  border: none;
   width: 100%;
   height: 180px;
   border-radius: 25px;
