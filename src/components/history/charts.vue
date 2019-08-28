@@ -8,19 +8,22 @@
       <h1>HISTORY</h1>
       <hr class="my-4" />
       <b-card-group columns class="card-rows cols-2">
-        <b-card class="shadow mb-5 bg-white rounded">
+        <b-card class="shadow mb-4 bg-white rounded">
           <BarColumn v-bind:model="TotalModel" />
         </b-card>
-        <b-card class="shadow mb-5 bg-white rounded">
+        <b-card class="shadow mb-4 bg-white rounded">
           <burndownChart />
         </b-card>
       </b-card-group>
-      <carousel
-        :navigationEnabled="true"
-        :perPageCustom="[[320, 1], [1024, 3],[768,2]]"
-        :mouseDrag="true"
-        class="mb-1"
-      >
+
+        <div class="input-group input-group-lg my-3"> 
+            <div class="input-group-prepend">
+              <span class="input-group-text"><span class="cui-magnifying-glass"></span></span>
+            </div>
+            <input type="text" id="search" class="form-control" placeholder="Search..." aria-label="Search" autocomplete="off" @keyup.enter="selectSprint(this.SprintModel.scoreOfSprint,this.index)" />
+        </div>
+
+      <carousel :navigationEnabled="true" :perPageCustom="[[320, 1], [1024, 3],[768,2]]" :mouseDrag="true" class="mb-1" >
         <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index">
           <div class="card cardsprit mr-1 ml-1 shadow">
             <div class="card-body">
@@ -33,6 +36,7 @@
           </div>
         </slide>
       </carousel>
+
       <b-modal id="modal-xl" size="xl" title="Bootstrap-Vue" hide-footer hide-header centered>
         <Bar v-bind:model="select" />
       </b-modal>
@@ -139,7 +143,6 @@ export default {
   text-align: center;
   border: none;
   background-size: 300% 100%;
-
   border-radius: 50px;
   -o-transition: all 0.4s ease-in-out;
   -webkit-transition: all 0.4s ease-in-out;
@@ -166,5 +169,6 @@ export default {
   );
   box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
 }
+
 </style>
 
