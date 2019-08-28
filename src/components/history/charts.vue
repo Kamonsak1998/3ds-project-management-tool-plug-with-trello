@@ -17,20 +17,18 @@
       </b-card-group>
       <carousel
         :navigationEnabled="true"
-        :perPageCustom="[[360, 1], [1024, 3],[768,2]]"
+        :perPageCustom="[[320, 1], [1024, 3],[768,2]]"
         :mouseDrag="true"
         class="mb-1"
       >
         <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index">
           <div class="card cardsprit mr-1 ml-1 shadow">
-            <div
-              class="card-body"
-              @click="selectSprint(SprintModel.scoreOfSprint,index)"
-              v-b-modal.modal-xl
-            >
-              <i class="icon-chart font-2xl d-block"></i>
+            <div class="card-body">
               <div class="text-value">{{models.title}}</div>
-              <div class="text-value">{{models.startDate}} - {{ models.endDate}}</div>
+              <p>{{models.startDate}} - {{ models.endDate}}</p>
+              <button class="btn-hover color-8"  @click="selectSprint(SprintModel.scoreOfSprint,index)" v-b-modal.modal-xl>
+                <i class="icon-chart font-2xl d-block"></i>
+              </button>
             </div>
           </div>
         </slide>
@@ -124,11 +122,49 @@ export default {
 .cardsprit {
   overflow: hidden;
   border-radius: 20px;
-  background-color:#AED6F1;
-  height: 120px;
+  background-color: #e3e8ed;
+  height: 160px;
   cursor: pointer;
-  text-shadow: 2px 2px 4px #000000;
-  color: white;
+  text-shadow: 2px 2px 4px white;
+  color: #3c4b64;
+}
+
+.btn-hover {
+  width: 100px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin: 5px;
+  height: 50px;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+
+  border-radius: 50px;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-hover:hover {
+  background-position: 100% 0;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-hover:focus {
+  outline: none;
+}
+.btn-hover.color-8 {
+  background-image: linear-gradient(
+    to right,
+    #29323c,
+    #485563,
+    #2b5876,
+    #4e4376
+  );
+  box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
 }
 </style>
 
