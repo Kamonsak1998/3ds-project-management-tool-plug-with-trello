@@ -20,11 +20,11 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><span class="cui-magnifying-glass"></span></span>
             </div>
-            <input type="text" id="search" class="form-control" placeholder="Search..." aria-label="Search" autocomplete="off" @keyup.enter="selectSprint(this.SprintModel.scoreOfSprint,this.index)" />
+            <input type="text" id="search" class="form-control" v-model="search" placeholder="Search..." aria-label="Search" autocomplete="off">
         </div>
 
       <carousel :navigationEnabled="true" :perPageCustom="[[320, 1], [1024, 3],[768,2]]" :mouseDrag="true" class="mb-1" >
-        <slide v-for="(models,index) in SprintModel.scoreOfSprint" :key="index">
+        <slide v-for="(models,index) in filteredSprintModel" :key="index">
           <div class="card cardsprit mr-1 ml-1 shadow">
             <div class="card-body">
               <div class="text-value">{{models.title}}</div>
@@ -56,6 +56,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      search:'',
       variants: ["dark"],
       TotalModel: Object,
       select: Object,
@@ -69,9 +70,14 @@ export default {
     this.getHistory();
   },
   computed: {
-    ...mapGetters(["idBoard", "token"])
+    ...mapGetters(["idBoard", "token"]),
+    filteredSprintModel:function(){
+      return this.SprintModel.scoreOfSprint.filter((models) => {
+        return models.title.match(this.search);
+      })
+    }
   },
-  components: {
+  components: { 
     Bar,
     BarColumn,
     burndownChart,
