@@ -55,7 +55,6 @@ export default {
     ...mapGetters(["idBoard", "Sprints"])
   },
   methods: {
-    
     checkidBoard() {
       if (this.idBoard != "") {
         return;
@@ -66,12 +65,15 @@ export default {
     },
     checkDate: function() {
       axios
-        .post("http://localhost:9000/checkdate", { idBoard: this.idBoard })
+        .post("http://localhost:9000/checksetdate", { idBoard: this.idBoard })
         .then(res => {
           if (res.data.status == false) {
           this.$router.push("/setdatetime");
           }
-        });
+        }).catch(err => {
+          alert(err);
+          
+        })
     },
   }
 };

@@ -34,6 +34,7 @@ export default {
           self.getToken(token);
           trello.me().done(function(response) { 
             self.getUsername(response.name)
+            
             if (this.token != "") {
               self.$router.push("/dashboards");
             }

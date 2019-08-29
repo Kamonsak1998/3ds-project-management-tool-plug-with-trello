@@ -119,7 +119,7 @@ export default {
         .then(res => {
           if (res.data.status == true) {
             this.startDate = moment.utc(res.data.startDate, "YYYY/MM/DD")
-            this.totaled = res.data.Sprint;
+            this.totaled = res.data.sprintDay;
             this.validated = res.data.status;
             this.total = parseInt(this.totaled)    
           }
@@ -186,10 +186,9 @@ export default {
               endDate : endDate,
               idBoard: this.idBoard,
               boardName: this.newBoard,
-              token: this.token
             })
             .then(() => {
-              alert("บันทึกข้อมูลเรียบร้อย");
+              alert("บันทึกข้อมูลเรียบร้อย"); 
               this.$router.push('/feature')
             })
             .catch(err => {
