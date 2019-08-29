@@ -89,7 +89,7 @@ export default {
   left: 45%;
 }
 .allboard-body {
-  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.2), 0 0px 20px 0 rgba(0,0,0,0.19);
+  box-shadow:0 2px 3px 0px rgba(0,0,0,0.25);
   padding-top: 15px;
   height: 60px;
   color: white;
@@ -127,10 +127,11 @@ div.row.allboard-body {
   line-height: 1.4;
 }
 .allboard-body:hover {
+    
    -webkit-transform: scale(1.1);
    -ms-transform: scale(1.1);
     transform: scale(1.1); 
-    box-shadow: 0 0px 0px 0 rgba(255, 255, 255, 0.2), 0 0px 0px 0 rgba(255, 255, 255, 0.19);
+    box-shadow:0 8px 20px 0px rgba(0,0,0,0.125);
 }
 .col-head {
   font-size: 15px;
