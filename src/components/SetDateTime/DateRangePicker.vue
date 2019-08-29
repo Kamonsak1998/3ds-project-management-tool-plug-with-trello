@@ -115,7 +115,7 @@ export default {
   methods: {
     checkDate: function() {
       axios
-        .post("http://localhost:9000/checkdate", { idBoard: this.idBoard })
+        .post("http://localhost:9000/checksetdate", { idBoard: this.idBoard })
         .then(res => {
           if (res.data.status == true) {
             this.startDate = moment.utc(res.data.startDate, "YYYY/MM/DD")

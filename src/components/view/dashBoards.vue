@@ -63,10 +63,8 @@ export default {
            this.results = Response.data;
            this.isShowModel = true;
           });
-        return;
       } else {
         this.$router.push("/auth/login");
-        return;
       }
     }
   }

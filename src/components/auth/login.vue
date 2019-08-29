@@ -23,7 +23,7 @@ export default {
     ...mapGetters(["token"])
   },
   methods: {
-    ...mapActions(["getToken","getUsername"]),
+    ...mapActions(["getToken","getUsername","getIduser"]),
     Auth() {
       const self = this;
       OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
@@ -34,7 +34,7 @@ export default {
           self.getToken(token);
           trello.me().done(function(response) { 
             self.getUsername(response.name)
-            
+            self.getIduser(response.raw.id)
             if (this.token != "") {
               self.$router.push("/dashboards");
             }
