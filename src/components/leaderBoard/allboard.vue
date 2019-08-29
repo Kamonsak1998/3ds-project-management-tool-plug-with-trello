@@ -93,7 +93,7 @@ export default {
   padding-top: 15px;
   height: 60px;
   color: white;
-  background: linear-gradient(40deg, #eb2d0c, #e0f141) !important;
+  background: linear-gradient(40deg, #ff6f69, #ffcc5c) !important;
   font-size: 16px;
   border-radius: 5px;
   /* border-color:red; */
