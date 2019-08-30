@@ -59,7 +59,6 @@ import { OAuth } from "oauthio-web";
 export default {
   computed: {
     ...mapGetters(["token", "idBoard", "startDates", "Sprints", "newBoard","userName"]),
-
   },
   methods: {
     logout: function() {
@@ -76,3 +75,9 @@ export default {
   }
 };
 </script>
+
+<style>
+  .sidebar{ 
+    border-top-right-radius: 30px;
+  }
+</style>

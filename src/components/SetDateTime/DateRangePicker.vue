@@ -36,7 +36,7 @@
             name="total"
             type="text"
             class="form-control w-100 daterangepicker-date-input"
-            pattern="^[1-9]+$"
+            pattern="^[1-9+$]"
             ref="endDate"
             :disabled="validated"
             v-model="total"
