@@ -23,22 +23,29 @@ export default {
     ...mapGetters(["token"])
   },
   methods: {
-    ...mapActions(["getToken","getUsername","getIduser"]),
+    ...mapActions(["getToken", "getUsername", "getIduser"]),
     Auth() {
       const self = this;
       OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
       var provider = "trello";
       OAuth.popup(provider, { cache: true })
         .done(function(trello) {
-          const token = trello.oauth_token;
-          self.getToken(token);
-          trello.me().done(function(response) { 
-            self.getUsername(response.name)
-            self.getIduser(response.raw.id)
-            if (this.token != "") {
-              self.$router.push("/dashboards");
-            }
-          });
+          if (trello.provider == "trello") {
+            const token = trello.oauth_token;
+            self.getToken(token);
+            trello
+              .me()
+              .done(function(response) {
+                self.getUsername(response.name);
+                self.getIduser(response.raw.id);
+                if (this.token != "") {
+                  self.$router.push("/dashboards");
+                }
+              })
+              .fail(function(err) {
+                alert(err);
+              });
+          }
         })
         .fail(function(err) {
           alert(err);
