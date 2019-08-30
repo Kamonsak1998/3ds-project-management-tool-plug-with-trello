@@ -30,6 +30,7 @@ export default {
       var provider = "trello";
       OAuth.popup(provider, { cache: true })
         .done(function(trello) {
+          console.log(trello);
           if (trello.provider == "trello") {
             const token = trello.oauth_token;
             self.getToken(token);
@@ -70,7 +71,7 @@ export default {
   line-height: 1;
   color: #fff;
   letter-spacing: 0.025em;
-  background: #379aff;
+  background: linear-gradient(40deg, #ff9966, #ff6666, #cc66cc) !important;
   padding: 18px 0 11px;
   cursor: pointer;
   border: 0;
