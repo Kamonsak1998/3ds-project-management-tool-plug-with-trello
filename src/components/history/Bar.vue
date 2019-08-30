@@ -18,7 +18,7 @@
                     <option value="palette10">Theme 10</option>
                 </select>
             </p>
-            <apexchart height="350px" type="bar" :options="chartOptions" :series="series"></apexchart>
+            <apexchart height="350" type="bar" :options="chartOptions" :series="series"></apexchart>
         </div>
 
     </div>
