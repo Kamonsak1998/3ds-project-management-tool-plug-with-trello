@@ -175,7 +175,7 @@ export default {
     submit: function() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
-      this.total = parseInt(this.total)
+      this.total = parseFloat(this.total)
         if (valid) {
           this.validated = true;
           let endDate = this.endDate;
