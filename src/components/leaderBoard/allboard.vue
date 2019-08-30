@@ -35,7 +35,7 @@ export default {
       like: true,
       key: 1,
       users: [],
-      user: { name: "", point: 0 },
+      user: { name: "", point: 0 }
       // items: [
       //   { name: "BahBenz", point: "100" },
       //   { name: "arram", point: "200" },
@@ -67,12 +67,12 @@ export default {
           // console.log(response);
           this.users = response.data.leaderboard;
           // this.like = true;
+        })
+        .catch(err => {
+          if (err) {
+            alert("connection lost");
+          }
         });
-      // .catch(err => {
-      //   if ((err)) {
-      //     alert("connection lost");
-      //   }
-      // });
     }
   }
 };
@@ -121,7 +121,7 @@ div.row.allboard-body {
   line-height: 1.4;
 }
 .allboard-body:hover {
-  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.2), 0 0px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2), 0 0px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .col-head {
   font-size: 15px;

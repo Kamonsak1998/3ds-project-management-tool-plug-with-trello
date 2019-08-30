@@ -74,7 +74,9 @@ export default {
         })
     },
     setmember(){
-      axios.post("http://localhost:9000/setmember", { token: this.token , idBoard: this.idBoard})
+      axios.post("http://localhost:9000/setmember", { token: this.token , idBoard: this.idBoard}).catch(err => {
+        alert(err);
+      })
     }
   }
 };

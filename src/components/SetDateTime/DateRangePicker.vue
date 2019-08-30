@@ -123,7 +123,9 @@ export default {
             this.validated = res.data.status;
             this.total = parseInt(this.totaled)    
           }
-        });
+        }).catch(err => {
+          alert(err);
+        })
     },
     reset: function() {
       this.total = "";

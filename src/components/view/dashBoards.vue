@@ -62,7 +62,9 @@ export default {
           .then(Response => {
            this.results = Response.data;
            this.isShowModel = true;
-          });
+          }).catch(err => {
+            alert(err)
+          })
       } else {
         this.$router.push("/auth/login");
       }

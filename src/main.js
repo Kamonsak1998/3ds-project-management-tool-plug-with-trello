@@ -35,12 +35,9 @@ if (idBoard && idBoard != "") {
 } 
 if (startDate && startDate != "") {
   store.commit('addStartDate', startDate)
-  console.log(startDate);
 }
 if (Sprint && Sprint != "") {
   store.commit('addSprint', Sprint)
-  console.log(Sprint);
-  
 }
 if (userName && userName != "") {
   store.commit('addUsername', userName)
