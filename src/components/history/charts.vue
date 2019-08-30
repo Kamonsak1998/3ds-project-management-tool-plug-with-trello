@@ -7,6 +7,14 @@
     <div class="animated fadeIn font" v-if="isShowModel === true">
       <h1>HISTORY</h1>
       <hr class="my-4" />
+
+      <div class="input-group input-group-lg my-3"> 
+          <div class="input-group-prepend">
+            <span class="input-group-text"><span class="cui-magnifying-glass"></span></span>
+          </div>
+          <input type="text" id="search" class="form-control" v-model="search" placeholder="Search Sprint..." aria-label="Search" autocomplete="off">
+      </div>
+
       <b-card-group columns class="card-rows cols-2">
         <b-card class="shadow mb-4 bg-white rounded">
           <BarColumn v-bind:model="TotalModel" />
@@ -15,13 +23,6 @@
           <burndownChart />
         </b-card>
       </b-card-group>
-
-        <div class="input-group input-group-lg my-3"> 
-            <div class="input-group-prepend">
-              <span class="input-group-text"><span class="cui-magnifying-glass"></span></span>
-            </div>
-            <input type="text" id="search" class="form-control" v-model="search" placeholder="Search..." aria-label="Search" autocomplete="off">
-        </div>
 
       <carousel :navigationEnabled="true" :perPageCustom="[[320, 1], [1024, 3],[768,2]]" :mouseDrag="true" class="mb-1" >
         <slide v-for="(models,index) in filteredSprintModel" :key="index">
