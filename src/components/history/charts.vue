@@ -20,7 +20,14 @@
           <BarColumn v-bind:model="TotalModel" />
         </b-card>
         <b-card class="shadow mb-4 bg-white rounded">
-          <burndownChart />
+           <burndownChart />
+        </b-card>
+      </b-card-group>
+      <h1>Burndown Chart</h1>
+      <hr class="my-4" />
+       <b-card-group rows class="card-rows">
+        <b-card class="shadow mb-4 bg-white rounded">
+           <burndownChart />
         </b-card>
       </b-card-group>
 
