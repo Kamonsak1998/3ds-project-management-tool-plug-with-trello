@@ -40,16 +40,21 @@
         </router-link>
       </div>
     </div>
+    <setscore> </setscore>
   </div>
 </template>
 
 <script>
+import setscore from '@/components/view/setscore'
 import { mapGetters } from "vuex";
 import axios from "axios";
 export default {
   mounted: function() {
     this.checkidBoard();
     this.checkDate();
+  },
+  components: {
+    setscore,
   },
   computed: {
     ...mapGetters(["idBoard", "Sprints"])
