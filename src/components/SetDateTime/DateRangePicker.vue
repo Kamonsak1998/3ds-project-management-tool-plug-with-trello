@@ -44,9 +44,9 @@
             :class="{ 'is-invalid': submitted && errors.has('total') }"
           />
           <div
-            v-if="submitted && errors.has('phone')"
+            v-if="submitted && errors.has('total')"
             class="invalid-feedback"
-          >{{ errors.first('phone') }}</div>
+          >{{ errors.first('total') }}</div>
           <br />
           <div class="form-group form-inline justify-content-end mb-0">
             <button type="button" class="btn btn-light" @click="clear">Reset</button>
