@@ -1,11 +1,6 @@
 <template>
-  <div class="container">
+  <div class="container pt-5">
     <div class="row">
-      <!--  <div class="col-sm-3">
-        <router-link :to="{name : 'leaderboyard'}">
-        </router-link>
-      </div>-->
-
       <div class="col-sm-4">
         <router-link  style="text-decoration:none" :to="{name : 'leaderboard'}">
           <div class="card text-white bg-primary">
@@ -45,16 +40,21 @@
         </router-link>
       </div>
     </div>
+    <setscore> </setscore>
   </div>
 </template>
 
 <script>
+import setscore from '@/components/view/setscore'
 import { mapGetters } from "vuex";
 import axios from "axios";
 export default {
   mounted: function() {
     this.checkidBoard();
     this.checkDate();
+  },
+  components: {
+    setscore,
   },
   computed: {
     ...mapGetters(["idBoard", "Sprints"])
@@ -119,8 +119,5 @@ export default {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-}
-.text-value {
-  color: white;
 }
 </style>
