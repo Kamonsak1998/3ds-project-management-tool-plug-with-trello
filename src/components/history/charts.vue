@@ -21,8 +21,8 @@
         </b-card>
         <b-card class="shadow mb-4 bg-white rounded">
           <carousel :per-page="1"  :mouseDrag="true" :centerMode="true" :paginationEnabled="false" class="mb-4">
-            <slide v-for="(models,index) in filteredSprintModel" :key="index">
-              <burndownChart />
+            <slide>
+              <burndownChart v-bind:model="burndown" />
             </slide>
           </carousel>
         </b-card>
@@ -63,6 +63,7 @@ export default {
     return {
       search:'',
       TotalModel: Object,
+      burndown:Object,
       select: Object,
       SprintModel: {
         scoreOfSprint: Object
@@ -72,6 +73,7 @@ export default {
   },
   mounted: function() {
     this.getHistory();
+    this.getburndownChart();
   },
   computed: {
     ...mapGetters(["idBoard", "token"]),
@@ -115,6 +117,14 @@ export default {
       } else {
         this.$router.push("/dashboards");
       }
+    },
+    getburndownChart(){
+      axios.get("http://localhost:9000/setburndownchart").then(res => {
+        this.burndown = res.data.ScoreTotal[0]
+        console.log(res.data.ScoreTotal[0]);
+      }).catch(err => {
+        alert(err);
+      })
     }
   }
 };

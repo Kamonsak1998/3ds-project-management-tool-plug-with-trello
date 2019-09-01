@@ -5,8 +5,20 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "burndownChart",
+   mounted: function() {
+     console.log('b',this.model.dataIDealBurn[2].iDealBurn);
+    //  this.series = {...this.series,...{data:this.model.dataIDealBurn[2].iDealBurn}}
+     this.chartOptions = {...this.chartOptions, ...{subtitle:{text:this.model.dataIDealBurn[2].titleSprint}}};
+     this.chartOptions = {...this.chartOptions, ...{xaxis: {categories: this.model.dataDay[2].datePeriod}}};
+  },
+   props: {
+      model: {
+          required: true,
+      },
+  },
   data: function() {
     return {
       series: [
@@ -14,7 +26,7 @@ export default {
           name: "Ideal Burn",
           color: "rgba(255,0,0,0.25)",
           lineWidth: 2,
-          data: [110, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0]
+          data: [110, 100, 90, 80, 70, 60, 50, 40, 30, 25, 10, 20, 10, 0]
         },
         {
           name: "Actual Burn",
@@ -22,7 +34,7 @@ export default {
           marker: {
             radius: 6
           },
-          data: [100, 110, 125, 95, 64, 76, 62, 44, 35, 29, 18, 2]
+          data: [100, 110, 125, 95, 64, 76, 62, 44, 35, 29, 23, 20, 18, 2]
         }
       ],
       chartOptions: {
@@ -35,7 +47,7 @@ export default {
           }
         },
         subtitle: {
-          text: "Sprint 1",
+          text: "1",
           x: -20
         },
         xaxis: {
