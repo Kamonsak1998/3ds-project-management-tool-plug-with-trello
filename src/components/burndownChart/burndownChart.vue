@@ -8,10 +8,11 @@
 export default {
   name: "burndownChart",
    mounted: function() {
-     this.series[0] = {...this.series[2],...{data:this.model.dataIDealBurn[2].iDealBurn}}
-     this.chartOptions = {...this.chartOptions, ...{subtitle:{text:this.model.dataIDealBurn[2].titleSprint}}};
+     this.series[0] = {...this.series[0],...{data:this.model.dataIDealBurn[2].iDealBurn}}
+     this.chartOptions = {...this.chartOptions, ...{title:{text:this.model.dataIDealBurn[2].titleSprint}}};
+     this.chartOptions = {...this.chartOptions, ...{subtitle:{text:this.model.dataIDealBurn[2].startDate+ "-" +this.model.dataIDealBurn[2].endDate}}};
      this.chartOptions = {...this.chartOptions, ...{xaxis: {categories: this.model.dataDay[2].datePeriod}}};
-  },
+   },
    props: {
       model: {
           required: true,
@@ -44,9 +45,23 @@ export default {
             hideDelay: 200
           }
         },
+        title: {
+          text: "sprint..",
+          x: -20,
+          align: "center",
+          style: {
+              fontSize: "20px",
+          }
+        },
         subtitle: {
-          text: "sprint",
-          x: -20
+            text: "",
+            align: "center",
+            margin: 10,
+            x: -20,
+            floating: false,
+            style: {
+                fontSize: "15px",
+            }
         },
         xaxis: {
           categories: []
