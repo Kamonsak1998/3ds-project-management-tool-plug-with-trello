@@ -29,13 +29,6 @@ export default {
 </script>
 
 <style>
-/* .container {
-    width: 100%;
-    padding-right: 0;
-    padding-left: 0;
-    margin-right: 0;
-    margin-left: auto;
-} */
 .main .container-fluid {
     padding: 0 0px;
 }

@@ -1,11 +1,9 @@
 <template>
   <div class="container">
       <h1 class="pb-4"> Set Date Time Stamp</h1>
-     <!-- <h3 class="pb-2 border-bottom"></h3> -->
     <div class="mb-4">
       <date-range-picker v-on:submit="submitted" />
     </div>
-    <!-- <h3 class="pb-2 border-bottom"></h3> -->
   </div>
 </template>
 
@@ -31,13 +29,9 @@ export default {
   },
  mounted: function() {
     if (this.idBoard != "") {
-       // console.log(1234);
-      
       return;
     } else {
       this.$router.push("/dashboards");
-      return;
-        // console.log(1234);
     }
   },
   computed: {
@@ -48,9 +42,7 @@ export default {
         this.parameter[arr[0]] = arr[1]
     },
     submitted: function() {
-      // console.log(range)
     },
-    // Modal methods
     submittedModal: function(range) {
       this.startDate = range.startDate
       this.endDate = '';
@@ -62,7 +54,6 @@ export default {
     closeModal: function() {
       this.$refs.exampleModal.hide()
     },
-    // Popover methods
     submittedPopover: function(range) {
       this.startDate = range.startDate
       this.endDate = range.endDate

@@ -112,10 +112,8 @@ export default {
           .catch(err => {
             alert(err);
           });
-        return;
       } else {
         this.$router.push("/dashboards");
-        return;
       }
     }
   }
