@@ -44,9 +44,9 @@
             :class="{ 'is-invalid': submitted && errors.has('total') }"
           />
           <div
-            v-if="submitted && errors.has('phone')"
+            v-if="submitted && errors.has('total')"
             class="invalid-feedback"
-          >{{ errors.first('phone') }}</div>
+          >{{ errors.first('total') }}</div>
           <br />
           <div class="form-group form-inline justify-content-end mb-0">
             <button type="button" class="btn btn-light" @click="clear">Reset</button>
@@ -115,15 +115,17 @@ export default {
   methods: {
     checkDate: function() {
       axios
-        .post("http://localhost:9000/checkdate", { idBoard: this.idBoard })
+        .post("http://localhost:9000/checksetdate", { idBoard: this.idBoard })
         .then(res => {
           if (res.data.status == true) {
             this.startDate = moment.utc(res.data.startDate, "YYYY/MM/DD")
-            this.totaled = res.data.Sprint;
+            this.totaled = res.data.sprintDay;
             this.validated = res.data.status;
             this.total = parseInt(this.totaled)    
           }
-        });
+        }).catch(err => {
+          alert(err);
+        })
     },
     reset: function() {
       this.total = "";
@@ -173,7 +175,7 @@ export default {
     submit: function() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
-      this.total = parseInt(this.total)
+      this.total = parseFloat(this.total)
         if (valid) {
           this.validated = true;
           let endDate = this.endDate;
@@ -186,10 +188,9 @@ export default {
               endDate : endDate,
               idBoard: this.idBoard,
               boardName: this.newBoard,
-              token: this.token
             })
             .then(() => {
-              alert("บันทึกข้อมูลเรียบร้อย");
+              alert("บันทึกข้อมูลเรียบร้อย"); 
               this.$router.push('/feature')
             })
             .catch(err => {

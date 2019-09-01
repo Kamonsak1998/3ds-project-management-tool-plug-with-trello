@@ -7,10 +7,10 @@
       <div v-for="(result,index) in results" :key="index" class="col-sm-4">
         <b-card
           overlay
-          :img-src="result.prefs.backgroundImage"
+          :img-src="result.imageBackground"
           img-alt="Card Image"
           text-variant="white"
-          :title="result.name"
+          :title="result.boardName"
           style="max-width: 30rem;"
           align="center"
           class="imgbg shadow-lg block"
@@ -45,8 +45,8 @@ export default {
   methods: {
     ...mapActions(["getBoard", "getNameBoard"]),
     setboard(result, index) {
-      const boardid = result[index].id;
-      const nameBoard = result[index].name;
+      const boardid = result[index].idBoard;
+      const nameBoard = result[index].boardName;
       this.getBoard(boardid);
       this.getNameBoard(nameBoard);
       if (this.idBoard != "") {
@@ -60,13 +60,13 @@ export default {
         axios
           .post("http://localhost:9000/getdashboard", { token: this.token })
           .then(Response => {
-            this.results = Response.data;
-             this.isShowModel = true;
-          });
-        return;
+           this.results = Response.data;
+           this.isShowModel = true;
+          }).catch(err => {
+            alert(err)
+          })
       } else {
         this.$router.push("/auth/login");
-        return;
       }
     }
   }

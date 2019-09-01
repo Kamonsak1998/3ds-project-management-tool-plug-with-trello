@@ -23,21 +23,30 @@ export default {
     ...mapGetters(["token"])
   },
   methods: {
-    ...mapActions(["getToken","getUsername"]),
+    ...mapActions(["getToken", "getUsername", "getIduser"]),
     Auth() {
       const self = this;
       OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
       var provider = "trello";
       OAuth.popup(provider, { cache: true })
         .done(function(trello) {
-          const token = trello.oauth_token;
-          self.getToken(token);
-          trello.me().done(function(response) { 
-            self.getUsername(response.name)
-            if (this.token != "") {
-              self.$router.push("/dashboards");
-            }
-          });
+          console.log(trello);
+          if (trello.provider == "trello") {
+            const token = trello.oauth_token;
+            self.getToken(token);
+            trello
+              .me()
+              .done(function(response) {
+                self.getUsername(response.name);
+                self.getIduser(response.raw.id);
+                if (this.token != "") {
+                  self.$router.push("/dashboards");
+                }
+              })
+              .fail(function(err) {
+                alert(err);
+              });
+          }
         })
         .fail(function(err) {
           alert(err);
@@ -62,7 +71,7 @@ export default {
   line-height: 1;
   color: #fff;
   letter-spacing: 0.025em;
-  background: #379aff;
+  background: linear-gradient(40deg, #ff9966, #ff6666, #cc66cc) !important;
   padding: 18px 0 11px;
   cursor: pointer;
   border: 0;

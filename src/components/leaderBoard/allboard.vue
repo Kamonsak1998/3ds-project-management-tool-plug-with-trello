@@ -67,12 +67,12 @@ export default {
           // console.log(response);
           this.users = response.data.leaderboard;
           // this.like = true;
+        })
+        .catch(err => {
+          if (err) {
+            alert("connection lost");
+          }
         });
-      // .catch(err => {
-      //   if ((err)) {
-      //     alert("connection lost");
-      //   }
-      // });
     }
   }
 };
