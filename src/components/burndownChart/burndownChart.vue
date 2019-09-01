@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <apexchart height="395" type="line" :options="chartOptions" :series="series"></apexchart>
+  <div class="animated fadeIn">
+    <apexchart height="370" type="line" :options="chartOptions" :series="series"></apexchart>
   </div>
 </template>
 
