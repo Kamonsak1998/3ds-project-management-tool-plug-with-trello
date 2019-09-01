@@ -12,11 +12,6 @@ export default new Router({
             component: () => import('@/components/auth/login')
         },
         {
-            path: '/auth/register',
-            name: 'register',
-            component: () => import('@/components/auth/register')
-        },
-        {
             path: '/leaderBoard/leaderboard',
             name: 'leaderboard',
             component: () => import('@/components/leaderBoard/Leaderboard')

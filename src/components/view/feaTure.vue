@@ -40,39 +40,49 @@
         </router-link>
       </div>
     </div>
+    <setscore> </setscore>
   </div>
 </template>
 
 <script>
+import setscore from '@/components/view/setscore'
 import { mapGetters } from "vuex";
 import axios from "axios";
 export default {
   mounted: function() {
     this.checkidBoard();
-    this.checkDate();
+  },
+  components: {
+    setscore,
   },
   computed: {
-    ...mapGetters(["idBoard", "Sprints"])
+    ...mapGetters(["idBoard","token"])
   },
   methods: {
-    
     checkidBoard() {
       if (this.idBoard != "") {
-        return;
+      this.checkDate();
+      this.setmember();
       } else {
         this.$router.push("/dashboards");
-        return;
       }
     },
     checkDate: function() {
       axios
-        .post("http://localhost:9000/checkdate", { idBoard: this.idBoard })
+        .post("http://localhost:9000/checksetdate", { idBoard: this.idBoard })
         .then(res => {
           if (res.data.status == false) {
           this.$router.push("/setdatetime");
-          }
-        });
+          } 
+        }).catch(err => {
+          alert(err);
+        })
     },
+    setmember(){
+      axios.post("http://localhost:9000/setmember", { token: this.token , idBoard: this.idBoard}).catch(err => {
+        alert(err);
+      })
+    }
   }
 };
 </script>

@@ -16,10 +16,10 @@
           <b>Score</b>
         </div>
       </div>
-      <div class="row allboard-body" v-for="(user,key) in users" :key="user">
+      <div class="row allboard-body" v-for="(items,key) in items" :key="items">
         <div class="col col-body">{{key+1}}</div>
-        <div class="col col-body">{{users.name}}</div>
-        <div class="col col-body">{{users.point}}</div>
+        <div class="col col-body">{{items.name}}</div>
+        <div class="col col-body">{{items.point}}</div>
       </div>
     </div>
   </div>
@@ -36,18 +36,18 @@ export default {
       key: 1,
       users: [],
       user: { name: "", point: 0 },
-      // items: [
-      //   { name: "BahBenz", point: "100" },
-      //   { name: "arram", point: "200" },
-      //   { name: "gono", point: "300" },
-      //   { name: "gono", point: "300" },
-      //   { name: "gono", point: "300" },
-      //   { name: "gono", point: "300" },
-      //   { name: "gono", point: "300" },
-      //   { name: "gono", point: "300" },
-      //   { name: "gono", point: "300" },
-      //   { name: "arnon", point: "400" }
-      // ]
+      items: [
+        { name: "BahBenz", point: "100" },
+        { name: "arram", point: "200" },
+        { name: "gono", point: "300" },
+        { name: "gono", point: "300" },
+        { name: "gono", point: "300" },
+        { name: "gono", point: "300" },
+        { name: "gono", point: "300" },
+        { name: "gono", point: "300" },
+        { name: "gono", point: "300" },
+        { name: "arnon", point: "400" }
+      ]
     };
   },
   mounted: function() {
@@ -67,12 +67,12 @@ export default {
           // console.log(response);
           this.users = response.data.leaderboard;
           // this.like = true;
+        })
+        .catch(err => {
+          if (err) {
+            alert("connection lost");
+          }
         });
-      // .catch(err => {
-      //   if ((err)) {
-      //     alert("connection lost");
-      //   }
-      // });
     }
   }
 };
@@ -89,11 +89,14 @@ export default {
   left: 45%;
 }
 .allboard-body {
+  box-shadow:0 2px 3px 0px rgba(0,0,0,0.25);
   padding-top: 15px;
   height: 60px;
   color: white;
-  background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
+  background: linear-gradient(40deg, #ff6f69, #ffcc5c) !important;
   font-size: 16px;
+  border-radius: 5px;
+  /* border-color:red; */
 }
 div.allboard-row {
   margin: auto;
@@ -105,10 +108,13 @@ div.allboard-row {
   color: black;
   background: transparent;
   font-size: 10px;
+  border-radius: 8px;
+
 }
 div.row.allboard-body {
   border-collapse: collapse;
-  margin-top: 13px;
+  margin-top: 12px;
+
 }
 .spinner {
   padding-top: 20%;
@@ -121,7 +127,11 @@ div.row.allboard-body {
   line-height: 1.4;
 }
 .allboard-body:hover {
-  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.2), 0 0px 20px 0 rgba(0,0,0,0.19);
+    
+   -webkit-transform: scale(1.1);
+   -ms-transform: scale(1.1);
+    transform: scale(1.1); 
+    box-shadow:0 8px 20px 0px rgba(0,0,0,0.125);
 }
 .col-head {
   font-size: 15px;
