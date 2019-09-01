@@ -121,7 +121,6 @@ export default {
     getburndownChart(){
       axios.get("http://localhost:9000/setburndownchart").then(res => {
         this.burndown = res.data.ScoreTotal[0]
-        console.log(res.data.ScoreTotal[0]);
       }).catch(err => {
         alert(err);
       })
