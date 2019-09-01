@@ -16,3 +16,6 @@ export function getNameBoard({ commit }, nameBoard) {
 export function getUsername({ commit }, Username) {
   commit('addUsername', Username)
 }
+export function getIduser({ commit }, iduser) {
+  commit('addIduser', iduser)
+}

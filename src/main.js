@@ -25,15 +25,14 @@ const idBoard = localStorage.getItem('idBoard')
 const startDate = localStorage.getItem('startDate')
 const Sprint = localStorage.getItem('Sprint')
 const userName = localStorage.getItem('userName')
+const idUser = localStorage.getItem('idUser')
 
 if (token && token != "") {
   store.commit('addToken', token)
 }
-
 if (idBoard && idBoard != "") {
   store.commit('addBoard', idBoard)
-}
-
+} 
 if (startDate && startDate != "") {
   store.commit('addStartDate', startDate)
 }
@@ -42,6 +41,9 @@ if (Sprint && Sprint != "") {
 }
 if (userName && userName != "") {
   store.commit('addUsername', userName)
+}
+if (idUser && idUser != "") {
+  store.commit('addIduser', idUser)
 }
 
 Vue.config.productionTip = false
