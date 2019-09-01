@@ -54,21 +54,17 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import { OAuth } from "oauthio-web";
 export default {
   computed: {
-    ...mapGetters(["token", "idBoard", "startDates", "Sprints", "newBoard","userName"]),
+    ...mapGetters(["token", "idBoard"]),
   },
   methods: {
+    ...mapMutations(['remove']),
     logout: function() {
       location.reload();
-      localStorage.removeItem("token");
-      localStorage.removeItem("idBoard");
-      localStorage.removeItem("startDates");
-      localStorage.removeItem("Sprints");
-      localStorage.removeItem("newBoard");
-      localStorage.removeItem("userName");
+      this.remove()
       OAuth.clearCache();
       return;
     }
