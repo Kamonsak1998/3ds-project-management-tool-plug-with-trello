@@ -42,7 +42,7 @@
             v-model="total"
             v-validate="'required|numeric|max:3'"
             :class="{ 'is-invalid': submitted && errors.has('total') }"
-          />
+          /><br/>
           <div
             v-if="submitted && errors.has('total')"
             class="invalid-feedback"
@@ -99,6 +99,7 @@ export default {
   },
   mounted: function() {
     this.checkDate();
+    this.focusInput();
   },
 
   computed: {
@@ -113,6 +114,9 @@ export default {
   },
 
   methods: {
+    focusInput() {
+      this.$refs.startDate.focus();
+    },
     checkDate: function() {
       axios
         .post("http://localhost:9000/checksetdate", { idBoard: this.idBoard })
@@ -209,15 +213,15 @@ export default {
         "days"
       );
     },
-    range: function() {
-      let predefinedRange = false;
-      // Custom range
-      if (!predefinedRange) {
-        if (this.rangeSelect !== "custom") {
-          this.rangeSelect = "custom";
-        }
-      }
-    }
+    // range: function() {
+    //   let predefinedRange = false;
+    //   // Custom range
+    //   if (!predefinedRange) {
+    //     if (this.rangeSelect !== "custom") {
+    //       this.rangeSelect = "custom";
+    //     }
+    //   }
+    // }
   },
   filters: {
     dateFormat: function(value) {
