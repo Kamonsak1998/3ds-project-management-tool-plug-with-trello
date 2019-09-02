@@ -208,9 +208,7 @@ export default {
     checkscore: function() {
       axios
         .post("http://localhost:9000/checkscoresize")
-        .then(res => {
-          console.log(res);
-        })
+        .then()
         // .catch(err => {
         //   alert(err);
         // });
@@ -222,9 +220,7 @@ export default {
           // this.validated = true;
           axios
             .post("http://localhost:9000/setscoresize", { point: this.point })
-            .then(res => {
-              console.log(this.point);
-            });
+            .then();
         }
       });
     },
