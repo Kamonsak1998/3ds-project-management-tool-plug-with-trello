@@ -20,7 +20,7 @@
           <BarColumn v-bind:model="TotalModel" />
         </b-card>
         <b-card class="shadow mb-4 bg-white rounded">
-          <carousel :per-page="1"  :mouseDrag="true" :centerMode="true" :paginationEnabled="false" class="mb-4">
+          <carousel :per-page="1" :scrollPerPage="false" :paginationEnabled="false" class="mb-4">
             <slide>
               <burndownChart v-bind:model="burndown" />
             </slide>
@@ -28,7 +28,7 @@
         </b-card>
       </b-card-group>
 
-      <carousel :navigationEnabled="true" :perPageCustom="[[320, 1], [1024, 3],[768,2]]" :paginationEnabled="true" :paginationPadding="1" :mouseDrag="true" :centerMode="false" >
+      <carousel :navigationEnabled="true" :perPageCustom="[[320, 1],[1024, 3]]" :scrollPerPage="false" :paginationPadding="3" :paginationEnabled="false">
         <slide v-for="(models,index) in filteredSprintModel" :key="index">
           <div class="card cardsprit mr-1 ml-1 shadow">
             <div class="card-body">
@@ -144,8 +144,7 @@ export default {
   overflow: hidden;
   border-radius: 20px;
   background-color: #e3e8ed;
-  height: 160px;
-  cursor: pointer;
+  height: 170px;
   text-shadow: 2px 2px 4px white;
   color: #3c4b64;
 }
@@ -154,7 +153,6 @@ export default {
   width: 100px;
   font-weight: 600;
   color: #fff;
-  cursor: pointer;
   margin: 5px;
   height: 50px;
   text-align: center;
