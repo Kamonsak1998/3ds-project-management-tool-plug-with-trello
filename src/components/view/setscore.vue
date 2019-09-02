@@ -12,6 +12,7 @@
               name="XXS"
               type="text"
               class="form-control"
+              ref="startxxs"
               pattern="[1-9]+"
               v-model="point[0].XXS"
               :disabled="validated"
@@ -208,9 +209,7 @@ export default {
     this.checkscore();
   },
   methods: {
-    focusInput() {
-      this.$refs.startscore.focus();
-    },
+  
     checkscore: function() {
       axios.get("http://localhost:9000/checkscoresize").then(res => {
         if (res.data.status == true) {
@@ -232,22 +231,23 @@ export default {
           this.validated = true;
           axios
             .post("http://localhost:9000/setscoresize", { point: this.point })
-            .then(res => {
+            .then(()=> {
               alert("บันทึกข้อมูลเรียบร้อย");
             });
         }
       });
     },
     clear: function() {
-      (this.validated = false),
-        (this.point[0].XXS = 0),
-        (this.point[1].XS = 0),
-        (this.point[2].S = 0),
-        (this.point[3].M = 0),
-        (this.point[4].L = 0),
-        (this.point[5].XL = 0),
-        (this.point[6].XXL = 0),
-        (this.point[7].XXXL = 0);
+        this.$refs.startxxs.focus();
+        this.validated = false,
+        this.point[0].XXS = 0,
+        this.point[1].XS = 0,
+        this.point[2].S = 0,
+        this.point[3].M = 0,
+        this.point[4].L = 0,
+        this.point[5].XL = 0,
+        this.point[6].XXL = 0,
+        this.point[7].XXXL = 0;
     }
   }
 };
