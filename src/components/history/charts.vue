@@ -28,7 +28,7 @@
         </b-card>
       </b-card-group>
 
-      <carousel :navigationEnabled="true" :perPageCustom="[[320, 1], [1024, 3],[768,2]]" :paginationEnabled="true" :paginationPadding="1" :mouseDrag="true" :centerMode="true" >
+      <carousel :navigationEnabled="true" :perPageCustom="[[320, 1], [1024, 3],[768,2]]" :paginationEnabled="true" :paginationPadding="1" :mouseDrag="true" :centerMode="false" >
         <slide v-for="(models,index) in filteredSprintModel" :key="index">
           <div class="card cardsprit mr-1 ml-1 shadow">
             <div class="card-body">
