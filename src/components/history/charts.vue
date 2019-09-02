@@ -20,15 +20,15 @@
           <BarColumn v-bind:model="TotalModel" />
         </b-card>
         <b-card class="shadow mb-4 bg-white rounded">
-          <carousel :per-page="1"  :mouseDrag="true" :centerMode="true" :paginationEnabled="false" class="mb-4">
-            <slide v-for="(models,index) in filteredSprintModel" :key="index">
-              <burndownChart />
+          <carousel :per-page="1" :scrollPerPage="false" :paginationEnabled="false" class="mb-4">
+            <slide>
+              <burndownChart v-bind:model="burndown" />
             </slide>
           </carousel>
         </b-card>
       </b-card-group>
 
-      <carousel :navigationEnabled="true" :perPageCustom="[[320, 1], [1024, 3],[768,2]]" :paginationEnabled="true" :paginationPadding="1" :mouseDrag="true" :centerMode="true" >
+      <carousel :navigationEnabled="true" :perPageCustom="[[320, 1],[1024, 3]]" :scrollPerPage="false" :paginationPadding="3" :paginationEnabled="false">
         <slide v-for="(models,index) in filteredSprintModel" :key="index">
           <div class="card cardsprit mr-1 ml-1 shadow">
             <div class="card-body">
@@ -63,6 +63,7 @@ export default {
     return {
       search:'',
       TotalModel: Object,
+      burndown:Object,
       select: Object,
       SprintModel: {
         scoreOfSprint: Object
@@ -72,6 +73,7 @@ export default {
   },
   mounted: function() {
     this.getHistory();
+    this.getburndownChart();
   },
   computed: {
     ...mapGetters(["idBoard", "token"]),
@@ -115,6 +117,13 @@ export default {
       } else {
         this.$router.push("/dashboards");
       }
+    },
+    getburndownChart(){
+      axios.get("http://localhost:9000/setburndownchart").then(res => {
+        this.burndown = res.data.ScoreTotal[0]
+      }).catch(err => {
+        alert(err);
+      })
     }
   }
 };
@@ -135,8 +144,7 @@ export default {
   overflow: hidden;
   border-radius: 20px;
   background-color: #e3e8ed;
-  height: 160px;
-  cursor: pointer;
+  height: 170px;
   text-shadow: 2px 2px 4px white;
   color: #3c4b64;
 }
@@ -145,7 +153,6 @@ export default {
   width: 100px;
   font-weight: 600;
   color: #fff;
-  cursor: pointer;
   margin: 5px;
   height: 50px;
   text-align: center;
