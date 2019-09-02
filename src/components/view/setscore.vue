@@ -230,7 +230,19 @@ export default {
         if (valid) {
           this.validated = true;
           axios
-            .post("http://localhost:9000/setscoresize", { point: this.point })
+                  .post("http://localhost:9000/setscoresize", {
+                    Points:
+                            [
+                              parseInt(this.point[0].XXS,10),
+                              parseInt(this.point[1].XS,10),
+                              parseInt(this.point[2].S,10),
+                              parseInt(this.point[3].M,10),
+                              parseInt(this.point[4].L,10),
+                              parseInt(this.point[5].XL,10),
+                              parseInt(this.point[6].XXL,10),
+                              parseInt(this.point[7].XXXL,10),
+                            ]
+                  })
             .then(()=> {
               alert("บันทึกข้อมูลเรียบร้อย");
             });
