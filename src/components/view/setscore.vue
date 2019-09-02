@@ -213,6 +213,7 @@ export default {
     checkscore: function() {
       axios.get("http://localhost:9000/checkscoresize").then(res => {
         if (res.data.status == true) {
+          this.validated == true;
           this.point[0].XXS = res.data[6].sizePoint;
           this.point[1].XS = res.data[4].sizePoint;
           this.point[2].S = res.data[2].sizePoint;
