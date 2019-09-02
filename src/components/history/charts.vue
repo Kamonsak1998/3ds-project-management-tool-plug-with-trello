@@ -20,7 +20,7 @@
           <BarColumn v-bind:model="TotalModel" />
         </b-card>
         <b-card class="shadow mb-4 bg-white rounded">
-          <carousel :per-page="1" :scrollPerPage="false" :paginationEnabled="false" class="mb-4">
+          <carousel :per-page="1" :scrollPerPage="false" :centerMode="true" :paginationEnabled="false" class="mb-4">
             <slide>
               <burndownChart v-bind:model="burndown" />
             </slide>
@@ -28,7 +28,7 @@
         </b-card>
       </b-card-group>
 
-      <carousel :navigationEnabled="true" :perPageCustom="[[320, 1],[1024, 3]]" :scrollPerPage="false" :paginationPadding="3" :paginationEnabled="false">
+      <carousel :navigationEnabled="true" :perPageCustom="[[320, 1],[1024, 3],[768,2]]" :scrollPerPage="false" :centerMode="true" :paginationPadding="3" :paginationEnabled="false">
         <slide v-for="(models,index) in filteredSprintModel" :key="index">
           <div class="card cardsprit mr-1 ml-1 shadow">
             <div class="card-body">
