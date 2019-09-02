@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header feature">
-      <h3 class="mb-0">Set Score Up to You !</h3>
+      <h3 class="mb-0">Set Score Up to You!</h3>
     </div>
     <div class="card-body">
       <div class="form-group row">
@@ -220,7 +220,7 @@ export default {
           this.point[4].L = res.data.sizes[0].sizePoint;
           this.point[5].XL = res.data.sizes[3].sizePoint;
           this.point[6].XXL = res.data.sizes[5].sizePoint;
-          this.point[7].XXXL = res.data.sizes[7].sizePoint;
+          this.point[7].XXXL = res.data.sizes[7].sizePoint; 
         }
       });
     },
@@ -244,7 +244,7 @@ export default {
                             ]
                   })
             .then(()=> {
-              alert("บันทึกข้อมูลเรียบร้อย");
+              alert("Save success");
             });
         }
       });
@@ -252,14 +252,14 @@ export default {
     clear: function() {
         this.$refs.startxxs.focus();
         this.validated = false,
-        this.point[0].XXS = 0,
-        this.point[1].XS = 0,
-        this.point[2].S = 0,
-        this.point[3].M = 0,
-        this.point[4].L = 0,
-        this.point[5].XL = 0,
-        this.point[6].XXL = 0,
-        this.point[7].XXXL = 0;
+        this.point[0].XXS = '',
+        this.point[1].XS = '',
+        this.point[2].S = '',
+        this.point[3].M = '',
+        this.point[4].L = '',
+        this.point[5].XL = '',
+        this.point[6].XXL = '',
+        this.point[7].XXXL = '';
     }
   }
 };
