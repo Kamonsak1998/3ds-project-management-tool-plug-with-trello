@@ -89,6 +89,7 @@ export default {
   cursor: pointer;
   color: white;
   text-shadow: 2px 2px 4px #000000;
+  background: linear-gradient(40deg, #ff9966, #ff6666, #cc66cc) !important;
 }
 .card-img {
   border-radius: 25px;
