@@ -8,11 +8,11 @@
 export default {
   name: "burndownChart",
    mounted: function() {
-     this.series[0] = {...this.series[0],...{data:this.model.dataIDealBurn[2].iDealBurn}}
-    //  this.series[0] = {...this.series[1],...{data:this.model.dataActualBurn[2].actualBurn}}
-     this.chartOptions = {...this.chartOptions, ...{title:{text:this.model.dataIDealBurn[2].titleSprint}}};
-     this.chartOptions = {...this.chartOptions, ...{subtitle:{text:this.model.dataIDealBurn[2].startDate+ "-" +this.model.dataIDealBurn[2].endDate}}};
-     this.chartOptions = {...this.chartOptions, ...{xaxis: {categories: this.model.dataDay[2].datePeriod}}};
+     this.series[0] = {...this.series[0],...{data:this.model.dataIDealBurn[4].iDealBurn}}
+     this.series[1] = {...this.series[1],...{data:this.model.dataActualBurn[4].actualBurn}}
+     this.chartOptions = {...this.chartOptions, ...{title:{text:this.model.dataIDealBurn[4].titleSprint}}};
+     this.chartOptions = {...this.chartOptions, ...{subtitle:{text:this.model.dataIDealBurn[4].startDate+ "-" +this.model.dataIDealBurn[2].endDate}}};
+     this.chartOptions = {...this.chartOptions, ...{xaxis: {categories: this.model.dataDay[4].datePeriod}}};
    },
    props: {
       model: {

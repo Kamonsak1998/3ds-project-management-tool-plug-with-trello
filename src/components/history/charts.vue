@@ -21,12 +21,20 @@
         </b-card>
         <b-card class="shadow mb-4 bg-white rounded">
           <carousel :per-page="1" :scrollPerPage="false" :centerMode="true" :paginationEnabled="false" class="mb-4">
-            <slide>
+            <slide v-for="(models,index) in burndown" :key="index">
               <burndownChart v-bind:model="burndown" />
             </slide>
           </carousel>
         </b-card>
       </b-card-group>
+
+      <!-- <b-card-group columns class="card-rows cols-2 mb-3">
+        <b-card class="shadow mb-4 bg-white rounded"> 
+        </b-card>
+        <b-card class="shadow mb-4 bg-white rounded">  
+          <Pie v-bind:model="TotalModel" />
+        </b-card>
+      </b-card-group> -->
 
       <carousel :navigationEnabled="true" :perPageCustom="[[320, 1],[1024, 3],[768,2]]" :scrollPerPage="false" :centerMode="true" :paginationPadding="3" :paginationEnabled="false">
         <slide v-for="(models,index) in filteredSprintModel" :key="index">
@@ -54,6 +62,7 @@
 import Bar from "@/components/history/Bar.vue";
 import BarColumn from "@/components/history/BarColumn.vue";
 import burndownChart from "@/components/burndownChart/burndownChart.vue";
+import Pie from "@/components/history/Pie.vue";
 import { mapGetters } from "vuex";
 import { Carousel, Slide } from "vue-carousel";
 import axios from "axios";
@@ -87,6 +96,7 @@ export default {
     Bar,
     BarColumn,
     burndownChart,
+    Pie,
     Carousel,
     Slide
   },
@@ -117,9 +127,9 @@ export default {
       } else {
         this.$router.push("/dashboards");
       }
-    },
+    },  
     getburndownChart(){
-      axios.get("http://localhost:9000/setburndownchart").then(res => {
+      axios.post("http://localhost:9000/setburndownchart",{idBoard : this.idBoard}).then(res => {
         this.burndown = res.data.ScoreTotal[0]
       }).catch(err => {
         alert(err);
