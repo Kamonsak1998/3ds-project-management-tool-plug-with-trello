@@ -209,18 +209,18 @@ export default {
     this.checkscore();
   },
   methods: {
-  
     checkscore: function() {
       axios.get("http://localhost:9000/checkscoresize").then(res => {
         if (res.data.status == true) {
-          this.point[0].XXS = res.data[6].sizePoint;
-          this.point[1].XS = res.data[4].sizePoint;
-          this.point[2].S = res.data[2].sizePoint;
-          this.point[3].M = res.data[1].sizePoint;
-          this.point[4].L = res.data[0].sizePoint;
-          this.point[5].XL = res.data[3].sizePoint;
-          this.point[6].XXL = res.data[5].sizePoint;
-          this.point[7].XXXL = res.data[7].sizePoint;
+          this.validated = res.data.status;
+          this.point[0].XXS = res.data.sizes[6].sizePoint;
+          this.point[1].XS = res.data.sizes[4].sizePoint;
+          this.point[2].S = res.data.sizes[2].sizePoint;
+          this.point[3].M = res.data.sizes[1].sizePoint;
+          this.point[4].L = res.data.sizes[0].sizePoint;
+          this.point[5].XL = res.data.sizes[3].sizePoint;
+          this.point[6].XXL = res.data.sizes[5].sizePoint;
+          this.point[7].XXXL = res.data.sizes[7].sizePoint;
         }
       });
     },
