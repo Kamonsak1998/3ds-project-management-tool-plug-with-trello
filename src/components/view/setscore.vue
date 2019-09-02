@@ -1,9 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header feature">
-      <div class="mb-0">
-        <h3>Set Score Up to You !</h3>
-      </div>
+      <h3 class="mb-0">Set Score Up to You !</h3>
     </div>
     <div class="card-body">
       <div class="form-group row">
@@ -36,7 +34,6 @@
               type="text"
               class="form-control"
               pattern="[1-9]+"
-              ref="startscorexs"
               v-model="point[1].XS"
               :disabled="validated"
               v-validate="'required|numeric|max:3'"
@@ -176,8 +173,13 @@
         </div>
       </div>
 
-      <button type="button" class="btn btn-light">Reset</button>
-      <button type="button" class="btn btn-primary ml-2" @click="addPoint">Submit</button>
+      <button type="button" class="btn btn-light" @click="clear">Reset</button>
+      <button
+        type="button"
+        class="btn btn-primary ml-2"
+        @click="addPoint"
+        :disabled="validated"
+      >Submit</button>
     </div>
   </div>
 </template>
@@ -198,68 +200,55 @@ export default {
         { XXL: 0 },
         { XXXL: 0 }
       ],
-      // step: null,
       submitted: false,
       validated: false
     };
   },
   mounted: function() {
     this.checkscore();
-    // this.focusInput();
   },
   methods: {
-    // focusInput() {
-    //   this.$refs.startDate.focus();
-    // },
+    focusInput() {
+      this.$refs.startscore.focus();
+    },
     checkscore: function() {
       axios.get("http://localhost:9000/checkscoresize").then(res => {
-        console.log(res);
-        this.point[0].XXS = res.data[6].sizePoint;
-        this.point[1].XS = res.data[4].sizePoint;
-        this.point[2].S = res.data[2].sizePoint;
-        this.point[3].M = res.data[1].sizePoint;
-        this.point[4].L = res.data[0].sizePoint;
-        this.point[5].XL = res.data[3].sizePoint;
-        this.point[6].XXL = res.data[5].sizePoint;
-        this.point[7].XXXL = res.data[7].sizePoint;
-        console.log(this.point);
-        
+        if (res.data.status == true) {
+          this.point[0].XXS = res.data[6].sizePoint;
+          this.point[1].XS = res.data[4].sizePoint;
+          this.point[2].S = res.data[2].sizePoint;
+          this.point[3].M = res.data[1].sizePoint;
+          this.point[4].L = res.data[0].sizePoint;
+          this.point[5].XL = res.data[3].sizePoint;
+          this.point[6].XXL = res.data[5].sizePoint;
+          this.point[7].XXXL = res.data[7].sizePoint;
+        }
       });
-     
     },
     addPoint: function() {
-      // this.submitted = false;
+      this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
-          // this.validated = true;
+          this.validated = true;
           axios
             .post("http://localhost:9000/setscoresize", { point: this.point })
             .then(res => {
-              console.log(this.point);
+              alert("บันทึกข้อมูลเรียบร้อย");
             });
         }
       });
     },
-    // clear: function() {
-    //   (this.validated = false),
-    //     (this.point.XXS = ""),
-    //     (this.point.XS = ""),
-    //     (this.point.S = ""),
-    //     (this.point.M = ""),
-    //     (this.point.L = ""),
-    //     (this.point.XL = ""),
-    //     (this.point.XLL = ""),
-    //     (this.point.XXL = "");
-    // }
-    // nextStep: function() {
-    //   if (this.step === "startscore") {
-    //     this.step = "startscorexs";
-    //     // this.$refs.endDate.focus();
-    //   } else if (this.step === "startscorexs") {
-    //     this.step = null;
-    //     this.$refs.endDate.blur();
-    //   }
-    // }
+    clear: function() {
+      (this.validated = false),
+        (this.point[0].XXS = 0),
+        (this.point[1].XS = 0),
+        (this.point[2].S = 0),
+        (this.point[3].M = 0),
+        (this.point[4].L = 0),
+        (this.point[5].XL = 0),
+        (this.point[6].XXL = 0),
+        (this.point[7].XXXL = 0);
+    }
   }
 };
 </script>
