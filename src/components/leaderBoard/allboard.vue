@@ -11,16 +11,16 @@
         <!-- <div class="col col-head">
           <b></b>
         </div> -->
-           <div class="col col-head">
+           <div class="col-5 col-head">
           <b>Name</b>
         </div>
-        <div class="col col-head">
+        <div class="col-4 col-head">
           <b>Score</b>
         </div>
       </div>
       <div class="row allboard-body" v-for="(user,key) in users" :key="key">
-        <div class="col-4 col-body">{{key+1}}</div>
-        <div class="col col-body col-img " ><img class="imguser rounded-circle"  :src="user.avatar" width="auto" height="40" border-radius ></div>
+        <div class="col-3 col-body">{{key+1}}</div>
+        <div class="col-2 col-body "><img class="img-user rounded-circle"  :src="user.avatar" width="40" height="40" border-radius ></div>
         <div class="col-3 col-body col-name">{{user.name}}</div>
         <div class="col-4 col-body">{{user.point}}</div>
       </div>
@@ -70,6 +70,17 @@ export default {
   margin-top: 15px;
   box-shadow: 7px;
 } */
+@media only screen and (max-width: 768px) {
+ .allboard-body {
+  box-shadow:0 2px 3px 0px rgba(0,0,0,0.25);
+  padding-top: 15px;
+  height: 60px;
+  color: white;
+  background: linear-gradient(40deg, #ff6f69, #ffcc5c) !important;
+  font-size: 16px;
+  border-radius: 5px;
+}
+}
 .allboard-body {
   box-shadow:0 2px 3px 0px rgba(0,0,0,0.25);
   padding-top: 15px;
@@ -79,10 +90,6 @@ export default {
   font-size: 16px;
   border-radius: 5px;
   /* border-color:red; */
-}
-div.allboard-row {
-  /* margin: auto;
-  width: 95%; */
 }
 .col-head {
   padding-top: 20px;
@@ -132,11 +139,9 @@ div.row.allboard-body {
     margin-right: auto;
     margin-left: auto;
 }
-/* .col-img{
-  text-align: right 1px;
-} */
 .col-name{
-  /* text-align: left; */
+  text-align: left;
 }
+
 </style>
 
