@@ -123,7 +123,7 @@ export default {
     focusInput() {
       setTimeout(() => {
         this.$refs.startDate.focus();
-      }, 100);
+      }, 0);
     },
     checkDate: function() {
       axios
