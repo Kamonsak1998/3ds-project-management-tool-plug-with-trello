@@ -109,7 +109,9 @@ export default {
   },
   mounted: function() {
     this.checkDate();
-    this.focusInput();
+    // if(this.total != ''){
+      this.focusInput();
+    // }
   },
 
   computed: {
@@ -127,20 +129,19 @@ export default {
     focusInput() {
       setTimeout(() => {
         this.$refs.startDate.focus();
-      }, 0);
+      }, 100);
     },
     checkDate: function() {
       axios
         .post("http://localhost:9000/checksetdate", { idBoard: this.idBoard })
         .then(res => {
-            this.isShowModel = true;
+          this.isShowModel = true;
           if (res.data.status == true) {
             this.startDated = moment.utc(res.data.startDate, "YYYY/MM/DD");
             this.startDate = this.startDated;
             this.totaled = res.data.sprintDay;
             this.validated = res.data.status;
             this.total = parseInt(this.totaled);
-            console.log(this.startDate);
           }
         })
         .catch(err => {
@@ -199,7 +200,7 @@ export default {
         this.totaled = parseInt(this.total);
         if (valid) {
           this.validated = true;
-          let endDate = this.endDate;
+          // let endDate = this.endDate;
           this.getStartDate(this.startDate);
           this.getSprint(this.totaled);
           axios
