@@ -37,7 +37,7 @@ export default {
     return {
       key: 1,
       users: [],
-      user: { avatar:'',name: '', point: 0 },
+      user: { avatar:'',name: '', point: Float64Array },
       isShowModel: false,
     };
   },
