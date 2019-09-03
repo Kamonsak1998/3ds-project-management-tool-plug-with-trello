@@ -18,7 +18,7 @@
           <option value="palette10">Theme 10</option>
         </select>
       </p>
-      <apexchart type="pie" height="315" :options="chartOptions" :series="series"></apexchart>
+      <apexchart type="pie" height="350" :options="chartOptions" :series="series"></apexchart>
     </div>
   </div>
 </template>
@@ -52,7 +52,7 @@ export default {
             showForNullSeries: true,
             showForZeroSeries: true,
             position: 'bottom',
-            horizontalAlign: 'left', 
+            horizontalAlign: 'center', 
             floating: false,
             fontSize: '12px',
             offsetX: 0,
