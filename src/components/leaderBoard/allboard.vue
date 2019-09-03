@@ -31,8 +31,6 @@
 <script>
 import axios from "axios";
 import { mapGetters } from "vuex";
-import { BoardService } from '../../services/BoardService';
-const boardService = new BoardService()
 
 export default {
   data() {
@@ -51,8 +49,11 @@ export default {
   },
   methods: {
     getUserData() {
-      boardService.fetchLeaderboard({token: this.token,
-          idBoard: this.idBoard})
+      axios
+        .post("http://localhost:9000/getleaderboard", {
+          token: this.token,
+          idBoard: this.idBoard
+        })
         .then(response => {
           console.log(response);
           this.isShowModel = true;
