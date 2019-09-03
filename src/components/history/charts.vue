@@ -63,7 +63,8 @@ import Pie from "@/components/history/Pie.vue";
 import { mapGetters } from "vuex";
 import { Carousel, Slide } from "vue-carousel";
 import axios from "axios";
-
+import {BoardService} from "../../services/BoardService";
+const boardService = new BoardService()
 export default {
   data() {
     return {

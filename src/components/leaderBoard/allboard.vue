@@ -8,17 +8,21 @@
         <div class="col col-head">
           <b>Rank</b>
         </div>
-        <div class="col col-head">
+        <!-- <div class="col col-head">
+          <b></b>
+        </div> -->
+           <div class="col-5 col-head">
           <b>Name</b>
         </div>
-        <div class="col col-head">
+        <div class="col-4 col-head">
           <b>Score</b>
         </div>
       </div>
       <div class="row allboard-body" v-for="(user,key) in users" :key="key">
-        <div class="col col-body">{{key+1}}</div>
-        <div class="col col-body">{{user.name}}</div>
-        <div class="col col-body">{{user.point}}</div>
+        <div class="col-3 col-body">{{key+1}}</div>
+        <div class="col-2 col-body "><img class="img-user rounded-circle"  :src="user.avatar" width="40" height="40" border-radius ></div>
+        <div class="col-3 col-body col-name">{{user.name}}</div>
+        <div class="col-4 col-body">{{user.point}}</div>
       </div>
     </div>
   </div>
@@ -33,7 +37,7 @@ export default {
     return {
       key: 1,
       users: [],
-      user: { name: '', point: 0 },
+      user: { avatar:'',name: '', point: Float64Array },
       isShowModel: false,
     };
   },
@@ -51,14 +55,11 @@ export default {
           idBoard: this.idBoard
         })
         .then(response => {
+          console.log(response);
           this.isShowModel = true;
           this.users = response.data.board;
+          this.non = response.data.board[1].avatar;          
         })
-        .catch(err => {
-          if (err) {
-            alert("connection lost");
-          }
-        });
     }
   }
 };
@@ -69,6 +70,17 @@ export default {
   margin-top: 15px;
   box-shadow: 7px;
 } */
+@media only screen and (max-width: 768px) {
+ .allboard-body {
+  box-shadow:0 2px 3px 0px rgba(0,0,0,0.25);
+  padding-top: 15px;
+  height: 60px;
+  color: white;
+  background: linear-gradient(40deg, #ff6f69, #ffcc5c) !important;
+  font-size: 16px;
+  border-radius: 5px;
+}
+}
 .allboard-body {
   box-shadow:0 2px 3px 0px rgba(0,0,0,0.25);
   padding-top: 15px;
@@ -78,10 +90,6 @@ export default {
   font-size: 16px;
   border-radius: 5px;
   /* border-color:red; */
-}
-div.allboard-row {
-  margin: auto;
-  width: 95%;
 }
 .col-head {
   padding-top: 20px;
@@ -124,5 +132,16 @@ div.row.allboard-body {
   text-transform: uppercase;
   background-color: rgba(255, 255, 255, 0.32);
 }
+.container {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.col-name{
+  text-align: left;
+}
+
 </style>
 

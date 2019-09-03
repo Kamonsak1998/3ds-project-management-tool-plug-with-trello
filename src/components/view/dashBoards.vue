@@ -26,11 +26,13 @@
 </template>
 
 <script>
-import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
+import {BoardService} from "../../services/BoardService";
+
+const boardService = new BoardService()
 export default {
   mounted: function() {
-    this.getboardtrello();
+    this.getBoardtrello();
   },
   computed: {
     ...mapGetters({ token: "token/token" , idBoard: "user/idBoard" })
@@ -58,16 +60,13 @@ export default {
         return;
       }
     },
-    getboardtrello() {
-        axios
-          .post("http://localhost:9000/getdashboard", { token: this.token })
-          .then(Response => {
-            this.results = Response.data;
-            this.isShowModel = true;
+    getBoardtrello() {
+        boardService.fetchDashboard(this.token).then(Response => {
+           this.results = Response.data;
+           this.isShowModel = true;
+          }).catch(err => {
+            alert(err)
           })
-          .catch(err => {
-            alert(err);
-          });
     }
   }
 };
