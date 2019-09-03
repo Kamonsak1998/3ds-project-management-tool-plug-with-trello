@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header feature">
-      <h3 class="mb-0">Set Score Up to You !</h3>
+      <h3 class="mb-0">Set Score Up to You!</h3>
     </div>
     <div class="card-body">
       <div class="form-group row">
@@ -209,18 +209,18 @@ export default {
     this.checkscore();
   },
   methods: {
-  
     checkscore: function() {
       axios.get("http://localhost:9000/checkscoresize").then(res => {
         if (res.data.status == true) {
-          this.point[0].XXS = res.data[6].sizePoint;
-          this.point[1].XS = res.data[4].sizePoint;
-          this.point[2].S = res.data[2].sizePoint;
-          this.point[3].M = res.data[1].sizePoint;
-          this.point[4].L = res.data[0].sizePoint;
-          this.point[5].XL = res.data[3].sizePoint;
-          this.point[6].XXL = res.data[5].sizePoint;
-          this.point[7].XXXL = res.data[7].sizePoint;
+          this.validated = res.data.status;
+          this.point[0].XXS = res.data.sizes[6].sizePoint;
+          this.point[1].XS = res.data.sizes[4].sizePoint;
+          this.point[2].S = res.data.sizes[2].sizePoint;
+          this.point[3].M = res.data.sizes[1].sizePoint;
+          this.point[4].L = res.data.sizes[0].sizePoint;
+          this.point[5].XL = res.data.sizes[3].sizePoint;
+          this.point[6].XXL = res.data.sizes[5].sizePoint;
+          this.point[7].XXXL = res.data.sizes[7].sizePoint; 
         }
       });
     },
@@ -230,9 +230,21 @@ export default {
         if (valid) {
           this.validated = true;
           axios
-            .post("http://localhost:9000/setscoresize", { point: this.point })
+                  .post("http://localhost:9000/setscoresize", {
+                    Points:
+                            [
+                              parseInt(this.point[0].XXS,10),
+                              parseInt(this.point[1].XS,10),
+                              parseInt(this.point[2].S,10),
+                              parseInt(this.point[3].M,10),
+                              parseInt(this.point[4].L,10),
+                              parseInt(this.point[5].XL,10),
+                              parseInt(this.point[6].XXL,10),
+                              parseInt(this.point[7].XXXL,10),
+                            ]
+                  })
             .then(()=> {
-              alert("บันทึกข้อมูลเรียบร้อย");
+              alert("Save success");
             });
         }
       });
@@ -240,14 +252,14 @@ export default {
     clear: function() {
         this.$refs.startxxs.focus();
         this.validated = false,
-        this.point[0].XXS = 0,
-        this.point[1].XS = 0,
-        this.point[2].S = 0,
-        this.point[3].M = 0,
-        this.point[4].L = 0,
-        this.point[5].XL = 0,
-        this.point[6].XXL = 0,
-        this.point[7].XXXL = 0;
+        this.point[0].XXS = '',
+        this.point[1].XS = '',
+        this.point[2].S = '',
+        this.point[3].M = '',
+        this.point[4].L = '',
+        this.point[5].XL = '',
+        this.point[6].XXL = '',
+        this.point[7].XXXL = '';
     }
   }
 };
