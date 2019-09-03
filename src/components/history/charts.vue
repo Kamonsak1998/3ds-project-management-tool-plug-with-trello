@@ -7,11 +7,12 @@
     <div class="animated fadeIn font" v-if="isShowModel === true">
       <h1>HISTORY</h1>
       <hr class="my-4" />
-
       <div class="input-group input-group-lg my-3"> 
           <div class="input-group-prepend">
             <span class="input-group-text"><span class="cui-magnifying-glass"></span></span>
+            
           </div>
+          
           <input type="text" id="search" class="form-control" v-model="search" placeholder="Search Sprint..." aria-label="Search" autocomplete="off">
       </div>
 
