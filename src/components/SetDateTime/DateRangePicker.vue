@@ -36,21 +36,27 @@
             name="total"
             type="text"
             class="form-control w-100 daterangepicker-date-input"
-            pattern="^[1-9+$]"
+            pattern="^[1-9]+"
             ref="endDate"
             :disabled="validated"
             v-model="total"
             v-validate="'required|numeric|max:3'"
             :class="{ 'is-invalid': submitted && errors.has('total') }"
-          /><br/>
+          />
+          <br />
           <div
             v-if="submitted && errors.has('total')"
             class="invalid-feedback"
           >{{ errors.first('total') }}</div>
           <br />
           <div class="form-group form-inline justify-content-end mb-0">
-            <button type="button" class="btn btn-light" @click="clear">Reset</button>
-            <button type="button" class="btn btn-primary ml-2" @click="submit" :disabled="validated"  >Submit</button>
+            <button type="button" class="btn btn-light" @click="reset">Reset</button>
+            <button
+              type="button"
+              class="btn btn-primary ml-2"
+              @click="submit"
+              :disabled="validated"
+            >Submit</button>
           </div>
         </b-col>
       </b-row>
@@ -62,7 +68,7 @@
 import axios from "axios";
 import moment from "moment";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCaretRight} from "@fortawesome/free-solid-svg-icons";
+import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
 import { mapActions, mapGetters } from "vuex";
 library.add(faCaretRight);
@@ -103,7 +109,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["startDates", "Sprints", "idBoard", "newBoard","token"]),
+    ...mapGetters(["startDates", "Sprints", "idBoard", "newBoard", "token"]),
     nextMonth: function() {
       return moment.utc(this.month).add(1, "month");
     },
@@ -115,31 +121,35 @@ export default {
 
   methods: {
     focusInput() {
-      this.$refs.startDate.focus();
+      setTimeout(() => {
+        this.$refs.startDate.focus();
+      }, 100);
     },
     checkDate: function() {
       axios
         .post("http://localhost:9000/checksetdate", { idBoard: this.idBoard })
         .then(res => {
           if (res.data.status == true) {
-            this.startDate = moment.utc(res.data.startDate, "YYYY/MM/DD")
+            this.startDate = moment.utc(res.data.startDate, "YYYY/MM/DD");
             this.totaled = res.data.sprintDay;
             this.validated = res.data.status;
-            this.total = parseInt(this.totaled)    
+            this.total = parseInt(this.totaled);
           }
-        }).catch(err => {
-          alert(err);
         })
-    },
-    reset: function() {
-      this.total = "";
+        .catch(err => {
+          alert(err);
+        });
     },
     clear: function() {
-      this.validated = false,
+      this.total = "";
+    },
+
+    reset: function() {
+      this.validated = false;
       this.startDate = moment.utc();
       this.endDate = moment.utc();
       this.total = "";
-      this.$refs.startDate.focus();
+      this.focusInput();
     },
 
     goToPrevMonth: function() {
@@ -179,23 +189,23 @@ export default {
     submit: function() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
-      this.total = parseFloat(this.total)
+        this.totaled = parseInt(this.total);
         if (valid) {
           this.validated = true;
           let endDate = this.endDate;
           this.getStartDate(this.startDate);
-          this.getSprint(this.total);
+          this.getSprint(this.totaled);
           axios
             .post("http://localhost:9000/setdate", {
               startDate: this.startDates,
               sprintDay: this.Sprints,
-              endDate : endDate,
+              endDate: endDate,
               idBoard: this.idBoard,
-              boardName: this.newBoard,
+              boardName: this.newBoard
             })
             .then(() => {
-              alert("บันทึกข้อมูลเรียบร้อย"); 
-              this.$router.push('/feature')
+              alert("Save Success");
+              this.$router.push("/feature");
             })
             .catch(err => {
               if (err) {
@@ -208,11 +218,10 @@ export default {
   },
   watch: {
     total: function(value) {
-      this.endDate = moment.utc(this.startDate, "YYYY/MM/DD").add(
-        1 * value - 1 ,
-        "days"
-      );
-    },
+      this.endDate = moment
+        .utc(this.startDate, "YYYY/MM/DD")
+        .add(1 * value - 1, "days");
+    }
     // range: function() {
     //   let predefinedRange = false;
     //   // Custom range
@@ -261,7 +270,6 @@ export default {
   box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25) !important;
 }
 .col-setdate {
-  /* color: red; */
   padding: 40px;
 }
 .row-setdate {
@@ -269,9 +277,6 @@ export default {
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  /* width: 200%; */
-  /* margin-right: -15px; */
-  /* margin-left: -5px; */
 }
 .card-setdate {
   border-radius: 10px;

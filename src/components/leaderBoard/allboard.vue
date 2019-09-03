@@ -1,10 +1,9 @@
 <template>
-  <div class="col-lg-9 mx-auto">
-    <div class="animated fadeIn loading" v-if="like === false">
+  <div class="container">
+   <div class="animated fadeIn loading" v-if="isShowModel === false">
       <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
-    </div>
-
-    <div class="allboard-row allboard" v-if="like===true">
+    </div>   
+    <div class="allboard-row allboard col-lg-9 mx-auto"  v-if="isShowModel === true">
       <div class="row row-head">
         <div class="col col-head">
           <b>Rank</b>
@@ -16,10 +15,10 @@
           <b>Score</b>
         </div>
       </div>
-      <div class="row allboard-body" v-for="(items,key) in items" :key="items">
+      <div class="row allboard-body" v-for="(user,key) in users" :key="key">
         <div class="col col-body">{{key+1}}</div>
-        <div class="col col-body">{{items.name}}</div>
-        <div class="col col-body">{{items.point}}</div>
+        <div class="col col-body">{{user.name}}</div>
+        <div class="col col-body">{{user.point}}</div>
       </div>
     </div>
   </div>
@@ -32,22 +31,10 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      like: true,
       key: 1,
       users: [],
-      user: { name: "", point: 0 },
-      items: [
-        { name: "BahBenz", point: "100" },
-        { name: "arram", point: "200" },
-        { name: "gono", point: "300" },
-        { name: "gono", point: "300" },
-        { name: "gono", point: "300" },
-        { name: "gono", point: "300" },
-        { name: "gono", point: "300" },
-        { name: "gono", point: "300" },
-        { name: "gono", point: "300" },
-        { name: "arnon", point: "400" }
-      ]
+      user: { name: '', point: 0 },
+      isShowModel: false,
     };
   },
   mounted: function() {
@@ -64,9 +51,8 @@ export default {
           idBoard: this.idBoard
         })
         .then(response => {
-          // console.log(response);
-          this.users = response.data.leaderboard;
-          // this.like = true;
+          this.isShowModel = true;
+          this.users = response.data.board;
         })
         .catch(err => {
           if (err) {
@@ -83,11 +69,6 @@ export default {
   margin-top: 15px;
   box-shadow: 7px;
 } */
-.loading {
-  position: fixed;
-  top: 50%;
-  left: 45%;
-}
 .allboard-body {
   box-shadow:0 2px 3px 0px rgba(0,0,0,0.25);
   padding-top: 15px;
@@ -116,8 +97,11 @@ div.row.allboard-body {
   margin-top: 12px;
 
 }
-.spinner {
-  padding-top: 20%;
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .col-body {
   width: 130px;
