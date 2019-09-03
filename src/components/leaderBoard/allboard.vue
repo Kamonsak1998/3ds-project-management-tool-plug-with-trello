@@ -41,7 +41,7 @@ export default {
     this.getUserData();
   },
   computed: {
-    ...mapGetters(["idBoard", "token"])
+    ...mapGetters({ token: "token/token" , idBoard: "user/idBoard" })
   },
   methods: {
     getUserData() {

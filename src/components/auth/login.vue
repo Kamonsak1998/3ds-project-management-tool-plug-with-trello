@@ -1,46 +1,49 @@
 <template>
-  <div class="login">
-    <div class="container">
-      <img class="bglogin" src="@/assets/circle.png" alt />
-      <button class="buttons" @click="Auth()">
+  <div class='login'>
+    <div class='container'>
+      <img class='bglogin' src='@/assets/circle.png' alt />
+      <button class='buttons' @click='Auth()'>
         <span>Login</span>
       </button>
     </div>
   </div>
 </template>
 
-
-
 <script>
-import { OAuth } from "oauthio-web";
-import { mapActions, mapGetters } from "vuex";
+import { OAuth } from 'oauthio-web';
+import { mapActions, mapGetters } from 'vuex';
 export default {
-  name: "login",
+  name: 'login',
   mounted: function() {
-    this.checkToken();
+    // this.checkToken();
   },
   computed: {
-    ...mapGetters(["token"])
+    ...mapGetters({ token: 'token/token' })
   },
   methods: {
-    ...mapActions(["getToken", "getUsername", "getIduser"]),
+    ...mapActions({
+      getToken: 'token/getToken',
+      getUsername: 'user/getUsername',
+      getIduser: 'user/getIduser'
+    }),
+
     Auth() {
       const self = this;
-      OAuth.initialize("DHnRyNE6xOi3k0N6jJapv7YTITc");
-      var provider = "trello";
+      OAuth.initialize('DHnRyNE6xOi3k0N6jJapv7YTITc');
+      var provider = 'trello';
       OAuth.popup(provider, { cache: true })
         .done(function(trello) {
-          console.log(trello);
-          if (trello.provider == "trello") {
+          if (trello.provider == 'trello') {
             const token = trello.oauth_token;
             self.getToken(token);
+            // self.$store.dispatch('token/getToken', token)
             trello
               .me()
               .done(function(response) {
                 self.getUsername(response.name);
                 self.getIduser(response.raw.id);
-                if (this.token != "") {
-                  self.$router.push("/dashboards");
+                if (self.token) {
+                  self.$router.push('/dashboards');
                 }
               })
               .fail(function(err) {
@@ -52,19 +55,18 @@ export default {
           alert(err);
         });
     },
-    checkToken() {
-      if (this.token != "") {
-        this.$router.push("/dashboards");
-        return;
-      } else {
-        return;
-      }
-    }
+    // checkToken() {
+    //   if (this.token) {
+    //     return this.$router.push('/dashboards');
+    //   } else {
+    //     return;
+    //   }
+    // }
   }
 };
 </script>
 
-<style lang="scss" >
+<style lang='scss' >
 .buttons {
   font-size: 18px;
   text-shadow: 2px 2px 4px #000000;
@@ -94,7 +96,7 @@ export default {
 .buttons:after,
 .buttons:before {
   padding: 36px 0 11px;
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: calc(-100% - 30px);

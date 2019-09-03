@@ -109,7 +109,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["startDates", "Sprints", "idBoard", "newBoard", "token"]),
+    ...mapGetters({startDates:"sprint/startDates", Sprints:"sprint/Sprints",idBoard: "user/idBoard", nameBoard: "user/nameBoard",  token: "token/token"}),
     nextMonth: function() {
       return moment.utc(this.month).add(1, "month");
     },

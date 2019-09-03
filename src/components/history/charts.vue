@@ -81,7 +81,7 @@ export default {
     this.getHistory();
   },
   computed: {
-    ...mapGetters(["idBoard", "token"]),
+    ...mapGetters({ token: "token/token" , idBoard: "user/idBoard" }),
     filteredSprintModel:function(){
       return this.SprintModel.scoreOfSprint.filter((models) => {
         return models.title.match(this.search);
@@ -106,14 +106,13 @@ export default {
       this.select = models[index];
     },
     getHistory() {
-      if (this.idBoard != "") {
+      if (this.idBoard) {
         axios
           .post("http://localhost:9000/gethistory", {
             token: this.token,
             idBoard: this.idBoard
           })
           .then(resp => {
-            console.log(resp.data.burnDown.burnDownChart);
             this.burndown = resp.data.burnDown.burnDownChart;
             this.TotalModel = resp.data.histories.ScoreTotal;
             this.SprintModel = {

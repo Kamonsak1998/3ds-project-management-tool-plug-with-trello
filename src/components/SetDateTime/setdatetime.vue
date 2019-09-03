@@ -28,14 +28,14 @@ export default {
     }
   },
  mounted: function() {
-    if (this.idBoard != "") {
+    if (this.idBoard) {
       return;
     } else {
       this.$router.push("/dashboards");
     }
   },
   computed: {
-    ...mapGetters(["idBoard"])
+    ...mapGetters({ idBoard: "user/idBoard" })
   },
   methods: {
     setscore(arr){

@@ -9,15 +9,15 @@ import allboard from "@/components/leaderBoard/allboard.vue";
 import { mapGetters } from "vuex";
 export default {
   mounted: function() {
-    if (this.idBoard != "") {
-      return;
+    if (this.idBoard) {
+      return
     } else {
       this.$router.push("/dashboards");
-      return;
+      return
     }
   },
   computed: {
-    ...mapGetters(["idBoard"])
+    ...mapGetters({ idBoard: "user/idBoard" })
   },
   components: {
     allboard,
