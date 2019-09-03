@@ -16,7 +16,7 @@
           class="imgbg shadow-lg block"
           @click="setboard(results,index)"
         >
-          <h3 class="animate-text">
+          <h3 class="animate-text text-animate">
             <b-card-text>Choose this project</b-card-text>
           </h3>
         </b-card>
@@ -96,7 +96,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-h3 {
+.text-animate {
   font-weight: 100;
   font-style: italic;
   transform: translateX(200px);
