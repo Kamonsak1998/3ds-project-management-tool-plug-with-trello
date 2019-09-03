@@ -10,9 +10,7 @@
       <div class="input-group input-group-lg my-3"> 
           <div class="input-group-prepend">
             <span class="input-group-text"><span class="cui-magnifying-glass"></span></span>
-            
           </div>
-          
           <input type="text" id="search" class="form-control" v-model="search" placeholder="Search Sprint..." aria-label="Search" autocomplete="off">
       </div>
 
@@ -28,7 +26,7 @@
       <b-card-group rows class="card-rows mb-3">
         <b-card class="shadow mb-4 bg-white rounded">  
           <carousel :per-page="1" :scrollPerPage="false" :centerMode="true" :paginationEnabled="false" class="mb-4">
-            <slide v-for="(models,index) in filteredSprintBurndownChart" :key="index">
+            <slide v-for="(models,index) in filteredSprintBurndownChart" :key="index+Math.random()">
               <burndownChart v-bind:model="models" />
             </slide>
           </carousel>
@@ -81,7 +79,6 @@ export default {
   },
   mounted: function() {
     this.getHistory();
-    this.getburndownChart();
   },
   computed: {
     ...mapGetters(["idBoard", "token"]),
@@ -116,11 +113,13 @@ export default {
             idBoard: this.idBoard
           })
           .then(resp => {
-            this.TotalModel = resp.data.ScoreTotal;
+            console.log(resp.data.burnDown.burnDownChart);
+            this.burndown = resp.data.burnDown.burnDownChart;
+            this.TotalModel = resp.data.histories.ScoreTotal;
             this.SprintModel = {
               ...this.SprintModel,
               ...{
-                scoreOfSprint: resp.data.scoreOfSprint
+                scoreOfSprint: resp.data.histories.scoreOfSprint
               }
             };
             this.isShowModel = true;
@@ -131,13 +130,6 @@ export default {
       } else {
         this.$router.push("/dashboards");
       }
-    },  
-    getburndownChart(){
-      axios.post("http://localhost:9000/setburndownchart",{idBoard : this.idBoard}).then(res => {
-        this.burndown = res.data.burnDownChart
-      }).catch(err => {
-        alert(err);
-      })
     }
   }
 };
