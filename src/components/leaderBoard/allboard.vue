@@ -8,7 +8,10 @@
         <div class="col col-head">
           <b>Rank</b>
         </div>
-        <div class="col col-head">
+        <!-- <div class="col col-head">
+          <b></b>
+        </div> -->
+           <div class="col col-head">
           <b>Name</b>
         </div>
         <div class="col col-head">
@@ -17,6 +20,7 @@
       </div>
       <div class="row allboard-body" v-for="(user,key) in users" :key="key">
         <div class="col col-body">{{key+1}}</div>
+        <div class="col col-body" ><img src="user.avatar" alt=""></div>
         <div class="col col-body">{{user.name}}</div>
         <div class="col col-body">{{user.point}}</div>
       </div>
@@ -51,6 +55,7 @@ export default {
           idBoard: this.idBoard
         })
         .then(response => {
+          console.log(response);
           this.isShowModel = true;
           this.users = response.data.board;
         })
@@ -80,8 +85,8 @@ export default {
   /* border-color:red; */
 }
 div.allboard-row {
-  margin: auto;
-  width: 95%;
+  /* margin: auto;
+  width: 95%; */
 }
 .col-head {
   padding-top: 20px;
@@ -123,6 +128,13 @@ div.row.allboard-body {
   line-height: 1.4;
   text-transform: uppercase;
   background-color: rgba(255, 255, 255, 0.32);
+}
+.container {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
 }
 </style>
 
