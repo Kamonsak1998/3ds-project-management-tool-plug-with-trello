@@ -134,6 +134,8 @@ export default {
             this.totaled = res.data.sprintDay;
             this.validated = res.data.status;
             this.total = parseInt(this.totaled);
+            console.log(this.startDate);
+            
           }
         })
         .catch(err => {
@@ -197,7 +199,7 @@ export default {
           this.getSprint(this.totaled);
           axios
             .post("http://localhost:9000/setdate", {
-              startDate: this.startDates,
+              startDate: this.startDate,
               sprintDay: this.Sprints,
               endDate: endDate,
               idBoard: this.idBoard,
@@ -222,15 +224,6 @@ export default {
         .utc(this.startDate, "YYYY/MM/DD")
         .add(1 * value - 1, "days");
     }
-    // range: function() {
-    //   let predefinedRange = false;
-    //   // Custom range
-    //   if (!predefinedRange) {
-    //     if (this.rangeSelect !== "custom") {
-    //       this.rangeSelect = "custom";
-    //     }
-    //   }
-    // }
   },
   filters: {
     dateFormat: function(value) {
