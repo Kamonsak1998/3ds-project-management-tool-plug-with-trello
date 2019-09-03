@@ -16,7 +16,7 @@
               pattern="[1-9]+"
               v-model="point[0].XXS"
               :disabled="validated"
-              v-validate="'required|numeric|max:3'"
+              v-validate="'required|max:3'"
               :class="{ 'is-invalid': submitted && errors.has('XXS') }"
             />
             <div
@@ -37,7 +37,7 @@
               pattern="[1-9]+"
               v-model="point[1].XS"
               :disabled="validated"
-              v-validate="'required|numeric|max:3'"
+              v-validate="'required|max:3'"
               :class="{ 'is-invalid': submitted && errors.has('XS') }"
             />
             <div
@@ -58,7 +58,7 @@
               pattern="[1-9]+"
               v-model="point[2].S"
               :disabled="validated"
-              v-validate="'required|numeric|max:3'"
+              v-validate="'required|max:3'"
               :class="{ 'is-invalid': submitted && errors.has('S') }"
             />
             <div
@@ -79,7 +79,7 @@
               pattern="[1-9]+"
               v-model="point[3].M"
               :disabled="validated"
-              v-validate="'required|numeric|max:3'"
+              v-validate="'required|max:3'"
               :class="{ 'is-invalid': submitted && errors.has('M') }"
             />
             <div
@@ -100,7 +100,7 @@
               pattern="[1-9]+"
               v-model="point[4].L"
               :disabled="validated"
-              v-validate="'required|numeric|max:3'"
+              v-validate="'required|max:3'"
               :class="{ 'is-invalid': submitted && errors.has('L') }"
             />
             <div
@@ -121,7 +121,7 @@
               pattern="[1-9]+"
               v-model="point[5].XL"
               :disabled="validated"
-              v-validate="'required|numeric|max:3'"
+              v-validate="'required|max:3'"
               :class="{ 'is-invalid': submitted && errors.has('XL') }"
             />
             <div
@@ -142,7 +142,7 @@
               pattern="[1-9]+"
               v-model="point[6].XXL"
               :disabled="validated"
-              v-validate="'required|numeric|max:3'"
+              v-validate="'required|max:3'"
               :class="{ 'is-invalid': submitted && errors.has('XXL') }"
             />
             <div
@@ -163,7 +163,7 @@
               pattern="[1-9]+"
               :disabled="validated"
               v-model="point[7].XXXL"
-              v-validate="'required|numeric|max:2'"
+              v-validate="'required|max:3'"
               :class="{ 'is-invalid': submitted && errors.has('XXXL') }"
             />
             <div
@@ -192,14 +192,14 @@ export default {
   data: function() {
     return {
       point: [
-        { XXS: 0 },
-        { XS: 0 },
-        { S: 0 },
-        { M: 0 },
-        { L: 0 },
-        { XL: 0 },
-        { XXL: 0 },
-        { XXXL: 0 }
+        { XXS:Float64Array },
+        { XS: Float64Array },
+        { S: Float64Array },
+        { M: Float64Array },
+        { L: Float64Array },
+        { XL: Float64Array },
+        { XXL: Float64Array },
+        { XXXL: Float64Array }
       ],
       submitted: false,
       validated: false
@@ -233,17 +233,18 @@ export default {
                   .post("http://localhost:9000/setscoresize", {
                     Points:
                             [
-                              parseInt(this.point[0].XXS,10),
-                              parseInt(this.point[1].XS,10),
-                              parseInt(this.point[2].S,10),
-                              parseInt(this.point[3].M,10),
-                              parseInt(this.point[4].L,10),
-                              parseInt(this.point[5].XL,10),
-                              parseInt(this.point[6].XXL,10),
-                              parseInt(this.point[7].XXXL,10),
+                              parseFloat(this.point[0].XXS,10),
+                              parseFloat(this.point[1].XS,10),
+                              parseFloat(this.point[2].S,10),
+                              parseFloat(this.point[3].M,10),
+                              parseFloat(this.point[4].L,10),
+                              parseFloat(this.point[5].XL,10),
+                              parseFloat(this.point[6].XXL,10),
+                              parseFloat(this.point[7].XXXL,10),
                             ]
                   })
             .then(()=> {
+              console.log(this.point);
               alert("Save success");
             });
         }
