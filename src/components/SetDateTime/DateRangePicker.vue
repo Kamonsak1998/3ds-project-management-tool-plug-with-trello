@@ -134,6 +134,8 @@ export default {
             this.totaled = res.data.sprintDay;
             this.validated = res.data.status;
             this.total = parseInt(this.totaled);
+            console.log(this.startDate);
+            
           }
         })
         .catch(err => {
@@ -197,7 +199,7 @@ export default {
           this.getSprint(this.totaled);
           axios
             .post("http://localhost:9000/setdate", {
-              startDate: this.startDates,
+              startDate: this.startDate,
               sprintDay: this.Sprints,
               endDate: endDate,
               idBoard: this.idBoard,
