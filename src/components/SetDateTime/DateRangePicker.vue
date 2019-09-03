@@ -199,7 +199,7 @@ export default {
           this.getSprint(this.totaled);
           axios
             .post("http://localhost:9000/setdate", {
-              startDate: this.startDate,
+              startDate: this.startDates,
               sprintDay: this.Sprints,
               endDate: endDate,
               idBoard: this.idBoard,
