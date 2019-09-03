@@ -127,13 +127,6 @@ export default {
   cursor: default;
 }
 
-/* .daterangepicker-range {
-  background-color: #17a2b8 !important;
-  color: #ffffff;
-} */
-
-
-
 .daterangepicker-cursor-pointer {
   cursor: pointer;
 }
