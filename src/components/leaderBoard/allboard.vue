@@ -19,10 +19,10 @@
         </div>
       </div>
       <div class="row allboard-body" v-for="(user,key) in users" :key="key">
-        <div class="col col-body">{{key+1}}</div>
-        <div class="col col-body" ><img src="user.avatar" alt=""></div>
-        <div class="col col-body">{{user.name}}</div>
-        <div class="col col-body">{{user.point}}</div>
+        <div class="col-4 col-body">{{key+1}}</div>
+        <div class="col col-body col-img " ><img class="imguser rounded-circle"  :src="user.avatar" width="auto" height="40" border-radius ></div>
+        <div class="col-3 col-body col-name">{{user.name}}</div>
+        <div class="col-4 col-body">{{user.point}}</div>
       </div>
     </div>
   </div>
@@ -37,7 +37,7 @@ export default {
     return {
       key: 1,
       users: [],
-      user: { name: '', point: 0 },
+      user: { avatar:'',name: '', point: 0 },
       isShowModel: false,
     };
   },
@@ -58,12 +58,8 @@ export default {
           console.log(response);
           this.isShowModel = true;
           this.users = response.data.board;
+          this.non = response.data.board[1].avatar;          
         })
-        .catch(err => {
-          if (err) {
-            alert("connection lost");
-          }
-        });
     }
   }
 };
@@ -135,6 +131,12 @@ div.row.allboard-body {
     padding-left: 0px;
     margin-right: auto;
     margin-left: auto;
+}
+/* .col-img{
+  text-align: right 1px;
+} */
+.col-name{
+  /* text-align: left; */
 }
 </style>
 
