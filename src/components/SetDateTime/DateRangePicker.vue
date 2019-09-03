@@ -123,7 +123,7 @@ export default {
     focusInput() {
       setTimeout(() => {
         this.$refs.startDate.focus();
-      }, 100);
+      }, 0);
     },
     checkDate: function() {
       axios
@@ -222,15 +222,6 @@ export default {
         .utc(this.startDate, "YYYY/MM/DD")
         .add(1 * value - 1, "days");
     }
-    // range: function() {
-    //   let predefinedRange = false;
-    //   // Custom range
-    //   if (!predefinedRange) {
-    //     if (this.rangeSelect !== "custom") {
-    //       this.rangeSelect = "custom";
-    //     }
-    //   }
-    // }
   },
   filters: {
     dateFormat: function(value) {
