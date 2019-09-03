@@ -18,7 +18,7 @@
           <option value="palette10">Theme 10</option>
         </select>
       </p>
-      <apexchart type="pie" height="250" :options="chartOptions" :series="series"></apexchart>
+      <apexchart type="pie" height="315" :options="chartOptions" :series="series"></apexchart>
     </div>
   </div>
 </template>
@@ -26,40 +26,50 @@
 <script>
 export default {
   name: "Pie",
-  // props: {
-  //     model: {
-  //         required: true
-  //     }
-  // },
+  props: {
+      model: {
+          required: true
+      }
+  },
   mounted() {
-    // this.series[0] = {...this.series[0], ...{data: this.model.data}};
-    // this.chartOptions = {...this.chartOptions, ...{xaxis: {categories: this.model.name}}};
-    // this.chartOptions = {...this.chartOptions, ...{subtitle: {text: this.model.startDate+ " - " +this.model.endDate}}};
-    // this.chartOptions = {...this.chartOptions, ...{title: {text: this.model.title}}};
+    this.series = this.model.data
+    this.chartOptions = {...this.chartOptions, ...{labels: this.model.name}};
   },
   data: function() {
     return {
-        series: [44, 55, 13, 43, 22],
+        series: [10,20,30,40,50,60,70],
         chartOptions: {
           pie: {
-                horizontal: true,
-                dataLabels: {
-                    position: "top"
-                }
-            },
-          labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-          responsive: [{
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 200
-              },
-              legend: {
-                position: 'bottom'
-              }
+            horizontal: true,
+            legend: {
+                position: "bottom"
             }
-          }]
-        }
+          },
+          labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E', 'Team E', 'Team E'],
+          legend: {
+            show: true,
+            showForSingleSeries: false,
+            showForNullSeries: true,
+            showForZeroSeries: true,
+            position: 'bottom',
+            horizontalAlign: 'left', 
+            floating: false,
+            fontSize: '12px',
+            offsetX: 0,
+            offsetY: 0,
+        },
+        subtitle: {
+          text: "Pie Total",
+          align: "left",
+          margin: 10,
+          offsetX: 0,
+          offsetY: 0,
+          floating: false,
+          style: {
+              fontSize: "16px",
+          }
+        },
+      }
     };
   },
   methods: {
