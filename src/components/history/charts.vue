@@ -20,9 +20,15 @@
           <BarColumn v-bind:model="TotalModel" />
         </b-card>
         <b-card class="shadow mb-4 bg-white rounded">
+           <Pie v-bind:model="TotalModel" />
+        </b-card>
+      </b-card-group>
+
+      <b-card-group rows class="card-rows mb-3">
+        <b-card class="shadow mb-4 bg-white rounded">  
           <carousel :per-page="1" :scrollPerPage="false" :centerMode="true" :paginationEnabled="false" class="mb-4">
-            <slide>
-              <burndownChart v-bind:model="burndown" />
+            <slide v-for="(models,index) in filteredSprintBurndownChart" :key="index">
+              <burndownChart v-bind:model="models" />
             </slide>
           </carousel>
         </b-card>
@@ -54,6 +60,7 @@
 import Bar from "@/components/history/Bar.vue";
 import BarColumn from "@/components/history/BarColumn.vue";
 import burndownChart from "@/components/burndownChart/burndownChart.vue";
+import Pie from "@/components/history/Pie.vue";
 import { mapGetters } from "vuex";
 import { Carousel, Slide } from "vue-carousel";
 import axios from "axios";
@@ -81,12 +88,18 @@ export default {
       return this.SprintModel.scoreOfSprint.filter((models) => {
         return models.title.match(this.search);
       })
+    },
+    filteredSprintBurndownChart:function(){
+      return this.burndown.filter((models) => {
+        return models.titleSprint.match(this.search);
+      })
     }
   },
   components: { 
     Bar,
     BarColumn,
     burndownChart,
+    Pie,
     Carousel,
     Slide
   },
@@ -117,10 +130,10 @@ export default {
       } else {
         this.$router.push("/dashboards");
       }
-    },
+    },  
     getburndownChart(){
-      axios.get("http://localhost:9000/setburndownchart").then(res => {
-        this.burndown = res.data.ScoreTotal[0]
+      axios.post("http://localhost:9000/setburndownchart",{idBoard : this.idBoard}).then(res => {
+        this.burndown = res.data.burnDownChart
       }).catch(err => {
         alert(err);
       })
