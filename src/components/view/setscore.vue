@@ -187,6 +187,8 @@
 
 <script>
 import axios from "axios";
+import { BoardService } from "../../services/BoardService";
+const boardservice = new BoardService()
 
 export default {
   data: function() {
@@ -210,7 +212,7 @@ export default {
   },
   methods: {
     checkscore: function() {
-      axios.get("http://localhost:9000/checkscoresize").then(res => {
+      boardservice.fetchcheckscoresize({}).then(res => {
         if (res.data.status == true) {
           this.validated = res.data.status;
           this.point[0].XXS = res.data.sizes[6].sizePoint;

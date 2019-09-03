@@ -33,4 +33,15 @@ export class BoardService extends BaseService {
     fetchchecksetdate = ({idBoard}) => {
         return this.requester.post('/checksetdate', {idBoard}, mainAPIOptions())
     }
+
+
+    fetchsetmember = ({ token,idBoard }) => {
+        return this.requester.post('/setmember', {token,idBoard},mainAPIOptions())
+    }
+
+    fetchcheckscoresize = ({}) => {
+        return this.requester.post('/checkscoresize',mainAPIOptions())
+    }
+
+
 }
