@@ -63,7 +63,8 @@ import Pie from "@/components/history/Pie.vue";
 import { mapGetters } from "vuex";
 import { Carousel, Slide } from "vue-carousel";
 import axios from "axios";
-
+import {BoardService} from "../../services/BoardService";
+const boardService = new BoardService()
 export default {
   data() {
     return {
@@ -107,13 +108,10 @@ export default {
     },
     getHistory() {
       if (this.idBoard != "") {
-        axios
-          .post("http://localhost:9000/gethistory", {
-            token: this.token,
-            idBoard: this.idBoard
-          })
-          .then(resp => {
-            console.log(resp.data.burnDown.burnDownChart);
+        boardService.fetchHistory({
+          token :this.token,
+          idBoard :this.idBoard
+        }).then(resp => {
             this.burndown = resp.data.burnDown.burnDownChart;
             this.TotalModel = resp.data.histories.ScoreTotal;
             this.SprintModel = {
