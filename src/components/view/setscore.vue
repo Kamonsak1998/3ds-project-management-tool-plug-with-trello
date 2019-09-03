@@ -16,7 +16,7 @@
               pattern="[1-9]+"
               v-model="point[0].XXS"
               :disabled="validated"
-              v-validate="'required|max:3'"
+              v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXS') }"
             />
             <div
@@ -37,7 +37,7 @@
               pattern="[1-9]+"
               v-model="point[1].XS"
               :disabled="validated"
-              v-validate="'required|max:3'"
+              v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XS') }"
             />
             <div
@@ -58,7 +58,7 @@
               pattern="[1-9]+"
               v-model="point[2].S"
               :disabled="validated"
-              v-validate="'required|max:3'"
+              v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('S') }"
             />
             <div
@@ -79,7 +79,7 @@
               pattern="[1-9]+"
               v-model="point[3].M"
               :disabled="validated"
-              v-validate="'required|max:3'"
+              v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('M') }"
             />
             <div
@@ -100,7 +100,7 @@
               pattern="[1-9]+"
               v-model="point[4].L"
               :disabled="validated"
-              v-validate="'required|max:3'"
+              v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('L') }"
             />
             <div
@@ -121,7 +121,7 @@
               pattern="[1-9]+"
               v-model="point[5].XL"
               :disabled="validated"
-              v-validate="'required|max:3'"
+              v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XL') }"
             />
             <div
@@ -142,7 +142,7 @@
               pattern="[1-9]+"
               v-model="point[6].XXL"
               :disabled="validated"
-              v-validate="'required|max:3'"
+              v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXL') }"
             />
             <div
@@ -163,7 +163,7 @@
               pattern="[1-9]+"
               :disabled="validated"
               v-model="point[7].XXXL"
-              v-validate="'required|max:3'"
+              v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXXL') }"
             />
             <div
