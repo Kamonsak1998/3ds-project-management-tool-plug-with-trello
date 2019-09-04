@@ -4,7 +4,5 @@ export const CONFIG = {
 
 export const mainAPIOptions = () => ({
     baseURL: CONFIG.MAIN_API_ENDPOINT,
-    headers : {
-        'x-token' : 'token_example'
-    }
+    headers: { token: localStorage.getItem('token') }
 })

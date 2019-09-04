@@ -3,7 +3,7 @@ import { BaseService } from "./BaseService";
 
 export class BoardService extends BaseService {
     fetchDashboard = (token) => {
-        return this.requester.post('/getdashboard', { token }, mainAPIOptions())
+        return this.requester.get('/getdashboard', { token }, mainAPIOptions())
     }
 
     fetchHistory = ({ token, idBoard }) => {
