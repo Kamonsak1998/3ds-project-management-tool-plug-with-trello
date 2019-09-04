@@ -15,6 +15,12 @@ export const sprint = {
         addStartDate: (state, newDate) => {
             state.startDate = newDate
         },
+        remove: (state) => {
+            state.sprint = null
+            state.startDate = null
+            localStorage.setItem('sprint', null);
+            localStorage.setItem('startDate', null);
+        }
     },
     state: {
         sprint: null,
