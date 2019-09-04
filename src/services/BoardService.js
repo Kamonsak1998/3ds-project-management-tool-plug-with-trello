@@ -11,7 +11,7 @@ export class BoardService extends BaseService {
     }
 
     fetchLeaderboard = ({ idBoard }) => {
-        return this.requester.post('/getleaderboard', { idBoard }, mainAPIOptions())
+        return this.requester.POST('/getleaderboard', { idBoard }, mainAPIOptions())
     }
 
     fetchSetdatetime = ({
@@ -21,7 +21,7 @@ export class BoardService extends BaseService {
         idBoard,
         boardName
     }) => {
-        return this.requester.get('/setdate', {
+        return this.requester.post('/setdate', {
             startDate,
             sprintDay,
             endDate,
@@ -43,7 +43,7 @@ export class BoardService extends BaseService {
     }
 
     fetchsetscoresize = ({ Points }) => {
-        return this.requester.get('/setscoresize', { Points }, mainAPIOptions())
+        return this.requester.post('/setscoresize', { Points }, mainAPIOptions())
     }
 
 
