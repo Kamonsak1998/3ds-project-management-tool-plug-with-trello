@@ -31,7 +31,7 @@ export class BoardService extends BaseService {
     }
 
     fetchchecksetdate = ({idBoard}) => {
-        return this.requester.post('/checksetdate', {idBoard}, mainAPIOptions())
+        return this.requester.get('/checksetdate', {idBoard}, mainAPIOptions())
     }
 
 
