@@ -2,7 +2,7 @@
   <div class="container pt-5">
     <div class="animated fadeIn loading" v-if="isShowModel === false">
       <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
-    </div>  
+    </div>
     <div class="row" v-if="isShowModel === true">
       <div v-for="(result,index) in results" :key="index" class="col-sm-4">
         <b-card
@@ -16,7 +16,7 @@
           class="imgbg shadow-lg block"
           @click="setboard(results,index)"
         >
-          <h3 class="animate-text">
+          <h3 class="animate-text text-animate">
             <b-card-text>Choose this project</b-card-text>
           </h3>
         </b-card>
@@ -26,14 +26,16 @@
 </template>
 
 <script>
-import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
+import {BoardService} from "../../services/BoardService";
+
+const boardService = new BoardService()
 export default {
   mounted: function() {
-    this.getboardtrello();
+    this.getBoardtrello();
   },
   computed: {
-    ...mapGetters(["token", "idBoard"])
+    ...mapGetters({ token: "token/token" , idBoard: "user/idBoard" })
   },
   data() {
     return {
@@ -43,31 +45,24 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getBoard", "getNameBoard"]),
+    ...mapActions({
+      getBoard: "user/getBoard",
+      getNameBoard: "user/getNameBoard"
+    }),
     setboard(result, index) {
       const boardid = result[index].idBoard;
       const nameBoard = result[index].boardName;
       this.getBoard(boardid);
       this.getNameBoard(nameBoard);
-      if (this.idBoard != "") {
-        this.$router.push("/feature");
-      } else {
-        return;
-      }
+      this.$router.push("/feature");
     },
-    getboardtrello() {
-      if (this.token != "") {
-        axios
-          .post("http://localhost:9000/getdashboard", { token: this.token })
-          .then(Response => {
+    getBoardtrello() {
+        boardService.fetchDashboard(this.token).then(Response => {
            this.results = Response.data;
            this.isShowModel = true;
           }).catch(err => {
             alert(err)
           })
-      } else {
-        this.$router.push("/auth/login");
-      }
     }
   }
 };
@@ -89,13 +84,14 @@ export default {
   cursor: pointer;
   color: white;
   text-shadow: 2px 2px 4px #000000;
+  background: linear-gradient(40deg, #ff9966, #ff6666, #cc66cc) !important;
 }
 .card-img {
   border-radius: 25px;
   width: 100%;
   height: 100%;
 }
-h3 {
+.text-animate {
   font-weight: 100;
   font-style: italic;
   transform: translateX(200px);

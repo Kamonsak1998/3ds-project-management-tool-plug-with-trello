@@ -1,12 +1,25 @@
 <template>
   <div class="animated fadeIn">
-    <apexchart height="370" type="line" :options="chartOptions" :series="series"></apexchart>
+    <apexchart height="350" type="line" :options="chartOptions" :series="series"></apexchart>
   </div>
 </template>
 
 <script>
 export default {
   name: "burndownChart",
+   mounted: function() {
+     this.series[0] = {...this.series[0],...{data: this.model.idealBurn}}
+     this.series[1] = {...this.series[1],...{data: this.model.actualBurn}}
+     this.chartOptions = {...this.chartOptions, ...{title:{text:this.model.titleSprint}}};
+     this.chartOptions = {...this.chartOptions, ...{subtitle:{text:this.model.startDate+ " - " +this.model.endDate}}};
+     this.chartOptions = {...this.chartOptions, ...{xaxis: {categories: this.model.datePeriod}}};
+     
+   },
+   props: {
+      model: {
+          required: true,
+      },
+  },
   data: function() {
     return {
       series: [
@@ -14,7 +27,7 @@ export default {
           name: "Ideal Burn",
           color: "rgba(255,0,0,0.25)",
           lineWidth: 2,
-          data: [110, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0]
+          data: []
         },
         {
           name: "Actual Burn",
@@ -22,7 +35,7 @@ export default {
           marker: {
             radius: 6
           },
-          data: [100, 110, 125, 95, 64, 76, 62, 44, 35, 29, 18, 2]
+          data: []
         }
       ],
       chartOptions: {
@@ -34,29 +47,30 @@ export default {
             hideDelay: 200
           }
         },
+        title: {
+          text: "",
+          x: -20,
+          align: "center",
+          style: {
+              fontSize: "20px",
+          }
+        },
         subtitle: {
-          text: "Sprint 1",
-          x: -20
+            text: "",
+            align: "center",
+            margin: 10,
+            x: -20,
+            floating: false,
+            style: {
+                fontSize: "15px",
+            }
         },
         xaxis: {
-          categories: [
-            "Day 1",
-            "Day 2",
-            "Day 3",
-            "Day 4",
-            "Day 5",
-            "Day 6",
-            "Day 7",
-            "Day 8",
-            "Day 9",
-            "Day 10",
-            "Day 11",
-            "Day 12"
-          ]
+          categories: []
         },
         yaxis: {
           title: {
-            text: "Hours"
+            text: "Score"
           },
           plotLines: [
             {
@@ -65,10 +79,16 @@ export default {
             }
           ]
         },
-        tooltip: {
-          valueSuffix: " hrs",
-          crosshairs: true,
-          shared: true
+        xaxis: {
+          title: {
+            text: "Day"
+          },
+          plotLines: [
+            {
+              value: 0,
+              width: 1
+            }
+          ]
         },
         legend: {
           layout: "vertical",

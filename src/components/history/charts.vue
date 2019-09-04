@@ -7,7 +7,6 @@
     <div class="animated fadeIn font" v-if="isShowModel === true">
       <h1>HISTORY</h1>
       <hr class="my-4" />
-
       <div class="input-group input-group-lg my-3"> 
           <div class="input-group-prepend">
             <span class="input-group-text"><span class="cui-magnifying-glass"></span></span>
@@ -20,15 +19,21 @@
           <BarColumn v-bind:model="TotalModel" />
         </b-card>
         <b-card class="shadow mb-4 bg-white rounded">
-          <carousel :per-page="1"  :mouseDrag="true" :centerMode="true" :paginationEnabled="false" class="mb-4">
-            <slide v-for="(models,index) in filteredSprintModel" :key="index">
-              <burndownChart />
+           <Pie v-bind:model="TotalModel" />
+        </b-card>
+      </b-card-group>
+
+      <b-card-group rows class="card-rows mb-3">
+        <b-card class="shadow mb-4 bg-white rounded">  
+          <carousel :per-page="1" :scrollPerPage="false" :centerMode="true" :paginationEnabled="false" class="mb-4">
+            <slide v-for="(models,index) in filteredSprintBurndownChart" :key="index+Math.random()">
+              <burndownChart v-bind:model="models" />
             </slide>
           </carousel>
         </b-card>
       </b-card-group>
 
-      <carousel :navigationEnabled="true" :perPageCustom="[[320, 1], [1024, 3],[768,2]]" :paginationEnabled="true" :paginationPadding="1" :mouseDrag="true" :centerMode="true" >
+      <carousel :navigationEnabled="true" :perPageCustom="[[320, 1],[1024, 3],[768,2]]" :scrollPerPage="false" :centerMode="true" :paginationPadding="3" :paginationEnabled="false">
         <slide v-for="(models,index) in filteredSprintModel" :key="index">
           <div class="card cardsprit mr-1 ml-1 shadow">
             <div class="card-body">
@@ -54,15 +59,18 @@
 import Bar from "@/components/history/Bar.vue";
 import BarColumn from "@/components/history/BarColumn.vue";
 import burndownChart from "@/components/burndownChart/burndownChart.vue";
+import Pie from "@/components/history/Pie.vue";
 import { mapGetters } from "vuex";
 import { Carousel, Slide } from "vue-carousel";
 import axios from "axios";
-
+import {BoardService} from "../../services/BoardService";
+const boardService = new BoardService()
 export default {
   data() {
     return {
       search:'',
       TotalModel: Object,
+      burndown:Object,
       select: Object,
       SprintModel: {
         scoreOfSprint: Object
@@ -74,10 +82,15 @@ export default {
     this.getHistory();
   },
   computed: {
-    ...mapGetters(["idBoard", "token"]),
+    ...mapGetters({ token: "token/token" , idBoard: "user/idBoard" }),
     filteredSprintModel:function(){
       return this.SprintModel.scoreOfSprint.filter((models) => {
         return models.title.match(this.search);
+      })
+    },
+    filteredSprintBurndownChart:function(){
+      return this.burndown.filter((models) => {
+        return models.titleSprint.match(this.search);
       })
     }
   },
@@ -85,6 +98,7 @@ export default {
     Bar,
     BarColumn,
     burndownChart,
+    Pie,
     Carousel,
     Slide
   },
@@ -93,18 +107,18 @@ export default {
       this.select = models[index];
     },
     getHistory() {
-      if (this.idBoard != "") {
         axios
           .post("http://localhost:9000/gethistory", {
             token: this.token,
             idBoard: this.idBoard
           })
           .then(resp => {
-            this.TotalModel = resp.data.ScoreTotal;
+            this.burndown = resp.data.burnDown.burnDownChart;
+            this.TotalModel = resp.data.histories.ScoreTotal;
             this.SprintModel = {
               ...this.SprintModel,
               ...{
-                scoreOfSprint: resp.data.scoreOfSprint
+                scoreOfSprint: resp.data.histories.scoreOfSprint
               }
             };
             this.isShowModel = true;
@@ -112,9 +126,6 @@ export default {
           .catch(err => {
             alert(err);
           });
-      } else {
-        this.$router.push("/dashboards");
-      }
     }
   }
 };
@@ -135,8 +146,7 @@ export default {
   overflow: hidden;
   border-radius: 20px;
   background-color: #e3e8ed;
-  height: 160px;
-  cursor: pointer;
+  height: 170px;
   text-shadow: 2px 2px 4px white;
   color: #3c4b64;
 }
@@ -145,7 +155,6 @@ export default {
   width: 100px;
   font-weight: 600;
   color: #fff;
-  cursor: pointer;
   margin: 5px;
   height: 50px;
   text-align: center;

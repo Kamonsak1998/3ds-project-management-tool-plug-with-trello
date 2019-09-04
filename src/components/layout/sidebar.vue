@@ -30,7 +30,7 @@
             <i class="nav-icon icon-user"></i> User
           </a>
           <ul class="nav-dropdown-items">
-            <li class="nav-item" v-if="token">
+            <li class="nav-item"  v-if="token">
               <a class="nav-link" href @click=" logout">
                 <i class="nav-icon icon-logout"></i>Logout
               </a>
@@ -40,11 +40,6 @@
                 <i class="nav-icon icon-login"></i> Login
               </router-link>
             </li>
-            <!-- <li class="nav-item">
-              <router-link class="nav-link" :to="{name : 'register'}">
-                <i class="nav-icon icon-star"></i> Register
-              </router-link>
-            </li>-->
           </ul>
         </li>
       </ul>
@@ -54,19 +49,17 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters } from "vuex";
 import { OAuth } from "oauthio-web";
 export default {
   computed: {
-    ...mapGetters(["token", "idBoard"]),
+    ...mapGetters({token: 'token/token' , idBoard:'user/idBoard'}),
   },
   methods: {
-    ...mapMutations(['remove']),
-    logout: function() {
-      location.reload();
-      this.remove()
+      logout: function() {
       OAuth.clearCache();
-      return;
+      this.$store.commit('token/remove');
+      this.$store.commit('user/remove');
     }
   }
 };
