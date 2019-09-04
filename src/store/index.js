@@ -1,21 +1,17 @@
 import Vue from 'vue';
 import Vuex from 'vuex'
-import * as getters from './getters'
-import * as mutations from './mutations'
-import * as actions from './actions'
+
+import { token } from './token'
+import { sprint } from './sprint'
+import { user } from './user'
+import createPersistedState from 'vuex-persistedstate'
 Vue.use(Vuex)
 
-export const store = new Vuex.Store({
-    state: {
-        token: '',
-        idBoard: '',
-        startDate: '',
-        Sprint: '',
-        nameBoard:'',
-        userName:'',
-        idUser:''
+export default new Vuex.Store({
+    modules: {
+        token,
+        sprint,
+        user
     },
-    getters,
-    mutations,
-    actions
+    plugins: [createPersistedState()],
 })

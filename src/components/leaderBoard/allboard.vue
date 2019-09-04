@@ -1,25 +1,28 @@
 <template>
-  <div class="col-lg-9 mx-auto">
-    <div class="animated fadeIn loading" v-if="like === false">
+  <div class="container">
+   <div class="animated fadeIn loading" v-if="isShowModel === false">
       <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
-    </div>
-
-    <div class="allboard-row allboard" v-if="like===true">
+    </div>   
+    <div class="allboard-row allboard col-lg-9 mx-auto"  v-if="isShowModel === true">
       <div class="row row-head">
         <div class="col col-head">
           <b>Rank</b>
         </div>
-        <div class="col col-head">
+        <!-- <div class="col col-head">
+          <b></b>
+        </div> -->
+           <div class="col-5 col-head">
           <b>Name</b>
         </div>
-        <div class="col col-head">
+        <div class="col-4 col-head">
           <b>Score</b>
         </div>
       </div>
-      <div class="row allboard-body" v-for="(items,key) in items" :key="items">
-        <div class="col col-body">{{key+1}}</div>
-        <div class="col col-body">{{items.name}}</div>
-        <div class="col col-body">{{items.point}}</div>
+      <div class="row allboard-body" v-for="(user,key) in users" :key="key">
+        <div class="col-3 col-body">{{key+1}}</div>
+        <div class="col-2 col-body "><img class="img-user rounded-circle"  :src="user.avatar" width="40" height="40" border-radius ></div>
+        <div class="col-3 col-body col-name">{{user.name}}</div>
+        <div class="col-4 col-body">{{user.point}}</div>
       </div>
     </div>
   </div>
@@ -32,29 +35,17 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      like: true,
       key: 1,
       users: [],
-      user: { name: "", point: 0 },
-      items: [
-        { name: "BahBenz", point: "100" },
-        { name: "arram", point: "200" },
-        { name: "gono", point: "300" },
-        { name: "gono", point: "300" },
-        { name: "gono", point: "300" },
-        { name: "gono", point: "300" },
-        { name: "gono", point: "300" },
-        { name: "gono", point: "300" },
-        { name: "gono", point: "300" },
-        { name: "arnon", point: "400" }
-      ]
+      user: { avatar:'',name: '', point: Float64Array },
+      isShowModel: false,
     };
   },
   mounted: function() {
     this.getUserData();
   },
   computed: {
-    ...mapGetters(["idBoard", "token"])
+    ...mapGetters({ token: "token/token" , idBoard: "user/idBoard" })
   },
   methods: {
     getUserData() {
@@ -64,15 +55,11 @@ export default {
           idBoard: this.idBoard
         })
         .then(response => {
-          // console.log(response);
-          this.users = response.data.leaderboard;
-          // this.like = true;
+          console.log(response);
+          this.isShowModel = true;
+          this.users = response.data.board;
+          this.non = response.data.board[1].avatar;          
         })
-        .catch(err => {
-          if (err) {
-            alert("connection lost");
-          }
-        });
     }
   }
 };
@@ -83,10 +70,16 @@ export default {
   margin-top: 15px;
   box-shadow: 7px;
 } */
-.loading {
-  position: fixed;
-  top: 50%;
-  left: 45%;
+@media only screen and (max-width: 768px) {
+ .allboard-body {
+  box-shadow:0 2px 3px 0px rgba(0,0,0,0.25);
+  padding-top: 15px;
+  height: 60px;
+  color: white;
+  background: linear-gradient(40deg, #ff6f69, #ffcc5c) !important;
+  font-size: 16px;
+  border-radius: 5px;
+}
 }
 .allboard-body {
   box-shadow:0 2px 3px 0px rgba(0,0,0,0.25);
@@ -97,10 +90,6 @@ export default {
   font-size: 16px;
   border-radius: 5px;
   /* border-color:red; */
-}
-div.allboard-row {
-  margin: auto;
-  width: 95%;
 }
 .col-head {
   padding-top: 20px;
@@ -116,8 +105,11 @@ div.row.allboard-body {
   margin-top: 12px;
 
 }
-.spinner {
-  padding-top: 20%;
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .col-body {
   width: 130px;
@@ -140,5 +132,16 @@ div.row.allboard-body {
   text-transform: uppercase;
   background-color: rgba(255, 255, 255, 0.32);
 }
+.container {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.col-name{
+  text-align: left;
+}
+
 </style>
 
