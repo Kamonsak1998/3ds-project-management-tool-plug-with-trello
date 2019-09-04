@@ -48,8 +48,8 @@
 import setscore from "@/components/view/setscore";
 import { mapGetters } from "vuex";
 import axios from "axios";
-import { BoardService } from "../../services/BoardService";
-const boardservice = new BoardService();
+import {BoardService} from "../../services/BoardService";
+const boardService = new BoardService()
 
 export default {
   mounted: function() {
@@ -59,20 +59,15 @@ export default {
     setscore
   },
   computed: {
-    ...mapGetters(["idBoard", "token"])
+    ...mapGetters({ token: "token/token" , idBoard: "user/idBoard" })
   },
   methods: {
     checkidBoard() {
-      if (this.idBoard != "") {
-        this.checkDate();
-        this.setmember();
-      } else {
-        this.$router.push("/dashboards");
-      }
+      this.checkDate();
+      this.setmember();
     },
     checkDate: function() {
-      boardservice
-        .fetchchecksetdate({ idBoard: this.idBoard })
+      boardService.fetchchecksetdate({ idBoard: this.idBoard })
         .then(res => {
           if (res.data.status == false) {
             this.$router.push("/setdatetime");
@@ -83,7 +78,10 @@ export default {
         });
     },
     setmember() {
-      boardservice.fetchcheckscoresize({ token: this.token, idBoard: this.idBoard })
+      boardService.fetchsetmember({
+          token: this.token,
+          idBoard: this.idBoard
+        })
         .catch(err => {
           alert(err);
         });
