@@ -60,6 +60,7 @@ export default {
       OAuth.clearCache();
       this.$store.commit('token/remove');
       this.$store.commit('user/remove');
+      this.$store.commit('sprint/remove');
     }
   }
 };
