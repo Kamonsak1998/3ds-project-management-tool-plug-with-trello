@@ -11,7 +11,7 @@ export class BoardService extends BaseService {
     }
 
     fetchLeaderboard = ({ idBoard }) => {
-        return this.requester.post('/getleaderboard', { idBoard }, mainAPIOptions())
+        return this.requester.POST('/getleaderboard', { idBoard }, mainAPIOptions())
     }
 
     fetchSetdatetime = ({
