@@ -48,6 +48,9 @@
 import setscore from "@/components/view/setscore";
 import { mapGetters } from "vuex";
 import axios from "axios";
+import {BoardService} from "../../services/BoardService";
+const boardService = new BoardService()
+
 export default {
   mounted: function() {
     this.checkidBoard();
@@ -64,8 +67,7 @@ export default {
       this.setmember();
     },
     checkDate: function() {
-      axios
-        .post("http://localhost:9000/checksetdate", { idBoard: this.idBoard })
+      boardService.fetchchecksetdate({ idBoard: this.idBoard })
         .then(res => {
           if (res.data.status == false) {
             this.$router.push("/setdatetime");
@@ -76,8 +78,7 @@ export default {
         });
     },
     setmember() {
-      axios
-        .post("http://localhost:9000/setmember", {
+      boardService.fetchsetmember({
           token: this.token,
           idBoard: this.idBoard
         })

@@ -74,6 +74,9 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
 import { mapActions, mapGetters } from "vuex";
+import { BoardService } from "../../services/BoardService";
+const boardservice = new BoardService();
+
 library.add(faCaretRight);
 
 export default {
@@ -110,7 +113,7 @@ export default {
   mounted: function() {
     this.checkDate();
     // if(this.total != ''){
-      this.focusInput();
+    this.focusInput();
     // }
   },
 
@@ -132,8 +135,7 @@ export default {
       }, 100);
     },
     checkDate: function() {
-      axios
-        .post("http://localhost:9000/checksetdate", { idBoard: this.idBoard })
+      boardservice.fetchchecksetdate({ idBoard : this.idBoard })
         .then(res => {
           this.isShowModel = true;
           if (res.data.status == true) {
@@ -203,13 +205,13 @@ export default {
           // let endDate = this.endDate;
           this.getStartDate(this.startDate);
           this.getSprint(this.totaled);
-          axios
-            .post("http://localhost:9000/setdate", {
-              startDate: this.startDates,
-              sprintDay: this.Sprints,
+          boardservice
+            .fetchSetdatetime({
+              startDate: this.getStartDate,
+              sprintDay: this.getSprint,
               endDate: this.endDate,
-              idBoard: this.idBoard,
-              boardName: this.newBoard
+              idBoard : this.idBoard,
+              boardName :this.boardName
             })
             .then(() => {
               alert("Save Success");
