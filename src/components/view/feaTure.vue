@@ -67,8 +67,7 @@ export default {
       this.setmember();
     },
     checkDate: function() {
-      boardService
-        .fetchchecksetdate({ idBoard: this.idBoard })
+      boardService.fetchchecksetdate({ idBoard: this.idBoard })
         .then(res => {
           if (res.data.status == false) {
             this.$router.push("/setdatetime");
