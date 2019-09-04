@@ -212,7 +212,7 @@ export default {
   },
   methods: {
     checkscore: function() {
-      boardservice.fetchcheckscoresize({}).then(res => {
+      boardservice.fetchcheckscoresize().then(res => {
         if (res.data.status == true) {
           this.validated = res.data.status;
           this.point[0].XXS = res.data.sizes[6].sizePoint;
