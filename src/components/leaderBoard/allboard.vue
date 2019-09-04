@@ -55,7 +55,6 @@ export default {
           idBoard: this.idBoard
         })
         .then(response => {
-          console.log(response);
           this.isShowModel = true;
           this.users = response.data.board;
           this.non = response.data.board[1].avatar;          

@@ -115,7 +115,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters({startDates:"sprint/startDates", Sprints:"sprint/Sprints",idBoard: "user/idBoard", nameBoard: "user/nameBoard",  token: "token/token"}),
+    ...mapGetters({startDates:"sprint/startDate", Sprints:"sprint/sprint",idBoard: "user/idBoard", nameBoard: "user/nameBoard",  token: "token/token"}),
     nextMonth: function() {
       return moment.utc(this.month).add(1, "month");
     },
@@ -193,7 +193,7 @@ export default {
       this.nextStep();
     },
     // Submit button
-    ...mapActions(["getStartDate", "getSprint"]),
+    ...mapActions({ getStartDate: "sprint/getStartDate", getSprint: "sprint/getSprint" }),
     submit: function() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
