@@ -207,11 +207,11 @@ export default {
           this.getSprint(this.totaled);
           boardservice
             .fetchSetdatetime({
-              startDate: this.getStartDate,
-              sprintDay: this.getSprint,
+              startDate: this.startDates,
+              sprintDay: this.Sprints,
               endDate: this.endDate,
               idBoard : this.idBoard,
-              boardName :this.boardName
+              boardName :this.nameBoard
             })
             .then(() => {
               alert("Save Success");
