@@ -35,7 +35,7 @@ export class BoardService extends BaseService {
     }
 
     fetchsetmember = ({ idBoard }) => {
-        return this.requester.get('/setmember', { idBoard }, mainAPIOptions())
+        return this.requester.post('/setmember', { idBoard }, mainAPIOptions())
     }
 
     fetchcheckscoresize = () => {
