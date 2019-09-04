@@ -13,6 +13,7 @@ export const token = {
     mutations: {
         addToken: (state, newToken) => {
             state.token = newToken
+            localStorage.setItem('token',newToken)
         },
         remove: (state) => {
             state.token = null
