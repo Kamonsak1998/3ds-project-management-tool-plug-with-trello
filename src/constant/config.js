@@ -1,3 +1,5 @@
+import { token } from "../store/token";
+
 export const CONFIG = {
     MAIN_API_ENDPOINT: 'http://localhost:9000'
 }
