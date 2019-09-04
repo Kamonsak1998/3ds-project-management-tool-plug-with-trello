@@ -14,9 +14,6 @@ import { OAuth } from 'oauthio-web';
 import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'login',
-  mounted: function() {
-    // this.checkToken();
-  },
   computed: {
     ...mapGetters({ token: 'token/token' })
   },
@@ -55,13 +52,6 @@ export default {
           alert(err);
         });
     },
-    // checkToken() {
-    //   if (this.token) {
-    //     return this.$router.push('/dashboards');
-    //   } else {
-    //     return;
-    //   }
-    // }
   }
 };
 </script>

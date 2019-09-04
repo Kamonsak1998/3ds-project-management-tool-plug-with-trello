@@ -54,11 +54,7 @@ export default {
       const nameBoard = result[index].boardName;
       this.getBoard(boardid);
       this.getNameBoard(nameBoard);
-      if (this.idBoard) {
-        this.$router.push("/feature");
-      } else {
-        return;
-      }
+      this.$router.push("/feature");
     },
     getBoardtrello() {
         boardService.fetchDashboard(this.token).then(Response => {

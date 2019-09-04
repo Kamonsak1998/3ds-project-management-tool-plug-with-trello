@@ -16,13 +16,13 @@ const router = new Router({
         {
             path: '/leaderBoard/leaderboard',
             name: 'leaderboard',
-            meta: { requiresAuth: true },
+            meta: { checkIdBoard: true },
             component: () => import('@/components/leaderBoard/Leaderboard')
         },
         {
             path: '/history/charts',
             name: 'charts',
-            meta: { requiresAuth: true },
+            meta: { checkIdBoard: true },
             component: () => import('@/components/history/charts')
         },
         {
@@ -34,13 +34,13 @@ const router = new Router({
         {
             path: '/feature',
             name: 'feature',
-            meta: { requiresAuth: true },
+            meta: { checkIdBoard: true },
             component: () => import('@/components/view/feaTure')
         },
         {
             path: '/setdatetime',
             name: 'setdatetime',
-            meta: { requiresAuth: true },
+            meta: { checkIdBoard: true },
             component: () => import('@/components/SetDateTime/setdatetime')
         }
     ],
@@ -53,6 +53,17 @@ router.beforeEach((to, from, next) => {
             return
         }
         next('/auth/login')
+    } else {
+        next()
+    }
+})
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.checkIdBoard)) {
+        if (store.getters['user/idBoard']) {
+            next()
+            return
+        }
+        next('/dashboards')
     } else {
         next()
     }

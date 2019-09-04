@@ -60,12 +60,8 @@ export default {
   },
   methods: {
     checkidBoard() {
-      if (this.idBoard) {
-        this.checkDate();
-        this.setmember();
-      } else {
-        this.$router.push("/dashboards");
-      }
+      this.checkDate();
+      this.setmember();
     },
     checkDate: function() {
       axios

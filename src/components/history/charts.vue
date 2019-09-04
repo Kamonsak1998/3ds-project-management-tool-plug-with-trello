@@ -107,7 +107,6 @@ export default {
       this.select = models[index];
     },
     getHistory() {
-      if (this.idBoard) {
         axios
           .post("http://localhost:9000/gethistory", {
             token: this.token,
@@ -127,9 +126,6 @@ export default {
           .catch(err => {
             alert(err);
           });
-      } else {
-        this.$router.push("/dashboards");
-      }
     }
   }
 };
