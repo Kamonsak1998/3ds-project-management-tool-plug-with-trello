@@ -41,9 +41,10 @@
             class="form-control w-100 daterangepicker-date-input"
             pattern="^[1-9]+"
             ref="endDate"
+            placeholder="1 - 30"
             :disabled="validated"
             v-model="total"
-            v-validate="'required|numeric|max:3'"
+            v-validate="'required|numeric|max:2'"
             :class="{ 'is-invalid': submitted && errors.has('total') }"
           />
           <br />
@@ -68,12 +69,14 @@
 </template>
 
 <script>
-import axios from "axios";
 import moment from "moment";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
-import { mapActions, mapGetters } from "vuex";
+import {  mapGetters } from "vuex";
+import { BoardService } from "../../services/BoardService";
+const boardservice = new BoardService();
+
 library.add(faCaretRight);
 
 export default {
@@ -110,12 +113,12 @@ export default {
   mounted: function() {
     this.checkDate();
     // if(this.total != ''){
-      this.focusInput();
+    this.focusInput();
     // }
   },
 
   computed: {
-    ...mapGetters({startDates:"sprint/startDates", Sprints:"sprint/Sprints",idBoard: "user/idBoard", nameBoard: "user/nameBoard",  token: "token/token"}),
+    ...mapGetters({idBoard: "user/idBoard", nameBoard: "user/nameBoard",  token: "user/token"}),
     nextMonth: function() {
       return moment.utc(this.month).add(1, "month");
     },
@@ -132,8 +135,7 @@ export default {
       }, 100);
     },
     checkDate: function() {
-      axios
-        .post("http://localhost:9000/checksetdate", { idBoard: this.idBoard })
+      boardservice.fetchchecksetdate({ idBoard : this.idBoard })
         .then(res => {
           this.isShowModel = true;
           if (res.data.status == true) {
@@ -193,23 +195,19 @@ export default {
       this.nextStep();
     },
     // Submit button
-    ...mapActions(["getStartDate", "getSprint"]),
     submit: function() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         this.totaled = parseInt(this.total);
         if (valid) {
           this.validated = true;
-          // let endDate = this.endDate;
-          this.getStartDate(this.startDate);
-          this.getSprint(this.totaled);
-          axios
-            .post("http://localhost:9000/setdate", {
-              startDate: this.startDates,
-              sprintDay: this.Sprints,
+          boardservice
+            .fetchSetdatetime({
+              startDate: this.startDate,
+              sprintDay: this.totaled,
               endDate: this.endDate,
-              idBoard: this.idBoard,
-              boardName: this.newBoard
+              idBoard : this.idBoard,
+              boardName :this.nameBoard
             })
             .then(() => {
               alert("Save Success");

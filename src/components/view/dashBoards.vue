@@ -35,7 +35,7 @@ export default {
     this.getBoardtrello();
   },
   computed: {
-    ...mapGetters({ token: "token/token" , idBoard: "user/idBoard" })
+    ...mapGetters({ token: "user/token" , idBoard: "user/idBoard" })
   },
   data() {
     return {
@@ -57,7 +57,7 @@ export default {
       this.$router.push("/feature");
     },
     getBoardtrello() {
-        boardService.fetchDashboard(this.token).then(Response => {
+        boardService.fetchDashboard().then(Response => {
            this.results = Response.data;
            this.isShowModel = true;
           }).catch(err => {

@@ -7,25 +7,43 @@
     <div class="animated fadeIn font" v-if="isShowModel === true">
       <h1>HISTORY</h1>
       <hr class="my-4" />
-      <div class="input-group input-group-lg my-3"> 
-          <div class="input-group-prepend">
-            <span class="input-group-text"><span class="cui-magnifying-glass"></span></span>
-          </div>
-          <input type="text" id="search" class="form-control" v-model="search" placeholder="Search Sprint..." aria-label="Search" autocomplete="off">
-      </div>
 
       <b-card-group columns class="card-rows cols-2 mb-3">
-        <b-card class="shadow mb-4 bg-white rounded"> 
+        <b-card class="shadow mb-4 bg-white rounded">
           <BarColumn v-bind:model="TotalModel" />
         </b-card>
         <b-card class="shadow mb-4 bg-white rounded">
-           <Pie v-bind:model="TotalModel" />
+          <Pie v-bind:model="TotalModel" />
         </b-card>
       </b-card-group>
 
+      <div class="input-group input-group-lg my-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <span class="icon-magnifying-glass"></span>
+          </span>
+        </div>
+        <input
+          type="text"
+          id="search"
+          class="form-control"
+          v-model="search"
+          placeholder="Search Sprint..."
+          aria-label="Search"
+          autocomplete="off"
+        />
+      </div>
+
       <b-card-group rows class="card-rows mb-3">
-        <b-card class="shadow mb-4 bg-white rounded">  
-          <carousel :per-page="1" :scrollPerPage="false" :centerMode="true" :paginationEnabled="false" class="mb-4">
+        <b-card class="shadow mb-4 bg-white rounded">
+          <carousel
+            :per-page="1"
+            :scrollPerPage="false"
+            :centerMode="true"
+            :paginationEnabled="false"
+            :navigationEnabled="true"
+            class="mb-4"
+          >
             <slide v-for="(models,index) in filteredSprintBurndownChart" :key="index+Math.random()">
               <burndownChart v-bind:model="models" />
             </slide>
@@ -33,13 +51,24 @@
         </b-card>
       </b-card-group>
 
-      <carousel :navigationEnabled="true" :perPageCustom="[[320, 1],[1024, 3],[768,2]]" :scrollPerPage="false" :centerMode="true" :paginationPadding="3" :paginationEnabled="false">
+      <carousel
+        :navigationEnabled="true"
+        :perPageCustom="[[320, 1],[1024, 3],[768,2]]"
+        :scrollPerPage="false"
+        :centerMode="true"
+        :paginationPadding="3"
+        :paginationEnabled="false"
+      >
         <slide v-for="(models,index) in filteredSprintModel" :key="index">
           <div class="card cardsprit mr-1 ml-1 shadow">
             <div class="card-body">
               <div class="text-value">{{models.title}}</div>
               <p>{{models.startDate}} - {{ models.endDate}}</p>
-              <button class="btn-hover color-8"  @click="selectSprint(filteredSprintModel,index)" v-b-modal.modal-xl>
+              <button
+                class="btn-hover color-8"
+                @click="selectSprint(filteredSprintModel,index)"
+                v-b-modal.modal-xl
+              >
                 <i class="icon-chart font-2xl d-block"></i>
               </button>
             </div>
@@ -62,15 +91,14 @@ import burndownChart from "@/components/burndownChart/burndownChart.vue";
 import Pie from "@/components/history/Pie.vue";
 import { mapGetters } from "vuex";
 import { Carousel, Slide } from "vue-carousel";
-import axios from "axios";
-import {BoardService} from "../../services/BoardService";
-const boardService = new BoardService()
+import { BoardService } from "../../services/BoardService";
+const boardService = new BoardService();
 export default {
   data() {
     return {
-      search:'',
+      search: '',
       TotalModel: Object,
-      burndown:Object,
+      burndown: Object,
       select: Object,
       SprintModel: {
         scoreOfSprint: Object
@@ -82,19 +110,21 @@ export default {
     this.getHistory();
   },
   computed: {
-    ...mapGetters({ token: "token/token" , idBoard: "user/idBoard" }),
-    filteredSprintModel:function(){
-      return this.SprintModel.scoreOfSprint.filter((models) => {
-        return models.title.match(this.search);
-      })
+    ...mapGetters({ token: "user/token", idBoard: "user/idBoard" }),
+    filteredSprintModel() {
+      let text = this.search.trim().toLowerCase()
+      return this.SprintModel.scoreOfSprint.filter(index => {
+        return index.title.toLowerCase().includes(text)
+      });
     },
-    filteredSprintBurndownChart:function(){
-      return this.burndown.filter((models) => {
-        return models.titleSprint.match(this.search);
-      })
+    filteredSprintBurndownChart: function() {
+      let text = this.search.trim().toLowerCase()
+      return this.burndown.filter(index => {
+        return index.titleSprint.toLowerCase().includes(text)
+      });
     }
   },
-  components: { 
+  components: {
     Bar,
     BarColumn,
     burndownChart,
@@ -107,25 +137,22 @@ export default {
       this.select = models[index];
     },
     getHistory() {
-        axios
-          .post("http://localhost:9000/gethistory", {
-            token: this.token,
-            idBoard: this.idBoard
-          })
-          .then(resp => {
-            this.burndown = resp.data.burnDown.burnDownChart;
-            this.TotalModel = resp.data.histories.ScoreTotal;
-            this.SprintModel = {
-              ...this.SprintModel,
-              ...{
-                scoreOfSprint: resp.data.histories.scoreOfSprint
-              }
-            };
-            this.isShowModel = true;
-          })
-          .catch(err => {
-            alert(err);
-          });
+      boardService
+        .fetchHistory({ idBoard: this.idBoard })
+        .then(resp => {
+          this.burndown = resp.data.burnDown.burnDownChart;
+          this.TotalModel = resp.data.histories.ScoreTotal;
+          this.SprintModel = {
+            ...this.SprintModel,
+            ...{
+              scoreOfSprint: resp.data.histories.scoreOfSprint
+            }
+          };
+          this.isShowModel = true;
+        })
+        .catch(err => {
+          alert(err);
+        });
     }
   }
 };
@@ -186,6 +213,5 @@ export default {
   );
   box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
 }
-
 </style>
 
