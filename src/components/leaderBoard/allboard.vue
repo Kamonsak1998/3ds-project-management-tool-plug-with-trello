@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import { mapGetters } from "vuex";
 import { BoardService } from "../../services/BoardService";
 const boardService = new BoardService();

@@ -68,7 +68,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import moment from "moment";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
