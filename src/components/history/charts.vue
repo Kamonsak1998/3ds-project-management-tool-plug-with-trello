@@ -7,10 +7,20 @@
     <div class="animated fadeIn font" v-if="isShowModel === true">
       <h1>HISTORY</h1>
       <hr class="my-4" />
+
+      <b-card-group columns class="card-rows cols-2 mb-3">
+        <b-card class="shadow mb-4 bg-white rounded">
+          <BarColumn v-bind:model="TotalModel" />
+        </b-card>
+        <b-card class="shadow mb-4 bg-white rounded">
+          <Pie v-bind:model="TotalModel" />
+        </b-card>
+      </b-card-group>
+
       <div class="input-group input-group-lg my-3">
         <div class="input-group-prepend">
           <span class="input-group-text">
-            <span class="cui-magnifying-glass"></span>
+            <span class="icon-magnifying-glass"></span>
           </span>
         </div>
         <input
@@ -23,15 +33,6 @@
           autocomplete="off"
         />
       </div>
-
-      <b-card-group columns class="card-rows cols-2 mb-3">
-        <b-card class="shadow mb-4 bg-white rounded">
-          <BarColumn v-bind:model="TotalModel" />
-        </b-card>
-        <b-card class="shadow mb-4 bg-white rounded">
-          <Pie v-bind:model="TotalModel" />
-        </b-card>
-      </b-card-group>
 
       <b-card-group rows class="card-rows mb-3">
         <b-card class="shadow mb-4 bg-white rounded">
