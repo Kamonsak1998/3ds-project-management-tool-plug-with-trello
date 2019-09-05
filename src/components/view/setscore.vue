@@ -10,10 +10,10 @@
           <div class="form-group">
             <input
               @keyup.enter="$refs.XS.focus"
+              ref="XXS"
               name="XXS"
               type="text"
               class="form-control"
-              ref="startxxs"
               pattern="[1-9]+"
               v-model="point[0].XXS"
               :disabled="validated"
@@ -201,7 +201,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import { BoardService } from "../../services/BoardService";
 const boardservice = new BoardService();
 
@@ -260,22 +259,21 @@ export default {
               ]
             })
             .then(() => {
-              console.log(this.point);
               alert("Save success");
             });
         }
       });
     },
     clear: function() {
-      this.$refs.startxxs.focus();
-      (this.validated = false),
-        (this.point[0].XXS = ""),
-        (this.point[1].XS = ""),
-        (this.point[2].S = ""),
-        (this.point[3].M = ""),
-        (this.point[4].L = ""),
-        (this.point[5].XL = ""),
-        (this.point[6].XXL = ""),
+      // this.$refs.XXS.focus();
+      (this.validated = false);
+        (this.point[0].XXS = "");
+        (this.point[1].XS = "");
+        (this.point[2].S = "");
+        (this.point[3].M = "");
+        (this.point[4].L = "");
+        (this.point[5].XL = "");
+        (this.point[6].XXL = "");
         (this.point[7].XXXL = "");
     }
   }
