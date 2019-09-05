@@ -15,18 +15,18 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'login',
   computed: {
-    ...mapGetters({ token: 'token/token' })
+    ...mapGetters({ token: 'user/token' })
   },
   methods: {
     ...mapActions({
-      getToken: 'token/getToken',
+      getToken: 'user/getToken',
       getUsername: 'user/getUsername',
       getIduser: 'user/getIduser'
     }),
 
     Auth() {
       const self = this;
-      OAuth.initialize('DHnRyNE6xOi3k0N6jJapv7YTITc');
+      OAuth.initialize('PNVmpwexyR2M51wt3L3jZrEaLjc');
       var provider = 'trello';
       OAuth.popup(provider, { cache: true })
         .done(function(trello) {

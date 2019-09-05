@@ -6,7 +6,6 @@
 
 <script>
 import allboard from "@/components/leaderBoard/allboard.vue";
-import { mapGetters } from "vuex";
 export default {
   components: {
     allboard,
