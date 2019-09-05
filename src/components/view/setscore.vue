@@ -9,14 +9,15 @@
         <div class="col-md-6">
           <div class="form-group">
             <input
+              @keyup.enter="$refs.XS.focus"
+              ref="XXS"
               name="XXS"
               type="text"
               class="form-control"
-              ref="startxxs"
               pattern="[1-9]+"
               v-model="point[0].XXS"
               :disabled="validated"
-              v-validate="'required|numeric|max:3'"
+              v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXS') }"
             />
             <div
@@ -31,13 +32,16 @@
         <div class="col-md-6">
           <div class="form-group">
             <input
+              @keyup.enter="$refs.S.focus"
+              ref="XS"
               name="XS"
               type="text"
               class="form-control"
               pattern="[1-9]+"
+              v-on:keyup.enter="$event.target.nextElementSibling.focus()"
               v-model="point[1].XS"
               :disabled="validated"
-              v-validate="'required|numeric|max:3'"
+              v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XS') }"
             />
             <div
@@ -52,13 +56,15 @@
         <div class="col-md-6">
           <div class="form-group">
             <input
+              @keyup.enter="$refs.M.focus"
+              ref="S"
               name="S"
               type="text"
               class="form-control"
               pattern="[1-9]+"
               v-model="point[2].S"
               :disabled="validated"
-              v-validate="'required|numeric|max:3'"
+              v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('S') }"
             />
             <div
@@ -73,13 +79,15 @@
         <div class="col-md-6">
           <div class="form-group">
             <input
+              @keyup.enter="$refs.L.focus"
+              ref="M"
               name="M"
               type="text"
               class="form-control"
               pattern="[1-9]+"
               v-model="point[3].M"
               :disabled="validated"
-              v-validate="'required|numeric|max:3'"
+              v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('M') }"
             />
             <div
@@ -94,13 +102,15 @@
         <div class="col-md-6">
           <div class="form-group">
             <input
+              @keyup.enter="$refs.XL.focus"
+              ref="L"
               name="L"
               type="text"
               class="form-control"
               pattern="[1-9]+"
               v-model="point[4].L"
               :disabled="validated"
-              v-validate="'required|numeric|max:3'"
+              v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('L') }"
             />
             <div
@@ -115,13 +125,15 @@
         <div class="col-md-6">
           <div class="form-group">
             <input
+              @keyup.enter="$refs.XXL.focus"
+              ref="XL"
               name="XL"
               type="text"
               class="form-control"
               pattern="[1-9]+"
               v-model="point[5].XL"
               :disabled="validated"
-              v-validate="'required|numeric|max:3'"
+              v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XL') }"
             />
             <div
@@ -136,13 +148,15 @@
         <div class="col-md-6">
           <div class="form-group">
             <input
+              @keyup.enter="$refs.XXXL.focus"
+              ref="XXL"
               name="XXL"
               type="text"
               class="form-control"
               pattern="[1-9]+"
               v-model="point[6].XXL"
               :disabled="validated"
-              v-validate="'required|numeric|max:3'"
+              v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXL') }"
             />
             <div
@@ -157,13 +171,14 @@
         <div class="col-md-6">
           <div class="form-group">
             <input
+              ref="XXXL"
               name="XXXL"
               type="text"
               class="form-control"
               pattern="[1-9]+"
               :disabled="validated"
               v-model="point[7].XXXL"
-              v-validate="'required|numeric|max:2'"
+              v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXXL') }"
             />
             <div
@@ -186,20 +201,21 @@
 </template>
 
 <script>
-import axios from "axios";
+import { BoardService } from "../../services/BoardService";
+const boardservice = new BoardService();
 
 export default {
   data: function() {
     return {
       point: [
-        { XXS: 0 },
-        { XS: 0 },
-        { S: 0 },
-        { M: 0 },
-        { L: 0 },
-        { XL: 0 },
-        { XXL: 0 },
-        { XXXL: 0 }
+        { XXS: Float64Array },
+        { XS: Float64Array },
+        { S: Float64Array },
+        { M: Float64Array },
+        { L: Float64Array },
+        { XL: Float64Array },
+        { XXL: Float64Array },
+        { XXXL: Float64Array }
       ],
       submitted: false,
       validated: false
@@ -210,7 +226,7 @@ export default {
   },
   methods: {
     checkscore: function() {
-      axios.get("http://localhost:9000/checkscoresize").then(res => {
+      boardservice.fetchcheckscoresize().then(res => {
         if (res.data.status == true) {
           this.validated = res.data.status;
           this.point[0].XXS = res.data.sizes[6].sizePoint;
@@ -220,7 +236,7 @@ export default {
           this.point[4].L = res.data.sizes[0].sizePoint;
           this.point[5].XL = res.data.sizes[3].sizePoint;
           this.point[6].XXL = res.data.sizes[5].sizePoint;
-          this.point[7].XXXL = res.data.sizes[7].sizePoint; 
+          this.point[7].XXXL = res.data.sizes[7].sizePoint;
         }
       });
     },
@@ -229,37 +245,36 @@ export default {
       this.$validator.validate().then(valid => {
         if (valid) {
           this.validated = true;
-          axios
-                  .post("http://localhost:9000/setscoresize", {
-                    Points:
-                            [
-                              parseInt(this.point[0].XXS,10),
-                              parseInt(this.point[1].XS,10),
-                              parseInt(this.point[2].S,10),
-                              parseInt(this.point[3].M,10),
-                              parseInt(this.point[4].L,10),
-                              parseInt(this.point[5].XL,10),
-                              parseInt(this.point[6].XXL,10),
-                              parseInt(this.point[7].XXXL,10),
-                            ]
-                  })
-            .then(()=> {
+          boardservice
+            .fetchsetscoresize({
+              Points: [
+                parseFloat(this.point[0].XXS, 10),
+                parseFloat(this.point[1].XS, 10),
+                parseFloat(this.point[2].S, 10),
+                parseFloat(this.point[3].M, 10),
+                parseFloat(this.point[4].L, 10),
+                parseFloat(this.point[5].XL, 10),
+                parseFloat(this.point[6].XXL, 10),
+                parseFloat(this.point[7].XXXL, 10)
+              ]
+            })
+            .then(() => {
               alert("Save success");
             });
         }
       });
     },
     clear: function() {
-        this.$refs.startxxs.focus();
-        this.validated = false,
-        this.point[0].XXS = '',
-        this.point[1].XS = '',
-        this.point[2].S = '',
-        this.point[3].M = '',
-        this.point[4].L = '',
-        this.point[5].XL = '',
-        this.point[6].XXL = '',
-        this.point[7].XXXL = '';
+      // this.$refs.XXS.focus();
+      (this.validated = false);
+        (this.point[0].XXS = "");
+        (this.point[1].XS = "");
+        (this.point[2].S = "");
+        (this.point[3].M = "");
+        (this.point[4].L = "");
+        (this.point[5].XL = "");
+        (this.point[6].XXL = "");
+        (this.point[7].XXXL = "");
     }
   }
 };

@@ -13,7 +13,6 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCalendarAlt, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import BModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import DateRangePicker from '@/components/SetDateTime/DateRangePicker'
-import { mapGetters } from "vuex";
 
 
 library.add(faCalendarAlt, faCaretDown)
@@ -26,16 +25,6 @@ export default {
       startDate: moment.utc().subtract(1, 'month').startOf('month'),
       endDate: moment.utc().subtract(1, 'month').endOf('month').startOf('day')
     }
-  },
- mounted: function() {
-    if (this.idBoard != "") {
-      return;
-    } else {
-      this.$router.push("/dashboards");
-    }
-  },
-  computed: {
-    ...mapGetters(["idBoard"])
   },
   methods: {
     setscore(arr){

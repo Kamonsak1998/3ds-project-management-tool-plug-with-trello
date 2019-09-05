@@ -2,7 +2,7 @@
   <div class="container pt-5">
     <div class="animated fadeIn loading" v-if="isShowModel === false">
       <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
-    </div>  
+    </div>
     <div class="row" v-if="isShowModel === true">
       <div v-for="(result,index) in results" :key="index" class="col-sm-4">
         <b-card
@@ -26,14 +26,16 @@
 </template>
 
 <script>
-import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
+import {BoardService} from "../../services/BoardService";
+
+const boardService = new BoardService()
 export default {
   mounted: function() {
-    this.getboardtrello();
+    this.getBoardtrello();
   },
   computed: {
-    ...mapGetters(["token", "idBoard"])
+    ...mapGetters({ token: "token/token" , idBoard: "user/idBoard" })
   },
   data() {
     return {
@@ -43,31 +45,24 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getBoard", "getNameBoard"]),
+    ...mapActions({
+      getBoard: "user/getBoard",
+      getNameBoard: "user/getNameBoard"
+    }),
     setboard(result, index) {
       const boardid = result[index].idBoard;
       const nameBoard = result[index].boardName;
       this.getBoard(boardid);
       this.getNameBoard(nameBoard);
-      if (this.idBoard != "") {
-        this.$router.push("/feature");
-      } else {
-        return;
-      }
+      this.$router.push("/feature");
     },
-    getboardtrello() {
-      if (this.token != "") {
-        axios
-          .post("http://localhost:9000/getdashboard", { token: this.token })
-          .then(Response => {
+    getBoardtrello() {
+        boardService.fetchDashboard().then(Response => {
            this.results = Response.data;
            this.isShowModel = true;
           }).catch(err => {
             alert(err)
           })
-      } else {
-        this.$router.push("/auth/login");
-      }
     }
   }
 };
