@@ -2,7 +2,7 @@
   <div class="container pt-5">
     <div class="row">
       <div class="col-sm-4">
-        <router-link  style="text-decoration:none" :to="{name : 'leaderboard'}">
+        <router-link style="text-decoration:none" :to="{name : 'leaderboard'}">
           <div class="card text-white bg-primary">
             <div class="card-body card-body-feature leaderboard-f pb-0">
               <div class="card-body-feature">
@@ -15,7 +15,7 @@
       </div>
 
       <div class="col-sm-4">
-        <router-link  style="text-decoration:none" :to="{name : 'charts'}">
+        <router-link style="text-decoration:none" :to="{name : 'charts'}">
           <div class="card text-white bg-info">
             <div class="card-body card-body-feature History-f pb-0">
               <div class="card-body-feature">
@@ -28,7 +28,7 @@
       </div>
 
       <div class="col-sm-4">
-        <router-link  style="text-decoration:none" :to="{name : 'setdatetime'}">
+        <router-link style="text-decoration:none" :to="{name : 'setdatetime'}">
           <div class="card text-white bg-warning">
             <div class="card-body card-body-feature Set-date-f pb-0">
               <div class="card-body-feature">
@@ -40,48 +40,51 @@
         </router-link>
       </div>
     </div>
-    <setscore> </setscore>
+    <setscore></setscore>
   </div>
 </template>
 
 <script>
-import setscore from '@/components/view/setscore'
+import setscore from "@/components/view/setscore";
 import { mapGetters } from "vuex";
 import axios from "axios";
+import { BoardService } from "../../services/BoardService";
+const boardService = new BoardService();
+
 export default {
   mounted: function() {
     this.checkidBoard();
   },
   components: {
-    setscore,
+    setscore
   },
   computed: {
-    ...mapGetters(["idBoard","token"])
+    ...mapGetters({ token: "token/token", idBoard: "user/idBoard" })
   },
   methods: {
     checkidBoard() {
-      if (this.idBoard != "") {
       this.checkDate();
       this.setmember();
-      } else {
-        this.$router.push("/dashboards");
-      }
     },
     checkDate: function() {
-      axios
-        .post("http://localhost:9000/checksetdate", { idBoard: this.idBoard })
+      boardService.fetchchecksetdate({ idBoard: this.idBoard })
         .then(res => {
           if (res.data.status == false) {
-          this.$router.push("/setdatetime");
-          } 
-        }).catch(err => {
-          alert(err);
+            this.$router.push("/setdatetime");
+          }
         })
+        .catch(err => {
+          alert(err);
+        });
     },
-    setmember(){
-      axios.post("http://localhost:9000/setmember", { token: this.token , idBoard: this.idBoard}).catch(err => {
-        alert(err);
-      })
+    setmember() {
+      boardService
+        .fetchsetmember({
+          idBoard: this.idBoard
+        })
+        .catch(err => {
+          alert(err);
+        });
     }
   }
 };
@@ -93,21 +96,21 @@ export default {
 }
 
 .bg-primary:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 /***********/
 .card.bg-info {
   border-color: #2eadd3;
 }
 .bg-info:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 /**********/
 .card.bg-warning {
   border-color: #c69500;
 }
 .bg-warning:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 /***********/
 .card-body-feature {

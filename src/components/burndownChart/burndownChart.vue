@@ -79,17 +79,6 @@ export default {
             }
           ]
         },
-        xaxis: {
-          title: {
-            text: "Day"
-          },
-          plotLines: [
-            {
-              value: 0,
-              width: 1
-            }
-          ]
-        },
         legend: {
           layout: "vertical",
           align: "right",

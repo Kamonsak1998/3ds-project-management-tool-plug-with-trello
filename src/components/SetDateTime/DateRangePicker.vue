@@ -1,6 +1,9 @@
 <template>
   <b-container class="bv-example-row row-setdate">
-    <div class="card card-setdate">
+    <div class="animated fadeIn loading" v-if="isShowModel === false">
+      <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
+    </div>
+    <div class="card card-setdate" v-if="isShowModel === true">
       <b-row>
         <b-col v-for="calendarIndex in calendarCount" :key="calendarIndex">
           <date-range-picker-calendar
@@ -71,6 +74,9 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
 import { mapActions, mapGetters } from "vuex";
+import { BoardService } from "../../services/BoardService";
+const boardservice = new BoardService();
+
 library.add(faCaretRight);
 
 export default {
@@ -89,6 +95,7 @@ export default {
   },
   data() {
     return {
+      isShowModel: false,
       validated: false,
       total: "",
       startDate: moment.utc(),
@@ -105,11 +112,13 @@ export default {
   },
   mounted: function() {
     this.checkDate();
+    // if(this.total != ''){
     this.focusInput();
+    // }
   },
 
   computed: {
-    ...mapGetters(["startDates", "Sprints", "idBoard", "newBoard", "token"]),
+    ...mapGetters({startDates:"sprint/startDate", Sprints:"sprint/sprint",idBoard: "user/idBoard", nameBoard: "user/nameBoard",  token: "token/token"}),
     nextMonth: function() {
       return moment.utc(this.month).add(1, "month");
     },
@@ -123,14 +132,15 @@ export default {
     focusInput() {
       setTimeout(() => {
         this.$refs.startDate.focus();
-      }, 0);
+      }, 100);
     },
     checkDate: function() {
-      axios
-        .post("http://localhost:9000/checksetdate", { idBoard: this.idBoard })
+      boardservice.fetchchecksetdate({ idBoard : this.idBoard })
         .then(res => {
+          this.isShowModel = true;
           if (res.data.status == true) {
-            this.startDate = moment.utc(res.data.startDate, "YYYY/MM/DD");
+            this.startDated = moment.utc(res.data.startDate, "YYYY/MM/DD");
+            this.startDate = this.startDated;
             this.totaled = res.data.sprintDay;
             this.validated = res.data.status;
             this.total = parseInt(this.totaled);
@@ -185,23 +195,23 @@ export default {
       this.nextStep();
     },
     // Submit button
-    ...mapActions(["getStartDate", "getSprint"]),
+    ...mapActions({ getStartDate: "sprint/getStartDate", getSprint: "sprint/getSprint" }),
     submit: function() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         this.totaled = parseInt(this.total);
         if (valid) {
           this.validated = true;
-          let endDate = this.endDate;
+          // let endDate = this.endDate;
           this.getStartDate(this.startDate);
           this.getSprint(this.totaled);
-          axios
-            .post("http://localhost:9000/setdate", {
+          boardservice
+            .fetchSetdatetime({
               startDate: this.startDates,
               sprintDay: this.Sprints,
-              endDate: endDate,
-              idBoard: this.idBoard,
-              boardName: this.newBoard
+              endDate: this.endDate,
+              idBoard : this.idBoard,
+              boardName :this.nameBoard
             })
             .then(() => {
               alert("Save Success");
@@ -271,5 +281,11 @@ export default {
 }
 .card-setdate {
   border-radius: 10px;
+}
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>

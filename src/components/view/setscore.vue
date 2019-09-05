@@ -187,6 +187,8 @@
 
 <script>
 import axios from "axios";
+import { BoardService } from "../../services/BoardService";
+const boardservice = new BoardService()
 
 export default {
   data: function() {
@@ -210,7 +212,7 @@ export default {
   },
   methods: {
     checkscore: function() {
-      axios.get("http://localhost:9000/checkscoresize").then(res => {
+      boardservice.fetchcheckscoresize().then(res => {
         if (res.data.status == true) {
           this.validated = res.data.status;
           this.point[0].XXS = res.data.sizes[6].sizePoint;
@@ -229,9 +231,7 @@ export default {
       this.$validator.validate().then(valid => {
         if (valid) {
           this.validated = true;
-          axios
-                  .post("http://localhost:9000/setscoresize", {
-                    Points:
+          boardservice.fetchsetscoresize({ Points:
                             [
                               parseFloat(this.point[0].XXS,10),
                               parseFloat(this.point[1].XS,10),
@@ -241,8 +241,7 @@ export default {
                               parseFloat(this.point[5].XL,10),
                               parseFloat(this.point[6].XXL,10),
                               parseFloat(this.point[7].XXXL,10),
-                            ]
-                  })
+                            ]})
             .then(()=> {
               console.log(this.point);
               alert("Save success");
