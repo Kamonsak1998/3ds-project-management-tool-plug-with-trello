@@ -1,46 +1,51 @@
 <template>
   <div class="container pt-5">
-    <div class="row">
-      <div class="col-sm-4">
-        <router-link style="text-decoration:none" :to="{name : 'leaderboard'}">
-          <div class="card text-white bg-primary">
-            <div class="card-body card-body-feature leaderboard-f pb-0">
-              <div class="card-body-feature">
-                <i class="icons font-2xl d-block cui-dashboard"></i>
-                <div class="text-value">Leader Board</div>
-              </div>
-            </div>
-          </div>
-        </router-link>
-      </div>
-
-      <div class="col-sm-4">
-        <router-link style="text-decoration:none" :to="{name : 'charts'}">
-          <div class="card text-white bg-info">
-            <div class="card-body card-body-feature History-f pb-0">
-              <div class="card-body-feature">
-                <i class="icon-chart font-2xl d-block"></i>
-                <div class="text-value">History</div>
-              </div>
-            </div>
-          </div>
-        </router-link>
-      </div>
-
-      <div class="col-sm-4">
-        <router-link style="text-decoration:none" :to="{name : 'setdatetime'}">
-          <div class="card text-white bg-warning">
-            <div class="card-body card-body-feature Set-date-f pb-0">
-              <div class="card-body-feature">
-                <i class="icon-calendar font-2xl d-block"></i>
-                <div class="text-value">SetDateTime</div>
-              </div>
-            </div>
-          </div>
-        </router-link>
-      </div>
+    <div class="animated fadeIn loading" v-if="isShowModel === false">
+      <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
     </div>
-    <setscore></setscore>
+    <div v-if="isShowModel === true">
+      <div class="row">
+        <div class="col-sm-4">
+          <router-link style="text-decoration:none" :to="{name : 'leaderboard'}">
+            <div class="card text-white bg-primary">
+              <div class="card-body card-body-feature leaderboard-f pb-0">
+                <div class="card-body-feature">
+                  <i class="icons font-2xl d-block cui-dashboard"></i>
+                  <div class="text-value">Leader Board</div>
+                </div>
+              </div>
+            </div>
+          </router-link>
+        </div>
+
+        <div class="col-sm-4">
+          <router-link style="text-decoration:none" :to="{name : 'charts'}">
+            <div class="card text-white bg-info">
+              <div class="card-body card-body-feature History-f pb-0">
+                <div class="card-body-feature">
+                  <i class="icon-chart font-2xl d-block"></i>
+                  <div class="text-value">History</div>
+                </div>
+              </div>
+            </div>
+          </router-link>
+        </div>
+
+        <div class="col-sm-4">
+          <router-link style="text-decoration:none" :to="{name : 'setdatetime'}">
+            <div class="card text-white bg-warning">
+              <div class="card-body card-body-feature Set-date-f pb-0">
+                <div class="card-body-feature">
+                  <i class="icon-calendar font-2xl d-block"></i>
+                  <div class="text-value">SetDateTime</div>
+                </div>
+              </div>
+            </div>
+          </router-link>
+        </div>
+      </div>
+      <setscore></setscore>
+    </div>
   </div>
 </template>
 
@@ -51,6 +56,11 @@ import { BoardService } from "../../services/BoardService";
 const boardService = new BoardService();
 
 export default {
+  data() {
+    return {
+      isShowModel: false
+    };
+  },
   mounted: function() {
     this.checkidBoard();
   },
@@ -66,10 +76,13 @@ export default {
       this.setmember();
     },
     checkDate: function() {
-      boardService.fetchchecksetdate({ idBoard: this.idBoard })
+      boardService
+        .fetchchecksetdate({ idBoard: this.idBoard })
         .then(res => {
           if (res.data.status == false) {
             this.$router.push("/setdatetime");
+          } else {
+            this.isShowModel = true;
           }
         })
         .catch(err => {
@@ -90,6 +103,12 @@ export default {
 </script>
 
 <style>
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .card.bg-primary {
   border-color: #187da0;
 }
