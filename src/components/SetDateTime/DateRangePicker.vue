@@ -41,9 +41,10 @@
             class="form-control w-100 daterangepicker-date-input"
             pattern="^[1-9]+"
             ref="endDate"
+            placeholder="1 - 30"
             :disabled="validated"
             v-model="total"
-            v-validate="'required|numeric|max:3'"
+            v-validate="'required|numeric|max:2'"
             :class="{ 'is-invalid': submitted && errors.has('total') }"
           />
           <br />
