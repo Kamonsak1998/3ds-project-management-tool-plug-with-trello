@@ -41,9 +41,10 @@
             class="form-control w-100 daterangepicker-date-input"
             pattern="^[1-9]+"
             ref="endDate"
+            placeholder="1 - 30"
             :disabled="validated"
             v-model="total"
-            v-validate="'required|numeric|max:3'"
+            v-validate="'required|numeric|max:2'"
             :class="{ 'is-invalid': submitted && errors.has('total') }"
           />
           <br />
@@ -68,12 +69,11 @@
 </template>
 
 <script>
-import axios from "axios";
 import moment from "moment";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
-import { mapActions, mapGetters } from "vuex";
+import {  mapGetters } from "vuex";
 import { BoardService } from "../../services/BoardService";
 const boardservice = new BoardService();
 
@@ -118,7 +118,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters({startDates:"sprint/startDate", Sprints:"sprint/sprint",idBoard: "user/idBoard", nameBoard: "user/nameBoard",  token: "token/token"}),
+    ...mapGetters({idBoard: "user/idBoard", nameBoard: "user/nameBoard",  token: "user/token"}),
     nextMonth: function() {
       return moment.utc(this.month).add(1, "month");
     },
@@ -195,20 +195,16 @@ export default {
       this.nextStep();
     },
     // Submit button
-    ...mapActions({ getStartDate: "sprint/getStartDate", getSprint: "sprint/getSprint" }),
     submit: function() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         this.totaled = parseInt(this.total);
         if (valid) {
           this.validated = true;
-          // let endDate = this.endDate;
-          this.getStartDate(this.startDate);
-          this.getSprint(this.totaled);
           boardservice
             .fetchSetdatetime({
-              startDate: this.startDates,
-              sprintDay: this.Sprints,
+              startDate: this.startDate,
+              sprintDay: this.totaled,
               endDate: this.endDate,
               idBoard : this.idBoard,
               boardName :this.nameBoard
