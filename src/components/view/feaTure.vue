@@ -47,7 +47,6 @@
 <script>
 import setscore from "@/components/view/setscore";
 import { mapGetters } from "vuex";
-import axios from "axios";
 import { BoardService } from "../../services/BoardService";
 const boardService = new BoardService();
 
