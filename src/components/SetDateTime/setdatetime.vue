@@ -14,7 +14,6 @@ import { faCalendarAlt, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import BModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import DateRangePicker from '@/components/SetDateTime/DateRangePicker'
 
-
 library.add(faCalendarAlt, faCaretDown)
 
 export default {
