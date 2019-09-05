@@ -12,12 +12,19 @@ export const user = {
         },
         getBoard: ({ commit }, idBoard) => {
             commit('addBoard', idBoard)
+        },
+        getToken: ({ commit }, token) => {
+            commit('addToken', token)
+        },
+        logout: ({ commit }) => {
+            commit('remove')
         }
     }, state: {
         idMember: null,
         username: null,
         nameBoard: null,
-        idBoard: null
+        idBoard: null,
+        token: null,
     }, mutations: {
         addIduser: (state, idMember) => {
             state.idMember = idMember
@@ -31,21 +38,23 @@ export const user = {
         addBoard: (state, idBoard) => {
             state.idBoard = idBoard
         },
+        addToken: (state, newToken) => {
+            state.token = newToken
+            localStorage.setItem('token', newToken)
+        },
         remove: (state) => {
             state.idBoard = null
             state.nameBoard = null
             state.username = null
             state.idMember = null
-            localStorage.setItem('idBoard', null)
-            localStorage.setItem('nameBoard', null)
-            localStorage.setItem('username', null)
-            localStorage.setItem('idMember', null)
+            state.token = null
+            localStorage.removeItem('token', null)
         }
-
     }, getters: {
         idMember: state => state.idMember,
         username: state => state.username,
         nameBoard: state => state.nameBoard,
-        idBoard: state => state.idBoard
+        idBoard: state => state.idBoard,
+        token: state => state.token
     }
 }

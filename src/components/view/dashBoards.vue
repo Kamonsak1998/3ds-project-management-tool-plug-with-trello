@@ -35,7 +35,7 @@ export default {
     this.getBoardtrello();
   },
   computed: {
-    ...mapGetters({ token: "token/token" , idBoard: "user/idBoard" })
+    ...mapGetters({ token: "user/token" , idBoard: "user/idBoard" })
   },
   data() {
     return {

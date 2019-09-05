@@ -109,7 +109,7 @@ export default {
     this.getHistory();
   },
   computed: {
-    ...mapGetters({ token: "token/token", idBoard: "user/idBoard" }),
+    ...mapGetters({ token: "user/token", idBoard: "user/idBoard" }),
     filteredSprintModel: function() {
       return this.SprintModel.scoreOfSprint.filter(models => {
         return models.title.match(this.search);

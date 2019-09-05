@@ -33,7 +33,7 @@
             <div class="card-body card-body-feature Set-date-f pb-0">
               <div class="card-body-feature">
                 <i class="icon-calendar font-2xl d-block"></i>
-                <div class="text-value">Set date of sprint</div>
+                <div class="text-value">SetDateTime</div>
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@ export default {
     setscore
   },
   computed: {
-    ...mapGetters({ token: "token/token", idBoard: "user/idBoard" })
+    ...mapGetters({ token: "user/token", idBoard: "user/idBoard" })
   },
   methods: {
     checkidBoard() {

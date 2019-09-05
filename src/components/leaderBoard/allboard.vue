@@ -54,7 +54,7 @@ export default {
     this.getUserData();
   },
   computed: {
-    ...mapGetters({ token: "token/token", idBoard: "user/idBoard" })
+    ...mapGetters({ token: "user/token", idBoard: "user/idBoard" })
   },
   methods: {
     getUserData() {
@@ -64,7 +64,9 @@ export default {
           this.isShowModel = true;
           this.users = response.data.board;
           this.non = response.data.board[1].avatar;
-        });
+        }).catch(err => {
+          alert(err)
+        })
     }
   }
 };
