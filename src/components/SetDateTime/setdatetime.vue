@@ -27,16 +27,6 @@ export default {
       endDate: moment.utc().subtract(1, 'month').endOf('month').startOf('day')
     }
   },
- mounted: function() {
-    if (this.idBoard != "") {
-      return;
-    } else {
-      this.$router.push("/dashboards");
-    }
-  },
-  computed: {
-    ...mapGetters(["idBoard"])
-  },
   methods: {
     setscore(arr){
         this.parameter[arr[0]] = arr[1]
