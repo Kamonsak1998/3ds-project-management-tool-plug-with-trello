@@ -44,8 +44,8 @@
             :navigationEnabled="true"
             class="mb-4"
           >
-            <slide v-for="(models,index) in filteredSprintBurndownChart" :key="index+Math.random()">
-              <burndownChart v-bind:model="models" />
+            <slide v-for="(model) in filteredSprintBurndownChart" :key="model.titleSprint">
+              <burndownChart v-bind:model="model" />
             </slide>
           </carousel>
         </b-card>
@@ -59,14 +59,14 @@
         :paginationPadding="3"
         :paginationEnabled="false"
       >
-        <slide v-for="(models,index) in filteredSprintModel" :key="index">
+        <slide v-for="(model,index) in filteredSprintModel" :key="index">
           <div class="card cardsprit mr-1 ml-1 shadow">
             <div class="card-body">
-              <div class="text-value">{{models.title}}</div>
-              <p>{{models.startDate}} - {{ models.endDate}}</p>
+              <div class="text-value">{{model.title}}</div>
+              <p>{{model.startDate}} - {{ model.endDate}}</p>
               <button
                 class="btn-hover color-8"
-                @click="selectSprint(filteredSprintModel,index)"
+                @click="selectSprint(model)"
                 v-b-modal.modal-xl
               >
                 <i class="icon-chart font-2xl d-block"></i>
@@ -117,6 +117,7 @@ export default {
         return index.title.toLowerCase().includes(text)
       });
     },
+    
     filteredSprintBurndownChart: function() {
       let text = this.search.trim().toLowerCase()
       return this.burndown.filter(index => {
@@ -133,8 +134,8 @@ export default {
     Slide
   },
   methods: {
-    selectSprint(models, index) {
-      this.select = models[index];
+    selectSprint(model) {
+      this.select = model;
     },
     getHistory() {
       boardService
