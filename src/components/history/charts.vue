@@ -7,10 +7,20 @@
     <div class="animated fadeIn font" v-if="isShowModel === true">
       <h1>HISTORY</h1>
       <hr class="my-4" />
+
+      <b-card-group columns class="card-rows cols-2 mb-3">
+        <b-card class="shadow mb-4 bg-white rounded">
+          <BarColumn v-bind:model="TotalModel" />
+        </b-card>
+        <b-card class="shadow mb-4 bg-white rounded">
+          <Pie v-bind:model="TotalModel" />
+        </b-card>
+      </b-card-group>
+
       <div class="input-group input-group-lg my-3">
         <div class="input-group-prepend">
           <span class="input-group-text">
-            <span class="cui-magnifying-glass"></span>
+            <span class="icon-magnifying-glass"></span>
           </span>
         </div>
         <input
@@ -24,15 +34,6 @@
         />
       </div>
 
-      <b-card-group columns class="card-rows cols-2 mb-3">
-        <b-card class="shadow mb-4 bg-white rounded">
-          <BarColumn v-bind:model="TotalModel" />
-        </b-card>
-        <b-card class="shadow mb-4 bg-white rounded">
-          <Pie v-bind:model="TotalModel" />
-        </b-card>
-      </b-card-group>
-
       <b-card-group rows class="card-rows mb-3">
         <b-card class="shadow mb-4 bg-white rounded">
           <carousel
@@ -40,6 +41,7 @@
             :scrollPerPage="false"
             :centerMode="true"
             :paginationEnabled="false"
+            :navigationEnabled="true"
             class="mb-4"
           >
             <slide v-for="(models,index) in filteredSprintBurndownChart" :key="index+Math.random()">
@@ -89,13 +91,12 @@ import burndownChart from "@/components/burndownChart/burndownChart.vue";
 import Pie from "@/components/history/Pie.vue";
 import { mapGetters } from "vuex";
 import { Carousel, Slide } from "vue-carousel";
-import axios from "axios";
 import { BoardService } from "../../services/BoardService";
 const boardService = new BoardService();
 export default {
   data() {
     return {
-      search: "",
+      search: '',
       TotalModel: Object,
       burndown: Object,
       select: Object,
@@ -109,15 +110,17 @@ export default {
     this.getHistory();
   },
   computed: {
-    ...mapGetters({ token: "token/token", idBoard: "user/idBoard" }),
-    filteredSprintModel: function() {
-      return this.SprintModel.scoreOfSprint.filter(models => {
-        return models.title.match(this.search);
+    ...mapGetters({ token: "user/token", idBoard: "user/idBoard" }),
+    filteredSprintModel() {
+      let text = this.search.trim().toLowerCase()
+      return this.SprintModel.scoreOfSprint.filter(index => {
+        return index.title.toLowerCase().includes(text)
       });
     },
     filteredSprintBurndownChart: function() {
-      return this.burndown.filter(models => {
-        return models.titleSprint.match(this.search);
+      let text = this.search.trim().toLowerCase()
+      return this.burndown.filter(index => {
+        return index.titleSprint.toLowerCase().includes(text)
       });
     }
   },

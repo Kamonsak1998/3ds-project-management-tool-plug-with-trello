@@ -8,9 +8,6 @@
         <div class="col col-head">
           <b>Rank</b>
         </div>
-        <!-- <div class="col col-head">
-          <b></b>
-        </div>-->
         <div class="col-5 col-head">
           <b>Name</b>
         </div>
@@ -37,7 +34,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import { mapGetters } from "vuex";
 import { BoardService } from "../../services/BoardService";
 const boardService = new BoardService();
@@ -54,7 +50,7 @@ export default {
     this.getUserData();
   },
   computed: {
-    ...mapGetters({ token: "token/token", idBoard: "user/idBoard" })
+    ...mapGetters({ token: "user/token", idBoard: "user/idBoard" })
   },
   methods: {
     getUserData() {
@@ -63,8 +59,7 @@ export default {
         .then(response => {
           this.isShowModel = true;
           this.users = response.data.board;
-          this.non = response.data.board[1].avatar;
-        });
+        })
     }
   }
 };

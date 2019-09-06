@@ -23,6 +23,11 @@
                 <i class="nav-icon icon-pie-chart"></i> LeaderBoard
               </router-link>
             </li>
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{name : 'setdatetime'}">
+                <i class="nav-icon icon-calendar"></i> SetDateTime
+              </router-link>
+            </li>
           </ul>
         </li>
         <li class="nav-item nav-dropdown">
@@ -53,14 +58,12 @@ import { mapGetters } from "vuex";
 import { OAuth } from "oauthio-web";
 export default {
   computed: {
-    ...mapGetters({token: 'token/token' , idBoard:'user/idBoard'}),
+    ...mapGetters({token: 'user/token' , idBoard:'user/idBoard'}),
   },
   methods: {
       logout: function() {
       OAuth.clearCache();
-      this.$store.commit('token/remove');
-      this.$store.commit('user/remove');
-      this.$store.commit('sprint/remove');
+      this.$store.dispatch('user/logout');
     }
   }
 };
