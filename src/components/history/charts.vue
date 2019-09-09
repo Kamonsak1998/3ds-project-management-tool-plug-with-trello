@@ -38,7 +38,7 @@
         <b-card class="shadow mb-4 bg-white rounded">
           <carousel
             :per-page="1"
-            :scrollPerPage="false"
+            :scrollPerPage="true"
             :centerMode="true"
             :paginationEnabled="false"
             :navigationEnabled="true"
@@ -54,9 +54,8 @@
       <carousel
         :navigationEnabled="true"
         :perPageCustom="[[320, 1],[1024, 3],[768,2]]"
-        :scrollPerPage="false"
+        :scrollPerPage="true"
         :centerMode="true"
-        :paginationPadding="3"
         :paginationEnabled="false"
       >
         <slide v-for="(model,index) in filteredSprintModel" :key="index">
@@ -120,8 +119,8 @@ export default {
     
     filteredSprintBurndownChart: function() {
       let text = this.search.trim().toLowerCase()
-      return this.burndown.filter(index => {
-        return index.titleSprint.toLowerCase().includes(text)
+      return this.burndown.filter(model => {
+        return model.titleSprint.toLowerCase().includes(text)
       });
     }
   },
