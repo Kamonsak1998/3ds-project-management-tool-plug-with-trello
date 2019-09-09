@@ -20,7 +20,7 @@
       <div class="input-group input-group-lg my-3">
         <div class="input-group-prepend">
           <span class="input-group-text">
-            <span class="icon-magnifying-glass"></span>
+            <i class="icon-magnifier"></i>
           </span>
         </div>
         <input

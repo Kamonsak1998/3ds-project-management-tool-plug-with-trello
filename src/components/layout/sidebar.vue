@@ -20,7 +20,7 @@
             </li>
             <li class="nav-item">
               <router-link class="nav-link" :to="{name : 'leaderboard'}">
-                <i class="nav-icon icon-pie-chart"></i> LeaderBoard
+                <i class="nav-icon icon-book-open"></i> LeaderBoard
               </router-link>
             </li>
             <li class="nav-item">
