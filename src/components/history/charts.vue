@@ -30,7 +30,7 @@
           v-model="search"
           placeholder="Search Sprint..."
           aria-label="Search"
-          autocomplete="off"
+          autocomplete="on"
         />
       </div>
 
@@ -40,8 +40,9 @@
             :per-page="1"
             :scrollPerPage="true"
             :centerMode="true"
-            :paginationEnabled="false"
+            :paginationEnabled="true"
             :navigationEnabled="true"
+            :paginationPadding="5"
             class="mb-4"
           >
             <slide v-for="(model) in filteredSprintBurndownChart" :key="model.titleSprint">
@@ -56,7 +57,8 @@
         :perPageCustom="[[320, 1],[1024, 3],[768,2]]"
         :scrollPerPage="true"
         :centerMode="true"
-        :paginationEnabled="false"
+        :paginationEnabled="true"
+        :paginationPadding="3"
       >
         <slide v-for="(model,index) in filteredSprintModel" :key="index">
           <div class="card cardsprit mr-1 ml-1 shadow">
