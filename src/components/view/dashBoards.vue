@@ -3,8 +3,25 @@
     <div class="animated fadeIn loading" v-if="isShowModel === false">
       <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
     </div>
+    
     <div class="row" v-if="isShowModel === true">
-      <div v-for="(result,index) in results" :key="index" class="col-sm-4">
+      <div class="input-group input-group-lg my-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="icon-magnifier"></i>
+          </span>
+        </div>
+        <input
+          type="text"
+          id="search"
+          class="form-control"
+          v-model="search"
+          placeholder="Search Sprint..."
+          aria-label="Search"
+          autocomplete="on"
+        />
+      </div>
+      <div v-for="(result,index) in filteredBoardModel" :key="index" class="col-sm-4">
         <b-card
           overlay
           :img-src="result.imageBackground"
@@ -35,10 +52,17 @@ export default {
     this.getBoardtrello();
   },
   computed: {
-    ...mapGetters({ token: "user/token" , idBoard: "user/idBoard" })
+    ...mapGetters({ token: "user/token" , idBoard: "user/idBoard" }),
+    filteredBoardModel() {
+      let text = this.search.trim().toLowerCase()
+      return this.results.filter(result => {
+        return result.boardName.toLowerCase().includes(text)
+      });
+    },
   },
   data() {
     return {
+      search:'',
       results: [],
       isShowModel: false
     };
@@ -49,6 +73,7 @@ export default {
       getBoard: "user/getBoard",
       getNameBoard: "user/getNameBoard"
     }),
+    
     setboard(result, index) {
       const boardid = result[index].idBoard;
       const nameBoard = result[index].boardName;
