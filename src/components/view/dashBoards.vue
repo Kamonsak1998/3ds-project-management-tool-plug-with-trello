@@ -4,6 +4,18 @@
       <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
     </div>
     <div class="row" v-if="isShowModel === true">
+      <div class="search-bar">
+        <b-form-input
+          @input="search_text()"
+          v-model="search.text"
+          type="text"
+          placeholder="Search by Name"
+        ></b-form-input>
+        <span class="search-icon">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+
       <div v-for="(result,index) in results" :key="index" class="col-sm-4">
         <b-card
           overlay
@@ -27,24 +39,38 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import {BoardService} from "../../services/BoardService";
+import { BoardService } from "../../services/BoardService";
 
-const boardService = new BoardService()
+const boardService = new BoardService();
 export default {
   mounted: function() {
     this.getBoardtrello();
   },
   computed: {
-    ...mapGetters({ token: "user/token" , idBoard: "user/idBoard" })
+    ...mapGetters({ token: "user/token", idBoard: "user/idBoard" })
   },
   data() {
     return {
+      search: { filter: null, text: "" },
       results: [],
+      resultss: [],
       isShowModel: false
     };
   },
 
   methods: {
+    search_text() {
+      var inside = this;
+      this.results = this.resultss.filter(function(results) {
+        if (
+          results.boardName
+            .toLowerCase()
+            .indexOf(inside.search.text.toLowerCase()) != "-1"
+        ) {
+          return results;
+        }
+      });
+    },
     ...mapActions({
       getBoard: "user/getBoard",
       getNameBoard: "user/getNameBoard"
@@ -57,12 +83,17 @@ export default {
       this.$router.push("/feature");
     },
     getBoardtrello() {
-        boardService.fetchDashboard().then(Response => {
-           this.results = Response.data;
-           this.isShowModel = true;
-          }).catch(err => {
-            alert(err)
-          })
+      var inside = this;
+      boardService
+        .fetchDashboard()
+        .then(Response => {
+          inside.resultss = Response.data;
+          inside.results = Response.data;
+          this.isShowModel = true;
+        })
+        .catch(err => {
+          alert(err);
+        });
     }
   }
 };

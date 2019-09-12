@@ -100,7 +100,6 @@ export default {
       total: "",
       startDate: moment.utc(),
       endDate: moment.utc(),
-      enddated: moment.utc(),
       rangeSelect: null,
       month: moment
         .utc()
