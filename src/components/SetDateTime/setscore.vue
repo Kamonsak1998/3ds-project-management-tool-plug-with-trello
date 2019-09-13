@@ -265,7 +265,6 @@ export default {
       });
     },
     clear: function() {
-      // this.$refs.XXS.focus();
       (this.validated = false);
         (this.point[0].XXS = "");
         (this.point[1].XS = "");
