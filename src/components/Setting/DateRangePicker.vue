@@ -20,7 +20,7 @@
           />
         </b-col>
         <b-col class="col-setdate">
-                <h2 class="pb-4"> Set Date Time Stamp</h2>
+          <h2 class="pb-4">Set Date Time Stamp</h2>
           <p>Start Sprint</p>
           <div class="form-group form-inline flex-nowrap">
             <input
@@ -66,15 +66,26 @@
         </b-col>
       </b-row>
     </div>
+    <div class="col" v-if="isShowModel === true">
+      <div class="row">
+        <setscore
+          :model="cardlist"
+          class="col-6 col-setting"
+        ></setscore>
+        <selectlist class="col-6 col-setting"></selectlist> 
+      </div>
+    </div>
   </b-container>
 </template>
 
 <script>
+import setscore from "@/components/Setting/setscore";
+import selectlist from "@/components/Setting/selectlist";
 import moment from "moment";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
-import {  mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 import { BoardService } from "../../services/BoardService";
 const boardservice = new BoardService();
 
@@ -96,6 +107,7 @@ export default {
   },
   data() {
     return {
+      cardlist:'',  
       isShowModel: false,
       validated: false,
       total: "",
@@ -118,7 +130,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters({idBoard: "user/idBoard", nameBoard: "user/nameBoard",  token: "user/token"}),
+    ...mapGetters({
+      idBoard: "user/idBoard",
+      nameBoard: "user/nameBoard",
+      token: "user/token"
+    }),
     nextMonth: function() {
       return moment.utc(this.month).add(1, "month");
     },
@@ -135,7 +151,8 @@ export default {
       }, 100);
     },
     checkDate: function() {
-      boardservice.fetchchecksetdate({ idBoard : this.idBoard })
+      boardservice
+        .fetchchecksetdate({ idBoard: this.idBoard })
         .then(res => {
           this.isShowModel = true;
           if (res.data.status == true) {
@@ -197,6 +214,9 @@ export default {
     // Submit button
     submit: function() {
       this.submitted = true;
+      this.props.selectlist;
+      console.log(this.props.selectlist);
+      
       this.$validator.validate().then(valid => {
         this.totaled = parseInt(this.total);
         if (valid) {
@@ -206,12 +226,12 @@ export default {
               startDate: this.startDate,
               sprintDay: this.totaled,
               endDate: this.endDate,
-              idBoard : this.idBoard,
-              boardName :this.nameBoard
+              idBoard: this.idBoard,
+              boardName: this.nameBoard
             })
             .then(() => {
               alert("Save Success");
-              this.$router.push("/feature");
+              // this.$router.push("/feature");
             })
             .catch(err => {
               if (err) {
@@ -234,7 +254,7 @@ export default {
       return value ? value.format("YYYY/MM/DD") : "";
     }
   },
-  components: { DateRangePickerCalendar }
+  components: { DateRangePickerCalendar, setscore, selectlist }
 };
 </script>
 
