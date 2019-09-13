@@ -10,7 +10,7 @@
             <div class="card text-white bg-primary">
               <div class="card-body card-body-feature leaderboard-f pb-0">
                 <div class="card-body-feature">
-                  <i class="icons font-2xl d-block cui-dashboard"></i>
+                  <i class="icon-book-open font-2xl d-block"></i>
                   <div class="text-value">Leader Board</div>
                 </div>
               </div>
@@ -44,13 +44,11 @@
           </router-link>
         </div>
       </div>
-      <setscore></setscore>
     </div>
   </div>
 </template>
 
 <script>
-import setscore from "@/components/view/setscore";
 import { mapGetters } from "vuex";
 import { BoardService } from "../../services/BoardService";
 const boardService = new BoardService();
@@ -63,9 +61,6 @@ export default {
   },
   mounted: function() {
     this.checkidBoard();
-  },
-  components: {
-    setscore
   },
   computed: {
     ...mapGetters({ token: "user/token", idBoard: "user/idBoard" })

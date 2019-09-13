@@ -20,7 +20,7 @@
       <div class="input-group input-group-lg my-3">
         <div class="input-group-prepend">
           <span class="input-group-text">
-            <span class="icon-magnifying-glass"></span>
+            <i class="icon-magnifier"></i>
           </span>
         </div>
         <input
@@ -30,7 +30,7 @@
           v-model="search"
           placeholder="Search Sprint..."
           aria-label="Search"
-          autocomplete="off"
+          autocomplete="on"
         />
       </div>
 
@@ -38,14 +38,15 @@
         <b-card class="shadow mb-4 bg-white rounded">
           <carousel
             :per-page="1"
-            :scrollPerPage="false"
+            :scrollPerPage="true"
             :centerMode="true"
-            :paginationEnabled="false"
+            :paginationEnabled="true"
             :navigationEnabled="true"
+            :paginationPadding="5"
             class="mb-4"
           >
-            <slide v-for="(models,index) in filteredSprintBurndownChart" :key="index+Math.random()">
-              <burndownChart v-bind:model="models" />
+            <slide v-for="(model) in filteredSprintBurndownChart" :key="model.titleSprint">
+              <burndownChart v-bind:model="model" />
             </slide>
           </carousel>
         </b-card>
@@ -54,19 +55,19 @@
       <carousel
         :navigationEnabled="true"
         :perPageCustom="[[320, 1],[1024, 3],[768,2]]"
-        :scrollPerPage="false"
+        :scrollPerPage="true"
         :centerMode="true"
+        :paginationEnabled="true"
         :paginationPadding="3"
-        :paginationEnabled="false"
       >
-        <slide v-for="(models,index) in filteredSprintModel" :key="index">
+        <slide v-for="(model,index) in filteredSprintModel" :key="index">
           <div class="card cardsprit mr-1 ml-1 shadow">
             <div class="card-body">
-              <div class="text-value">{{models.title}}</div>
-              <p>{{models.startDate}} - {{ models.endDate}}</p>
+              <div class="text-value">{{model.title}}</div>
+              <p>{{model.startDate}} - {{ model.endDate}}</p>
               <button
                 class="btn-hover color-8"
-                @click="selectSprint(filteredSprintModel,index)"
+                @click="selectSprint(model)"
                 v-b-modal.modal-xl
               >
                 <i class="icon-chart font-2xl d-block"></i>
@@ -117,10 +118,11 @@ export default {
         return index.title.toLowerCase().includes(text)
       });
     },
+    
     filteredSprintBurndownChart: function() {
       let text = this.search.trim().toLowerCase()
-      return this.burndown.filter(index => {
-        return index.titleSprint.toLowerCase().includes(text)
+      return this.burndown.filter(model => {
+        return model.titleSprint.toLowerCase().includes(text)
       });
     }
   },
@@ -133,8 +135,8 @@ export default {
     Slide
   },
   methods: {
-    selectSprint(models, index) {
-      this.select = models[index];
+    selectSprint(model) {
+      this.select = model;
     },
     getHistory() {
       boardService
