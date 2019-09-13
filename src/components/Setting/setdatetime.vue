@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-      <h1 class="pb-4"> Set Date Time Stamp</h1>
     <div class="mb-4">
       <date-range-picker v-on:submit="submitted" />
     </div>
+    <setscore></setscore>
   </div>
 </template>
 
@@ -12,12 +12,13 @@ import moment from 'moment'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCalendarAlt, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import BModalDirective from 'bootstrap-vue/es/directives/modal/modal'
-import DateRangePicker from '@/components/SetDateTime/DateRangePicker'
+import DateRangePicker from '@/components/Setting/DateRangePicker'
+import setscore from '@/components/Setting/setscore'
 
 library.add(faCalendarAlt, faCaretDown)
 
 export default {
-  components: { DateRangePicker  },
+  components: { DateRangePicker,setscore  },
   directives: { 'b-modal': BModalDirective },
   data: () => {
     return {

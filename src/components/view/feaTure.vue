@@ -44,13 +44,11 @@
           </router-link>
         </div>
       </div>
-      <setscore></setscore>
     </div>
   </div>
 </template>
 
 <script>
-import setscore from "@/components/view/setscore";
 import { mapGetters } from "vuex";
 import { BoardService } from "../../services/BoardService";
 const boardService = new BoardService();
@@ -63,9 +61,6 @@ export default {
   },
   mounted: function() {
     this.checkidBoard();
-  },
-  components: {
-    setscore
   },
   computed: {
     ...mapGetters({ token: "user/token", idBoard: "user/idBoard" })

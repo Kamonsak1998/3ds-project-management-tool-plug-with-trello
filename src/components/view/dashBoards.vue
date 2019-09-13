@@ -16,7 +16,7 @@
           id="search"
           class="form-control"
           v-model="search"
-          placeholder="Search Sprint..."
+          placeholder="Search Board..."
           aria-label="Search"
           autocomplete="on"
         />
@@ -44,9 +44,9 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import {BoardService} from "../../services/BoardService";
+import { BoardService } from "../../services/BoardService";
 
-const boardService = new BoardService()
+const boardService = new BoardService();
 export default {
   mounted: function() {
     this.getBoardtrello();
@@ -64,11 +64,24 @@ export default {
     return {
       search:'',
       results: [],
+      resultss: [],
       isShowModel: false
     };
   },
 
   methods: {
+    search_text() {
+      var inside = this;
+      this.results = this.resultss.filter(function(results) {
+        if (
+          results.boardName
+            .toLowerCase()
+            .indexOf(inside.search.text.toLowerCase()) != "-1"
+        ) {
+          return results;
+        }
+      });
+    },
     ...mapActions({
       getBoard: "user/getBoard",
       getNameBoard: "user/getNameBoard"
@@ -82,12 +95,17 @@ export default {
       this.$router.push("/feature");
     },
     getBoardtrello() {
-        boardService.fetchDashboard().then(Response => {
-           this.results = Response.data;
-           this.isShowModel = true;
-          }).catch(err => {
-            alert(err)
-          })
+      var inside = this;
+      boardService
+        .fetchDashboard()
+        .then(Response => {
+          inside.resultss = Response.data;
+          inside.results = Response.data;
+          this.isShowModel = true;
+        })
+        .catch(err => {
+          alert(err);
+        });
     }
   }
 };

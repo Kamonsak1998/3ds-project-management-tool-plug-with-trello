@@ -20,6 +20,7 @@
           />
         </b-col>
         <b-col class="col-setdate">
+                <h2 class="pb-4"> Set Date Time Stamp</h2>
           <p>Start Sprint</p>
           <div class="form-group form-inline flex-nowrap">
             <input
@@ -100,7 +101,6 @@ export default {
       total: "",
       startDate: moment.utc(),
       endDate: moment.utc(),
-      enddated: moment.utc(),
       rangeSelect: null,
       month: moment
         .utc()
