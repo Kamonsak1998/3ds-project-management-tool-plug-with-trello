@@ -16,7 +16,7 @@
           id="search"
           class="form-control"
           v-model="search"
-          placeholder="Search Sprint..."
+          placeholder="Search Board..."
           aria-label="Search"
           autocomplete="on"
         />
