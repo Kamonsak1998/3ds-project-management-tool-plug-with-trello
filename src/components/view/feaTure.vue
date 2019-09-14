@@ -72,9 +72,9 @@ export default {
     },
     checkDate: function() {
       boardService
-        .fetchchecksetdate({ idBoard: this.idBoard })
+        .fetchchecksetting({ idBoard: this.idBoard })
         .then(res => {
-          if (res.data.status == false) {
+          if (res.data.date.status == false) {
             this.$router.push("/setdatetime");
           } else {
             this.isShowModel = true;

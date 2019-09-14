@@ -36,7 +36,9 @@ export default {
     setscore(arr) {
       this.parameter[arr[0]] = arr[1];
     },
-    submitted: function() {},
+    submitted: function() {
+      
+    },
     submittedModal: function(range) {
       this.startDate = range.startDate;
       this.endDate = "";

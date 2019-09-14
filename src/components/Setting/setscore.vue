@@ -190,12 +190,6 @@
       </div>
 
       <button type="button" class="btn btn-light" @click="clear">Reset</button>
-      <button
-        type="button"
-        class="btn btn-primary ml-2"
-        @click="addPoint"
-        :disabled="validated"
-      >Submit</button>
     </div>
   </div>
 </template>
@@ -205,6 +199,12 @@ import { BoardService } from "../../services/BoardService";
 const boardservice = new BoardService();
 
 export default {
+  props: {
+    model: {
+      required: true
+    },
+    isSubmit: false
+  },
   data: function() {
     return {
       point: [
@@ -222,58 +222,103 @@ export default {
     };
   },
   mounted: function() {
+    this.point[0].XXS = this.model.sizes[4].sizePoint;
+    this.point[1].XS = this.model.sizes[4].sizePoint;
+    this.point[2].S = this.model.sizes[2].sizePoint;
+    this.point[3].M = this.model.sizes[1].sizePoint;
+    this.point[4].L = this.model.sizes[0].sizePoint;
+    this.point[5].XL = this.model.sizes[3].sizePoint;
+    this.point[6].XXL = this.model.sizes[5].sizePoint;
+    this.point[7].XXXL = this.model.sizes[7].sizePoint;
+    this.validated = this.model.status;
     this.checkscore();
   },
+  watch: {
+    isSubmit(value) {
+      if (value == true) {
+        this.submit();
+      }
+    }
+  },
   methods: {
-    checkscore: function() {
-      boardservice.fetchcheckscoresize().then(res => {
-        if (res.data.status == true) {
-          this.validated = res.data.status;
-          this.point[0].XXS = res.data.sizes[6].sizePoint;
-          this.point[1].XS = res.data.sizes[4].sizePoint;
-          this.point[2].S = res.data.sizes[2].sizePoint;
-          this.point[3].M = res.data.sizes[1].sizePoint;
-          this.point[4].L = res.data.sizes[0].sizePoint;
-          this.point[5].XL = res.data.sizes[3].sizePoint;
-          this.point[6].XXL = res.data.sizes[5].sizePoint;
-          this.point[7].XXXL = res.data.sizes[7].sizePoint;
-        }
-      });
+    submit: function() {
+      console.log("submit");
+      boardservice
+        .fetchchecksetting({
+          // setDate: [
+          //   {
+          //     startDate: this.startDate,
+          //     sprintDay: this.totaled,
+          //     endDate: this.endDate,
+          //     idBoard: this.idBoard,
+          //     boardName: this.nameBoard
+          //   }
+          // ],
+          score: [
+            parseFloat(this.point[0].XXS, 10),
+            parseFloat(this.point[1].XS, 10),
+            parseFloat(this.point[2].S, 10),
+            parseFloat(this.point[3].M, 10),
+            parseFloat(this.point[4].L, 10),
+            parseFloat(this.point[5].XL, 10),
+            parseFloat(this.point[6].XXL, 10),
+            parseFloat(this.point[7].XXXL, 10)
+          ]
+        })
+        .then(() => {
+          alert("Save Success");
+          // this.$router.push("/feature");
+        });
     },
-    addPoint: function() {
-      this.submitted = true;
-      this.$validator.validate().then(valid => {
-        if (valid) {
-          this.validated = true;
-          boardservice
-            .fetchsetscoresize({
-              Points: [
-                parseFloat(this.point[0].XXS, 10),
-                parseFloat(this.point[1].XS, 10),
-                parseFloat(this.point[2].S, 10),
-                parseFloat(this.point[3].M, 10),
-                parseFloat(this.point[4].L, 10),
-                parseFloat(this.point[5].XL, 10),
-                parseFloat(this.point[6].XXL, 10),
-                parseFloat(this.point[7].XXXL, 10)
-              ]
-            })
-            .then(() => {
-              alert("Save success");
-            });
-        }
-      });
-    },
+    // checkscore: function() {
+    //   boardservice.fetchcheckscoresize().then(res => {
+    //     if (res.data.status == true) {
+    //       this.validated = res.data.status;
+    //       this.point[0].XXS = res.data.sizes[6].sizePoint;
+    //       this.point[1].XS = res.data.sizes[4].sizePoint;
+    //       this.point[2].S = res.data.sizes[2].sizePoint;
+    //       this.point[3].M = res.data.sizes[1].sizePoint;
+    //       this.point[4].L = res.data.sizes[0].sizePoint;
+    //       this.point[5].XL = res.data.sizes[3].sizePoint;
+    //       this.point[6].XXL = res.data.sizes[5].sizePoint;
+    //       this.point[7].XXXL = res.data.sizes[7].sizePoint;
+    //     }
+    //   });
+    // },
+    // addPoint: function() {
+    //   this.submitted = true;
+    //   this.$validator.validate().then(valid => {
+    //     if (valid) {
+    //       this.validated = true;
+    //       boardservice
+    //         .fetchsetscoresize({
+    //           Points: [
+    //             parseFloat(this.point[0].XXS, 10),
+    //             parseFloat(this.point[1].XS, 10),
+    //             parseFloat(this.point[2].S, 10),
+    //             parseFloat(this.point[3].M, 10),
+    //             parseFloat(this.point[4].L, 10),
+    //             parseFloat(this.point[5].XL, 10),
+    //             parseFloat(this.point[6].XXL, 10),
+    //             parseFloat(this.point[7].XXXL, 10)
+    //           ]
+    //         })
+    //         .then(() => {
+    //           alert("Save success");
+    //         });
+    //     }
+    //   });
+    // },
     clear: function() {
-      (this.validated = false);
-        (this.point[0].XXS = "");
-        (this.point[1].XS = "");
-        (this.point[2].S = "");
-        (this.point[3].M = "");
-        (this.point[4].L = "");
-        (this.point[5].XL = "");
-        (this.point[6].XXL = "");
-        (this.point[7].XXXL = "");
+      this.validated = false;
+      this.point[0].XXS = "";
+      this.point[1].XS = "";
+      this.point[2].S = "";
+      this.point[3].M = "";
+      this.point[4].L = "";
+      this.point[5].XL = "";
+      this.point[6].XXL = "";
+      this.point[7].XXXL = "";
     }
   }
 };

@@ -68,11 +68,8 @@
     </div>
     <div class="col" v-if="isShowModel === true">
       <div class="row">
-        <setscore
-          :model="cardlist"
-          class="col-6 col-setting"
-        ></setscore>
-        <selectlist class="col-6 col-setting"></selectlist> 
+        <setscore :isSubmit="submitted" :model="score" class="col-6 col-setting"></setscore>
+        <selectlist :model="cardlist" class="col-6 col-setting"></selectlist>
       </div>
     </div>
   </b-container>
@@ -107,7 +104,8 @@ export default {
   },
   data() {
     return {
-      cardlist:'',  
+      score: [],
+      cardlist: [],
       isShowModel: false,
       validated: false,
       total: "",
@@ -124,9 +122,7 @@ export default {
   },
   mounted: function() {
     this.checkDate();
-    // if(this.total != ''){
     this.focusInput();
-    // }
   },
 
   computed: {
@@ -152,15 +148,16 @@ export default {
     },
     checkDate: function() {
       boardservice
-        .fetchchecksetdate({ idBoard: this.idBoard })
+        .fetchchecksetting({ idBoard: this.idBoard })
         .then(res => {
+          console.log(res);
+
           this.isShowModel = true;
-          if (res.data.status == true) {
-            this.startDated = moment.utc(res.data.startDate, "YYYY/MM/DD");
-            this.startDate = this.startDated;
-            this.totaled = res.data.sprintDay;
-            this.validated = res.data.status;
-            this.total = parseInt(this.totaled);
+          this.score = res.data.scoreSize;
+          this.cardlist = res.data.lists;
+          if (res.data.date.status == true) {
+            this.cardlist = res.data.lists;
+            this.total = res.data.date.sprintDay;
           }
         })
         .catch(err => {
@@ -211,23 +208,23 @@ export default {
       }
       this.nextStep();
     },
-    // Submit button
     submit: function() {
       this.submitted = true;
-      this.props.selectlist;
-      console.log(this.props.selectlist);
-      
       this.$validator.validate().then(valid => {
         this.totaled = parseInt(this.total);
         if (valid) {
           this.validated = true;
           boardservice
-            .fetchSetdatetime({
-              startDate: this.startDate,
-              sprintDay: this.totaled,
-              endDate: this.endDate,
-              idBoard: this.idBoard,
-              boardName: this.nameBoard
+            .fetchchecksetting({
+              setDate: [
+                {
+                  startDate: this.startDate,
+                  sprintDay: this.totaled,
+                  endDate: this.endDate,
+                  idBoard: this.idBoard,
+                  boardName: this.nameBoard
+                }
+              ]
             })
             .then(() => {
               alert("Save Success");
