@@ -14,21 +14,21 @@ export class BoardService extends BaseService {
         return this.requester.post('/getleaderboard', { idBoard }, mainAPIOptions())
     }
 
-    fetchSetdatetime = ({
-        startDate,
-        sprintDay,
-        endDate,
-        idBoard,
-        boardName
-    }) => {
-        return this.requester.post('/setdate', {
-            startDate,
-            sprintDay,
-            endDate,
-            idBoard,
-            boardName
-        }, mainAPIOptions())
-    }
+    // fetchSetdatetime = ({
+    //     startDate,
+    //     sprintDay,
+    //     endDate,
+    //     idBoard,
+    //     boardName
+    // }) => {
+    //     return this.requester.post('/setdate', {
+    //         startDate,
+    //         sprintDay,
+    //         endDate,
+    //         idBoard,
+    //         boardName
+    //     }, mainAPIOptions())
+    // }
 
     fetchchecksetdate = ({ idBoard }) => {
         return this.requester.post('/checksetdate', { idBoard }, mainAPIOptions())
@@ -38,18 +38,18 @@ export class BoardService extends BaseService {
         return this.requester.post('/setmember', { idBoard }, mainAPIOptions())
     }
 
-    fetchcheckscoresize = () => {
-        return this.requester.get('/checkscoresize', mainAPIOptions())
-    }
+    // fetchcheckscoresize = () => {
+    //     return this.requester.get('/checkscoresize', mainAPIOptions())
+    // }
 
-    fetchsetscoresize = ({ Points }) => {
-        return this.requester.post('/setscoresize', { Points }, mainAPIOptions())
-    }
+    // fetchsetscoresize = ({ Points }) => {
+    //     return this.requester.post('/setscoresize', { Points }, mainAPIOptions())
+    // }
 
     fetchsettingdata = ({
-        setDate, score
+        setDate, setscore
     }) => {
-        return this.requester.post('/settingdata', { setDate, score }, mainAPIOptions())
+        return this.requester.post('/settingdata', { setDate, setscore }, mainAPIOptions())
     }
 
     fetchchecksetting = ({ idBoard }) => {

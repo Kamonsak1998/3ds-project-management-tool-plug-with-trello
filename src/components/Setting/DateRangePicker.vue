@@ -56,12 +56,6 @@
           <br />
           <div class="form-group form-inline justify-content-end mb-0">
             <button type="button" class="btn btn-light" @click="reset">Reset</button>
-            <button
-              type="button"
-              class="btn btn-primary ml-2"
-              @click="submit"
-              :disabled="validated"
-            >Submit</button>
           </div>
         </b-col>
       </b-row>
@@ -69,13 +63,18 @@
     <div class="col" v-if="isShowModel === true">
       <div class="row">
         <setscore
-          :isSubmit="submitted"
-          :point="point"
-          @input="(newpoint) => {point = newpoint}"
+          :point="pointt"
+          @input="(newpoint) => {pointt = newpoint}"
           :model="points"
           class="col-6 col-setting"
         ></setscore>
         <selectlist :model="cardlist" class="col-6 col-setting"></selectlist>
+        <button
+          type="button"
+          class="btn btn-primary ml-2"
+          @click="submit"
+          :disabled="validated"
+        >Submit</button>
       </div>
     </div>
   </b-container>
@@ -111,16 +110,17 @@ export default {
   data() {
     return {
       setDate: [],
-      point: [
-        { XXS: Float64Array },
-        { XS: Float64Array },
-        { S: Float64Array },
-        { M: Float64Array },
-        { L: Float64Array },
-        { XL: Float64Array },
-        { XXL: Float64Array },
-        { XXXL: Float64Array }
-      ],
+      setscore: [],
+      pointt: {
+        XXS: "",
+        XS: "",
+        S: "",
+        M: "",
+        L: "",
+        XL: "",
+        XXL: "",
+        XXXL: ""
+      },
       cardlist: [],
       isShowModel: false,
       validated: false,
@@ -225,13 +225,12 @@ export default {
       this.nextStep();
     },
     submit: function() {
-      console.log(this.point);
-
       this.submitted = true;
       this.$validator.validate().then(valid => {
         this.totaled = parseInt(this.total);
         if (valid) {
           this.validated = true;
+          // console.log(this.startDate);
           boardservice
             .fetchsettingdata({
               setDate: [
@@ -243,9 +242,11 @@ export default {
                   boardName: this.nameBoard
                 }
               ],
-              setscore: []
+              setscore: [{ setscore: this.pointt }]
             })
             .then(() => {
+              // console.log(this.setDate);
+              // console.log(this.setscore);
               alert("Save Success");
               // this.$router.push("/feature");
             })
