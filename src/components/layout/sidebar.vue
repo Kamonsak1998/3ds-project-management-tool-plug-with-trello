@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar text-left">
-    <nav class="sidebar-nav">
+    <nav class="sidebar-nav">  
       <ul class="nav">
         <li class="nav-item">
           <router-link class="nav-link" :to="{name : 'dashboards'}">
@@ -13,7 +13,7 @@
             <i class="nav-icon icon-list"></i> Feature
           </router-link>
           <ul class="nav-dropdown-items">
-            <li class="nav-item">
+            <li class="nav-item ">
               <router-link class="nav-link" :to="{name : 'charts'}">
                 <i class="nav-icon icon-chart"></i> Charts
               </router-link>
@@ -30,12 +30,12 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item nav-dropdown">
+        <li class="nav-item nav-dropdown d-lg-none">
           <a class="nav-link nav-dropdown-toggle" href="#">
             <i class="nav-icon icon-user"></i> User
           </a>
           <ul class="nav-dropdown-items">
-            <li class="nav-item"  v-if="token">
+            <li class="nav-item" v-if="token">
               <a class="nav-link" href @click=" logout">
                 <i class="nav-icon icon-logout"></i>Logout
               </a>
@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style>
-  .sidebar{ 
-    border-top-right-radius: 30px;
-  }
+.nav-dropdown-items{
+  background-color: #4b545b;
+}
 </style>
