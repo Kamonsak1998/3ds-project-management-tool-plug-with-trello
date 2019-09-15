@@ -68,7 +68,13 @@
     </div>
     <div class="col" v-if="isShowModel === true">
       <div class="row">
-        <setscore :isSubmit="submitted" :model="score" class="col-6 col-setting"></setscore>
+        <setscore
+          
+          :method="parentMethod"
+          :isSubmit="submitted"
+          :model="score"
+          class="col-6 col-setting"
+        ></setscore>
         <selectlist :model="cardlist" class="col-6 col-setting"></selectlist>
       </div>
     </div>
@@ -104,6 +110,8 @@ export default {
   },
   data() {
     return {
+      
+      setDate: [],
       score: [],
       cardlist: [],
       isShowModel: false,
@@ -122,7 +130,7 @@ export default {
   },
   mounted: function() {
     this.checkDate();
-    this.focusInput();
+    // this.focusInput();
   },
 
   computed: {
@@ -141,10 +149,15 @@ export default {
   },
 
   methods: {
+    parentMethod(point) {
+      // Do something with the value
+      console.log("From the child:", point);
+    },
+
     focusInput() {
       setTimeout(() => {
         this.$refs.startDate.focus();
-      }, 100);
+      }, 200);
     },
     checkDate: function() {
       boardservice
@@ -215,7 +228,7 @@ export default {
         if (valid) {
           this.validated = true;
           boardservice
-            .fetchchecksetting({
+            .fetchsettingdata({
               setDate: [
                 {
                   startDate: this.startDate,
@@ -224,9 +237,11 @@ export default {
                   idBoard: this.idBoard,
                   boardName: this.nameBoard
                 }
-              ]
+              ],
+              setscore: []
             })
             .then(() => {
+              console.log(setDate);
               alert("Save Success");
               // this.$router.push("/feature");
             })
