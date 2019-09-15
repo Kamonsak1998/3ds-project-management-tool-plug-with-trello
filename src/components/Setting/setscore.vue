@@ -200,18 +200,13 @@ const boardservice = new BoardService();
 
 export default {
   props: {
- 
-    method: { type: Function },
     model: {
       required: true
-    },
-    isSubmit: false
+    }
   },
   data: function() {
     return {
-    
-      value: "I am the child.",
-      score: [],
+      point: [],
       point: [
         { XXS: Float64Array },
         { XS: Float64Array },
@@ -227,63 +222,26 @@ export default {
     };
   },
   mounted: function() {
-    this.method(this.point);
-
-    this.point[0].XXS = this.model.sizes[4].sizePoint;
-    this.point[1].XS = this.model.sizes[4].sizePoint;
-    this.point[2].S = this.model.sizes[2].sizePoint;
-    this.point[3].M = this.model.sizes[1].sizePoint;
-    this.point[4].L = this.model.sizes[0].sizePoint;
-    this.point[5].XL = this.model.sizes[3].sizePoint;
-    this.point[6].XXL = this.model.sizes[5].sizePoint;
-    this.point[7].XXXL = this.model.sizes[7].sizePoint;
-    this.validated = this.model.status;
     this.checkscore();
   },
   watch: {
-
-    myprop: function(newVal, oldVal) {},
-    isSubmit(value) {
-      if (value == true) {
-        this.submit();
-      }
-    }
-  },
-  methods: {
-    created() {
-      this.$emit("created");
+    point(){
+      this.$emit("input",this.point);
     },
 
-    // submit: function() {
-    //   console.log(11111111111111111);
-    //   boardservice
-    //     .fetchchecksetting({
-    //       // setDate: [
-    //       //   {
-    //       //     startDate: this.startDate,
-    //       //     sprintDay: this.totaled,
-    //       //     endDate: this.endDate,
-    //       //     idBoard: this.idBoard,
-    //       //     boardName: this.nameBoard
-    //       //   }
-    //       // ],
-    //       score: [
-    //         parseFloat(this.point[0].XXS, 10),
-    //         parseFloat(this.point[1].XS, 10),
-    //         parseFloat(this.point[2].S, 10),
-    //         parseFloat(this.point[3].M, 10),
-    //         parseFloat(this.point[4].L, 10),
-    //         parseFloat(this.point[5].XL, 10),
-    //         parseFloat(this.point[6].XXL, 10),
-    //         parseFloat(this.point[7].XXXL, 10)
-    //       ]
-    //     })
-    //     .then(() => {
-    //       console.log(score);
-
-    //       alert("Save Success");
-    //     });
-    // },
+  },
+  methods: {
+    checkscore: function() {
+      this.point[0].XXS = this.model.sizes[4].sizePoint;
+      this.point[1].XS = this.model.sizes[4].sizePoint;
+      this.point[2].S = this.model.sizes[2].sizePoint;
+      this.point[3].M = this.model.sizes[1].sizePoint;
+      this.point[4].L = this.model.sizes[0].sizePoint;
+      this.point[5].XL = this.model.sizes[3].sizePoint;
+      this.point[6].XXL = this.model.sizes[5].sizePoint;
+      this.point[7].XXXL = this.model.sizes[7].sizePoint;
+      this.validated = this.model.status;
+    },
     clear: function() {
       this.validated = false;
       this.point[0].XXS = "";

@@ -69,10 +69,10 @@
     <div class="col" v-if="isShowModel === true">
       <div class="row">
         <setscore
-          
-          :method="parentMethod"
           :isSubmit="submitted"
-          :model="score"
+          :point="point"
+          @input="(newpoint) => {point = newpoint}"
+          :model="points"
           class="col-6 col-setting"
         ></setscore>
         <selectlist :model="cardlist" class="col-6 col-setting"></selectlist>
@@ -110,9 +110,17 @@ export default {
   },
   data() {
     return {
-      
       setDate: [],
-      score: [],
+      point: [
+        { XXS: Float64Array },
+        { XS: Float64Array },
+        { S: Float64Array },
+        { M: Float64Array },
+        { L: Float64Array },
+        { XL: Float64Array },
+        { XXL: Float64Array },
+        { XXXL: Float64Array }
+      ],
       cardlist: [],
       isShowModel: false,
       validated: false,
@@ -149,11 +157,6 @@ export default {
   },
 
   methods: {
-    parentMethod(point) {
-      // Do something with the value
-      console.log("From the child:", point);
-    },
-
     focusInput() {
       setTimeout(() => {
         this.$refs.startDate.focus();
@@ -166,7 +169,7 @@ export default {
           console.log(res);
 
           this.isShowModel = true;
-          this.score = res.data.scoreSize;
+          this.points = res.data.scoreSize;
           this.cardlist = res.data.lists;
           if (res.data.date.status == true) {
             this.cardlist = res.data.lists;
@@ -222,6 +225,8 @@ export default {
       this.nextStep();
     },
     submit: function() {
+      console.log(this.point);
+
       this.submitted = true;
       this.$validator.validate().then(valid => {
         this.totaled = parseInt(this.total);
@@ -241,7 +246,6 @@ export default {
               setscore: []
             })
             .then(() => {
-              console.log(setDate);
               alert("Save Success");
               // this.$router.push("/feature");
             })
