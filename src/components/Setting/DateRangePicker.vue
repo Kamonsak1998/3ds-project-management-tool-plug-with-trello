@@ -154,9 +154,10 @@ export default {
       boardservice
         .fetchchecksetting({ idBoard: this.idBoard })
         .then(res => {
+          console.log(res);
           this.isShowModel = true;
           this.points = res.data.scoreSize;
-          this.cardlist = res.data.lists;
+          this.cardlist = res.data.lists;          
           if (res.data.date.status == true) {
             this.startDated = moment.utc(res.data.date.startDate, "YYYY/MM/DD");
             this.startDate = this.startDated;

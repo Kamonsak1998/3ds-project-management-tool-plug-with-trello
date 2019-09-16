@@ -1,44 +1,42 @@
 <template>
   <div class="card">
     <br />
-    <b-form-select v-model="selectedone" :options="model"></b-form-select>
+    <b-form-select v-model="selectedone" :options="list"></b-form-select>
     <div class="mt-1">
       Selected:
       <strong>{{ selectedone }}</strong>
     </div>
 
     <br />
-    <b-form-select v-model="selectedtwo" :options="model"></b-form-select>
+    <b-form-select v-model="selectedtwo" :options="list"></b-form-select>
     <div class="mt-1">
       Selected:
       <strong>{{ selectedtwo }}</strong>
     </div>
 
     <br />
-    <b-form-select v-model="selectedthree" :options="model"></b-form-select>
+    <b-form-select v-model="selectedthree" :options="list"></b-form-select>
     <div class="mt-1">
       Selected:
       <strong>{{ selectedthree }}</strong>
     </div>
   </div>
-  
 </template>
 
 <script>
-// import DateRangePicker from "@/components/Setting/DateRangePicker";
-
 export default {
   props: {
-            // model: {
-            //     required: true
-            // }
-        },
+    model: {
+      required: true
+    }
+  },
   data() {
     return {
-      selectedone: '',
-      selectedtwo: '',
-      selectedthree: '',
-      model:[],
+      listed: [],
+      selectedone: "",
+      selectedtwo: "",
+      selectedthree: "",
+      list: [{ value: "", text: "" }]
       // cardlist: [
       //   { value: null, text: "Please select an option" },
       //   { value: "a", text: "This is First option"},
@@ -52,9 +50,14 @@ export default {
       // ],
     };
   },
-  methods: {
-
-    }
+  mounted: function() {
+    // console.log(22222, this.model.list[0].ListName);
+    // console.log(22222, this.model.list);
+    this.chartOptions = {...this.chartOptions, ...{title: {text: this.model.title}}};
+    console.log(1111111, this.list);
+    this.list[0] = this.model.list;
+  },
+  methods: {}
 };
 </script>
 
