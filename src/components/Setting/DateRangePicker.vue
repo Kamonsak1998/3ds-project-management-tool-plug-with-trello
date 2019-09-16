@@ -109,8 +109,8 @@ export default {
   },
   data() {
     return {
-      setDate: [],
-      setscore: [],
+      // setDate: [],
+      // setscore: [],
       pointt: {
         XXS: "",
         XS: "",
@@ -166,7 +166,7 @@ export default {
       boardservice
         .fetchchecksetting({ idBoard: this.idBoard })
         .then(res => {
-          console.log(res);
+          // console.log(res);
 
           this.isShowModel = true;
           this.points = res.data.scoreSize;
@@ -225,6 +225,7 @@ export default {
       this.nextStep();
     },
     submit: function() {
+      console.log(this.pointt);
       this.submitted = true;
       this.$validator.validate().then(valid => {
         this.totaled = parseInt(this.total);
@@ -233,7 +234,7 @@ export default {
           // console.log(this.startDate);
           boardservice
             .fetchsettingdata({
-              setDate: [
+              setDate: 
                 {
                   startDate: this.startDate,
                   sprintDay: this.totaled,
@@ -241,14 +242,15 @@ export default {
                   idBoard: this.idBoard,
                   boardName: this.nameBoard
                 }
-              ],
+              ,
               setscore: [{ setscore: this.pointt }]
             })
             .then(() => {
+              
+              alert("Save Success");              
               // console.log(this.setDate);
-              // console.log(this.setscore);
-              alert("Save Success");
               // this.$router.push("/feature");
+              // console.log(this.setscore);
             })
             .catch(err => {
               if (err) {
