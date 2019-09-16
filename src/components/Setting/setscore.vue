@@ -15,7 +15,7 @@
               type="text"
               class="form-control"
               pattern="[0-9]+"
-              v-model="point[0].XXS"
+              v-model="point[0]"
               :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXS') }"
@@ -39,7 +39,7 @@
               class="form-control"
               pattern="[0-9]+"
               v-on:keyup.enter="$event.target.nextElementSibling.focus()"
-              v-model="point[1].XS"
+              v-model="point[1]"
               :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XS') }"
@@ -62,7 +62,7 @@
               type="text"
               class="form-control"
               pattern="[0-9]+"
-              v-model="point[2].S"
+              v-model="point[2]"
               :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('S') }"
@@ -85,7 +85,7 @@
               type="text"
               class="form-control"
               pattern="[0-9]+"
-              v-model="point[3].M"
+              v-model="point[3]"
               :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('M') }"
@@ -108,7 +108,7 @@
               type="text"
               class="form-control"
               pattern="[0-9]+"
-              v-model="point[4].L"
+              v-model="point[4]"
               :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('L') }"
@@ -131,7 +131,7 @@
               type="text"
               class="form-control"
               pattern="[0-9]+"
-              v-model="point[5].XL"
+              v-model="point[5]"
               :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XL') }"
@@ -154,7 +154,7 @@
               type="text"
               class="form-control"
               pattern="[0-9]+"
-              v-model="point[6].XXL"
+              v-model="point[6]"
               :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXL') }"
@@ -177,7 +177,7 @@
               class="form-control"
               pattern="[0-9]+"
               :disabled="validated"
-              v-model="point[7].XXXL"
+              v-model="point[7]"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXXL') }"
             />
@@ -190,33 +190,28 @@
       </div>
 
       <button type="button" class="btn btn-light" @click="clear">Reset</button>
-      <button
-        type="button"
-        class="btn btn-primary ml-2"
-        @click="addPoint"
-        :disabled="validated"
-      >Submit</button>
     </div>
   </div>
 </template>
 
 <script>
-import { BoardService } from "../../services/BoardService";
-const boardservice = new BoardService();
+// import { BoardService } from "../../services/BoardService";
+// const boardservice = new BoardService();
 
 export default {
-  data: function() {
+  props: {
+    model: {
+      required: true
+    },
+    point: {
+      type: Object,
+      required: true
+    }
+      
+  },
+  data() {
     return {
-      point: [
-        { XXS: Float64Array },
-        { XS: Float64Array },
-        { S: Float64Array },
-        { M: Float64Array },
-        { L: Float64Array },
-        { XL: Float64Array },
-        { XXL: Float64Array },
-        { XXXL: Float64Array }
-      ],
+      point: [],
       submitted: false,
       validated: false
     };
@@ -224,56 +219,25 @@ export default {
   mounted: function() {
     this.checkscore();
   },
+  watch: {
+    value() {
+      this.$emit("input", this.value);
+    }
+  },
   methods: {
     checkscore: function() {
-      boardservice.fetchcheckscoresize().then(res => {
-        if (res.data.status == true) {
-          this.validated = res.data.status;
-          this.point[0].XXS = res.data.sizes[6].sizePoint;
-          this.point[1].XS = res.data.sizes[4].sizePoint;
-          this.point[2].S = res.data.sizes[2].sizePoint;
-          this.point[3].M = res.data.sizes[1].sizePoint;
-          this.point[4].L = res.data.sizes[0].sizePoint;
-          this.point[5].XL = res.data.sizes[3].sizePoint;
-          this.point[6].XXL = res.data.sizes[5].sizePoint;
-          this.point[7].XXXL = res.data.sizes[7].sizePoint;
-        }
-      });
-    },
-    addPoint: function() {
-      this.submitted = true;
-      this.$validator.validate().then(valid => {
-        if (valid) {
-          this.validated = true;
-          boardservice
-            .fetchsetscoresize({
-              Points: [
-                parseFloat(this.point[0].XXS, 10),
-                parseFloat(this.point[1].XS, 10),
-                parseFloat(this.point[2].S, 10),
-                parseFloat(this.point[3].M, 10),
-                parseFloat(this.point[4].L, 10),
-                parseFloat(this.point[5].XL, 10),
-                parseFloat(this.point[6].XXL, 10),
-                parseFloat(this.point[7].XXXL, 10)
-              ]
-            })
-            .then(() => {
-              alert("Save success");
-            });
-        }
-      });
+      this.point[0] = this.model.sizes[6].sizePoint;
+      this.point[1] = this.model.sizes[4].sizePoint;
+      this.point[2] = this.model.sizes[2].sizePoint;
+      this.point[3] = this.model.sizes[1].sizePoint;
+      this.point[4] = this.model.sizes[0].sizePoint;
+      this.point[5] = this.model.sizes[3].sizePoint;
+      this.point[6] = this.model.sizes[5].sizePoint;
+      this.point[7] = this.model.sizes[7].sizePoint;
+      this.validated = this.model.status;
     },
     clear: function() {
-      (this.validated = false);
-        (this.point[0].XXS = "");
-        (this.point[1].XS = "");
-        (this.point[2].S = "");
-        (this.point[3].M = "");
-        (this.point[4].L = "");
-        (this.point[5].XL = "");
-        (this.point[6].XXL = "");
-        (this.point[7].XXXL = "");
+      this.validated = false;
     }
   }
 };
