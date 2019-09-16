@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import DateRangePicker from "@/components/Setting/DateRangePicker";
+// import DateRangePicker from "@/components/Setting/DateRangePicker";
 
 export default {
   props: {

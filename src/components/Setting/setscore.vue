@@ -195,8 +195,8 @@
 </template>
 
 <script>
-import { BoardService } from "../../services/BoardService";
-const boardservice = new BoardService();
+// import { BoardService } from "../../services/BoardService";
+// const boardservice = new BoardService();
 
 export default {
   props: {

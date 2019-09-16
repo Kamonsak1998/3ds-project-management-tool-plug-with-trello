@@ -154,8 +154,6 @@ export default {
       boardservice
         .fetchchecksetting({ idBoard: this.idBoard })
         .then(res => {
-          console.log(res);
-
           this.isShowModel = true;
           this.points = res.data.scoreSize;
           this.cardlist = res.data.lists;
@@ -164,9 +162,7 @@ export default {
             this.startDate = this.startDated;
             // this.totaled = res.data.date.sprintDay;
             this.total = res.data.date.sprintDay;
-            console.log(this.startDated);
           }
-          // console.log(this.total);
         })
         .catch(err => {
           alert(err);
@@ -243,8 +239,6 @@ export default {
               }
             })
             .then(() => {
-              console.log(setDate);
-
               alert("Save Success");
               // this.$router.push("/feature");
             })
