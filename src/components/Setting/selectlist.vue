@@ -1,61 +1,57 @@
 <template>
-  <div class="card">
-    <br />
-    <b-form-select v-model="selectedone" :options="model"></b-form-select>
-    <div class="mt-1">
-      Selected:
-      <strong>{{ selectedone }}</strong>
+    <div class="card p-5">
+        *First list:
+        <b-form-select v-model="selectedone">
+            <option v-for="(list,index) in model" :key="model">{{list.ListName}}</option>
+        </b-form-select>
+        <br/>
+
+        Second list:
+        <b-form-select v-model="selectedtwo">
+            <option v-for="(list,index) in model2">{{list.ListName}}</option>
+        </b-form-select>
+        <br/>
+
+        Third list:
+        <b-form-select v-model="selectedthree">
+            <option v-for="(list,index) in model3">{{list.ListName}}</option>
+        </b-form-select>
     </div>
 
-    <br />
-    <b-form-select v-model="selectedtwo" :options="model"></b-form-select>
-    <div class="mt-1">
-      Selected:
-      <strong>{{ selectedtwo }}</strong>
-    </div>
-
-    <br />
-    <b-form-select v-model="selectedthree" :options="model"></b-form-select>
-    <div class="mt-1">
-      Selected:
-      <strong>{{ selectedthree }}</strong>
-    </div>
-  </div>
-  
 </template>
 
 <script>
-// import DateRangePicker from "@/components/Setting/DateRangePicker";
-
-export default {
-  props: {
-            // model: {
-            //     required: true
-            // }
+    export default {
+        props: {
+            model: [],
         },
-  data() {
-    return {
-      selectedone: '',
-      selectedtwo: '',
-      selectedthree: '',
-      model:[],
-      // cardlist: [
-      //   { value: null, text: "Please select an option" },
-      //   { value: "a", text: "This is First option"},
-      //   { value: "b", text: "Selected Option"},
-      //   {
-      //     value: { C: "3PO" },
-      //     text: "This is an option with object value",
-      //     disabled: false
-      //   },
-      //   { value: "d", text: "This one is disabled", disabled: true }
-      // ],
-    };
-  },
-  methods: {
-
+        computed: {
+            model2() {
+                this.result = this.model.filter((list) => {
+                    return list.ListName !== this.selectedone
+                })
+                return this.result
+            },
+            model3() {
+                return this.result.filter((list) => {
+                    return list.ListName !== this.selectedtwo
+                })
+            }
+        },
+        data() {
+            return {
+                selectedone: '',
+                selectedtwo: '',
+                selectedthree: '',
+                result: ''
+            };
+        },
+        methods: {
+            test() {
+                console.log(this.selectedone, this.selectedtwo, this.selectedthree)
+            }
+        }
     }
-};
 </script>
 
 <style>
