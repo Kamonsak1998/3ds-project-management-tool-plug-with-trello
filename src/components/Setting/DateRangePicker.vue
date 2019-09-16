@@ -154,14 +154,19 @@ export default {
       boardservice
         .fetchchecksetting({ idBoard: this.idBoard })
         .then(res => {
+          console.log(res);
+
           this.isShowModel = true;
           this.points = res.data.scoreSize;
           this.cardlist = res.data.lists;
           if (res.data.date.status == true) {
+            this.startDated = moment.utc(res.data.date.startDate, "YYYY/MM/DD");
+            this.startDate = this.startDated;
+            // this.totaled = res.data.date.sprintDay;
             this.total = res.data.date.sprintDay;
+            console.log(this.startDated);
           }
-          console.log(this.total);
-          
+          // console.log(this.total);
         })
         .catch(err => {
           alert(err);
@@ -218,29 +223,29 @@ export default {
         if (valid) {
           boardservice
             .fetchsettingdata({
-              setDate: 
-                {
-                  startDate: this.startDate,
-                  sprintDay: this.totaled,
-                  endDate: this.endDate,
-                  idBoard: this.idBoard,
-                }
-              ,
-              scoreSize:  {Points: [
-                parseFloat(this.pointt[0]),
-                parseFloat(this.pointt[1]),
-                parseFloat(this.pointt[2]),
-                parseFloat(this.pointt[3]),
-                parseFloat(this.pointt[4]),
-                parseFloat(this.pointt[5]),
-                parseFloat(this.pointt[6]),
-                parseFloat(this.pointt[7])
-              ]} 
+              sprintDate: {
+                startDate: this.startDate,
+                sprintDay: this.totaled,
+                endDate: this.endDate,
+                idBoard: this.idBoard
+              },
+              scoreSize: {
+                Points: [
+                  parseFloat(this.pointt[0]),
+                  parseFloat(this.pointt[1]),
+                  parseFloat(this.pointt[2]),
+                  parseFloat(this.pointt[3]),
+                  parseFloat(this.pointt[4]),
+                  parseFloat(this.pointt[5]),
+                  parseFloat(this.pointt[6]),
+                  parseFloat(this.pointt[7])
+                ]
+              }
             })
             .then(() => {
               console.log(setDate);
-              
-              alert("Save Success");              
+
+              alert("Save Success");
               // this.$router.push("/feature");
             })
             .catch(err => {
