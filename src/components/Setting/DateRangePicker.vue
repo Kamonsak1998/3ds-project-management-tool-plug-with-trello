@@ -287,10 +287,34 @@
         margin: -0.5rem;
     }
 
-    .daterangepicker-col {
-        padding: 0.5rem;
-        flex-basis: 100%;
-    }
+  methods: {
+    focusInput() {
+      setTimeout(() => {
+        this.$refs.startDate.focus();
+      }, 200);
+    },
+    checkDate: function() {
+      boardservice
+        .fetchchecksetting({ idBoard: this.idBoard })
+        .then(res => {
+          console.log(res);
+          this.isShowModel = true;
+          this.points = res.data.scoreSize;
+          this.cardlist = res.data.lists;          
+          if (res.data.date.status == true) {
+            this.startDated = moment.utc(res.data.date.startDate, "YYYY/MM/DD");
+            this.startDate = this.startDated;
+            // this.totaled = res.data.date.sprintDay;
+            this.total = res.data.date.sprintDay;
+          }
+        })
+        .catch(err => {
+          alert(err);
+        });
+    },
+    clear: function() {
+      this.total = "";
+    },
 
     .daterangepicker-date-input {
         min-width: 120px;
