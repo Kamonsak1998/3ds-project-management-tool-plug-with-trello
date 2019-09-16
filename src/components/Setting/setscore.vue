@@ -15,7 +15,7 @@
               type="text"
               class="form-control"
               pattern="[0-9]+"
-              v-model="point.XXS"
+              v-model="point[0]"
               :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXS') }"
@@ -39,7 +39,7 @@
               class="form-control"
               pattern="[0-9]+"
               v-on:keyup.enter="$event.target.nextElementSibling.focus()"
-              v-model="point.XS"
+              v-model="point[1]"
               :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XS') }"
@@ -62,7 +62,7 @@
               type="text"
               class="form-control"
               pattern="[0-9]+"
-              v-model="point.S"
+              v-model="point[2]"
               :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('S') }"
@@ -85,7 +85,7 @@
               type="text"
               class="form-control"
               pattern="[0-9]+"
-              v-model="point.M"
+              v-model="point[3]"
               :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('M') }"
@@ -108,7 +108,7 @@
               type="text"
               class="form-control"
               pattern="[0-9]+"
-              v-model="point.L"
+              v-model="point[4]"
               :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('L') }"
@@ -131,7 +131,7 @@
               type="text"
               class="form-control"
               pattern="[0-9]+"
-              v-model="point.XL"
+              v-model="point[5]"
               :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XL') }"
@@ -154,7 +154,7 @@
               type="text"
               class="form-control"
               pattern="[0-9]+"
-              v-model="point.XXL"
+              v-model="point[6]"
               :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXL') }"
@@ -177,7 +177,7 @@
               class="form-control"
               pattern="[0-9]+"
               :disabled="validated"
-              v-model="point.XXXL"
+              v-model="point[7]"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXXL') }"
             />
@@ -203,9 +203,7 @@ export default {
     model: {
       required: true
     },
-    point: { 
-      type: Object, 
-      required: true }
+    point: []
   },
   data() {
     return {
@@ -233,14 +231,14 @@ export default {
   },
   methods: {
     checkscore: function() {
-      this.point.XXS = this.model.sizes[4].sizePoint;
-      this.point.XS = this.model.sizes[4].sizePoint;
-      this.point.S = this.model.sizes[2].sizePoint;
-      this.point.M = this.model.sizes[1].sizePoint;
-      this.point.L = this.model.sizes[0].sizePoint;
-      this.point.XL = this.model.sizes[3].sizePoint;
-      this.point.XXL = this.model.sizes[5].sizePoint;
-      this.point.XXXL = this.model.sizes[7].sizePoint;
+      this.point[0] = this.model.sizes[4].sizePoint;
+      this.point[1] = this.model.sizes[4].sizePoint;
+      this.point[2] = this.model.sizes[2].sizePoint;
+      this.point[3] = this.model.sizes[1].sizePoint;
+      this.point[4] = this.model.sizes[0].sizePoint;
+      this.point[5] = this.model.sizes[3].sizePoint;
+      this.point[6] = this.model.sizes[5].sizePoint;
+      this.point[7] = this.model.sizes[7].sizePoint;
       this.validated = this.model.status;
     },
     clear: function() {

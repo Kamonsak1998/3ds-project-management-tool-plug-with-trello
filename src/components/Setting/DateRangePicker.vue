@@ -109,18 +109,7 @@ export default {
   },
   data() {
     return {
-      // setDate: [],
-      // setscore: [],
-      pointt: {
-        XXS: "",
-        XS: "",
-        S: "",
-        M: "",
-        L: "",
-        XL: "",
-        XXL: "",
-        XXXL: ""
-      },
+      pointt: [],
       cardlist: [],
       isShowModel: false,
       validated: false,
@@ -137,6 +126,7 @@ export default {
     };
   },
   mounted: function() {
+    console.log(this.pointt);
     this.checkDate();
     // this.focusInput();
   },
@@ -230,7 +220,7 @@ export default {
       this.$validator.validate().then(valid => {
         this.totaled = parseInt(this.total);
         if (valid) {
-          this.validated = true;
+          // this.validated = true;
           // console.log(this.startDate);
           boardservice
             .fetchsettingdata({
@@ -243,7 +233,7 @@ export default {
                   boardName: this.nameBoard
                 }
               ,
-              setscore: [{ setscore: this.pointt }]
+              setscore:  {Points : this.pointt} 
             })
             .then(() => {
               
