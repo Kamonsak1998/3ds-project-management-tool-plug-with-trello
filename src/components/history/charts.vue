@@ -55,7 +55,7 @@
       <carousel
         :navigationEnabled="true"
         :perPageCustom="[[320, 1],[1024, 3],[768,2]]"
-        :scrollPerPage="true"
+        :scrollPerPage="false"
         :centerMode="true"
         :paginationEnabled="true"
         :paginationPadding="3"
@@ -118,7 +118,7 @@ export default {
         return index.title.toLowerCase().includes(text)
       });
     },
-    
+
     filteredSprintBurndownChart: function() {
       let text = this.search.trim().toLowerCase()
       return this.burndown.filter(model => {
