@@ -203,20 +203,15 @@ export default {
     model: {
       required: true
     },
-    point: []
+    point: {
+      type: Object,
+      required: true
+    }
+      
   },
   data() {
     return {
-      point: [
-        { XXS: Float64Array },
-        { XS: Float64Array },
-        { S: Float64Array },
-        { M: Float64Array },
-        { L: Float64Array },
-        { XL: Float64Array },
-        { XXL: Float64Array },
-        { XXXL: Float64Array }
-      ],
+      point: [],
       submitted: false,
       validated: false
     };
@@ -231,7 +226,7 @@ export default {
   },
   methods: {
     checkscore: function() {
-      this.point[0] = this.model.sizes[4].sizePoint;
+      this.point[0] = this.model.sizes[6].sizePoint;
       this.point[1] = this.model.sizes[4].sizePoint;
       this.point[2] = this.model.sizes[2].sizePoint;
       this.point[3] = this.model.sizes[1].sizePoint;
@@ -243,14 +238,6 @@ export default {
     },
     clear: function() {
       this.validated = false;
-      this.point.XXS = "";
-      this.point.XS = "";
-      this.point.S = "";
-      this.point.M = "";
-      this.point.L = "";
-      this.point.XL = "";
-      this.point.XXL = "";
-      this.point.XXXL = "";
     }
   }
 };

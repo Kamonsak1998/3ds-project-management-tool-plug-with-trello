@@ -126,9 +126,7 @@ export default {
     };
   },
   mounted: function() {
-    console.log(this.pointt);
     this.checkDate();
-    // this.focusInput();
   },
 
   computed: {
@@ -156,15 +154,14 @@ export default {
       boardservice
         .fetchchecksetting({ idBoard: this.idBoard })
         .then(res => {
-          // console.log(res);
-
           this.isShowModel = true;
           this.points = res.data.scoreSize;
           this.cardlist = res.data.lists;
           if (res.data.date.status == true) {
-            this.cardlist = res.data.lists;
             this.total = res.data.date.sprintDay;
           }
+          console.log(this.total);
+          
         })
         .catch(err => {
           alert(err);
@@ -215,13 +212,10 @@ export default {
       this.nextStep();
     },
     submit: function() {
-      console.log(this.pointt);
       this.submitted = true;
       this.$validator.validate().then(valid => {
         this.totaled = parseInt(this.total);
         if (valid) {
-          // this.validated = true;
-          // console.log(this.startDate);
           boardservice
             .fetchsettingdata({
               setDate: 
@@ -230,17 +224,24 @@ export default {
                   sprintDay: this.totaled,
                   endDate: this.endDate,
                   idBoard: this.idBoard,
-                  boardName: this.nameBoard
                 }
               ,
-              setscore:  {Points : this.pointt} 
+              scoreSize:  {Points: [
+                parseFloat(this.pointt[0]),
+                parseFloat(this.pointt[1]),
+                parseFloat(this.pointt[2]),
+                parseFloat(this.pointt[3]),
+                parseFloat(this.pointt[4]),
+                parseFloat(this.pointt[5]),
+                parseFloat(this.pointt[6]),
+                parseFloat(this.pointt[7])
+              ]} 
             })
             .then(() => {
+              console.log(setDate);
               
               alert("Save Success");              
-              // console.log(this.setDate);
               // this.$router.push("/feature");
-              // console.log(this.setscore);
             })
             .catch(err => {
               if (err) {

@@ -47,9 +47,9 @@ export class BoardService extends BaseService {
     // }
 
     fetchsettingdata = ({
-        setDate, setscore
+        setDate, scoreSize
     }) => {
-        return this.requester.post('/settingdata', { setDate, setscore }, mainAPIOptions())
+        return this.requester.post('/settingdata', { setDate, scoreSize }, mainAPIOptions())
     }
 
     fetchchecksetting = ({ idBoard }) => {
