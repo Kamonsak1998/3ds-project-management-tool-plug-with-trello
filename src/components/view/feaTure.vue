@@ -5,18 +5,6 @@
     </div>
     <div v-if="isShowModel === true">
       <div class="row">
-        <div class="col-sm-4">
-          <router-link style="text-decoration:none" :to="{name : 'leaderboard'}">
-            <div class="card text-white bg-primary">
-              <div class="card-body card-body-feature leaderboard-f pb-0">
-                <div class="card-body-feature">
-                  <i class="icon-book-open font-2xl d-block"></i>
-                  <div class="text-value">Leader Board</div>
-                </div>
-              </div>
-            </div>
-          </router-link>
-        </div>
 
         <div class="col-sm-4">
           <router-link style="text-decoration:none" :to="{name : 'charts'}">
@@ -31,13 +19,26 @@
           </router-link>
         </div>
 
+         <div class="col-sm-4">
+          <router-link style="text-decoration:none" :to="{name : 'leaderboard'}">
+            <div class="card text-white bg-primary">
+              <div class="card-body card-body-feature leaderboard-f pb-0">
+                <div class="card-body-feature">
+                  <i class="icon-book-open font-2xl d-block"></i>
+                  <div class="text-value">Leader Board</div>
+                </div>
+              </div>
+            </div>
+          </router-link>
+        </div>
+
         <div class="col-sm-4">
           <router-link style="text-decoration:none" :to="{name : 'setdatetime'}">
             <div class="card text-white bg-warning">
               <div class="card-body card-body-feature Set-date-f pb-0">
                 <div class="card-body-feature">
-                  <i class="icon-calendar font-2xl d-block"></i>
-                  <div class="text-value">SetDateTime</div>
+                  <i class="icon-settings font-2xl d-block"></i>
+                  <div class="text-value">Setting</div>
                 </div>
               </div>
             </div>

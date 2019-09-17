@@ -15,7 +15,7 @@
           <ul class="nav-dropdown-items">
             <li class="nav-item ">
               <router-link class="nav-link" :to="{name : 'charts'}">
-                <i class="nav-icon icon-chart"></i> Charts
+                <i class="nav-icon icon-chart"></i> History
               </router-link>
             </li>
             <li class="nav-item">
@@ -25,7 +25,7 @@
             </li>
             <li class="nav-item">
               <router-link class="nav-link" :to="{name : 'setdatetime'}">
-                <i class="nav-icon icon-calendar"></i> SetDateTime
+                <i class="nav-icon icon-settings"></i> Setting
               </router-link>
             </li>
           </ul>
@@ -70,7 +70,4 @@ export default {
 </script>
 
 <style>
-.nav-dropdown-items{
-  background-color: #4b545b;
-}
 </style>
