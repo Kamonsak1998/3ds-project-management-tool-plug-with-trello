@@ -121,7 +121,7 @@ export default {
   data() {
     return {
       pointt: [],
-      selectListed: {},
+      selectListed: [],
       listed: {},
       isShowModel: false,
       validated: false,
