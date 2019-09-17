@@ -3,10 +3,10 @@
       <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">
-        <img class="navbar-brand-full" src="@/assets/3dslogo.png" width="100" height="30" alt="3DS Logo" />
-        <img class="navbar-brand-minimized" src="@/assets/LOGO3DS.png" width="35" height="20" alt="3DS Logo">
-      </a>
+        <router-link class="navbar-brand" :to="{name : 'dashboards'}">
+          <img class="navbar-brand-full" src="@/assets/3dslogo.png" width="100" height="30" alt="3DS Logo" />
+          <img class="navbar-brand-minimized" src="@/assets/LOGO3DS.png" width="35" height="20" alt="3DS Logo">
+        </router-link>
       <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
         <span class="navbar-toggler-icon"></span>
       </button>

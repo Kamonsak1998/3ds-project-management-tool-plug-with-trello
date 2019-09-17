@@ -205,11 +205,9 @@ export default {
   methods: {
     formValidate() {
         // valiadate this form parent components call this
-        console.log('validate',this.errors);
         this.submitted = true;
         console.log(this.valid);
         return this.$validator.validate().then(valid => {
-          console.log('valid : setscore',valid);
         })
       },
     checkscore: function() {
