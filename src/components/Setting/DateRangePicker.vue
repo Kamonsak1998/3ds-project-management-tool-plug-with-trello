@@ -60,23 +60,26 @@
         </b-col>
       </b-row>
     </div>
-    <div class="col" v-if="isShowModel === true">
-      <div class="row">
-        <setscore
-          :point="pointt"
-          @input="(newpoint) => {pointt = newpoint}"
-          :model="points"
-          class="col-6 col-setting"
-        ></setscore>
-        <selectlist :model="cardlist" class="col-6 col-setting"></selectlist>
-        <button
-          type="button"
-          class="btn btn-primary ml-2"
-          @click="submit"
-          :disabled="validated"
-        >Submit</button>
-      </div>
-    </div>
+    <b-card-group columns class="card-rows cols-2 mb-3" v-if="isShowModel === true">
+      <setscore
+        :point="pointt"
+        @input="(newpoint) => {pointt = newpoint}"
+        :model="points"
+        class="scoreCard"
+      ></setscore>
+      <selectlist
+        :model="lists"
+        :selectListed="selectListed"
+        class="listCard"
+        :listed="listed"
+      >{{selectListed}}</selectlist>
+      <button
+        type="button"
+        class="btn btn-primary submitbtn"
+        @click="submit"
+        :disabled="validated"
+      >Submit</button>
+    </b-card-group>
   </b-container>
 </template>
 
@@ -89,6 +92,7 @@ import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
 import { mapGetters } from "vuex";
 import { BoardService } from "../../services/BoardService";
+
 const boardservice = new BoardService();
 
 library.add(faCaretRight);
@@ -110,7 +114,8 @@ export default {
   data() {
     return {
       pointt: [],
-      cardlist: [],
+      selectListed: [],
+      listed: Object,
       isShowModel: false,
       validated: false,
       total: "",
@@ -156,7 +161,8 @@ export default {
         .then(res => {
           this.isShowModel = true;
           this.points = res.data.scoreSize;
-          this.cardlist = res.data.lists;
+          this.lists = res.data.lists.list;
+          this.listed = res.data.lists.selectList;
           if (res.data.date.status == true) {
             this.startDated = moment.utc(res.data.date.startDate, "YYYY/MM/DD");
             this.startDate = this.startDated;
@@ -236,7 +242,9 @@ export default {
                   parseFloat(this.pointt[6]),
                   parseFloat(this.pointt[7])
                 ]
-              }
+              },
+
+              selectList: this.selectListed
             })
             .then(() => {
               alert("Save Success");
@@ -272,11 +280,6 @@ export default {
 .daterangepicker-row {
   margin: -0.5rem;
 }
-
-.daterangepicker-col {
-  padding: 0.5rem;
-  flex-basis: 100%;
-}
 .daterangepicker-date-input {
   min-width: 120px;
 }
@@ -290,27 +293,47 @@ export default {
   background-color: red !important;
   color: #ffffff;
 }
+
 /* Date input focus */
 .daterangepicker-date-input:focus {
   border-color: #17a2b8 !important;
   box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25) !important;
 }
+
 .col-setdate {
   padding: 40px;
 }
+
 .row-setdate {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
+
 .card-setdate {
   border-radius: 10px;
 }
+
 .loading {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.scoreCard {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.listCard {
+  height: 70%;
+}
+
+.submitbtn {
+  float: right;
+  margin-bottom: 10%;
 }
 </style>
