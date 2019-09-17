@@ -21,14 +21,11 @@ export default {
     model: [],
     selectListed: [],
     listed: {
-                required: true
-            }
+      required: true
+    }
   },
-  mounted(){
-       this.selectListed[0] = this.listed[0] 
-       this.selectListed[1] = this.listed[1]
-       this.selectListed[2] = this.listed[2]
-       console.log('this.selectListed[0]: ',this.selectListed[0]);
+  mounted() {
+   this.setSelect();
   },
   computed: {
     model2() {
@@ -41,13 +38,22 @@ export default {
       return this.result.filter(list => {
         return list !== this.selectListed[1];
       });
-    },
+    }
   },
   data() {
     return {
       result: ""
     };
   },
+  methods: {
+    setSelect() {
+      if (this.listed) {
+        this.selectListed[0] = this.listed[0];
+        this.selectListed[1] = this.listed[1];
+        this.selectListed[2] = this.listed[2];
+      }
+    }
+  }
 };
 </script>
 

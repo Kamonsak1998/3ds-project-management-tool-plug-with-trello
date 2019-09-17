@@ -60,34 +60,26 @@
         </b-col>
       </b-row>
     </div>
-    <div class="col" v-if="isShowModel === true">
-      <div class="row">
-        <div class="col-6">
-          <setscore
-            :point="pointt"
-            @input="(newpoint) => {pointt = newpoint}"
-            :model="points"
-            class="scoreCard"
-          ></setscore>
-        </div>
-        <div class="col-5">
-          <div class="col">
-            <selectlist
-              :model="lists"
-              :selectListed="selectListed"
-              class="listCard"
-              :listed="listed"
-            >{{selectListed}}</selectlist>
-            <button
-              type="button"
-              class="btn btn-primary submitbtn"
-              @click="submit"
-              :disabled="validated"
-            >Submit</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <b-card-group columns class="card-rows cols-2 mb-3" v-if="isShowModel === true">
+      <setscore
+        :point="pointt"
+        @input="(newpoint) => {pointt = newpoint}"
+        :model="points"
+        class="scoreCard"
+      ></setscore>
+      <selectlist
+        :model="lists"
+        :selectListed="selectListed"
+        class="listCard"
+        :listed="listed"
+      >{{selectListed}}</selectlist>
+      <button
+        type="button"
+        class="btn btn-primary submitbtn"
+        @click="submit"
+        :disabled="validated"
+      >Submit</button>
+    </b-card-group>
   </b-container>
 </template>
 
@@ -342,6 +334,6 @@ export default {
 
 .submitbtn {
   float: right;
-  margin-top: 20%;
+  margin-bottom: 10%;
 }
 </style>
