@@ -1,11 +1,22 @@
 <template>
   <div class="card p-5">
     *First list:
-    <b-form-select v-model="selectListed[0]" @change="select1Change($event)" >
+    <b-form-select
+      v-model="selectListed[0]"
+      @change="select1Change($event)"
+      name="select"
+      v-validate="'required'"
+      :class="{ 'is-invalid': submitted && errors.has('select') }"
+    >
       <option v-for="(list,index) in model" :value="list" :key="index">{{list.listName}}</option>
     </b-form-select>
+    <div v-if="submitted && errors.has('select')" class="invalid-feedback">{{ errors.first('select') }}</div>
     <br />Second list:
-    <b-form-select v-model="selectListed[1]" @change="select2Change($event)" :disabled="select2disable">
+    <b-form-select
+      v-model="selectListed[1]"
+      @change="select2Change($event)"
+      :disabled="select2disable"
+    >
       <option v-for="(list,index) in model2" :value="list" :key="index">{{list.listName}}</option>
     </b-form-select>
     <br />Third list:
@@ -16,53 +27,69 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      model: [],
-      selectListed: [],
-      listed: {
-        required: true
-      }
+export default {
+  inject:["parentValidator"],
+  created() {
+    this.$validator = this.parentValidator
+  },
+  props: {
+    model: {
+      type: Array,
+      required: true
     },
-    mounted() {
-      this.setSelect();
+    selectListed: {
+      type: Array,
+      required: true
     },
-    computed: {
-      model2() {
-        this.result = this.model.filter(list => {
-          return list !== this.selectListed[0];
-        });
-        return this.result;
-      },
-      model3() {
-        return this.result.filter(list => {
-          return list !== this.selectListed[1];
-        });
-      }
-    },
-    data() {
-      return {
-        result: "",
-        select2disable: true,
-        select3disable: true,
-      };
-    },
-    methods: {
-      setSelect() {
-        if (this.listed) {
-          this.selectListed[0] = this.listed[0];
-          this.selectListed[1] = this.listed[1];
-          this.selectListed[2] = this.listed[2];
-        }
-      },
-      select1Change(event) {
-        this.select2disable = false
-      },
-      select2Change(event) {
-        this.select3disable = false
-      },
+    listed: {
+      type: Array,
+      required: true
     }
-  };
+  },
+  mounted() {
+    this.setSelect();
+  },
+  computed: {
+    model2() {
+      this.result = this.model.filter(list => {
+        return list !== this.selectListed[0];
+      });
+      return this.result;
+    },
+    model3() {
+      return this.result.filter(list => {
+        return list !== this.selectListed[1];
+      });
+    }
+  },
+  data() {
+    return {
+      result: "",
+      select2disable: true,
+      select3disable: true,
+      submitted : false
+    };
+  },
+  methods: {
+    formValidate() {
+        this.submitted = true;
+        return this.$validator.validate()
+      },
+    setSelect() {
+      if (this.listed) {
+        this.selectListed[0] = this.listed[0];
+        this.selectListed[1] = this.listed[1];
+        this.selectListed[2] = this.listed[2];
+      }
+    },
+    select1Change(event) {
+      this.select2disable = false;
+    },
+    select2Change(event) {
+      this.select3disable = false;
+    }
+  }
+};
 </script>
 
 <style>

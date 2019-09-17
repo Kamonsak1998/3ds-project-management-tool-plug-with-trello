@@ -1,8 +1,5 @@
 <template>
   <div class="card">
-    <div class="card-header feature">
-      <h3 class="mb-0">Set Score Up to You!</h3>
-    </div>
     <div class="card-body">
       <div class="form-group row">
         <label class="col-md-6 col-form-label form-control-label">XXS</label>
@@ -10,13 +7,11 @@
           <div class="form-group">
             <input
               @keyup.enter="$refs.XS.focus"
-              ref="XXS"
               name="XXS"
               type="text"
               class="form-control"
               pattern="[0-9]+"
               v-model="point[0]"
-              :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXS') }"
             />
@@ -33,14 +28,12 @@
           <div class="form-group">
             <input
               @keyup.enter="$refs.S.focus"
-              ref="XS"
               name="XS"
               type="text"
               class="form-control"
               pattern="[0-9]+"
               v-on:keyup.enter="$event.target.nextElementSibling.focus()"
               v-model="point[1]"
-              :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XS') }"
             />
@@ -57,13 +50,11 @@
           <div class="form-group">
             <input
               @keyup.enter="$refs.M.focus"
-              ref="S"
               name="S"
               type="text"
               class="form-control"
               pattern="[0-9]+"
               v-model="point[2]"
-              :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('S') }"
             />
@@ -80,13 +71,11 @@
           <div class="form-group">
             <input
               @keyup.enter="$refs.L.focus"
-              ref="M"
               name="M"
               type="text"
               class="form-control"
               pattern="[0-9]+"
               v-model="point[3]"
-              :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('M') }"
             />
@@ -103,13 +92,11 @@
           <div class="form-group">
             <input
               @keyup.enter="$refs.XL.focus"
-              ref="L"
               name="L"
               type="text"
               class="form-control"
               pattern="[0-9]+"
               v-model="point[4]"
-              :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('L') }"
             />
@@ -126,13 +113,11 @@
           <div class="form-group">
             <input
               @keyup.enter="$refs.XXL.focus"
-              ref="XL"
               name="XL"
               type="text"
               class="form-control"
               pattern="[0-9]+"
               v-model="point[5]"
-              :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XL') }"
             />
@@ -149,13 +134,11 @@
           <div class="form-group">
             <input
               @keyup.enter="$refs.XXXL.focus"
-              ref="XXL"
               name="XXL"
               type="text"
               class="form-control"
               pattern="[0-9]+"
               v-model="point[6]"
-              :disabled="validated"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXL') }"
             />
@@ -171,12 +154,10 @@
         <div class="col-md-6">
           <div class="form-group">
             <input
-              ref="XXXL"
               name="XXXL"
               type="text"
               class="form-control"
               pattern="[0-9]+"
-              :disabled="validated"
               v-model="point[7]"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXXL') }"
@@ -188,32 +169,29 @@
           </div>
         </div>
       </div>
-
-      <button type="button" class="btn btn-light" @click="clear">Reset</button>
     </div>
   </div>
 </template>
 
 <script>
-// import { BoardService } from "../../services/BoardService";
-// const boardservice = new BoardService();
-
 export default {
+  inject:["parentValidator"],
+  created() {
+    this.$validator = this.parentValidator
+  },
   props: {
     model: {
+      type: Object,
       required: true
     },
     point: {
-      type: Object,
+      type: Array,
       required: true
     }
-      
   },
   data() {
     return {
-      point: [],
       submitted: false,
-      validated: false
     };
   },
   mounted: function() {
@@ -225,6 +203,15 @@ export default {
     }
   },
   methods: {
+    formValidate() {
+        // valiadate this form parent components call this
+        console.log('validate',this.errors);
+        this.submitted = true;
+        console.log(this.valid);
+        return this.$validator.validate().then(valid => {
+          console.log('valid : setscore',valid);
+        })
+      },
     checkscore: function() {
       this.point[0] = this.model.sizes[6].sizePoint;
       this.point[1] = this.model.sizes[4].sizePoint;
@@ -234,11 +221,7 @@ export default {
       this.point[5] = this.model.sizes[3].sizePoint;
       this.point[6] = this.model.sizes[5].sizePoint;
       this.point[7] = this.model.sizes[7].sizePoint;
-      this.validated = this.model.status;
     },
-    clear: function() {
-      this.validated = false;
-    }
   }
 };
 </script>

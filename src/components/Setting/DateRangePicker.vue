@@ -66,12 +66,14 @@
         @input="(newpoint) => {pointt = newpoint}"
         :model="points"
         class="scoreCard"
+        ref="score"
       ></setscore>
       <selectlist
         :model="lists"
         :selectListed="selectListed"
-        class="listCard"
+         class="listCard"
         :listed="listed"
+        ref="select"
       >{{selectListed}}</selectlist>
       <button
         type="button"
@@ -98,6 +100,9 @@ const boardservice = new BoardService();
 library.add(faCaretRight);
 
 export default {
+  provide(){
+    return {parentValidator : this.$validator}
+  },
   props: {
     calendarCount: {
       type: Number,
@@ -218,9 +223,13 @@ export default {
       }
       this.nextStep();
     },
+     formValidate() {
+        return this.$refs.select.formValidate(),this.$refs.score.formValidate()
+    },
     submit: function() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
+        this.formValidate();
         this.totaled = parseInt(this.total);
         if (valid) {
           boardservice
@@ -243,12 +252,11 @@ export default {
                   parseFloat(this.pointt[7])
                 ]
               },
-
               selectList: this.selectListed
             })
             .then(() => {
               alert("Save Success");
-              // this.$router.push("/feature");
+              this.$router.push("/feature");
             })
             .catch(err => {
               if (err) {
