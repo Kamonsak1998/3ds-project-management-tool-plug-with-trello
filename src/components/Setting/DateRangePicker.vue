@@ -20,6 +20,7 @@
           />
         </b-col>
         <b-col class="col-setdate">
+          <h2 class="pb-4">Set Date Time Stamp</h2>
           <p>Start Sprint</p>
           <div class="form-group form-inline flex-nowrap">
             <input
@@ -55,31 +56,53 @@
           <br />
           <div class="form-group form-inline justify-content-end mb-0">
             <button type="button" class="btn btn-light" @click="reset">Reset</button>
-            <button
-              type="button"
-              class="btn btn-primary ml-2"
-              @click="submit"
-              :disabled="validated"
-            >Submit</button>
           </div>
         </b-col>
       </b-row>
     </div>
+    <b-card-group columns class="card-rows cols-2 mb-3" v-if="isShowModel === true">
+      <setscore
+        :point="pointt"
+        @input="(newpoint) => {pointt = newpoint}"
+        :model="points"
+        class="scoreCard"
+        ref="score"
+      ></setscore>
+      <selectlist
+        :model="lists"
+        :selectListed="selectListed"
+         class="listCard"
+        :listed="listed"
+        ref="select"
+      >{{selectListed}}</selectlist>
+      <button
+        type="button"
+        class="btn btn-primary submitbtn"
+        @click="submit"
+        :disabled="validated"
+      >Submit</button>
+    </b-card-group>
   </b-container>
 </template>
 
 <script>
+import setscore from "@/components/Setting/setscore";
+import selectlist from "@/components/Setting/selectlist";
 import moment from "moment";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import DateRangePickerCalendar from "./DateRangePickerCalendar";
-import {  mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 import { BoardService } from "../../services/BoardService";
+
 const boardservice = new BoardService();
 
 library.add(faCaretRight);
 
 export default {
+  provide(){
+    return {parentValidator : this.$validator}
+  },
   props: {
     calendarCount: {
       type: Number,
@@ -95,12 +118,14 @@ export default {
   },
   data() {
     return {
+      pointt: [],
+      selectListed: [],
+      listed: Object,
       isShowModel: false,
       validated: false,
       total: "",
       startDate: moment.utc(),
       endDate: moment.utc(),
-      enddated: moment.utc(),
       rangeSelect: null,
       month: moment
         .utc()
@@ -112,13 +137,14 @@ export default {
   },
   mounted: function() {
     this.checkDate();
-    // if(this.total != ''){
-    this.focusInput();
-    // }
   },
 
   computed: {
-    ...mapGetters({idBoard: "user/idBoard", nameBoard: "user/nameBoard",  token: "user/token"}),
+    ...mapGetters({
+      idBoard: "user/idBoard",
+      nameBoard: "user/nameBoard",
+      token: "user/token"
+    }),
     nextMonth: function() {
       return moment.utc(this.month).add(1, "month");
     },
@@ -132,18 +158,21 @@ export default {
     focusInput() {
       setTimeout(() => {
         this.$refs.startDate.focus();
-      }, 100);
+      }, 200);
     },
     checkDate: function() {
-      boardservice.fetchchecksetdate({ idBoard : this.idBoard })
+      boardservice
+        .fetchchecksetting({ idBoard: this.idBoard })
         .then(res => {
           this.isShowModel = true;
-          if (res.data.status == true) {
-            this.startDated = moment.utc(res.data.startDate, "YYYY/MM/DD");
+          this.points = res.data.scoreSize;
+          this.lists = res.data.lists.list;
+          this.listed = res.data.lists.selectList;
+          if (res.data.date.status == true) {
+            this.startDated = moment.utc(res.data.date.startDate, "YYYY/MM/DD");
             this.startDate = this.startDated;
-            this.totaled = res.data.sprintDay;
-            this.validated = res.data.status;
-            this.total = parseInt(this.totaled);
+            // this.totaled = res.data.date.sprintDay;
+            this.total = res.data.date.sprintDay;
           }
         })
         .catch(err => {
@@ -194,20 +223,36 @@ export default {
       }
       this.nextStep();
     },
-    // Submit button
+     formValidate() {
+        return this.$refs.select.formValidate(),this.$refs.score.formValidate()
+    },
     submit: function() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
+        this.formValidate();
         this.totaled = parseInt(this.total);
         if (valid) {
-          this.validated = true;
           boardservice
-            .fetchSetdatetime({
-              startDate: this.startDate,
-              sprintDay: this.totaled,
-              endDate: this.endDate,
-              idBoard : this.idBoard,
-              boardName :this.nameBoard
+            .fetchsettingdata({
+              sprintDate: {
+                startDate: this.startDate,
+                sprintDay: this.totaled,
+                endDate: this.endDate,
+                idBoard: this.idBoard
+              },
+              scoreSize: {
+                Points: [
+                  parseFloat(this.pointt[0]),
+                  parseFloat(this.pointt[1]),
+                  parseFloat(this.pointt[2]),
+                  parseFloat(this.pointt[3]),
+                  parseFloat(this.pointt[4]),
+                  parseFloat(this.pointt[5]),
+                  parseFloat(this.pointt[6]),
+                  parseFloat(this.pointt[7])
+                ]
+              },
+              selectList: this.selectListed
             })
             .then(() => {
               alert("Save Success");
@@ -234,7 +279,7 @@ export default {
       return value ? value.format("YYYY/MM/DD") : "";
     }
   },
-  components: { DateRangePickerCalendar }
+  components: { DateRangePickerCalendar, setscore, selectlist }
 };
 </script>
 
@@ -242,11 +287,6 @@ export default {
 /* Custom row */
 .daterangepicker-row {
   margin: -0.5rem;
-}
-
-.daterangepicker-col {
-  padding: 0.5rem;
-  flex-basis: 100%;
 }
 .daterangepicker-date-input {
   min-width: 120px;
@@ -261,27 +301,47 @@ export default {
   background-color: red !important;
   color: #ffffff;
 }
+
 /* Date input focus */
 .daterangepicker-date-input:focus {
   border-color: #17a2b8 !important;
   box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25) !important;
 }
+
 .col-setdate {
   padding: 40px;
 }
+
 .row-setdate {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
+
 .card-setdate {
   border-radius: 10px;
 }
+
 .loading {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.scoreCard {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.listCard {
+  height: 70%;
+}
+
+.submitbtn {
+  float: right;
+  margin-bottom: 10%;
 }
 </style>

@@ -8,9 +8,6 @@
         <div class="col col-head">
           <b>Rank</b>
         </div>
-        <!-- <div class="col col-head">
-          <b></b>
-        </div>-->
         <div class="col-5 col-head">
           <b>Name</b>
         </div>
@@ -62,9 +59,6 @@ export default {
         .then(response => {
           this.isShowModel = true;
           this.users = response.data.board;
-          this.non = response.data.board[1].avatar;
-        }).catch(err => {
-          alert(err)
         })
     }
   }

@@ -41,7 +41,7 @@ const router = new Router({
             path: '/setdatetime',
             name: 'setdatetime',
             meta: { checkIdBoard: true },
-            component: () => import('@/components/SetDateTime/setdatetime')
+            component: () => import('@/components/Setting/setdatetime')
         }
     ],
 })
