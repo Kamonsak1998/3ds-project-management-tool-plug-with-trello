@@ -160,12 +160,12 @@
               pattern="[0-9]+"
               v-model="point[7]"
               v-validate="'required|decimal|max:5'"
-              :class="{ 'is-invalid': submitted && errors.has('XXXL') }"
+              :class="{ 'is-invalid': submitted && errors.has('point') }"
             />
             <div
-              v-if="submitted && errors.has('XXXL')"
+              v-if="submitted && errors.has('point')"
               class="invalid-feedback"
-            >{{ errors.first('XXXL') }}</div>
+            >{{ errors.first('point') }}</div>
           </div>
         </div>
       </div>
@@ -180,6 +180,7 @@ export default {
     this.$validator = this.parentValidator
   },
   props: {
+    point: [],
     model: {
       type: Object,
       required: true

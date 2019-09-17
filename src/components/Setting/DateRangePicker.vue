@@ -171,7 +171,6 @@ export default {
           if (res.data.date.status == true) {
             this.startDated = moment.utc(res.data.date.startDate, "YYYY/MM/DD");
             this.startDate = this.startDated;
-            // this.totaled = res.data.date.sprintDay;
             this.total = res.data.date.sprintDay;
           }
         })
