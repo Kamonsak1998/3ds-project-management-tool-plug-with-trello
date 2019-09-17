@@ -76,6 +76,7 @@
               :model="lists"
               :selectListed="selectListed"
               class="listCard"
+              :listed="listed"
             >{{selectListed}}</selectlist>
             <button
               type="button"
@@ -122,7 +123,7 @@ export default {
     return {
       pointt: [],
       selectListed: [],
-      listed: {},
+      listed: Object,
       isShowModel: false,
       validated: false,
       total: "",
@@ -169,6 +170,7 @@ export default {
           this.isShowModel = true;
           this.points = res.data.scoreSize;
           this.lists = res.data.lists.list;
+          this.listed = res.data.lists.selectList;
           if (res.data.date.status == true) {
             this.startDated = moment.utc(res.data.date.startDate, "YYYY/MM/DD");
             this.startDate = this.startDated;
@@ -225,8 +227,6 @@ export default {
       this.nextStep();
     },
     submit: function() {
-      console.log(this.selectListed);
-
       this.submitted = true;
       this.$validator.validate().then(valid => {
         this.totaled = parseInt(this.total);

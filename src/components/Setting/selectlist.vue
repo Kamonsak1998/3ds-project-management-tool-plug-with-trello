@@ -12,16 +12,23 @@
     <b-form-select v-model="selectListed[2]">
       <option v-for="(list,index) in model3" :value="list" :key="index">{{list.listName}}</option>
     </b-form-select>
-    <button @click="test"></button>
   </div>
 </template>
 
 <script>
 export default {
-
   props: {
     model: [],
-    selectListed: []
+    selectListed: [],
+    listed: {
+                required: true
+            }
+  },
+  mounted(){
+       this.selectListed[0] = this.listed[0] 
+       this.selectListed[1] = this.listed[1]
+       this.selectListed[2] = this.listed[2]
+       console.log('this.selectListed[0]: ',this.selectListed[0]);
   },
   computed: {
     model2() {
@@ -41,19 +48,6 @@ export default {
       result: ""
     };
   },
-  mounted: function() {
-
-
-    this.test();
-  },
-  watch: {
-
-  },
-  methods: {
-    test() {
-      console.log(this.selectListed);
-    }
-  }
 };
 </script>
 
