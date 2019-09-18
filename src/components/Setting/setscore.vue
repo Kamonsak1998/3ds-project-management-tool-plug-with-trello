@@ -228,10 +228,6 @@ export default {
 .form-group {
   margin-bottom: 3px;
 }
-.form-control {
-  display: table-row;
-  width: 60%;
-}
 .btn-primary {
   color: #fff;
   background-color: #20a8d8;

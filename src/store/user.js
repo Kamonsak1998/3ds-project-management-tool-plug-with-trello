@@ -16,6 +16,9 @@ export const user = {
         getToken: ({ commit }, token) => {
             commit('addToken', token)
         },
+        getAvatar:({commit},urlAvatar) =>{
+            commit('setAvatar',urlAvatar)
+        },
         logout: ({ commit }) => {
             commit('remove')
         }
@@ -24,6 +27,7 @@ export const user = {
         username: null,
         nameBoard: null,
         idBoard: null,
+        urlAvatar: null,
         token: null,
     }, mutations: {
         addIduser: (state, idMember) => {
@@ -42,12 +46,16 @@ export const user = {
             state.token = newToken
             localStorage.setItem('token', newToken)
         },
+        setAvatar:(state, urlAvatar) => {
+            state.urlAvatar = urlAvatar
+        },
         remove: (state) => {
             state.idBoard = null
             state.nameBoard = null
             state.username = null
             state.idMember = null
             state.token = null
+            state.urlAvatar = null
             localStorage.removeItem('token', null)
         }
     }, getters: {
@@ -55,6 +63,7 @@ export const user = {
         username: state => state.username,
         nameBoard: state => state.nameBoard,
         idBoard: state => state.idBoard,
-        token: state => state.token
+        token: state => state.token,
+        urlAvatar: state => state.urlAvatar
     }
 }

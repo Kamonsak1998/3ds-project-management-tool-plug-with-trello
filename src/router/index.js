@@ -8,6 +8,11 @@ const router = new Router({
     base: process.env.BASE_URL,
     routes: [
         {
+            path: '/',
+            name: 'index',
+            component: () => import('@/components/view/index')
+        },
+        {
             path: '/auth/login',
             name: 'login',
             meta: { authSuccess: true },
