@@ -55,7 +55,13 @@
           >{{ errors.first('total') }}</div>
           <br />
           <div class="form-group form-inline justify-content-end mb-0">
-            <button type="button" class="btn btn-light" @click="reset">Reset</button>
+            <button type="button" class="btn btn-light mr-2" @click="reset">Reset</button>
+            <button
+              type="button"
+              class="btn btn-primary submitbtn"
+              @click="submit"
+              :disabled="validated"
+            >Submit</button>
           </div>
         </b-col>
       </b-row>
@@ -71,16 +77,10 @@
       <selectlist
         :model="lists"
         :selectListed="selectListed"
-         class="listCard"
+        class="listCard"
         :listed="listed"
         ref="select"
       >{{selectListed}}</selectlist>
-      <button
-        type="button"
-        class="btn btn-primary submitbtn"
-        @click="submit"
-        :disabled="validated"
-      >Submit</button>
     </b-card-group>
   </b-container>
 </template>
@@ -100,8 +100,8 @@ const boardservice = new BoardService();
 library.add(faCaretRight);
 
 export default {
-  provide(){
-    return {parentValidator : this.$validator}
+  provide() {
+    return { parentValidator: this.$validator };
   },
   props: {
     calendarCount: {
@@ -171,6 +171,7 @@ export default {
           if (res.data.date.status == true) {
             this.startDated = moment.utc(res.data.date.startDate, "YYYY/MM/DD");
             this.startDate = this.startDated;
+            this.validated = res.data.date.status;
             // this.totaled = res.data.date.sprintDay;
             this.total = res.data.date.sprintDay;
           }
@@ -223,8 +224,8 @@ export default {
       }
       this.nextStep();
     },
-     formValidate() {
-        return this.$refs.select.formValidate(),this.$refs.score.formValidate()
+    formValidate() {
+      return this.$refs.select.formValidate(), this.$refs.score.formValidate();
     },
     submit: function() {
       this.submitted = true;
@@ -330,18 +331,5 @@ export default {
   transform: translate(-50%, -50%);
 }
 
-.scoreCard {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
 
-.listCard {
-  height: 70%;
-}
-
-.submitbtn {
-  float: right;
-  margin-bottom: 10%;
-}
 </style>

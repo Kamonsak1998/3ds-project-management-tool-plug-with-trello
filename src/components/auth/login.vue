@@ -21,12 +21,13 @@ export default {
     ...mapActions({
       getToken: 'user/getToken',
       getUsername: 'user/getUsername',
-      getIduser: 'user/getIduser'
+      getIduser: 'user/getIduser',
+      getAvatar: 'user/getAvatar'
     }),
 
     Auth() {
       const self = this;
-      OAuth.initialize('PNVmpwexyR2M51wt3L3jZrEaLjc');
+      OAuth.initialize('JU1e9RyziKwRZHqiZKBa7Zilk7I'); //www.oath.io ID : 3dsxtrello@gmail.com || Password : 3dsinteractive ถ้าหากเกิดปัญหา oauth ลองเข้าไปเช็คที่นี่นะครับ
       var provider = 'trello';
       OAuth.popup(provider, { cache: true })
         .done(function(trello) {
@@ -37,6 +38,9 @@ export default {
             trello
               .me()
               .done(function(response) {
+                if (response.raw.avatarUrl !== null) {
+                   self.getAvatar(response.raw.avatarUrl)
+                }
                 self.getUsername(response.name);
                 self.getIduser(response.raw.id);
                 if (self.token) {
