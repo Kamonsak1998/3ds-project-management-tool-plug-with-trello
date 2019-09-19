@@ -12,6 +12,7 @@
               class="form-control"
               pattern="[0-9]+"
               v-model="point[0]"
+              :disabled="dissable"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXS') }"
             />
@@ -32,6 +33,7 @@
               type="text"
               class="form-control"
               pattern="[0-9]+"
+              :disabled="dissable"
               v-on:keyup.enter="$event.target.nextElementSibling.focus()"
               v-model="point[1]"
               v-validate="'required|decimal|max:5'"
@@ -55,6 +57,7 @@
               class="form-control"
               pattern="[0-9]+"
               v-model="point[2]"
+              :disabled="dissable"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('S') }"
             />
@@ -76,6 +79,7 @@
               class="form-control"
               pattern="[0-9]+"
               v-model="point[3]"
+              :disabled="dissable"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('M') }"
             />
@@ -97,6 +101,7 @@
               class="form-control"
               pattern="[0-9]+"
               v-model="point[4]"
+              :disabled="dissable"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('L') }"
             />
@@ -118,6 +123,7 @@
               class="form-control"
               pattern="[0-9]+"
               v-model="point[5]"
+              :disabled="dissable"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XL') }"
             />
@@ -139,6 +145,7 @@
               class="form-control"
               pattern="[0-9]+"
               v-model="point[6]"
+              :disabled="dissable"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXL') }"
             />
@@ -159,6 +166,7 @@
               class="form-control"
               pattern="[0-9]+"
               v-model="point[7]"
+              :disabled="dissable"
               v-validate="'required|decimal|max:5'"
               :class="{ 'is-invalid': submitted && errors.has('XXXL') }"
             />
@@ -192,6 +200,7 @@ export default {
   data() {
     return {
       submitted: false,
+      dissable : true
     };
   },
   mounted: function() {
@@ -203,10 +212,12 @@ export default {
     }
   },
   methods: {
+    reset(){
+      this.dissable = false
+    },
     formValidate() {
         // valiadate this form parent components call this
         this.submitted = true;
-        console.log(this.valid);
         return this.$validator.validate().then(valid => {
         })
       },

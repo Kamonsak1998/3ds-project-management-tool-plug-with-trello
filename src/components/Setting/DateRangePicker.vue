@@ -4,6 +4,13 @@
       <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
     </div>
     <div class="card card-setdate" v-if="isShowModel === true">
+      <b-alert
+        variant="success"
+        dismissible
+        :show="dismissCountDown"
+        @dismissed="dismissCountDown=0"
+        @dismiss-count-down="countDownChanged"
+      >Save Success</b-alert>
       <b-row>
         <b-col v-for="calendarIndex in calendarCount" :key="calendarIndex">
           <date-range-picker-calendar
@@ -118,6 +125,8 @@ export default {
   },
   data() {
     return {
+      dismissSecs: 3,
+      dismissCountDown: 0,
       pointt: [],
       selectListed: [],
       listed: Object,
@@ -189,6 +198,7 @@ export default {
       this.startDate = moment.utc();
       this.endDate = moment.utc();
       this.total = "";
+      this.$refs.score.reset();
       this.focusInput();
     },
 
@@ -227,12 +237,16 @@ export default {
     formValidate() {
       return this.$refs.select.formValidate(), this.$refs.score.formValidate();
     },
+    countDownChanged(dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+      },
     submit: function() {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         this.formValidate();
         this.totaled = parseInt(this.total);
         if (valid) {
+          this.dismissCountDown = this.dismissSecs
           boardservice
             .fetchsettingdata({
               sprintDate: {
@@ -256,7 +270,6 @@ export default {
               selectList: this.selectListed
             })
             .then(() => {
-              alert("Save Success");
               this.$router.push("/feature");
             })
             .catch(err => {
@@ -330,6 +343,4 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
-
 </style>
