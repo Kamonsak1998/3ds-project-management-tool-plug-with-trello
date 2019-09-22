@@ -54,10 +54,10 @@
 
       <carousel
         :navigationEnabled="true"
-        :perPageCustom="[[320, 1],[1024, 3],[768,2]]"
-        :scrollPerPage="true"
+        :perPageCustom="[[320, 1],[768,2]]"
         :centerMode="true"
-        :paginationEnabled="false"
+        :scrollPerPage="false"
+        :paginationEnabled="true"
         :paginationPadding="3"
       >
         <slide v-for="(model,index) in filteredSprintModel" :key="index">

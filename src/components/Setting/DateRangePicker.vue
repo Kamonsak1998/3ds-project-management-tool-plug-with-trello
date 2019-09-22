@@ -125,7 +125,7 @@ export default {
   },
   data() {
     return {
-      dismissSecs: 3,
+      dismissSecs: 5,
       dismissCountDown: 0,
       pointt: [],
       selectListed: [],
