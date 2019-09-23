@@ -57,8 +57,7 @@
         :perPageCustom="[[320, 1],[768,2]]"
         :centerMode="true"
         :scrollPerPage="false"
-        :paginationEnabled="true"
-        :paginationPadding="3"
+        :paginationEnabled="false"
       >
         <slide v-for="(model,index) in filteredSprintModel" :key="index">
           <div class="card cardsprit mr-1 ml-1 shadow">
