@@ -270,7 +270,7 @@ export default {
               selectList: this.selectListed
             })
             .then(() => {
-              this.$router.push("/feature");
+              // this.$router.push("/feature");
             })
             .catch(err => {
               if (err) {
