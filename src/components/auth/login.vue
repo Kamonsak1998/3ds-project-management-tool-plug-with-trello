@@ -27,7 +27,7 @@ export default {
 
     Auth() {
       const self = this;
-      OAuth.initialize('JU1e9RyziKwRZHqiZKBa7Zilk7I'); //www.oath.io ID : 3dsxtrello@gmail.com || Password : 3dsinteractive ถ้าหากเกิดปัญหา oauth ลองเข้าไปเช็คที่นี่นะครับ
+      OAuth.initialize('HPINSnNzQSvEP7Bh5V0AVjTp6NI'); //www.oath.io ID : 3dsxtrello01@gmail.com || Password : 3dsinteractive ถ้าหากเกิดปัญหา oauth ลองเข้าไปเช็คที่นี่นะครับ
       var provider = 'trello';
       OAuth.popup(provider, { cache: true })
         .done(function(trello) {
